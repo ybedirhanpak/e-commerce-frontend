@@ -3,13 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 
 //Components
-import SlideProduct from './components/slide-product/slide-product';
+import TopHeader from './components/top-header/top-header';
 
 export default class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
+          <TopHeader/>
           <div className="row header-row">
             <div className="col-3 banner">
               <img src={logo} className="App-logo" alt="logo" />
