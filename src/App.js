@@ -1,9 +1,12 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Product from "./components/product-card";
+
+
+import React, {Component} from 'react';
+import './App.css';
+
 //Components
-import TopHeader from "./components/top-header/top-header";
+import MainHeader from './components/main-header/main-header'
+import NavigationBar from './components/navigation-bar/navigation-bar';
+
 
 export default class App extends Component {
   product = {
@@ -17,8 +20,16 @@ export default class App extends Component {
   };
   render() {
     return (
-      <div>
-        {Product(this.product)}
+
+      <div className="App">
+        <body className="App-body">
+          <MainHeader/>
+          <NavigationBar/>
+        </body>
+        
+        
+        
+
       </div>
     );
   }
