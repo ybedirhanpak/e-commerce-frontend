@@ -1,5 +1,3 @@
-
-
 import React, {Component} from 'react';
 import './App.css';
 
@@ -7,7 +5,6 @@ import './App.css';
 import MainHeader from './components/main-header/main-header'
 import NavigationBar from './components/navigation-bar/navigation-bar';
 import ProductCard from './components/product-card/index';
-
 
 export default class App extends Component {
   product = {
@@ -26,7 +23,7 @@ export default class App extends Component {
         <body className="App-body">
           <MainHeader/>
           <NavigationBar/>
-          <ProductCard/>
+          {ProductCard(this.product)}
         </body>
       </div>
     );
