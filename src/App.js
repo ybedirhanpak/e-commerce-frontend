@@ -1,3 +1,5 @@
+
+
 import React, {Component} from 'react';
 import './App.css';
 
@@ -5,9 +7,20 @@ import './App.css';
 import MainHeader from './components/main-header/main-header'
 import NavigationBar from './components/navigation-bar/navigation-bar';
 
+
 export default class App extends Component {
+  product = {
+    name: "Product1",
+    imgSource: "./img/product01.png",
+    discount: "%30",
+    new: false,
+    category: "computer",
+    price: "210",
+    oldPrice: "300"
+  };
   render() {
     return (
+
       <div className="App">
         <body className="App-body">
           <MainHeader/>
@@ -16,8 +29,8 @@ export default class App extends Component {
         
         
         
+
       </div>
     );
   }
 }
-
