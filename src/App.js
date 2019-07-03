@@ -6,6 +6,7 @@ import './App.css';
 //Components
 import MainHeader from './components/main-header/main-header'
 import NavigationBar from './components/navigation-bar/navigation-bar';
+import ProductCard from './components/product-card/index';
 
 
 export default class App extends Component {
@@ -25,11 +26,8 @@ export default class App extends Component {
         <body className="App-body">
           <MainHeader/>
           <NavigationBar/>
+          <ProductCard/>
         </body>
-        
-        
-        
-
       </div>
     );
   }
