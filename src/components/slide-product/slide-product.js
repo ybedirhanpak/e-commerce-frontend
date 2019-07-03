@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Carousel from 'react-bootstrap/Carousel';
 
 export default class SlideProduct extends Component {
     render() {
