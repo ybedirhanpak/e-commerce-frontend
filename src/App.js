@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Alert from 'react-bootstrap/Alert';
-
 //Components
 import SlideProduct from './components/slide-product/slide-product';
 
