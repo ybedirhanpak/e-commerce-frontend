@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Product from './components/product-card'
 //Components
-import SlideProduct from './components/slide-product/slide-product';
+import TopHeader from './components/top-header/top-header';
 
 export default class App extends Component {
   render() {
