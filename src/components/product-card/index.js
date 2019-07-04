@@ -3,28 +3,25 @@ import Image from "react-image-resizer";
 import "./style.css";
 
 //"./img/product01.png"
-export default function index (product) {
-    console.log(product.imgSource)
+export default class index extends React.Component{
+  render() {
+    const product = this.props.product
     return (
       <div>
         <div class="product">
           <div class="product-img">
-            <Image
-              width={240}
-              height={240}
-              src={product.imgSource}
-              alt=""
-            />
+            <Image width={240} height={240} src={product.imgSource} alt="" />
             <div class="product-label">
-              <span class="sale">-{product.discount}</span>
-              {product.new &&<span class="new">{product.new && "NEW"}</span> }
-              
+              {product.discount && (
+                <span class="sale">-{product.discount}</span>
+              )}
+              {product.new && <span class="new">{product.new && "NEW"}</span>}
             </div>
           </div>
           <div class="product-body">
             <p class="product-category">{product.category}</p>
             <h3 class="product-name">
-              <a href="#">{product.name}</a>
+              <a href="as">{product.name}</a>
             </h3>
             <h4 class="product-price">
               {product.price}
@@ -63,4 +60,4 @@ export default function index (product) {
       </div>
     );
   }
-
+}
