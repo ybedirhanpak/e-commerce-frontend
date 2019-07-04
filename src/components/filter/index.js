@@ -1,12 +1,37 @@
 import React, { Component } from "react";
-import "./style.css";
+
 import SelectBox from "../select-box";
+import Box from '../city-dropdown/box'
+import './style.css'
+
+
 
 export default class index extends Component {
+
+  data= [
+    {
+        "name": "İstanbul"
+    },
+    {
+        "name": "Hatay"
+    },
+    {
+        "name": "Ankara"
+    },
+    {
+        "name": "Bursa"
+    },
+    {
+        "name": "İzmir"
+    }
+]
   
+
   render() {
     return (
       <div>
+        <Box data={this.data}/>
+       
         <SelectBox data={this.categories} />
 
         <div class="aside">
