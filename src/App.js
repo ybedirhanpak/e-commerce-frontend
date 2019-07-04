@@ -8,6 +8,7 @@ import ProductContainer from './components/product-container/product-container';
 import Footer from "./components/bottom-footer/footer";
 import Slide from "./components/slides/slide"
 
+
 export default class App extends Component {
   product = {
     name: "Product1",
@@ -18,6 +19,7 @@ export default class App extends Component {
     price: "210",
     oldPrice: "300"
   };
+
   render() {
     return (
       <div className="App">
