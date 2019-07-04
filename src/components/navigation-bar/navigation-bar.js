@@ -8,7 +8,7 @@ export default class NavigationBar extends Component {
               <div className="container">
                 <div id="responsive-nav" className="collapse navbar-collapse js-navbar-collapse">
                   <ul className="main-nav nav navbar-nav">
-                    <li className=""><a href="#">Home</a></li>
+                    <li className=""><a href="home">Home</a></li>
                     <Kategori tag="Teknoloji"
                     />
                     <Kategori tag="Kadın"
@@ -20,8 +20,7 @@ export default class NavigationBar extends Component {
                     />
                       <Kategori tag="Ayakkabı & Çanta"
                   />
-                    <li><a href="#">İletişim</a></li>
-                
+                    <li><a href="iletisim">İletişim</a></li>
                   </ul>                
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
 
-class UserLogin extends React.Component {
+class UserLogin extends Component {
 
     state={
         nameSurname:null,
@@ -58,7 +58,7 @@ passwordControl=(event) => {
                 <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
                   <li class="nav-item">
 
-                    <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1" aria-hidden="true "></i>
+                    <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1" aria-hidden="true"></i>
                       Login</a>
                   </li>
                   <li class="nav-item">
@@ -90,8 +90,8 @@ passwordControl=(event) => {
               
                     <div class="modal-footer">
                       <div class="options text-center text-md-right mt-1">
-                        <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
-                        <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+                        <p>Not a member? <a href="sign-up" class="blue-text">Sign Up</a></p>
+                        <p>Forgot <a href="forgot-password" class="blue-text">Password?</a></p>
                       </div>
                       <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                     </div>
@@ -133,7 +133,7 @@ passwordControl=(event) => {
               
                     <div class="modal-footer">
                       <div class="options text-right">
-                        <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
+                        <p class="pt-1">Already have an account? <a href="login" class="blue-text">Log In</a></p>
                       </div>
                       <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                     </div>
