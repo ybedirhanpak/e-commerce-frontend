@@ -35,14 +35,14 @@ class Box extends Component {
     ));
 
     return (
-      <div id="aside" class="col-md-3">
+      
         <div class="aside">
           <h3 class="aside-title" onClick={this.dropDown}>
            Select City
           </h3>
           {this.state.showItems && <div class="checkbox-filter">{cities}</div>}
         </div>
-      </div>
+
     );
   }
 }
