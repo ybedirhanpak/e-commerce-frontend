@@ -85,7 +85,6 @@ export default class footer extends Component {
 						</div>
 					</div>
 				</div>
-				
 				</footer>
             </div>
         )

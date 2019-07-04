@@ -144,7 +144,7 @@ passwordControl=(event) => {
           </div>
         </div>
         <div class="dropdown">
-          <a href="sign-in" class="btn btn-default btn-rounded my-6" data-toggle="modal" data-target="#modalLRForm">
+          <a href="" class="btn btn-default btn-rounded my-6" data-toggle="modal" data-target="#modalLRForm">
           <i class="fa fa-user"></i>
             <span>Sign in</span>
           </a>
