@@ -1,18 +1,28 @@
-.elements{
-    float:left;
-    margin-top: 40px;    
+.my-item {
+    background-color: begie;
 }
 
-.inputCity{
-    float:left;
-        
+.my-item:hover {
+    background-color: #e0e0e0;
 }
 
-
-.inputDistrict{
-    float:left;
+.active {
+    background-color: #c4c2c2;
 }
 
-.inputNeighbor{
-    float:left;
+.box-row {
+    width: 700px;
+}
+
+.search-input-group {
+    width: 700px;
+}
+
+.search-input {
+    padding: .5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+    border-radius: .2rem;
+    width: 100%;
 }

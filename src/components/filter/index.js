@@ -6,6 +6,7 @@ export default class index extends Component {
   render() {
     return (
       <div>
+        
         <div class="aside">
           <h3 class="aside-title">Categories</h3>
           <div class="checkbox-filter">
