@@ -7,8 +7,8 @@ export default class index extends Component {
   render() {
     const optionsList = this.props.data.options.map((option,index) => (
       <div class="input-checkbox">
-        <input type="checkbox" id={"category-" + index} />
-        <label for={"category-" + index}>
+        <input type="checkbox" id={ this.props.data.title+"-" + index} />
+        <label for={ this.props.data.title+"-" + index}>
           <span />
           {option.name}
           <small className="small">{"(" + option.quantity + ")"}</small>
