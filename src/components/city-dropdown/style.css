@@ -1,0 +1,18 @@
+.elements{
+    float:left;
+    margin-top: 40px;    
+}
+
+.inputCity{
+    float:left;
+        
+}
+
+
+.inputDistrict{
+    float:left;
+}
+
+.inputNeighbor{
+    float:left;
+}
