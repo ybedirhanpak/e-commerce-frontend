@@ -6,6 +6,7 @@ import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
 import ProductCard from "./components/product-card/index";
 import Filter from "./components/filter";
+import Footer from "./components/bottom-footer/footer"
 
 export default class App extends Component {
   product = {
@@ -25,7 +26,10 @@ export default class App extends Component {
           <NavigationBar />
           <Filter />
           <ProductCard product={this.product} />
+          <Footer />
+
         </body>
+
       </div>
     );
   }
