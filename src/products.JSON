@@ -1,0 +1,13 @@
+ {
+    "products" : [
+        {
+            "name":"Product1",
+            "imgSource":"./img/product01.png",
+            "discount":"%30",
+            "new":true,
+            "category":"computer",
+            "price":"210",
+            "oldPrice":"300"
+        }
+    ]
+ }

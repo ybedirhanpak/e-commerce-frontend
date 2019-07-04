@@ -2,73 +2,33 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 20vmin;
-  pointer-events: none;
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: #333;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1, h2, h3, h4, h5, h6 {
+  color: #2B2D42;
+  font-weight: 700;
+  margin: 0 0 10px;
 }
 
-.App-container {
-  background-color: #cdcdce;
-  min-height: 1000px;
+a {
+  color: #2B2D42;
+  font-weight: 500;
+  -webkit-transition: 0.2s color;
+  transition: 0.2s color;
 }
 
-.App-link {
-  color: #61dafb;
+a:hover, a:focus {
+  color: #D10024;
+  text-decoration: none;
+  outline: none;
 }
 
-.header-row {
-  width: 100%;
-}
-
-.banner {
-  background-color: #404144;
-}
-
-.sign-in {
-  background-color: #404144;
-}
-
-.navbar-row{
-  background-color: #cdcdce;
-  min-height: 60px;
-}
-
-.navbar-col {
-  background-color: #787d86;
-}
-
-.filter {
-  background-color: #686a6e;
-  max-height: 500px;
-}
-
-.result-products {
-  background-color: #545557;
-  min-height: 1000px;
-}
-
-.sort {
-  background-color: #494a4d;
-  min-height: 60px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none
 }
