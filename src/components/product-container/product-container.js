@@ -5,13 +5,7 @@ import Store from '../store/store';
 import Filter from '../filter/index';
 
 export default class ProductContainer extends Component {
-
-    constructor(props){
-        super(props);
-    }
-
     render() {
-
         var dummyProducts = [
             {
                 name: "Product1",
