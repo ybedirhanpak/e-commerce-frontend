@@ -6,7 +6,7 @@ import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
 import ProductCard from "./components/product-card/index";
 import Filter from "./components/filter";
-import Dropdown from "./components/city-dropdown/dropdown"
+
 
 export default class App extends Component {
   product = {
@@ -18,23 +18,7 @@ export default class App extends Component {
     price: "210",
     oldPrice: "300"
   };
-  data= [
-    {
-        "name": "İstanbul"
-    },
-    {
-        "name": "Hatay"
-    },
-    {
-        "name": "Ankara"
-    },
-    {
-        "name": "Bursa"
-    },
-    {
-        "name": "İzmir"
-    }
-]
+
   render() {
     return (
       <div className="App">
@@ -43,16 +27,6 @@ export default class App extends Component {
           <NavigationBar />
           <Filter />
           <ProductCard product={this.product} />
-          <div className="App">
-        <div className="container fluid">
-            <div className="row">
-                <div className="col-sm-12">
-                    <Dropdown data = {this.data}/>
-                </div>
-            </div>
-        </div>
-    </div>
-      
         </body>
       </div>
     );
