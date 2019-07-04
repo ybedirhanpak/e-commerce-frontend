@@ -18,7 +18,6 @@ export default class App extends Component {
   };
   render() {
     return (
-
       <div className="App">
         <body className="App-body">
           <MainHeader/>
