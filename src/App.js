@@ -4,8 +4,7 @@ import "./App.css";
 //Components
 import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
-import ProductCard from "./components/product-card/index";
-import Filter from "./components/filter";
+import ProductContainer from './components/product-container/product-container';
 import Footer from "./components/bottom-footer/footer"
 
 export default class App extends Component {
@@ -24,12 +23,9 @@ export default class App extends Component {
         <body className="App-body">
           <MainHeader />
           <NavigationBar />
-          <Filter />
-          <ProductCard product={this.product} />
+          <ProductContainer/>
           <Footer />
-
         </body>
-
       </div>
     );
   }
