@@ -5,7 +5,8 @@ import "./App.css";
 import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
 import ProductContainer from './components/product-container/product-container';
-import Footer from "./components/bottom-footer/footer"
+import Footer from "./components/bottom-footer/footer";
+import Slide from "./components/slides/slide"
 
 export default class App extends Component {
   product = {
@@ -24,7 +25,9 @@ export default class App extends Component {
           <MainHeader />
           <NavigationBar />
           <ProductContainer/>
+          <Slide />
           <Footer />
+      
         </body>
       </div>
     );
