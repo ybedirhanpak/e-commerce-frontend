@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style.css";
+
 
 class Box extends Component {
   constructor(props) {
