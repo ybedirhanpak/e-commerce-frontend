@@ -23,7 +23,7 @@ export default class StoreTopFilter extends Component {
                 </div>
                 <ul class="store-grid">
                     <li class="active"><i class="fa fa-th"></i></li>
-                    <li><a href="#"><i class="fa fa-th-list"></i></a></li>
+                    <li><a href="filter"><i class="fa fa-th-list"></i></a></li>
                 </ul>
             </div>
         )
