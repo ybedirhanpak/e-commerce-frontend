@@ -7,6 +7,7 @@ import './main-heder.css'
 import Logo from '../logo/logo';
 import SearchBar from '../search-bar/search-bar';
 import Cart from '../cart/cart';
+import UserLogin from '../user-login/index';
 
 export default class MainHeader extends Component {
     render() {
@@ -23,12 +24,7 @@ export default class MainHeader extends Component {
 						<div class="col-md-3 clearfix col-account">
 							<div class="header-ctn">
                                 {/* Sign-in Button */}
-                                <div class="dropdown">
-                                    <a>
-                                        <i class="fa fa-user"></i>
-                                        <span>Sign in</span>
-                                    </a>
-                                </div>
+                                <UserLogin/>
                                 {/*  */}
                                 <Cart/>
 							</div>

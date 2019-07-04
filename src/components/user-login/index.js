@@ -12,8 +12,6 @@ class UserLogin extends React.Component {
         Password2:null
     }
 
-
-
 handleChange = (event) => {
         const {name,value} = event.target
         this.setState({[name]:value})      
@@ -42,7 +40,6 @@ passwordControl=(event) => {
 */
 
   render() {
-
     console.log(this.state.email)
     console.log(this.state.Password)
     console.log(this.state.nameSurname)
@@ -56,10 +53,8 @@ passwordControl=(event) => {
             
             <div class="modal-content">
         
-              
               <div class="modal-c-tabs">
         
-              
                 <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
                   <li class="nav-item">
 
@@ -72,12 +67,10 @@ passwordControl=(event) => {
                   </li>
                 </ul>
         
-              
                 <div class="tab-content">
               
                   <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
         
-              
                     <div class="modal-body mb-1">
                       <div class="md-form form-sm mb-5">
                         <i class="fa fa-envelope"></i>
@@ -104,12 +97,9 @@ passwordControl=(event) => {
                     </div>
         
                   </div>
-              
-        
-              
+                            
                   <div class="tab-pane fade" id="panel8" role="tabpanel">
         
-              
                     <div class="modal-body">
                       <div class="md-form form-sm mb-5">
                         <i class="fa fa-user mr-1"></i>
@@ -123,8 +113,6 @@ passwordControl=(event) => {
                         <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
                       </div>
                       
-                        
-        
                       <div class="md-form form-sm mb-5">
                         <i class="fa fa-lock prefix"></i>
                         <input name='Password1' value={this.state.Password1} onChange = {this.handleChange}  type="password" id="modalLRInput13" class="form-control form-control-sm validate"/>
@@ -150,18 +138,16 @@ passwordControl=(event) => {
                       <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                     </div>
                   </div>
-              
                 </div>
-        
               </div>
             </div>
-            
           </div>
         </div>
-        
-        
-        <div class="text-right">
-          <a href="" class="btn btn-default btn-rounded my-6" data-toggle="modal" data-target="#modalLRForm">Hello! Sign In/Register</a>
+        <div class="dropdown">
+          <a href="" class="btn btn-default btn-rounded my-6" data-toggle="modal" data-target="#modalLRForm">
+          <i class="fa fa-user"></i>
+            <span>Sign in</span>
+          </a>
         </div>
         </div>
     );
