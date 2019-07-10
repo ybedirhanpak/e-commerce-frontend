@@ -14,9 +14,9 @@ export default class footer extends Component {
 									<h3 class="footer-title">About Us</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
 									<ul class="footer-links">
-										<li><a href="address"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-										<li><a href="phone"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-										<li><a href="mail"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+										<li><a href="address-location"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+										<li><a href="phone-contact"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+										<li><a href="email-contact"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
 									</ul>
 								</div>
 							</div>
@@ -30,7 +30,6 @@ export default class footer extends Component {
 										<li><a href="about">About Us</a></li>
 										<li><a href="contact">Contact Us</a></li>
 										<li><a href="privacy">Privacy Policy</a></li>
-										<li><a href="orders">Orders and Returns</a></li>
 										<li><a href="terms">Terms & Conditions</a></li>
 									</ul>
 								</div>
