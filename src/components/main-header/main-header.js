@@ -13,16 +13,16 @@ export default class MainHeader extends Component {
     render() {
         return(
             <div id="header">
-				<div class="container-fluid">
-					<div class="row row-container">
-						<div class="col-md-3 col-logo">
+				<div className="container-fluid">
+					<div className="row row-container">
+						<div className="col-md-3 col-logo">
 							<Logo/>
 						</div>
-						<div class="col-md-6 col-searchbar">
+						<div className="col-md-6 col-searchbar">
 							<SearchBar/>
 						</div>
-						<div class="col-md-3 clearfix col-account">
-							<div class="header-ctn">
+						<div className="col-md-3 clearfix col-account">
+							<div className="header-ctn">
                                 {/* Sign-in Button */}
                                 <UserLogin/>
                                 {/*  */}

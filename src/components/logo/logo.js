@@ -4,8 +4,8 @@ import logo from '../../logo.svg';
 export default class Logo extends Component {
     render() {
         return (
-            <div class="header-logo">
-                <a href="home" class="logo">
+            <div className="header-logo">
+                <a href="home" className="logo">
                     <img src={logo} alt="Logo"></img>
                 </a>
             </div>

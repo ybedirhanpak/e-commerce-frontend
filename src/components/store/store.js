@@ -19,7 +19,7 @@ export default class Store extends Component {
 
     createProducts = () => {
         const productsList = this.props.products.map(product => 
-            <div className="col-md-4 col-xs-6">
+            <div key={product.name} className="col-md-4 col-xs-6">
                 <ProductCard product={product}/>
             </div>
         )

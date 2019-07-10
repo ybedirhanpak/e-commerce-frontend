@@ -30,7 +30,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <body className="App-body">
+        <div className="App-body">
           <BrowserRouter>
             <MainHeader />
             <NavigationBar />
@@ -53,7 +53,7 @@ export default class App extends Component {
             </Switch>
             <Footer />
           </BrowserRouter>
-        </body>
+        </div>
       </div>
     );
   }
