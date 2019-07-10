@@ -20,6 +20,10 @@ import TermsContainer from './containers/terms-container/terms-container';
 import AddressLocationContainer from "./containers/address-location-container/address-location-container";
 import PhoneContactContainer from "./containers/phone-contact-container/phone-contact-container";
 import EmailContactContainer from "./containers/email-contact-container/email-contact-container";
+import MyAccountContainer from "./containers/my-account-container/my-account-container";
+import WiewCardContainer from "./containers/wiew-cart-container/wiew-card-container";
+import TrackMyOrderContainer from "./containers/track-my-order-container/track-my-order-container";
+import HelpContainer from "./containers/help-container/help-container";
 
 export default class App extends Component {
   render() {
@@ -40,6 +44,10 @@ export default class App extends Component {
               <Route path="/address-location" component={AddressLocationContainer}/>
               <Route path="/phone-contact" component={PhoneContactContainer}/>
               <Route path="/email-contact" component={EmailContactContainer}/>
+              <Route path="/account" component={MyAccountContainer}/>
+              <Route path="/cart" component={WiewCardContainer}/>
+              <Route path="/tract" component={TrackMyOrderContainer}/>
+              <Route path="/help" component={HelpContainer}/>
             </Switch>
             <Footer />
           </BrowserRouter>
