@@ -13,6 +13,10 @@ import Footer from "./components/bottom-footer/footer";
 //Containers
 import HomeContainer from "./containers/home-container/home-container";
 import ProductDetailedContainer from "./containers/product-detailed-container/product-detailed-container";
+import MyAccountContainer from "./containers/my-account-container/my-account-container";
+import WiewCardContainer from "./containers/wiew-cart-container/wiew-card-container";
+import TrackMyOrderContainer from "./containers/track-my-order-container/track-my-order-container";
+import HelpContainer from "./containers/help-container/help-container";
 
 export default class App extends Component {
   render() {
@@ -25,6 +29,11 @@ export default class App extends Component {
             <Switch>
               <Route path="/home" component={HomeContainer} exact/>
               <Route path="/productDetailed" component={ProductDetailedContainer}/>
+              <Route path="/account" component={MyAccountContainer}/>
+              <Route path="/cart" component={WiewCardContainer}/>
+              <Route path="/tract" component={TrackMyOrderContainer}/>
+              <Route path="/help" component={HelpContainer}/>
+
             </Switch>
             <Footer />
           </BrowserRouter>
