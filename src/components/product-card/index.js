@@ -21,7 +21,7 @@ export default class index extends React.Component{
           <div class="product-body">
             <p class="product-category">{product.category}</p>
             <h3 class="product-name">
-              <a href="as">{product.name}</a>
+              <a href="productDetailed">{product.name}</a>
             </h3>
             <h4 class="product-price">
               {product.price}

@@ -9,18 +9,11 @@ export default class NavigationBar extends Component {
                 <div id="responsive-nav" className="collapse navbar-collapse js-navbar-collapse">
                   <ul className="main-nav nav navbar-nav">
                     <li className=""><a href="home">Home</a></li>
-                    <Kategori tag="Teknoloji"
-                    />
-                    <Kategori tag="Kadın"
-                    />
-                    
-                    <Kategori tag="Erkek"
-                    />
-                    <Kategori tag="Çocuk"
-                    />
-                      <Kategori tag="Ayakkabı & Çanta"
-                  />
-                    <li><a href="iletisim">İletişim</a></li>
+                    <Kategori tag="Teknoloji"/>
+                    <Kategori tag="Kadın"/>
+                    <Kategori tag="Erkek"/>
+                    <Kategori tag="Çocuk"/>
+                    <Kategori tag="Ayakkabı & Çanta"/>
                   </ul>                
                 </div>
               </div>

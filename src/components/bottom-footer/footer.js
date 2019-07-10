@@ -41,7 +41,7 @@ export default class footer extends Component {
 									<ul class="footer-links">
 										<li><a href="account">My Account</a></li>
 										<li><a href="cart">View Cart</a></li>
-										<li><a href="tract">Track My Order</a></li>
+										<li><a href="track">Track My Order</a></li>
 										<li><a href="help">Help</a></li>
 									</ul>
 								</div>

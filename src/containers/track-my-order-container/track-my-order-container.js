@@ -4,7 +4,7 @@ export default class TrackMyOrder extends Component {
     render() {
         return (
             <div>
-                <h1>TrackMyOrder Container</h1>
+                <h1>Track My Order Container</h1>
             </div>
         )
     }

@@ -4,8 +4,7 @@ export default class WiewCardContainer extends Component {
     render() {
         return (
             <div>
-                <h1>WiewCardContainer</h1>
-                
+                <h1>WiewCard Container</h1>
             </div>
         )
     }
