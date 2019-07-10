@@ -4,8 +4,6 @@ import SelectBox from "../select-box";
 import Box from '../city-dropdown/box'
 import './style.css'
 
-
-
 export default class index extends Component {
 
   data= [
@@ -34,20 +32,20 @@ export default class index extends Component {
        
         <SelectBox data={this.categories} />
 
-        <div class="aside">
-          <h3 class="aside-title">Price</h3>
-          <div class="price-filter">
+        <div className="aside">
+          <h3 className="aside-title">Price</h3>
+          <div className="price-filter">
             <div id="price-slider" />
-            <div class="input-number price-min">
+            <div className="input-number price-min">
               <input id="price-min" type="number" />
-              <span class="qty-up">+</span>
-              <span class="qty-down">-</span>
+              <span className="qty-up">+</span>
+              <span className="qty-down">-</span>
             </div>
             <span>-</span>
-            <div class="input-number price-max">
+            <div className="input-number price-max">
               <input id="price-max" type="number" />
-              <span class="qty-up">+</span>
-              <span class="qty-down">-</span>
+              <span className="qty-up">+</span>
+              <span className="qty-down">-</span>
             </div>
           </div>
         </div>

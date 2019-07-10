@@ -40,102 +40,102 @@ passwordControl=(event) => {
 */
 
   render() {
-    console.log(this.state.email)
-    console.log(this.state.Password)
-    console.log(this.state.nameSurname)
-    console.log(this.state.emailRegister)
-    console.log(this.state.Password1)
-    console.log(this.state.Password2)
+    // console.log(this.state.email)
+    // console.log(this.state.Password)
+    // console.log(this.state.nameSurname)
+    // console.log(this.state.emailRegister)
+    // console.log(this.state.Password1)
+    // console.log(this.state.Password2)
     return (
-        <div>
-        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog cascading-modal" role="document">
+      <div>
+        <div className="modal fade" id="modalLRForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div className="modal-dialog cascading-modal" role="document">
             
-            <div class="modal-content">
+            <div className="modal-content">
         
-              <div class="modal-c-tabs">
+              <div className="modal-c-tabs">
         
-                <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
-                  <li class="nav-item">
+                <ul className="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                  <li className="nav-item">
 
-                    <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1" aria-hidden="true"></i>
+                    <a className="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i className="fa fa-user mr-1" aria-hidden="true"></i>
                       Login</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i>
+                  <li className="nav-item">
+                    <a className="nav-link" data-toggle="tab" href="#panel8" role="tab"><i className="fa fa-user-plus mr-1"></i>
                       Register</a>
                   </li>
                 </ul>
         
-                <div class="tab-content">
+                <div className="tab-content">
               
-                  <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                  <div className="tab-pane fade in show active" id="panel7" role="tabpanel">
         
-                    <div class="modal-body mb-1">
-                      <div class="md-form form-sm mb-5">
-                        <i class="fa fa-envelope"></i>
-                        <input name='email' value={this.state.email} onChange = {this.handleChange} type="email" id="modalLRInput10" class="form-control form-control-sm validate"/>
-                        <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
+                    <div className="modal-body mb-1">
+                      <div className="md-form form-sm mb-5">
+                        <i className="fa fa-envelope"></i>
+                        <input name='email' value={this.state.email == null ? "" : this.state.email} onChange = {this.handleChange} type="email" id="modalLRInput10" className="form-control form-control-sm validate"/>
+                        <label data-error="wrong" data-success="right" htmlFor="modalLRInput10">Your email</label>
                       </div>
         
-                      <div class="md-form form-sm mb-4">
-                        <i class="fa fa-lock prefix"></i>
-                        <input name='Password' value = {this.state.Password} onChange = {this.handleChange} type="password" id="modalLRInput11" class="form-control form-control-sm validate"/>
-                        <label data-error="wrong" data-success="right" for="modalLRInput11">Your password</label>
+                      <div className="md-form form-sm mb-4">
+                        <i className="fa fa-lock prefix"></i>
+                        <input name='Password' value = {this.state.Password == null ? "" : this.state.Password} onChange = {this.handleChange} type="password" id="modalLRInput11" className="form-control form-control-sm validate"/>
+                        <label data-error="wrong" data-success="right" htmlFor="modalLRInput11">Your password</label>
                       </div>
-                      <div class="text-center mt-2">
-                        <button class="btn btn-info">Log in <i class="fa fa-sign-in ml-1"></i></button>
+                      <div className="text-center mt-2">
+                        <button className="btn btn-info">Log in <i className="fa fa-sign-in ml-1"></i></button>
                       </div>
                     </div>
               
-                    <div class="modal-footer">
-                      <div class="options text-center text-md-right mt-1">
-                        <p>Not a member? <a href="sign-up" class="blue-text">Sign Up</a></p>
-                        <p>Forgot <a href="forgot-password" class="blue-text">Password?</a></p>
+                    <div className="modal-footer">
+                      <div className="options text-center text-md-right mt-1">
+                        <p>Not a member? <a href="sign-up" className="blue-text">Sign Up</a></p>
+                        <p>Forgot <a href="forgot-password" className="blue-text">Password?</a></p>
                       </div>
-                      <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                     </div>
         
                   </div>
                             
-                  <div class="tab-pane fade" id="panel8" role="tabpanel">
+                  <div className="tab-pane fade" id="panel8" role="tabpanel">
         
-                    <div class="modal-body">
-                      <div class="md-form form-sm mb-5">
-                        <i class="fa fa-user mr-1"></i>
-                        <input name='nameSurname' value= {this.state.nameSurname} onChange = {this.handleChange} type="text" id="modalLRInput15" class="form-control form-control-sm validate"/>
-                        <label data-error="wrong" data-success="right" for="modalLRInput15">Name-Surname</label>
+                    <div className="modal-body">
+                      <div className="md-form form-sm mb-5">
+                        <i className="fa fa-user mr-1"></i>
+                        <input name='nameSurname' value= {this.state.nameSurname == null ? "" : this.state.nameSurname} onChange = {this.handleChange} type="text" id="modalLRInput15" className="form-control form-control-sm validate"/>
+                        <label data-error="wrong" data-success="right" htmlFor="modalLRInput15">Name-Surname</label>
                       </div>
 
-                      <div class="md-form form-sm mb-5">
-                        <i class="fa fa-envelope prefix"></i>
-                        <input name='emailRegister' value= {this.state.emailRegister} onChange = {this.handleChange} type="email" id="modalLRInput12" class="form-control form-control-sm validate"/>
-                        <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
+                      <div className="md-form form-sm mb-5">
+                        <i className="fa fa-envelope prefix"></i>
+                        <input name='emailRegister' value= {this.state.emailRegister == null ? "" : this.state.emailRegister} onChange = {this.handleChange} type="email" id="modalLRInput12" className="form-control form-control-sm validate"/>
+                        <label data-error="wrong" data-success="right" htmlFor="modalLRInput12">Your email</label>
                       </div>
                       
-                      <div class="md-form form-sm mb-5">
-                        <i class="fa fa-lock prefix"></i>
-                        <input name='Password1' value={this.state.Password1} onChange = {this.handleChange}  type="password" id="modalLRInput13" class="form-control form-control-sm validate"/>
-                        <label data-error="wrong" data-success="right" for="modalLRInput13">Your password</label>
+                      <div className="md-form form-sm mb-5">
+                        <i className="fa fa-lock prefix"></i>
+                        <input name='Password1' value={this.state.Password1 == null ? "" : this.state.Password1 == null} onChange = {this.handleChange}  type="password" id="modalLRInput13" className="form-control form-control-sm validate"/>
+                        <label data-error="wrong" data-success="right" htmlFor="modalLRInput13">Your password</label>
                       </div>
         
-                      <div class="md-form form-sm mb-4">
-                        <i class="fa fa-lock prefix"></i>
-                        <input name='Password2' value={this.state.Password2} onChange = {this.handleChange}  type="password" id="modalLRInput14" class="form-control form-control-sm validate"/>
-                        <label data-error="wrong" data-success="right" for="modalLRInput14">Repeat password</label>
+                      <div className="md-form form-sm mb-4">
+                        <i className="fa fa-lock prefix"></i>
+                        <input name='Password2' value={this.state.Password2 == null ? "" : this.state.Password2} onChange = {this.handleChange}  type="password" id="modalLRInput14" className="form-control form-control-sm validate"/>
+                        <label data-error="wrong" data-success="right" htmlFor="modalLRInput14">Repeat password</label>
                       </div>
         
-                      <div class="text-center form-sm mt-2">
-                        <button class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                      <div className="text-center form-sm mt-2">
+                        <button className="btn btn-info">Sign up <i className="fa fa-sign-in ml-1"></i></button>
                       </div>
         
                     </div>
               
-                    <div class="modal-footer">
-                      <div class="options text-right">
-                        <p class="pt-1">Already have an account? <a href="login" class="blue-text">Log In</a></p>
+                    <div className="modal-footer">
+                      <div className="options text-right">
+                        <p className="pt-1">Already have an account? <a href="login" className="blue-text">Log In</a></p>
                       </div>
-                      <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
@@ -143,13 +143,15 @@ passwordControl=(event) => {
             </div>
           </div>
         </div>
-        <div class="dropdown">
-          <a href="" class="btn btn-default btn-rounded my-6" data-toggle="modal" data-target="#modalLRForm">
-          <i class="fa fa-user"></i>
+
+        <div className="dropdown">
+          <a href="" className="btn btn-default btn-rounded my-6" data-toggle="modal" data-target="#modalLRForm">
+          <i className="fa fa-user"></i>
             <span>Sign in</span>
           </a>
         </div>
-        </div>
+
+      </div>
     );
   }
 }
