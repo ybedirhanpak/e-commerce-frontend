@@ -24,6 +24,7 @@ import MyAccountContainer from "./containers/my-account-container/my-account-con
 import WiewCardContainer from "./containers/wiew-cart-container/wiew-card-container";
 import TrackMyOrderContainer from "./containers/track-my-order-container/track-my-order-container";
 import HelpContainer from "./containers/help-container/help-container";
+import NoPageContainer from "./containers/no-page-container/no-page-container";
 
 export default class App extends Component {
   render() {
@@ -46,8 +47,9 @@ export default class App extends Component {
               <Route path="/email-contact" component={EmailContactContainer}/>
               <Route path="/account" component={MyAccountContainer}/>
               <Route path="/cart" component={WiewCardContainer}/>
-              <Route path="/tract" component={TrackMyOrderContainer}/>
+              <Route path="/track" component={TrackMyOrderContainer}/>
               <Route path="/help" component={HelpContainer}/>
+              <Route component={NoPageContainer}/>
             </Switch>
             <Footer />
           </BrowserRouter>
