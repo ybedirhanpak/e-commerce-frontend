@@ -4,11 +4,10 @@ export default class Cart extends Component {
     render() {
         return (
             <div class="dropdown">
-                <a href="cart">
+                <button class="btn btn-default btn-rounded my-6" href="cart">
                     <i class="fa fa-shopping-cart"></i>
-                    <span>Your Cart</span>
-                    <div class="qty">3</div>
-                </a>
+                    <span> Your Cart</span>
+                </button>
             </div>
         );
     }

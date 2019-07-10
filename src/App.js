@@ -1,35 +1,33 @@
-import React, { Component } from "react";
+//CSS
 import "./App.css";
+
+//Imports
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 //Components
 import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
-import ProductContainer from './components/product-container/product-container';
 import Footer from "./components/bottom-footer/footer";
-import Slide from "./components/slides/slide"
 
+//Containers
+import HomeContainer from "./containers/home-container/home-container";
+import ProductDetailedContainer from "./containers/product-detailed-container/product-detailed-container";
 
 export default class App extends Component {
-  product = {
-    name: "Product1",
-    imgSource: "./img/product01.png",
-    discount: "%30",
-    new: false,
-    category: "computer",
-    price: "210",
-    oldPrice: "300"
-  };
-
   render() {
     return (
       <div className="App">
         <body className="App-body">
-          <MainHeader />
-          <NavigationBar />
-          <ProductContainer/>
-          <Slide />
-          <Footer />
-      
+          <BrowserRouter>
+            <MainHeader />
+            <NavigationBar />
+            <Switch>
+              <Route path="/home" component={HomeContainer} exact/>
+              <Route path="/productDetailed" component={ProductDetailedContainer}/>
+            </Switch>
+            <Footer />
+          </BrowserRouter>
         </body>
       </div>
     );
