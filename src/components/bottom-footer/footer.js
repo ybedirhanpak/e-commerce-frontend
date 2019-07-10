@@ -9,7 +9,7 @@ export default class footer extends Component {
 				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-3 col-xs-6">
+							<div class="col-md-4 col-xs-6">
 								<div class="footer">
 									<h3 class="footer-title">About Us</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
@@ -21,22 +21,9 @@ export default class footer extends Component {
 								</div>
 							</div>
 
-							<div class="col-md-3 col-xs-6">
-								<div class="footer">
-									<h3 class="footer-title">Categories</h3>
-									<ul class="footer-links">
-										<li><a href="hot">Hot deals</a></li>
-										<li><a href="laptops">Laptops</a></li>
-										<li><a href="smartphones">Smartphones</a></li>
-										<li><a href="cameras">Cameras</a></li>
-										<li><a href="accessories">Accessories</a></li>
-									</ul>
-								</div>
-							</div>
-
 							<div class="clearfix visible-xs"></div>
 
-							<div class="col-md-3 col-xs-6">
+							<div class="col-md-4 col-xs-6">
 								<div class="footer">
 									<h3 class="footer-title">Information</h3>
 									<ul class="footer-links">
@@ -49,13 +36,12 @@ export default class footer extends Component {
 								</div>
 							</div>
 
-							<div class="col-md-3 col-xs-6">
+							<div class="col-md-4 col-xs-6">
 								<div class="footer">
 									<h3 class="footer-title">Service</h3>
 									<ul class="footer-links">
 										<li><a href="account">My Account</a></li>
 										<li><a href="cart">View Cart</a></li>
-										<li><a href="whishlist">Wishlist</a></li>
 										<li><a href="tract">Track My Order</a></li>
 										<li><a href="help">Help</a></li>
 									</ul>
