@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 
 //Components
-import Store from '../store/store';
-import Filter from '../filter/index';
+import Store from '../../components/store/store';
+import Filter from '../../components/filter/index';
+import SlideProduct from '../../components/slide-product/slide'
 
 export default class ProductContainer extends Component {
+    constructor(props) {
+        super(props);
+        console.log(this.props);
+    }
+
     render() {
         var dummyProducts = [
             {
@@ -59,6 +65,7 @@ export default class ProductContainer extends Component {
                         </div>
                     </div>
                 </div>
+                <SlideProduct/>
             </div>
         )
     }

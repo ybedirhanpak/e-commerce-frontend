@@ -1,56 +1,56 @@
 import React, { Component } from 'react'
-import './kategori.css'
+import './category.css'
 
- class Kategori extends Component {
+export default class Category extends Component {
     render() {
         return (
-            <li class="dropdown dropdown-large">
-            <a href="dropdown" class="dropdown-toggle" data-toggle="dropdown">{this.props.tag} <b class="caret"></b></a>
+            <li className="dropdown dropdown-large">
+            <a href="dropdown" className="dropdown-toggle" data-toggle="dropdown">{this.props.tag} <b className="caret"></b></a>
             
-            <ul class="dropdown-menu dropdown-menu-large row">
-                <li class="col-sm-3">
+            <ul className="dropdown-menu dropdown-menu-large row">
+                <li className="col-sm-3">
                     <ul>
-                        <li class="dropdown-header">Glyphicons</li>
+                        <li className="dropdown-header">Glyphicons</li>
                         <li><a href="glyphs">Available glyphs</a></li>
-                        <li class=""><a href="how-to-use">How to use</a></li>
+                        <li className=""><a href="how-to-use">How to use</a></li>
                         <li><a href="examples">Examples</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Dropdowns</li>
+                        <li className="divider"></li>
+                        <li className="dropdown-header">Dropdowns</li>
                         <li><a href="example">Example</a></li>
                         <li><a href="aligninment">Aligninment options</a></li>
                         <li><a href="headers">Headers</a></li>
                         <li><a href="disabled">Disabled menu items</a></li>
                     </ul>
                 </li>
-                <li class="col-sm-3">
+                <li className="col-sm-3">
                     <ul>
-                        <li class="dropdown-header">Button groups</li>
+                        <li className="dropdown-header">Button groups</li>
                         <li><a href="basic-example">Basic example</a></li>
                         <li><a href="button-toolbar">Button toolbar</a></li>
                         <li><a href="sizing">Sizing</a></li>
                         <li><a href="nesting">Nesting</a></li>
                         <li><a href="vertical">Vertical variation</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Button dropdowns</li>
+                        <li className="divider"></li>
+                        <li className="dropdown-header">Button dropdowns</li>
                         <li><a href="signle-button">Single button dropdowns</a></li>
                     </ul>
                 </li>
-                <li class="col-sm-3">
+                <li className="col-sm-3">
                     <ul>
-                        <li class="dropdown-header">Input groups</li>
+                        <li className="dropdown-header">Input groups</li>
                         <li><a href="basic-example">Basic example</a></li>
                         <li><a href="sizing">Sizing</a></li>
                         <li><a href="checkboxes">Checkboxes and radio addons</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Navs</li>
+                        <li className="divider"></li>
+                        <li className="dropdown-header">Navs</li>
                         <li><a href="tabs">Tabs</a></li>
                         <li><a href="pills">Pills</a></li>
                         <li><a href="justified">Justified</a></li>
                     </ul>
                 </li>
-                <li class="col-sm-3">
+                <li className="col-sm-3">
                     <ul>
-                        <li class="dropdown-header">Navbar</li>
+                        <li className="dropdown-header">Navbar</li>
                         <li><a href="deafult-navbar">Default navbar</a></li>
                         <li><a href="buttons">Buttons</a></li>
                         <li><a href="text">Text</a></li>
@@ -67,4 +67,3 @@ import './kategori.css'
         )
     }
 }
-export default Kategori

@@ -3,12 +3,11 @@ import React, {Component} from 'react';
 export default class Cart extends Component {
     render() {
         return (
-            <div class="dropdown">
-                <a href="cart">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span>Your Cart</span>
-                    <div class="qty">3</div>
-                </a>
+            <div className="dropdown">
+                <button className="btn btn-default btn-rounded my-6" href="cart">
+                    <i className="fa fa-shopping-cart"></i>
+                    <span> Your Cart</span>
+                </button>
             </div>
         );
     }

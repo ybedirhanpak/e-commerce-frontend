@@ -25,7 +25,7 @@ class Box extends Component {
 
   render() {
     const cities = this.props.data.map((element, index) => (
-      <div class="input-checkbox">
+      <div className="input-checkbox">
         <input type="checkbox" id={"category-" + index} />
         <label for={"category-" + index}>
           <span />
@@ -36,11 +36,11 @@ class Box extends Component {
 
     return (
       
-        <div class="aside">
-          <h3 class="aside-title" onClick={this.dropDown}>
+        <div className="aside">
+          <h3 className="aside-title" onClick={this.dropDown}>
            Select City
           </h3>
-          {this.state.showItems && <div class="checkbox-filter">{cities}</div>}
+          {this.state.showItems && <div className="checkbox-filter">{cities}</div>}
         </div>
 
     );

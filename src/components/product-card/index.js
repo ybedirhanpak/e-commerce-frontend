@@ -8,52 +8,52 @@ export default class index extends React.Component{
     const product = this.props.product
     return (
       <div>
-        <div class="product">
-          <div class="product-img">
+        <div className="product">
+          <div className="product-img">
             <Image width={240} height={240} src={product.imgSource} alt="" />
-            <div class="product-label">
+            <div className="product-label">
               {product.discount && (
-                <span class="sale">-{product.discount}</span>
+                <span className="sale">-{product.discount}</span>
               )}
-              {product.new && <span class="new">{product.new && "NEW"}</span>}
+              {product.new && <span className="new">{product.new && "NEW"}</span>}
             </div>
           </div>
-          <div class="product-body">
-            <p class="product-category">{product.category}</p>
-            <h3 class="product-name">
-              <a href="as">{product.name}</a>
+          <div className="product-body">
+            <p className="product-category">{product.category}</p>
+            <h3 className="product-name">
+              <a href="productDetailed">{product.name}</a>
             </h3>
-            <h4 class="product-price">
+            <h4 className="product-price">
               {product.price}
-              <del class="product-old-price">
+              <del className="product-old-price">
                 {product.oldprice && product.oldprice}
               </del>
             </h4>
-            <div class="product-rating">
-              <i class="fa fa-star" />
-              <i class="fa fa-star" />
-              <i class="fa fa-star" />
-              <i class="fa fa-star" />
-              <i class="fa fa-star" />
+            <div className="product-rating">
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
             </div>
-            <div class="product-btns">
-              <button class="add-to-wishlist">
-                <i class="fa fa-heart-o" />
-                <span class="tooltipp">add to wishlist</span>
+            <div className="product-btns">
+              <button className="add-to-wishlist">
+                <i className="fa fa-heart-o" />
+                <span className="tooltipp">add to wishlist</span>
               </button>
-              <button class="add-to-compare">
-                <i class="fa fa-exchange" />
-                <span class="tooltipp">add to compare</span>
+              <button className="add-to-compare">
+                <i className="fa fa-exchange" />
+                <span className="tooltipp">add to compare</span>
               </button>
-              <button class="quick-view">
-                <i class="fa fa-eye" />
-                <span class="tooltipp">quick view</span>
+              <button className="quick-view">
+                <i className="fa fa-eye" />
+                <span className="tooltipp">quick view</span>
               </button>
             </div>
           </div>
-          <div class="add-to-cart">
-            <button class="add-to-cart-btn">
-              <i class="fa fa-shopping-cart" /> add to cart
+          <div className="add-to-cart">
+            <button className="add-to-cart-btn">
+              <i className="fa fa-shopping-cart" /> add to cart
             </button>
           </div>
         </div>
