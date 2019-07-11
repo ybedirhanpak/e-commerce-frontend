@@ -30,7 +30,7 @@ export default class MainHeader extends Component {
 							</div>
 						</div>
 					</div>
-                </div>
+    		    </div>
 			</div>
         );
     }
