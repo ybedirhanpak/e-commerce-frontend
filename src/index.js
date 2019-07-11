@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import {store} from "./redux/configureStore";
 
-import { postUserRegister, postUserLogin } from './redux/user/actions';
+//import { postUserRegister, postUserLogin } from './redux/user/actions';
 
 // Log the initial state
 console.log(store.getState())
@@ -15,18 +15,19 @@ console.log(store.getState())
 // Note that subscribe() returns a function for unregistering the listener
 const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
-// store.dispatch(postUserRegister({
-//   username:"yabepa16",
-//   password:"yahya123",
-//   firstName:"Yahya",
-//   lastName:"Pak",
-//   role:"Admin"
-// }));
+// store.dispatch(postUserRegister(
+//   {
+    // email:"yabepa123@arute.com",
+    // password:"yahya1234",
+    // firstName:"Yahya Bedirhan",
+    // lastName:"Pak",
+    // role:"Admin"
+//   }));
 
-store.dispatch(postUserLogin({
-    username:"yabepa",
-    password:"yahya1234"
-}))
+// store.dispatch(postUserLogin({
+//     email:"yabepa",
+//     password:"yahya1234"
+// }))
 
 unsubscribe();
 
