@@ -1,6 +1,7 @@
-import 'isomorphic-fetch'
-const UrlPostWithParams=(url,params)=>{
-    var request=fetch(url, {
+import fetch from 'cross-fetch'
+
+export const PostWithUrlBody=(url,bodyIn)=>{
+    var request = fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -11,11 +12,7 @@ const UrlPostWithParams=(url,params)=>{
         },
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(params), // body data type must match "Content-Type" header
+        body: JSON.stringify(bodyIn), // body data type must match "Content-Type" header
     });
-    return {
-        query:request
-    };
+    return request;
 };
-
-export default UrlPostWithParams;

@@ -1,29 +1,25 @@
 import {actionTypes} from './actions'
 
-
 const initialState = {
-    currentUser:null,
+    currentUser:{},
+    successfulRegister: false
 }
-
 
 function userReducer(state=initialState, action) {
     switch(action.type){
-        case actionTypes.LOGOUT_USER:
-            return [
-                ...state,
-                {currentUser: null}
-            ]
-        
-        case actionTypes.UPDATE_USER:    
+        case actionTypes.REGISTER_USER:
+            console.log("action");
+            console.log(action)
+            return{...state,
+                successfulRegister : action.payload.status === 200 ? true : false
+            };
         case actionTypes.LOGIN_USER:
-            return [
-                ...state,
-                {currentUser: action.payload}
-            ];      
+            return{
+                currentUser: action.payload
+            };      
         default:
-            return state;    
+            return state;
     }
-
 }
 
 export default userReducer;
