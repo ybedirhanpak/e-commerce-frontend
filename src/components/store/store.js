@@ -15,10 +15,6 @@ class Store extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      products: []
-    };
-
     //Bind Functions
     this.createProducts = this.createProducts.bind(this);
     this.addSingleProduct = this.addSingleProduct.bind(this);
@@ -36,6 +32,7 @@ class Store extends Component {
     ));
     return productsList;
   };
+  /*
   addSingleProduct() {
     this.props.addProduct({
       name: "Product5",
@@ -52,13 +49,7 @@ class Store extends Component {
       sizeOptions: ["14", "15", "17"]
     });
   }
-  deleteProducts = () => {
-    this.props.apiProducts.map(product => {
-      if (product.name === "Product4") {
-        this.props.deleteProduct(product.id);
-      }
-    });
-  };
+  */
 
   render() {
     console.log("rendering");
