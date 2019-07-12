@@ -4,6 +4,12 @@ import { connect } from "react-redux";
 import ProductCard from "../../components/product-card/index";
 
 import { getProduct } from "../../redux/product/actions";
+import React, { Component } from "react";
+//Components
+import ProductMainImg from "../../components/product-main-img/product-main-img";
+import ProductThumb from "../../components/product-thumb/product-thumb";
+import ProductDetails from "../../components/product-details/product-details";
+import ProductTab from "../../components/product-tab/product-tab";
 
 class ProductDetailedContainer extends Component {
   componentDidMount() {
