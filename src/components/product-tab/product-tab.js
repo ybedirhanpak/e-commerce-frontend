@@ -52,7 +52,7 @@ export default class ProductTab extends Component {
 															<i className="fa fa-star"></i>
 														</div>
 														<div className="rating-progress">
-															<div style="width: 80%;"></div>
+															<div style={{width: '80%'}}></div>
 														</div>
 														<span className="sum">3</span>
 													</li>
@@ -65,7 +65,7 @@ export default class ProductTab extends Component {
 															<i className="fa fa-star-o"></i>
 														</div>
 														<div className="rating-progress">
-															<div style="width: 60%;"></div>
+															<div style={{width: '60%'}}></div>
 														</div>
 														<span className="sum">2</span>
 													</li>

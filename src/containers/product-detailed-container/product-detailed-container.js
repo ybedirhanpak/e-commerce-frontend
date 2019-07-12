@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-
 //Components
-import ProductCard from '../../components/product-card/index';
+import ProductMainImg from '../../components/product-main-img/product-main-img'
+import ProductThumb from '../../components/product-thumb/product-thumb'
+import ProductDetails from '../../components/product-details/product-details'
+import ProductTab from '../../components/product-tab/product-tab'
+
 
 export default class ProductDetailedContainer extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         console.log("Product Detailed Props")
         console.log(this.props);
@@ -13,19 +16,16 @@ export default class ProductDetailedContainer extends Component {
 
     render() {
 
-        var dummyProduct = {
-            name: "Product1",
-            imgSource: "./img/product01.png",
-            discount: "%30",
-            new: false,
-            category: "computer",
-            price: "210",
-            oldPrice: "300"
-        };
-
         return (
-            <div>
-                <ProductCard product={dummyProduct}/>
+            <div className="section">
+                <div className="container">
+                    <div className="row">
+                        <ProductMainImg/>
+                        <ProductThumb/>
+                        <ProductDetails/>
+                        <ProductTab/>
+                    </div>
+                </div>
             </div>
         )
     }
