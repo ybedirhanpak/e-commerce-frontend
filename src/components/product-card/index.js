@@ -1,11 +1,13 @@
 import React from "react";
 import Image from "react-image-resizer";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 //"./img/product01.png"
-export default class index extends React.Component{
+export default class index extends React.Component {
   render() {
-    const product = this.props.product
+    const product = this.props.product;
+    console.log("imgSource: " + product.imgSource);
     return (
       <div>
         <div className="product">
@@ -15,13 +17,23 @@ export default class index extends React.Component{
               {product.discount && (
                 <span className="sale">-{product.discount}</span>
               )}
-              {product.new && <span className="new">{product.new && "NEW"}</span>}
+              {product.new && (
+                <span className="new">{product.new && "NEW"}</span>
+              )}
             </div>
           </div>
           <div className="product-body">
             <p className="product-category">{product.category}</p>
             <h3 className="product-name">
-              <a href="productDetailed">{product.name}</a>
+              <Link
+                to={{
+                  pathname: "/productDetailed/" + product.id,
+                  state: { id: product.id }
+                }}
+              >
+                {product.name}
+              </Link>
+              {/*<a href="productDetailed">{product.name}</a>*/}
             </h3>
             <h4 className="product-price">
               {product.price}

@@ -51,7 +51,6 @@ class Store extends Component {
   */
 
   render() {
-    console.log("rendering");
     return (
       <div>
         <StoreTopFilter />
@@ -61,7 +60,7 @@ class Store extends Component {
   }
 }
 
-const mapsStateToProps = state => {
+const mapStateToProps = state => {
   return {
     apiProducts: state.product.productList
   };
@@ -74,6 +73,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  mapsStateToProps,
+  mapStateToProps,
   mapDispatchToProps
 )(Store);
