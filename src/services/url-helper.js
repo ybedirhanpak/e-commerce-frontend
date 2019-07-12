@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch'
 
-export const PostWithUrlBody=(url,bodyIn)=>{
+export const PostWithUrlBody = (url,bodyIn) => {
     var request = fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -17,7 +17,7 @@ export const PostWithUrlBody=(url,bodyIn)=>{
     return request;
 };
 
-export const GetWithUrl=(url)=>{
+export const GetWithUrl = (url) => {
     var request = fetch(url, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -34,7 +34,7 @@ export const GetWithUrl=(url)=>{
     return request;
 };
 
-export const DeleteWithUrl=(url)=>{
+export const DeleteWithUrl = (url) => {
     var request = fetch(url, {
         method: "DELETE", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -50,3 +50,4 @@ export const DeleteWithUrl=(url)=>{
     });
     return request;
 };
+

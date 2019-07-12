@@ -7,13 +7,14 @@ import { Provider } from "react-redux";
 import {store} from "./redux/configureStore";
 
 //import { postUserRegister, postUserLogin } from './redux/user/actions';
+// import { fetchAllCategories } from './redux/category/actions';
 
 // Log the initial state
-console.log(store.getState())
+// console.log(store.getState())
 
 // Every time the state changes, log it
 // Note that subscribe() returns a function for unregistering the listener
-const unsubscribe = store.subscribe(() => console.log(store.getState()))
+// const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 // store.dispatch(postUserRegister(
 //   {
@@ -29,7 +30,9 @@ const unsubscribe = store.subscribe(() => console.log(store.getState()))
 //     password:"yahya1234"
 // }))
 
-unsubscribe();
+// store.dispatch(fetchAllCategories());
+
+// unsubscribe();
 
 ReactDOM.render(
   <Provider store={store}>

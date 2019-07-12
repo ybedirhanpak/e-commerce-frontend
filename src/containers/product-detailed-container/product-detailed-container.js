@@ -7,7 +7,7 @@ export default class ProductDetailedContainer extends Component {
 
     constructor(props){
         super(props);
-
+        console.log("Product Detailed Props")
         console.log(this.props);
     }
 
