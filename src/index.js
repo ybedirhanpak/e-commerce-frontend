@@ -4,13 +4,12 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import {store} from "./redux/configureStore";
+import { store } from "./redux/configureStore";
 
 //import { postUserRegister, postUserLogin } from './redux/user/actions';
 // import { fetchAllCategories } from './redux/category/actions';
 
 // Log the initial state
-// console.log(store.getState())
 
 // Every time the state changes, log it
 // Note that subscribe() returns a function for unregistering the listener
@@ -18,11 +17,11 @@ import {store} from "./redux/configureStore";
 
 // store.dispatch(postUserRegister(
 //   {
-    // email:"yabepa123@arute.com",
-    // password:"yahya1234",
-    // firstName:"Yahya Bedirhan",
-    // lastName:"Pak",
-    // role:"Admin"
+// email:"yabepa123@arute.com",
+// password:"yahya1234",
+// firstName:"Yahya Bedirhan",
+// lastName:"Pak",
+// role:"Admin"
 //   }));
 
 // store.dispatch(postUserLogin({
