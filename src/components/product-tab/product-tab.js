@@ -82,7 +82,7 @@ export default class ProductTab extends Component {
                           <i className="fa fa-star" />
                         </div>
                         <div className="rating-progress">
-                          <div style="width: 80%;" />
+                          <div style={"width: 80%;"} />
                         </div>
                         <span className="sum">3</span>
                       </li>
@@ -209,16 +209,16 @@ export default class ProductTab extends Component {
                     <ul className="reviews-pagination">
                       <li className="active">1</li>
                       <li>
-                        <a href="#">2</a>
+                        <a href="asd">2</a>
                       </li>
                       <li>
-                        <a href="#">3</a>
+                        <a href="asd">3</a>
                       </li>
                       <li>
-                        <a href="#">4</a>
+                        <a href="asdas">4</a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href="asda">
                           <i className="fa fa-angle-right" />
                         </a>
                       </li>
