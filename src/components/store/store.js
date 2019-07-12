@@ -17,7 +17,6 @@ class Store extends Component {
 
     //Bind Functions
     this.createProducts = this.createProducts.bind(this);
-    this.addSingleProduct = this.addSingleProduct.bind(this);
   }
 
   componentDidMount() {
