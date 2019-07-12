@@ -1,7 +1,28 @@
 import React, {Component} from 'react';
-import Category from '../category-dropdown/category'
+import Category from '../category/category'
 
-export default class NavigationBar extends Component {
+//Redux
+import { connect } from 'react-redux';
+import { fetchAllCategories } from '../../redux/category/actions'
+
+class NavigationBar extends Component {
+
+    constructor(props) {
+      super(props);
+    }
+
+    componentDidMount() {
+      console.log("Navigation Bar executes fetchAllCategories...")
+      this.props.fetchAllCategories();
+    }
+
+    generateCategories = () => {
+      const categories = this.props.categories.map(category => 
+        <Category category={category}/>
+      );
+      return categories;
+    }
+
     render() {
         return (
             <nav id="navigation" className="navbar navbar-default navbar-static">
@@ -9,11 +30,7 @@ export default class NavigationBar extends Component {
                 <div id="responsive-nav" className="collapse navbar-collapse js-navbar-collapse">
                   <ul className="main-nav nav navbar-nav">
                     <li className=""><a href="home">Home</a></li>
-                    <Category tag="Teknoloji"/>
-                    <Category tag="Kadın"/>
-                    <Category tag="Erkek"/>
-                    <Category tag="Çocuk"/>
-                    <Category tag="Ayakkabı & Çanta"/>
+                    {this.generateCategories()}
                   </ul>                
                 </div>
               </div>
@@ -21,3 +38,15 @@ export default class NavigationBar extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.category.categories
+  }
+}
+
+const mapDispatchToProps = {
+  fetchAllCategories
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
