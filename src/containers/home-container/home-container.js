@@ -6,11 +6,6 @@ import Filter from '../../components/filter/index';
 import SlideProduct from '../../components/slide-product/slide'
 
 export default class ProductContainer extends Component {
-    constructor(props) {
-        super(props);
-        console.log(this.props);
-    }
-
     render() {
         var dummyProducts = [
             {

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./index.css";
 
+//Redux
+import { connect } from 'react-redux';
+import { postUserLogin, postUserRegister } from '../../redux/user/actions'
+
 class UserLogin extends Component {
 
   state = {
@@ -21,19 +25,37 @@ class UserLogin extends Component {
     //  }
 
   }
+
   userLoggedin = (event) =>{
+    this.props.postUserLogin({
+      email: this.state.email,
+      password: this.state.Password,
+    })
+
     console.log(this.state.email)
     console.log(this.state.Password)
   }
-  userSignedup =(event) =>{
+
+  userSignedup = (event) =>{
+    if(this.state.Password1 === this.state.Password2) {
+      this.props.postUserRegister({
+        email: this.state.emailRegister,
+        password: this.state.Password1,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        role:"User"
+      });
+    } else {
+      alert("Passwords are not equal");
+    }
     console.log(this.state.firstName)
     console.log(this.state.lastName)
     console.log(this.state.emailRegister)
     console.log(this.state.Password1)
     console.log(this.state.Password2)
+
+    event.preventDefault();
   }
-
-
 
   /*        
   passwordControl=(event) => {
@@ -175,4 +197,15 @@ class UserLogin extends Component {
   }
 }
 
-export default UserLogin;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  postUserLogin,
+  postUserRegister
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserLogin);
