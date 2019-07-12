@@ -20,10 +20,18 @@ export default class ProductDetailedContainer extends Component {
             <div className="section">
                 <div className="container">
                     <div className="row">
-                        <ProductMainImg/>
-                        <ProductThumb/>
-                        <ProductDetails/>
-                        <ProductTab/>
+                        <div class="col-md-5 col-md-push-2">
+                            <ProductMainImg/>
+                        </div>
+                        <div className="col-md-2  col-md-pull-5">
+                            {/* <ProductThumb/> */}
+                        </div>
+                        <div className="col-md-5">
+                            <ProductDetails/>
+                        </div>
+                        <div className="col-md-12">
+                            <ProductTab/>
+                        </div>
                     </div>
                 </div>
             </div>
