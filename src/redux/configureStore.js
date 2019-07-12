@@ -4,9 +4,11 @@ import { combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import userReducer from "./user/reducers";
+import categoryReducer from './category/reducers';
 
 const eCommerceApp = combineReducers({
-  user: userReducer
+  user: userReducer,
+  category: categoryReducer
 });
 
 export const store = createStore(

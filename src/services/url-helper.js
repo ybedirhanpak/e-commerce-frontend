@@ -17,7 +17,7 @@ export const PostWithUrlBody=(url,bodyIn)=>{
     return request;
 };
 
-export const GetWithUrlBody=(url=>{
+export const GetWithUrl = (url) => {
     var request = fetch(url, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -32,4 +32,4 @@ export const GetWithUrlBody=(url=>{
         //body: JSON.stringify(bodyIn), // body data type must match "Content-Type" header
     });
     return request;
-};
+}
