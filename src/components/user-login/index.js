@@ -326,7 +326,7 @@ class UserLogin extends Component {
         </div>
 
         <div className="dropdown">
-          <a
+          <button
             href=""
             className="btn btn-default btn-rounded my-6"
             data-toggle="modal"
@@ -334,7 +334,7 @@ class UserLogin extends Component {
           >
             <i className="fa fa-user" />
             <span>Sign in</span>
-          </a>
+          </button>
         </div>
       </div>
     );

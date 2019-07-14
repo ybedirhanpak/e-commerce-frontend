@@ -15,17 +15,15 @@ export default class MainHeader extends Component {
             <div id="header">
 				<div className="container-fluid">
 					<div className="row row-container">
-						<div className="col-md-3 col-logo">
+						<div className="col-md-3">
 							<Logo/>
 						</div>
-						<div className="col-md-6 col-searchbar">
+						<div className="col-md-6">
 							<SearchBar/>
 						</div>
-						<div className="col-md-3 clearfix col-account">
+						<div className="col-md-3 clearfix">
 							<div className="header-ctn">
-                                {/* Sign-in Button */}
                                 <UserLogin/>
-                                {/*  */}
                                 <Cart/>
 							</div>
 						</div>

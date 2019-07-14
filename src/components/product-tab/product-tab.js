@@ -10,7 +10,9 @@ export default class ProductTab extends Component {
 				<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
 			</ul>
 
+			
 			<div className="tab-content">
+				{/* Description */}
 				<div id="tab1" className="tab-pane fade in active">
 					<div className="row">
 						<div className="col-md-12">
@@ -19,6 +21,7 @@ export default class ProductTab extends Component {
 					</div>
 				</div>
 
+				{/* Details */}
 				<div id="tab2" className="tab-pane fade in">
 					<div className="row">
 						<div className="col-md-12">
@@ -27,6 +30,7 @@ export default class ProductTab extends Component {
 					</div>
 				</div>
 
+				{/* Reviews */}
 				<div id="tab3" className="tab-pane fade in">
 					<div className="row">
 						<div className="col-md-3">
@@ -165,10 +169,10 @@ export default class ProductTab extends Component {
 								</ul>
 								<ul className="reviews-pagination">
 									<li className="active">1</li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#"><i className="fa fa-angle-right"></i></a></li>
+									<li><a href="2">2</a></li>
+									<li><a href="3">3</a></li>
+									<li><a href="4">4</a></li>
+									<li><a href="right"><i className="fa fa-angle-right"></i></a></li>
 								</ul>
 							</div>
 						</div>

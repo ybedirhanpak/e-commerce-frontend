@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-//Components
-import ProductCard from "../../components/product-card/index";
 
+//Redux
+import { connect } from "react-redux";
 import { getProduct } from "../../redux/product/actions";
+
 //Components
 import ProductMainImg from "../../components/product-main-img/product-main-img";
-import ProductThumb from "../../components/product-thumb/product-thumb";
 import ProductDetails from "../../components/product-details/product-details";
 import ProductTab from "../../components/product-tab/product-tab";
 
@@ -16,21 +15,21 @@ class ProductDetailedContainer extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="section">
           <div className="container">
               <div className="row">
-                  <div class="col-md-5 col-md-push-2">
-                      <ProductMainImg/>
-                  </div>
-                  <div className="col-md-2  col-md-pull-5">
-                      {/* <ProductThumb/> */}
+                  <div class="col-md-7">
+                      <ProductMainImg product={this.props.product}/>
                   </div>
                   <div className="col-md-5">
-                      <ProductDetails/>
+                      <ProductDetails product={this.props.product}/>
                   </div>
-                  <div className="col-md-12">
-                      <ProductTab/>
+              </div>
+              <div className="row">
+                  <div className="col-sm-12">
+                      <ProductTab product={this.props.product}/>
                   </div>
               </div>
           </div>

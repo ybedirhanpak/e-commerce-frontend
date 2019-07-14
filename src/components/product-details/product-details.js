@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 export default class ProductDetails extends Component {
 	render() {
+		const product = this.props.product;
 		return (
 			<div className="product-details">
-				<h2 className="product-name">product name goes here</h2>
+				<h2 className="product-name">{product.name}</h2>
 				<div>
 					<div className="product-rating">
 						<i className="fa fa-star"></i>
@@ -13,14 +14,13 @@ export default class ProductDetails extends Component {
 						<i className="fa fa-star"></i>
 						<i className="fa fa-star-o"></i>
 					</div>
-					<a className="review-link" href="#">10 Review(s) | Add your review</a>
+					<a className="review-link" href="add-review">10 Review(s) | Add your review</a>
 				</div>
 				<div>
-					<h3 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h3>
-					<span className="product-available">In Stock</span>
+					<h3 className="product-price">{'$'+ product.price }<del className="product-old-price">{'$'+ product.oldPrice}</del></h3>
+					<span className="product-available">{product.quantity > 0 ? 'In Stock (' + product.quantity + ')' : 'Not In Stock'}</span>
 				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
+				<p>{product.description}</p>
 				<div className="product-options">
 					<label>
 						Size
@@ -47,25 +47,6 @@ export default class ProductDetails extends Component {
 					</div>
 					<button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i> add to cart</button>
 				</div>
-
-				<ul className="product-btns">
-					<li><a href="#"><i className="fa fa-heart-o"></i> add to wishlist</a></li>
-					<li><a href="#"><i className="fa fa-exchange"></i> add to compare</a></li>
-				</ul>
-
-				<ul className="product-links">
-					<li>Category:</li>
-					<li><a href="#">Headphones</a></li>
-					<li><a href="#">Accessories</a></li>
-				</ul>
-
-				<ul className="product-links">
-					<li>Share:</li>
-					<li><a href="#"><i className="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i className="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i className="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i className="fa fa-envelope"></i></a></li>
-				</ul>
 			</div>
 		);
 	}

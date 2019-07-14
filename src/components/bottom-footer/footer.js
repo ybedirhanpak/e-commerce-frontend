@@ -12,7 +12,7 @@ export default class footer extends Component {
 				<div className="section">
 					<div className="container">
 						<div className="row">
-							<div className="col-md-4 col-xs-6">
+							<div className="col-md-4 col-xs-12">
 								<div className="footer">
 									<h3 className="footer-title">About Us</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
