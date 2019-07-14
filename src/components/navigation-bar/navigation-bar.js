@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Category from "../category/category";
 
+//Route
+import { Link } from 'react-router-dom';
+
 //Redux
 import { connect } from "react-redux";
 import { fetchAllCategories } from "../../redux/category/actions";
@@ -26,8 +29,8 @@ class NavigationBar extends Component {
             className="collapse navbar-collapse js-navbar-collapse"
           >
             <ul className="main-nav nav navbar-nav">
-              <li className="">
-                <a href="home">Home</a>
+              <li>
+                <Link to='/home' activeClassName='active'>Home </Link>
               </li>
               {this.generateCategories()}
             </ul>

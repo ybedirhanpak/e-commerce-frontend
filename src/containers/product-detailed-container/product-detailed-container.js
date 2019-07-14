@@ -17,10 +17,25 @@ class ProductDetailedContainer extends Component {
 
   render() {
     return (
-      <div>
-        <ProductCard product={this.props.product} />
+      <div className="section">
+          <div className="container">
+              <div className="row">
+                  <div class="col-md-5 col-md-push-2">
+                      <ProductMainImg/>
+                  </div>
+                  <div className="col-md-2  col-md-pull-5">
+                      {/* <ProductThumb/> */}
+                  </div>
+                  <div className="col-md-5">
+                      <ProductDetails/>
+                  </div>
+                  <div className="col-md-12">
+                      <ProductTab/>
+                  </div>
+              </div>
+          </div>
       </div>
-    );
+    )
   }
 }
 

@@ -327,7 +327,7 @@ class UserLogin extends Component {
 
         <div className="dropdown">
           <a
-            href="sdasd"
+            href=""
             className="btn btn-default btn-rounded my-6"
             data-toggle="modal"
             data-target="#modalLRForm"
