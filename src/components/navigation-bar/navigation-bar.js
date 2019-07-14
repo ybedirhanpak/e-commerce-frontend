@@ -37,7 +37,7 @@ class NavigationBar extends Component {
           <div id="responsive-nav" className="collapse navbar-collapse js-navbar-collapse">
             <ul className="main-nav nav navbar-nav">
               <li>
-                <Link to='/home' activeClassName='active'>Home </Link>
+                <Link to='/home'>Home </Link>
               </li>
               {this.generateCategories()}
             </ul>

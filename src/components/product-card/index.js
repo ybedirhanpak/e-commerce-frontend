@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 export default class index extends React.Component {
   render() {
     const product = this.props.product;
-    console.log("imgSource: " + product.imgSource);
     return (
       <div>
         <div className="product">

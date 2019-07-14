@@ -39,7 +39,14 @@ export default class App extends Component {
                 <Redirect to='home'/>
               )}/>
               <Route path="/home" component={HomeContainer} exact/>
-              <Route path="/productDetailed" component={ProductDetailedContainer}/>
+
+              <Route path="/productDetailed/:productId" render={(props) => {
+                const productId = props.match.params.productId;
+                return(
+                  <ProductDetailedContainer productId={productId}/>
+                )
+              }}/>
+
               <Route path="/about" component={AboutUsContainer}/>
               <Route path="/contact" component={ContactUsContainer}/>
               <Route path="/privacy" component={PrivacyPolicyContainer}/>

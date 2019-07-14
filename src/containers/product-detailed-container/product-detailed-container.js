@@ -11,11 +11,10 @@ import ProductTab from "../../components/product-tab/product-tab";
 
 class ProductDetailedContainer extends Component {
   componentDidMount() {
-    this.props.getProduct(this.props.location.state.id);
+    this.props.getProduct(this.props.productId);
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="section">
           <div className="container">
