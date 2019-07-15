@@ -326,15 +326,15 @@ class UserLogin extends Component {
         </div>
 
         <div className="dropdown">
-          <a
-            href="sdasd"
+          <button
+            href=""
             className="btn btn-default btn-rounded my-6"
             data-toggle="modal"
             data-target="#modalLRForm"
           >
             <i className="fa fa-user" />
             <span>Sign in</span>
-          </a>
+          </button>
         </div>
       </div>
     );

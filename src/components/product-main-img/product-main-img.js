@@ -1,28 +1,14 @@
 import React, { Component } from 'react'
 import "../..//utils/style.css";
+import './product-main-img.css';
 
 export default class ProductMainImg extends Component {
+    
     render() {
+        const product = this.props.product;
+        const imgSource = product.imgSource ? product.imgSource.substring(1) : '';
         return (
-            <div class="col-md-5 col-md-push-2">
-                <div id="product-main-img">
-                    <div class="product-preview">
-                        <img src="./img/product01.png" alt=""></img>
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="./img/product03.png" alt=""></img>
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="./img/product06.png" alt=""></img>
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="./img/product08.png" alt=""></img>
-                    </div>
-                </div>
-            </div>
+            <img className="product-image" alt='Product' src={imgSource}></img>
         );
     }
 }

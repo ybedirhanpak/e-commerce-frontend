@@ -24,12 +24,26 @@ class Store extends Component {
   }
 
   createProducts = () => {
-    const productsList = this.props.apiProducts.map(product => (
-      <div key={product.id} className="col-md-4 col-xs-6">
-        <ProductCard product={product} />
-      </div>
-    ));
-    return productsList;
+    if(this.props.fetchInProgress) {
+      return(
+        <ProductCard product={
+          {
+            name: "Loading...",
+            imgSource: "./img/product05.png",
+            discount: "...",
+            category: "...",
+            price: "...",
+            stars: 5
+          }} />
+      )
+    }else {
+      const productsList = this.props.apiProducts.map(product => (
+        <div key={product.id} className="col-md-4 col-xs-6">
+          <ProductCard product={product} />
+        </div>
+      ));
+      return productsList;
+    }
   };
   /*
   addSingleProduct() {
@@ -62,7 +76,8 @@ class Store extends Component {
 
 const mapStateToProps = state => {
   return {
-    apiProducts: state.product.productList
+    apiProducts: state.product.productList,
+    fetchInProgress: state.product.fetchInProgress
   };
 };
 

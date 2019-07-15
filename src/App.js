@@ -3,7 +3,7 @@ import "./App.css";
 
 //Imports
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 //Components
 import MainHeader from "./components/main-header/main-header";
@@ -35,9 +35,18 @@ export default class App extends Component {
             <MainHeader />
             <NavigationBar />
             <Switch>
-              <Route path="/" component={HomeContainer} exact/>
+              <Route exact path="/" render={() => (
+                <Redirect to='home'/>
+              )}/>
               <Route path="/home" component={HomeContainer} exact/>
-              <Route path="/productDetailed" component={ProductDetailedContainer}/>
+
+              <Route path="/productDetailed/:productId" render={(props) => {
+                const productId = props.match.params.productId;
+                return(
+                  <ProductDetailedContainer productId={productId}/>
+                )
+              }}/>
+
               <Route path="/about" component={AboutUsContainer}/>
               <Route path="/contact" component={ContactUsContainer}/>
               <Route path="/privacy" component={PrivacyPolicyContainer}/>

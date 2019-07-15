@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Category from "../category/category";
 
+//Route
+import { Link } from 'react-router-dom';
+
 //Redux
 import { connect } from "react-redux";
 import { fetchAllCategories } from "../../redux/category/actions";
@@ -11,23 +14,30 @@ class NavigationBar extends Component {
   }
 
   generateCategories = () => {
-    const categories = this.props.categories.map(category => (
-      <Category key={category.id} category={category} />
-    ));
-    return categories;
+    if(this.props.fetchInProgress) {
+      return(
+        <li>
+            <a href='/home'>
+              Loading...
+            </a>
+        </li>
+      )
+    }else {
+      const categories = this.props.categories.map(category => (
+        <Category key={category.id} category={category} />
+      ));
+      return categories;
+    }
   };
 
   render() {
     return (
       <nav id="navigation" className="navbar navbar-default navbar-static">
         <div className="container">
-          <div
-            id="responsive-nav"
-            className="collapse navbar-collapse js-navbar-collapse"
-          >
+          <div id="responsive-nav" className="collapse navbar-collapse js-navbar-collapse">
             <ul className="main-nav nav navbar-nav">
-              <li className="">
-                <a href="home">Home</a>
+              <li>
+                <Link to='/home'>Home </Link>
               </li>
               {this.generateCategories()}
             </ul>
@@ -40,7 +50,8 @@ class NavigationBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.category.categories
+    categories: state.category.categories,
+    fetchInProgress: state.category.fetchInProgress
   };
 };
 

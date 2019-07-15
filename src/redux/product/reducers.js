@@ -2,7 +2,8 @@ import { actionTypes } from "./actions";
 
 const initialState = {
   productList: [],
-  currentProduct: {}
+  currentProduct: {},
+  fetchInProgress: true,
 };
 
 function productReducer(state = initialState, action) {
@@ -10,7 +11,8 @@ function productReducer(state = initialState, action) {
     case actionTypes.SAVE_PRODUCT_LIST:
       return {
         ...state,
-        productList: action.payload
+        productList: action.payload,
+        fetchInProgress: false
       };
     case actionTypes.SAVE_SINGLE_PRODUCT:
       return {
