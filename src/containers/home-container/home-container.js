@@ -7,6 +7,8 @@ import SlideProduct from '../../components/slide-product/slide'
 
 export default class ProductContainer extends Component {
     render() {
+        const currentDate = new Date();
+        const year = (currentDate.getMonth() === 11 && currentDate.getDate() > 23) ? currentDate.getFullYear() + 1 : currentDate.getFullYear();
         return (
             <div className="section">
                 <div className="container">
@@ -21,7 +23,7 @@ export default class ProductContainer extends Component {
                         </div>
                     </div>
                 </div>
-                <SlideProduct/>
+                <SlideProduct date={`${year}-07-20T00:00:00`}/>
             </div>
         )
     }
