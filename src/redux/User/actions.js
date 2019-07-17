@@ -3,32 +3,66 @@ import { PostWithUrlBody } from "../../services/url-helper";
 
 /* Action Types */
 
-const REGISTER_USER = "REGISTER_USER";
-const LOGIN_USER = "LOGIN_USER";
+const RESET_REGISTER = 'RESET_REGISTER';
+const INITIALIZE_REGISTER = 'INITIALIZE_REGISTER';
+const COMPLETE_REGISTER = "COMPLETE_REGISTER";
+const RESET_LOGIN = 'RESET_LOGIN';
+const INITIALIZE_LOGIN = 'INITIALIZE_LOGIN';
+const COMPLETE_LOGIN = "COMPLETE_LOGIN";
 export const actionTypes = {
-  REGISTER_USER,
-  LOGIN_USER
+  RESET_REGISTER,
+  INITIALIZE_REGISTER,
+  COMPLETE_REGISTER,
+  RESET_LOGIN,
+  INITIALIZE_LOGIN,
+  COMPLETE_LOGIN
 };
 
 /* Action Creators */
 
 export const actionCreators = {
-  userRegister,
-  userLogin
+  resetRegister,
+  initializeRegister,
+  completeRegister,
+  resetLogin,
+  initializeLogin,
+  completeLogin
 };
 
-function userRegister(userConfig) {
-  console.log("userRegister. userConfig:");
-  console.log(userConfig);
+function resetRegister() {
+  return{
+    type: RESET_REGISTER
+  }
+}
+
+function initializeRegister() {
+  return{
+    type: INITIALIZE_REGISTER
+  }
+}
+
+function completeRegister(userConfig) {
   return {
-    type: REGISTER_USER,
+    type: COMPLETE_REGISTER,
     payload: userConfig
   };
 }
 
-function userLogin(userConfig) {
+function resetLogin() {
+  return{
+    type: RESET_LOGIN
+  }
+}
+
+function initializeLogin() {
   return {
-    type: LOGIN_USER,
+    type: INITIALIZE_LOGIN
+  };
+}
+
+function completeLogin(userConfig) {
+  return {
+    type: COMPLETE_LOGIN,
     payload: userConfig
   };
 }
@@ -36,30 +70,32 @@ function userLogin(userConfig) {
 /* Api Call Functions */
 
 export const postUserRegister = body => {
-  console.log("postUserRegister");
   return dispatch => {
+    dispatch(initializeRegister());
     PostWithUrlBody(API + "/users/register", body)
       .then(response => {
-        console.log(response);
-        console.log("dispatch");
-        dispatch(userRegister(response));
+          if(response.status === 200) {
+            dispatch(completeRegister(response));
+          } else {
+            response.json().then(data => {
+              console.log(data.message)
+              dispatch(completeRegister(data.message));
+            });
+          }
       })
       .catch(error => console.log("Error when fetch register\n", error));
   };
 };
 
 export const postUserLogin = body => {
-  console.log("postUserLogin");
   return dispatch => {
+    dispatch(initializeLogin());
     PostWithUrlBody(API + "/users/authenticate", body)
       .then(response => {
-        console.log(response);
         return response.json();
       })
       .then(responseJson => {
-        console.log(responseJson);
-        console.log("dispatch userLogin");
-        dispatch(userLogin(responseJson));
+        dispatch(completeLogin(responseJson));
       })
       .catch(error => console.log("Error when fetch register\n", error));
   };
