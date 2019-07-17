@@ -1,0 +1,15 @@
+
+.admin-panel-main{
+    display: flex;
+    justify-content: center;
+}
+
+.admin-panel-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.admin-panel-item{
+    padding: 20px 0 !important;
+}
