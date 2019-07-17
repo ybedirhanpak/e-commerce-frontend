@@ -28,6 +28,13 @@ export default class MainHeader extends Component {
 								</div>
 								<div className="col-xs-6 col-md-5">
 									<Cart/>
+									{/* <!-- Menu Toogle --> */}
+									<div className="menu-toggle">
+										<a href="#">
+											<i className="fa fa-bars"></i>
+											<span>Menu</span>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
