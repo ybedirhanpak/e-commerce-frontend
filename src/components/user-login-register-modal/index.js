@@ -5,6 +5,10 @@ import "./index.css";
 import { connect } from "react-redux";
 import { postUserLogin, postUserRegister } from "../../redux/user/actions";
 
+//Route
+import { Redirect } from 'react-router-dom';
+
+
 class UserLogin extends Component {
   state = {
     firstName: "",
@@ -66,12 +70,12 @@ class UserLogin extends Component {
   */
 
   render() {
-    // console.log(this.state.email)
-    // console.log(this.state.Password)
-    // console.log(this.state.nameSurname)
-    // console.log(this.state.emailRegister)
-    // console.log(this.state.Password1)
-    // console.log(this.state.Password2)
+    if(this.props.user.successfulRegister){
+      window.location.reload();
+      return(
+        <Redirect to='/login'/>
+      )
+    }
     return (
       <div>
         <div
@@ -114,11 +118,7 @@ class UserLogin extends Component {
                 </ul>
 
                 <div className="tab-content">
-                  <div
-                    className="tab-pane fade in active"
-                    id="panel7"
-                    role="tabpanel"
-                  >
+                  <div className="tab-pane fade in active" id="panel7"role="tabpanel">
                     <div className="modal-body mb-1">
                       <div className="md-form form-sm">
                         <i className="fa fa-envelope" />
@@ -291,6 +291,7 @@ class UserLogin extends Component {
                         <button
                           className="btn btn-danger"
                           onClick={this.userSignedup}
+                          data-dismiss={this.props.successfulRegister ? "modal" : ""}
                         >
                           Sign up <i className="fa fa-sign-in ml-1" />
                         </button>
@@ -325,7 +326,7 @@ class UserLogin extends Component {
           </div>
         </div>
 
-        <div className="dropdown">
+        <div >
           <button
             href=""
             className="btn btn-default btn-rounded my-6"

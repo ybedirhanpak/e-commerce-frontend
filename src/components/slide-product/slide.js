@@ -113,7 +113,7 @@ export default class slide extends Component {
 									</ul>
 									<h2 className="text-uppercase">hot deal this week</h2>
 									<p>New Collection Up to 50% OFF</p>
-									<a className="primary-btn cta-btn" href="#">Shop now</a>
+									<a className="primary-btn cta-btn" href="/hot-deals">Shop now</a>
 								</div>
 							</div>
 						</div>

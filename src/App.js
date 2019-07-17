@@ -24,6 +24,8 @@ import MyAccountContainer from "./containers/my-account-container/my-account-con
 import WiewCardContainer from "./containers/wiew-cart-container/wiew-card-container";
 import TrackMyOrderContainer from "./containers/track-my-order-container/track-my-order-container";
 import HelpContainer from "./containers/help-container/help-container";
+import LoginContainer from './containers/login-container/login-container';
+import RegisterContainer from './containers/register-container/register-container';
 import NoPageContainer from "./containers/no-page-container/no-page-container";
 
 export default class App extends Component {
@@ -46,7 +48,9 @@ export default class App extends Component {
                   <ProductDetailedContainer productId={productId}/>
                 )
               }}/>
-
+              <Route path="/login" component={LoginContainer}/>
+              <Route path="/register" component={RegisterContainer}/>
+              <Route path="/account" component={MyAccountContainer}/>
               <Route path="/about" component={AboutUsContainer}/>
               <Route path="/contact" component={ContactUsContainer}/>
               <Route path="/privacy" component={PrivacyPolicyContainer}/>
@@ -54,7 +58,6 @@ export default class App extends Component {
               <Route path="/address-location" component={AddressLocationContainer}/>
               <Route path="/phone-contact" component={PhoneContactContainer}/>
               <Route path="/email-contact" component={EmailContactContainer}/>
-              <Route path="/account" component={MyAccountContainer}/>
               <Route path="/cart" component={WiewCardContainer}/>
               <Route path="/track" component={TrackMyOrderContainer}/>
               <Route path="/help" component={HelpContainer}/>
