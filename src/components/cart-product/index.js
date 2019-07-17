@@ -14,7 +14,13 @@ class CartProduct extends React.Component {
                 </div>
                 <div className="product-body">
                     <h3 className="product-name"><a href="#">{this.props.cartProduct.name}</a></h3>
-                    <h4 className="product-price"><span className="qty">{this.props.cartProduct.quantity}</span>{this.props.cartProduct.price}</h4>
+                    <h4 className="product-price">
+                        <span className="qty">{this.props.cartProduct.quantity}</span>
+                        {'$'+ this.props.cartProduct.price}
+                        <del className="product-old-price">
+                            {'$'+ this.props.cartProduct.oldPrice}
+                        </del>
+                    </h4>
                 </div>
                 <button className="delete" onClick={this.handleDeleteFromCart}><i className="fa fa-close"></i></button>
             </div>

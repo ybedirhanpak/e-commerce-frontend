@@ -13,7 +13,8 @@ class ProductCard extends React.Component {
       img:this.props.product.imgSource,
       name:this.props.product.name,
       quantity:1,
-      price:this.props.product.price  
+      price:this.props.product.price ,
+      oldPrice:this.props.product.oldPrice 
     });
   }
   render() {
@@ -46,9 +47,9 @@ class ProductCard extends React.Component {
               {/*<a href="productDetailed">{product.name}</a>*/}
             </h3>
             <h4 className="product-price">
-              {product.price}
+              {'$'+ product.price}
               <del className="product-old-price">
-                {product.oldprice && product.oldprice}
+                {'$'+ product.oldPrice}
               </del>
             </h4>
             <div className="product-rating">
