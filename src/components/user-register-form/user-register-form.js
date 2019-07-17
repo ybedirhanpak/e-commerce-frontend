@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { actionCreators, postUserRegister } from "../../redux/user/actions";
 
 //Route
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class UserRegisterForm extends Component {
 
@@ -116,6 +116,8 @@ class UserRegisterForm extends Component {
                     <MDBBtn color="danger" onClick={this.onUserRegister}>Register</MDBBtn>
                     </div>
                 </form>
+                <h5 style={{marginTop:20}} className="text-center mb-4">Already have an account ?</h5>
+                <Link to='/login'>Login now!</Link>
                 </MDBCol>
             </MDBRow>
             {
