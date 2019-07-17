@@ -9,13 +9,15 @@ const COMPLETE_REGISTER = "COMPLETE_REGISTER";
 const RESET_LOGIN = 'RESET_LOGIN';
 const INITIALIZE_LOGIN = 'INITIALIZE_LOGIN';
 const COMPLETE_LOGIN = "COMPLETE_LOGIN";
+const LOGOUT = "LOGOUT";
 export const actionTypes = {
   RESET_REGISTER,
   INITIALIZE_REGISTER,
   COMPLETE_REGISTER,
   RESET_LOGIN,
   INITIALIZE_LOGIN,
-  COMPLETE_LOGIN
+  COMPLETE_LOGIN,
+  LOGOUT
 };
 
 /* Action Creators */
@@ -26,7 +28,8 @@ export const actionCreators = {
   completeRegister,
   resetLogin,
   initializeLogin,
-  completeLogin
+  completeLogin,
+  logout
 };
 
 function resetRegister() {
@@ -64,6 +67,12 @@ function completeLogin(userConfig) {
   return {
     type: COMPLETE_LOGIN,
     payload: userConfig
+  };
+}
+
+function logout() {
+  return {
+    type: LOGOUT
   };
 }
 

@@ -96,6 +96,11 @@ function userReducer(state = initialState, action) {
           }
         }
       }
+    case actionTypes.LOGOUT:
+      return {
+        ...state,
+        currentUser: null
+      }
     default:
       return state;
   }

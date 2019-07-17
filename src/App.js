@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
 import Footer from "./components/bottom-footer/footer";
+import Logout from './components/logout/logout';
 
 //Containers
 import HomeContainer from "./containers/home-container/home-container";
@@ -48,6 +49,7 @@ export default class App extends Component {
               <Route path="/login" component={LoginContainer}/>
               <Route path="/register" component={RegisterContainer}/>
               <Route path="/account" component={MyAccountContainer}/>
+              <Route path="/logout" component={Logout} />
               <Route path="/about" component={AboutUsContainer}/>
               <Route path="/contact" component={ContactUsContainer}/>
               <Route path="/privacy" component={PrivacyPolicyContainer}/>
@@ -58,8 +60,8 @@ export default class App extends Component {
               <Route path="/cart" component={WiewCardContainer}/>
               <Route path="/track" component={TrackMyOrderContainer}/>
               <Route path="/help" component={HelpContainer}/>
-              <Route component={NoPageContainer}/>
               <Route path="/address-location" component={AddressLocationContainer} />
+              <Route component={NoPageContainer}/>
             </Switch>
             <Footer />
           </BrowserRouter>
