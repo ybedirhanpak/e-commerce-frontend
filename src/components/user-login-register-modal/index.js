@@ -68,7 +68,6 @@ class UserLogin extends Component {
       }        
   }
   */
-
   render() {
     if(this.props.user.successfulRegister){
       window.location.reload();
