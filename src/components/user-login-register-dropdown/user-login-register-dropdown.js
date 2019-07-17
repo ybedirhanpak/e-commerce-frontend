@@ -10,25 +10,33 @@ class UserLoginRegisterDropdown extends Component {
     render() {
       if(!this.props.user.currentUser){
         return (
-          <li class="dropdown">
-            <button
-              href=""
-              className="btn btn-default btn-rounded my-6 dropdown-toggle"
-              data-toggle="dropdown"
-            >
-              <i className="fa fa-user" />
-              <span>My Account</span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><Link to='/login'>Login</Link></li>
-              <li class="divider"></li>
-              <li><Link to='/register'>Register</Link></li>
-            </ul>
-          </li>
+          <div>
+              <button
+                href=""
+                className="btn btn-default btn-rounded my-6 dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                <i className="fa fa-user" />
+                <span>Login / Register</span>
+              </button>
+              <ul className="dropdown-menu dropdown-menu-large row">
+                    {/* Login */}
+                    <li>
+                      <Link to='/login'>Login</Link>
+                    </li>
+
+                    <li className="divider" />
+
+                    {/* Register */}
+                    <li>
+                      <Link to='/register'>Register</Link>
+                    </li>
+              </ul>
+            </div>
           )
       }else {
         return (
-          <li class="dropdown">
+          <div>
             <button
               href=""
               className="btn btn-default btn-rounded my-6 dropdown-toggle"
@@ -37,13 +45,23 @@ class UserLoginRegisterDropdown extends Component {
               <i className="fa fa-user" />
               <span>{this.props.user.currentUser.firstName}</span>
             </button>
-            <ul class="dropdown-menu">
-              <li><Link to='/account'>My Account</Link></li>
-              <li class="divider"></li>
-              <li><Link to='/logout'>Logout</Link></li>
+            <ul className="dropdown-menu dropdown-menu-large row">
+                  {/* My Account */}
+                  <li><Link to='/account'>My Account</Link></li>
+
+                  <li className="divider" />
+                  
+                  {/* My Orders */}
+                  <li><Link to='/account/orders'>My Orders</Link></li>
+
+                  <li className="divider" />
+
+                  {/* Logout */}
+                  <li><Link to='/logout'>Logout</Link></li>
+ 
             </ul>
-          </li>
-          )
+         </div>
+        )
       }
     }
 }
