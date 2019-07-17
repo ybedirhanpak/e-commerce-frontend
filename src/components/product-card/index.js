@@ -2,9 +2,20 @@ import React from "react";
 import Image from "react-image-resizer";
 import "./style.css";
 import { Link } from "react-router-dom";
-
+import {connect} from 'react-redux';
+import {actionCreators} from '../../redux/cart/actions'
 //"./img/product01.png"
-export default class index extends React.Component {
+
+class ProductCard extends React.Component {
+  handleAddtoChart = () => {
+    this.props.addtoCART({
+      id:this.props.product.id,
+      img:this.props.product.imgSource,
+      name:this.props.product.name,
+      quantity:1,
+      price:this.props.product.price  
+    });
+  }
   render() {
     const product = this.props.product;
     return (
@@ -63,7 +74,7 @@ export default class index extends React.Component {
             </div>
           </div>
           <div className="add-to-cart">
-            <button className="add-to-cart-btn">
+            <button className="add-to-cart-btn" onClick={this.handleAddtoChart}>
               <i className="fa fa-shopping-cart" /> add to cart
             </button>
           </div>
@@ -72,3 +83,12 @@ export default class index extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  addtoCART: actionCreators.addtoCART
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ProductCard);

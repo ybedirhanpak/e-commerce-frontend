@@ -64,8 +64,8 @@ class UserLogin extends Component {
       }        
   }
   */
-
   render() {
+    console.log(this.props.user);
     // console.log(this.state.email)
     // console.log(this.state.Password)
     // console.log(this.state.nameSurname)
