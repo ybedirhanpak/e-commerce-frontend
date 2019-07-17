@@ -5,38 +5,16 @@ import "./utils/style.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import { store } from "./redux/configureStore";
+import configureStore from "./redux/configureStore";
+import { PersistGate } from 'redux-persist/integration/react'
 
-//import { postUserRegister, postUserLogin } from './redux/user/actions';
-// import { fetchAllCategories } from './redux/category/actions';
-
-// Log the initial state
-
-// Every time the state changes, log it
-// Note that subscribe() returns a function for unregistering the listener
-// const unsubscribe = store.subscribe(() => console.log(store.getState()))
-
-// store.dispatch(postUserRegister(
-//   {
-// email:"yabepa123@arute.com",
-// password:"yahya1234",
-// firstName:"Yahya Bedirhan",
-// lastName:"Pak",
-// role:"Admin"
-//   }));
-
-// store.dispatch(postUserLogin({
-//     email:"yabepa",
-//     password:"yahya1234"
-// }))
-
-// store.dispatch(fetchAllCategories());
-
-// unsubscribe();
+let { store, persistor } = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );
