@@ -17,23 +17,23 @@ class ProductDetailedContainer extends Component {
   render() {
     return (
       <div className="section">
-          <div className="container">
-              <div className="row">
-                  <div class="col-md-7">
-                      <ProductMainImg product={this.props.product}/>
-                  </div>
-                  <div className="col-md-5">
-                      <ProductDetails product={this.props.product}/>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="col-sm-12">
-                      <ProductTab product={this.props.product}/>
-                  </div>
-              </div>
+        <div className="container">
+          <div className="row">
+            <div class="col-md-7">
+              <ProductMainImg product={this.props.product} />
+            </div>
+            <div className="col-md-5">
+              <ProductDetails product={this.props.product} />
+            </div>
           </div>
+          <div className="row">
+            <div className="col-sm-12">
+              <ProductTab />
+            </div>
+          </div>
+        </div>
       </div>
-    )
+    );
   }
 }
 
