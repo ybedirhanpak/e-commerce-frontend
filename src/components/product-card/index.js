@@ -25,9 +25,13 @@ class ProductCard extends React.Component {
     });
   }
 
-  findCategory = (categoryId) => {
+  findCategoryName = (categoryId) => {
     const category = this.props.allCategories.filter(x => x.id === categoryId)[0];
-    return category;
+    if (category !== undefined) {
+      return category.name;
+    } else {
+      return 'Loading...'
+    }
   }
 
   generatePath = () => {
@@ -63,7 +67,7 @@ class ProductCard extends React.Component {
             </div>
           </div>
           <div className="product-body">
-            <p className="product-category">{this.findCategory(product.category).name}</p>
+            <p className="product-category">{this.findCategoryName(product.category)}</p>
             <h3 className="product-name">
               <Link
                 to={{
