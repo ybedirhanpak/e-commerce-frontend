@@ -29,6 +29,8 @@ import LoginContainer from './containers/login-container/login-container';
 import RegisterContainer from './containers/register-container/register-container';
 import NoPageContainer from "./containers/no-page-container/no-page-container";
 import AdminPanelContainer from "./containers/admin-panel-container/admin-panel-container";
+import Checkoutcontainer from "./containers/checkout-container/checkout-container";
+
 
 export default class App extends Component {
   render() {
@@ -63,6 +65,8 @@ export default class App extends Component {
               <Route path="/help" component={HelpContainer}/>
               <Route path="/address-location" component={AddressLocationContainer} />
               <Route path="/admin-panel" component={AdminPanelContainer} />
+              <Route path="/checkout" component={Checkoutcontainer} />
+              
               <Route component={NoPageContainer}/>
             </Switch>
             <Footer />

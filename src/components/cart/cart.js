@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import CartProduct from '../cart-product/index'
 
+//Route
+import { Link } from 'react-router-dom';
+
 //Redux
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/cart/actions";
@@ -48,7 +51,7 @@ class Cart extends Component {
                     </div>
                     <div className="cart-btns">
                         <a href="#">View Cart</a>
-                        <a href="#">Checkout  <i className="fa fa-arrow-circle-right"></i></a>
+                        <Link to="/checkout">Checkout  <i className="fa fa-arrow-circle-right"></i></Link>
                     </div>
                 </div>
             </div>
