@@ -3,7 +3,6 @@ import CartProduct from '../cart-product/index'
 
 //Redux
 import { connect } from "react-redux";
-import { actionCreators } from "../../redux/cart/actions";
 
 class Cart extends Component {
     constructor(props) {
@@ -47,8 +46,8 @@ class Cart extends Component {
                         <h5>SUBTOTAL: ${this.props.cart.totalPrice}</h5>
                     </div>
                     <div className="cart-btns">
-                        <a href="#">View Cart</a>
-                        <a href="#">Checkout  <i className="fa fa-arrow-circle-right"></i></a>
+                        <a href="view-cart">View Cart</a>
+                        <a href="checkout">Checkout  <i className="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

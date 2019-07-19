@@ -1,25 +1,29 @@
 import React, { Component } from 'react'
+import './category-container.css'
 
 //Components
 import Store from '../../components/store/store';
 import Filter from '../../components/filter/index';
-import SlideProduct from '../../components/slide-product/slide';
+import BreadCrumb from '../../components/breadcrumb/breadcrumb'
 
 //Redux
 import { connect } from "react-redux";
 import { getProductList } from "../../redux/product/actions";
 
-class HomeContainer extends Component {
+
+class CategoryContainer extends Component {
 
     componentDidMount() {
         this.props.getProductList();
     }
 
     render() {
-        const currentDate = new Date();
-        const year = (currentDate.getMonth() === 11 && currentDate.getDate() > 23) ? currentDate.getFullYear() + 1 : currentDate.getFullYear();
+        console.log("category-container props:", this.props);
+        const { productId} = this.props.match.params;
+        //const { _mainCategory, _subcategory, _subheader } = this.props.categories;
         return (
-            <div className="section">
+            <div className="category-container">
+                <BreadCrumb params={this.props.categories} productId={productId}/>
                 <div className="container">
                     <div className="row">
                         <div id="aside" className="col-md-3">
@@ -35,7 +39,6 @@ class HomeContainer extends Component {
                         </div>
                     </div>
                 </div>
-                <SlideProduct date={`${year}-07-20T00:00:00`}/>
             </div>
         )
     }
@@ -55,5 +58,4 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(HomeContainer);
-  
+  )(CategoryContainer);

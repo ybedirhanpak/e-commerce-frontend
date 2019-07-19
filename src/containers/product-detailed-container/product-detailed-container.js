@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './product-detailed-container.css'
 
 //Redux
 import { connect } from "react-redux";
@@ -16,7 +17,7 @@ class ProductDetailedContainer extends Component {
 
   render() {
     return (
-      <div className="section">
+      <div className="product-detailed">
           <div className="container">
               <div className="row">
                   <div class="col-md-7">
