@@ -11,11 +11,91 @@ class ProductTab extends Component {
       reviewerName: "",
       reviewerMail: "",
       reviewContent: "",
-      rating: 0
+      rating: 0,
+      currentBlock: 3
     };
-
     this.setValue = this.setValue.bind(this);
     this.submitReview = this.submitReview.bind(this);
+    this.showReviews = this.showReviews.bind(this);
+    this.setStars = this.setStars.bind(this);
+    this.handleLeftReview = this.handleLeftReview.bind(this);
+    this.handleRightReview = this.handleRightReview.bind(this);
+
+  }
+  
+
+  setStars = (index) => {
+    let div;
+    let children = [];
+    for (let i = 0; i < 1; i++) {
+
+      for (let j = 0; j < index; j++) {
+        children.push(<i className="fa fa-star"></i>)
+      }
+      for (let k = index; k < 5; k++) {
+        children.push(<i className="fa fa-star-o empty"></i>)
+      }
+
+    }
+    console.log(children);
+    return children;
+
+  }
+
+  showReviews = () => {
+    console.log("show curBlock",this.state.currentBlock);
+    let review = this.props.product.reviews;
+    console.log("onemli",review);
+    let element = [];
+    console.log(this.props);
+    for (let i = this.state.currentBlock - 3; i < this.state.currentBlock; i++) {
+      console.log("sa");
+      console.log()
+      if(i<0){
+        i=0;
+      }
+
+      if(review.length<=i){
+        
+        break;
+      }
+      console.log(review[i].userFullName);
+      element.push(<li>
+        <div className="review-heading">
+          <h5 className="name">{review[i].userFullName}</h5>
+          <p className="date">{review[i].commentTime}</p>
+          <div className="review-rating">
+            {this.setStars(review[i].numberOfStars)}
+          </div>
+        </div>
+        <div className="review-body">
+          <p>
+            {review[i].reviewContent}
+          </p>
+        </div>
+      </li>)
+    }
+
+
+    console.log(element);
+    return element;
+  }
+  handleRightReview() {
+    let newBlock = this.state.currentBlock + 3;
+    if (newBlock > this.props.product.reviews.length) {
+      newBlock = 3;
+    }
+    this.setState({ currentBlock: newBlock })
+    console.log(this.state.currentBlock)
+  }
+  handleLeftReview() {
+    let newBlock = this.state.currentBlock - 3;
+    if (newBlock <= 0) {
+      newBlock = this.props.product.reviews.length;
+    }
+    this.setState({ currentBlock: newBlock });
+    console.log(this.state.currentBlock)
+
   }
 
   setValue(event) {
@@ -24,7 +104,7 @@ class ProductTab extends Component {
     this.setState({ [name]: value });
   }
 
-  submitReview() {
+  submitReview(event) {
     var currentDate = new Date();
     var date = currentDate.getDate();
     var month = currentDate.getMonth(); //Be careful! January is 0 not 1
@@ -34,18 +114,20 @@ class ProductTab extends Component {
       userFullName: this.state.reviewerName,
       userMail: this.state.reviewerMail,
       reviewContent: this.state.reviewContent,
-      numberOfStars: this.state.rating,
-      commentTime: dateString
+      commentTime: dateString,
+      numberOfStars: this.state.rating
     };
     const product = {
       ...this.props.product,
       reviews: [...this.props.product.reviews, review]
     };
     this.props.updateProduct(this.props.product.id, product);
+    event.preventDefault();
   }
 
+
+
   render() {
-    console.log(this.state.rating);
     return (
       <div id="product-tab">
         <ul className="tab-nav">
@@ -173,80 +255,16 @@ class ProductTab extends Component {
               <div className="col-md-6">
                 <div id="reviews">
                   <ul className="reviews">
-                    <li>
-                      <div className="review-heading">
-                        <h5 className="name">John</h5>
-                        <p className="date">27 DEC 2018, 8:0 PM</p>
-                        <div className="review-rating">
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star-o empty" />
-                        </div>
-                      </div>
-                      <div className="review-body">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua
-                        </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="review-heading">
-                        <h5 className="name">John</h5>
-                        <p className="date">27 DEC 2018, 8:0 PM</p>
-                        <div className="review-rating">
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star-o empty" />
-                        </div>
-                      </div>
-                      <div className="review-body">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua
-                        </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="review-heading">
-                        <h5 className="name">John</h5>
-                        <p className="date">27 DEC 2018, 8:0 PM</p>
-                        <div className="review-rating">
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star-o empty" />
-                        </div>
-                      </div>
-                      <div className="review-body">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua
-                        </p>
-                      </div>
-                    </li>
+                    {this.showReviews()}
                   </ul>
                   <ul className="reviews-pagination">
-                    <li className="active">1</li>
                     <li>
-                      <a href="2">2</a>
+                      <a id="left-review" onClick={this.handleLeftReview}>
+                        <i className="fa fa-angle-left" />
+                      </a>
                     </li>
                     <li>
-                      <a href="3">3</a>
-                    </li>
-                    <li>
-                      <a href="4">4</a>
-                    </li>
-                    <li>
-                      <a href="right">
+                      <a id="right-review" onClick={this.handleRightReview}>
                         <i className="fa fa-angle-right" />
                       </a>
                     </li>
@@ -292,6 +310,7 @@ class ProductTab extends Component {
                         />
                         <label for="star5" />
                         <input
+                          onClick={this.setValue}
                           id="star4"
                           name="rating"
                           value="4"
@@ -299,6 +318,7 @@ class ProductTab extends Component {
                         />
                         <label for="star4" />
                         <input
+                          onClick={this.setValue}
                           id="star3"
                           name="rating"
                           value="3"
@@ -306,6 +326,7 @@ class ProductTab extends Component {
                         />
                         <label for="star3" />
                         <input
+                          onClick={this.setValue}
                           id="star2"
                           name="rating"
                           value="2"
@@ -313,6 +334,7 @@ class ProductTab extends Component {
                         />
                         <label for="star2" />
                         <input
+                          onClick={this.setValue}
                           id="star1"
                           name="rating"
                           value="1"
@@ -336,8 +358,8 @@ class ProductTab extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    product: state.product.currentProduct
+  return{
+    currentProduct: state.product.currentProduct
   };
 };
 

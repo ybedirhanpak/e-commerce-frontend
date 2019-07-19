@@ -28,7 +28,7 @@ class ProductDetailedContainer extends Component {
           </div>
           <div className="row">
             <div className="col-sm-12">
-              <ProductTab />
+              <ProductTab product={this.props.product} />
             </div>
           </div>
         </div>
