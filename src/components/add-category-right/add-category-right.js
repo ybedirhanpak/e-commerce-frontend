@@ -5,11 +5,20 @@ export default class AddCategoryRight extends Component {
     super(props);
     this.state = {
       subCategory2: "",
-      category2: "addNewSubCategory",
+      category2: "",
       categories2: "",
       categorySelected2: false
     };
     this.onChange = this.onChange.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
+  }
+
+  selectCategory(event) {
+    const id = event.target.id;
+
+    this.setState({
+      category2: id
+    });
   }
 
   onChange = event => {
@@ -20,7 +29,11 @@ export default class AddCategoryRight extends Component {
   };
 
   render() {
-    console.log(this.state);
+    const categories = this.props.categoryList.map(element => (
+      <option key={element.id} id={element.id} onClick={this.selectCategory}>
+        {element.name}
+      </option>
+    ));
     return (
       <div className="row container">
         <div className="col-md-6">
@@ -37,14 +50,7 @@ export default class AddCategoryRight extends Component {
                 onChange={this.onChange}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="select1">Main Category</label>
-              <select
-                name="category2"
-                className="form-control"
-                onChange={this.onChange}
-              />
-            </div>
+
             {this.state.category2 === "addNewSubCategory" ? (
               <div className="col-md-12">
                 <button
@@ -85,7 +91,9 @@ export default class AddCategoryRight extends Component {
                 name="categories2"
                 onChange={this.onChange}
                 onClick={this.onClick}
-              />
+              >
+                {categories}
+              </select>
             </div>
           </form>
         </div>

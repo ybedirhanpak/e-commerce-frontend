@@ -1,26 +1,36 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addCategory } from "../../redux/category/actions";
 
-export default class AddCategoryLeft extends Component {
+class AddCategoryLeft extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subCategory: "",
+      categoryInput: "",
       category1: "addNewSubCategory",
       categories: "",
       categorySelected: false
     };
     this.onChange = this.onChange.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
+    this.saveCategory = this.saveCategory.bind(this);
+  }
+
+  saveCategory() {
+    const category = {
+      Name: this.state.categoryInput,
+      Path: this.state.categoryInput,
+      ParentId: this.props.parentId
+    };
+    this.props.addCategory(category);
   }
 
   selectCategory(event) {
     const id = event.target.id;
-
     const subList = this.props.allCategories.filter(
       element => element.parentId === id
     );
-
-    this.props.setSub(subList, 2);
+    this.props.setSub(subList, 2, id);
   }
 
   onChange = event => {
@@ -36,7 +46,6 @@ export default class AddCategoryLeft extends Component {
         {element.name}
       </option>
     ));
-    console.log("sub categories: " + this.props.categoryList);
     return (
       <div className="row container">
         <div className="col-md-6">
@@ -45,27 +54,20 @@ export default class AddCategoryLeft extends Component {
               <label htmlFor="product">Sub Category</label>
               <input
                 type="text"
-                id="subcategory"
+                id="categoryInput"
                 className="form-control"
-                placeholder="Product Name..."
+                placeholder="Sub Category"
                 required
-                name="subCategory"
+                name="categoryInput"
                 onChange={this.onChange}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="select1">Main Category</label>
-              <select
-                name="category1"
-                className="form-control"
-                onChange={this.onChange}
-              />
-            </div>
+
             {this.state.category1 === "addNewSubCategory" ? (
               <div className="col-md-12">
                 <button
                   className="btn btn-danger btn-lg btn-block"
-                  onClick={this.sendMessage}
+                  onClick={this.saveCategory}
                 >
                   Save
                 </button>
@@ -111,3 +113,12 @@ export default class AddCategoryLeft extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  addCategory
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddCategoryLeft);

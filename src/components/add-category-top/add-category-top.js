@@ -32,7 +32,7 @@ class AddCategoryTop extends Component {
       element => element.parentId === id
     );
 
-    this.props.setSub(subList, 1);
+    this.props.setSub(subList, 1, id);
   }
 
   onChange = event => {
@@ -68,33 +68,14 @@ class AddCategoryTop extends Component {
               onChange={this.onChange}
             />
           </div>
-          {!this.state.selected ? (
-            <button
-              className="btn btn-danger btn-lg btn-block"
-              onClick={this.saveCategory}
-            >
-              Save
-            </button>
-          ) : (
-            <div className="row container">
-              <div className="col-md-3">
-                <button
-                  className="btn btn-danger btn-lg btn-block"
-                  onClick={this.sendMessage}
-                >
-                  Edit
-                </button>
-              </div>
-              <div className="col-md-3">
-                <button
-                  className="btn btn-danger btn-lg btn-block"
-                  onClick={this.sendMessage}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          )}
+
+          <button
+            className="btn btn-danger btn-lg btn-block"
+            onClick={this.saveCategory}
+          >
+            Save
+          </button>
+
           <form>
             <label htmlFor="categories">Categories</label>
             <select
@@ -107,6 +88,25 @@ class AddCategoryTop extends Component {
               {categories}
             </select>
           </form>
+
+          <div className="row container">
+            <div className="col-md-3">
+              <button
+                className="btn btn-danger btn-lg btn-block"
+                onClick={this.sendMessage}
+              >
+                Edit
+              </button>
+            </div>
+            <div className="col-md-3">
+              <button
+                className="btn btn-danger btn-lg btn-block"
+                onClick={this.sendMessage}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );
