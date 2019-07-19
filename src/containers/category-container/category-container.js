@@ -19,8 +19,7 @@ class CategoryContainer extends Component {
 
     render() {
         console.log("category-container props:", this.props);
-        const { productId} = this.props.match.params;
-        //const { _mainCategory, _subcategory, _subheader } = this.props.categories;
+        const { productId } = this.props.match.params;
         return (
             <div className="category-container">
                 <BreadCrumb params={this.props.categories} productId={productId}/>

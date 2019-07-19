@@ -44,16 +44,17 @@ class HomeContainer extends Component {
 const mapStateToProps = state => {
     return {
       apiProducts: state.product.productList,
-      fetchInProgress: state.product.fetchInProgress
+      fetchInProgress: state.product.fetchInProgress,
+      allCategories: state.category.categories
     };
-  };
+};
   
-  const mapDispatchToProps = {
-    getProductList
-  };
+const mapDispatchToProps = {
+getProductList
+};
   
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(HomeContainer);
+export default connect(
+mapStateToProps,
+mapDispatchToProps
+)(HomeContainer);
   

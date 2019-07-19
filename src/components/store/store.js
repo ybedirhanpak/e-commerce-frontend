@@ -26,11 +26,13 @@ export default class Store extends Component {
           }} />
       )
     }else {
-      const productsList = this.props.apiProducts.map(product => (
-        <div key={product.id} className="col-md-4 col-xs-6">
-          <ProductCard product={product} />
-        </div>
-      ));
+      const productsList = this.props.apiProducts.map(product => {
+        return(
+          <div key={product.id} className="col-md-4 col-xs-6">
+            <ProductCard product={product} />
+          </div>
+        )
+      });
       return productsList;
     }
   };
@@ -40,7 +42,9 @@ export default class Store extends Component {
     return (
       <div>
         <StoreTopFilter />
-        <div className="row">{this.createProducts()}</div>
+        <div className="row">
+          {this.createProducts()}
+        </div>
       </div>
     );
   }
