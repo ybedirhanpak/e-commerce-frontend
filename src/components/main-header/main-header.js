@@ -12,7 +12,7 @@ import UserLoginRegisterDropdown from '../user-login-register-dropdown/user-logi
 export default class MainHeader extends Component {
     render() {
         return(
-            <div id="header">
+            <div id="header" >
 				<div className="container-fluid">
 					<div className="row row-container">
 						<div className="col-sm-12 col-md-3">
