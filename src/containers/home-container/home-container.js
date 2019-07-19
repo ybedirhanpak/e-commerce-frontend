@@ -22,11 +22,11 @@ class HomeContainer extends Component {
             <div className="section">
                 <div className="container">
                     <div className="row">
-                        <div id="aside" className="col-md-3">
+                        <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
                             <Filter/>
                         </div>
-                        <div id="store" className="col-md-9">
+                        <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}
                             <Store 
                                 apiProducts={this.props.apiProducts}

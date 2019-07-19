@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import './navigation-bar.css'
 
+import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+
 //Components
 import Category from "../category/category";
 
 //Route
 import { Link } from 'react-router-dom';
+import LoadingSpinner from "../loading-spinner/loading-spinner";
 
 export default class NavigationBar extends Component {
   generateCategories = () => {
     if(this.props.fetchInProgress) {
       return(
         <li>
-            <a href='/home'>
-              Loading...
-            </a>
+          <LoadingSpinner/>
         </li>
       )
     }else {

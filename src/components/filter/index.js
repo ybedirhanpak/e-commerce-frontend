@@ -27,7 +27,7 @@ export default class index extends Component {
 
   render() {
     return (
-      <div>
+      <div className="aside-filter">
         <SelectBox data={this.categories} />
 
         <div className="aside">
