@@ -1,5 +1,5 @@
 import { API } from "../../api-config";
-import { GetWithUrl } from "../../services/url-helper";
+import { GetWithUrl, PostWithUrlBody } from "../../services/url-helper";
 
 /* Action Types */
 
@@ -34,5 +34,16 @@ export const fetchAllCategories = () => {
         dispatch(saveCategories(responseJson));
       })
       .catch(error => console.log("Error when fetch categories\n", error));
+  };
+};
+
+export const addCategory = body => {
+  return dispatch => {
+    PostWithUrlBody(API + "/categories/create", body)
+      .then(response => console.log(response))
+      .then(dispatch(fetchAllCategories))
+      .catch(error =>
+        console.log("Error while adding a new category\n", error)
+      );
   };
 };
