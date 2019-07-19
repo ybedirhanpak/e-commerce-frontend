@@ -9,6 +9,7 @@ import { getProduct } from "../../redux/product/actions";
 import ProductMainImg from "../../components/product-main-img/product-main-img";
 import ProductDetails from "../../components/product-details/product-details";
 import ProductTab from "../../components/product-tab/product-tab";
+import BreadCrumb from '../../components/breadcrumb/breadcrumb'
 
 class ProductDetailedContainer extends Component {
   componentDidMount() {
@@ -16,11 +17,13 @@ class ProductDetailedContainer extends Component {
   }
 
   render() {
+    console.log("Product detailed props", this.props)
     return (
       <div className="product-detailed">
+          <BreadCrumb params={this.props.categories} product={this.props.product}/>
           <div className="container">
               <div className="row">
-                  <div class="col-md-7">
+                  <div className="col-md-7">
                       <ProductMainImg product={this.props.product}/>
                   </div>
                   <div className="col-md-5">

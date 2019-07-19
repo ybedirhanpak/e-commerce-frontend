@@ -115,14 +115,14 @@ class App extends Component {
 
               <Route exact path="/show/:mainCategory/:subheader/:subcategory/:productId" render={(props) => {
                 return(
-                  <CategoryContainer 
+                  <ProductDetailedContainer 
                   {...props}
                   categories={this.findCategoryWithPath(
                     props.match.params.mainCategory,
                     props.match.params.subheader,
                     props.match.params.subcategory
                     )}
-                  producutId={props.match.params.productId}
+                  productId={props.match.params.productId}
                   />
                 )
               }}/>
