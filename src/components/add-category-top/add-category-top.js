@@ -43,24 +43,25 @@ class AddCategoryTop extends Component {
   };
 
   render() {
+    console.log("category list:" + this.props.categoryList);
     var categories = this.props.categoryList.filter(
       element => element.parentId === null
     );
     categories = categories.map(element => (
-      <option id={element.id} onClick={this.selectCategory}>
-        {element}
+      <option key={element.id} id={element.id} onClick={this.selectCategory}>
+        {element.name}
       </option>
     ));
-    console.log(this.state);
+
     return (
       <div className="row container" onClick={this.onClick}>
         <div className="col-md-12">
           <div className="form-group">
-            <label for="product">Sub Category</label>
+            <label htmlFor="product">Sub Category</label>
             <input
               type="text"
               id="subcategory"
-              class="form-control"
+              className="form-control"
               placeholder="Main category name"
               required
               name="categoryInput"
@@ -98,7 +99,7 @@ class AddCategoryTop extends Component {
             <label htmlFor="categories">Categories</label>
             <select
               multiple
-              class="form-control"
+              className="form-control"
               id="sel2"
               name="categories"
               onChange={this.onChange}

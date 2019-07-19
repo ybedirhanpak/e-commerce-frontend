@@ -32,21 +32,21 @@ export default class AddCategoryLeft extends Component {
 
   render() {
     const categories = this.props.categoryList.map(element => (
-      <option id={element.id} onClick={this.selectCategory}>
-        {element}
+      <option key={element.id} id={element.id} onClick={this.selectCategory}>
+        {element.name}
       </option>
     ));
-    console.log(this.state);
+    console.log("sub categories: " + this.props.categoryList);
     return (
       <div className="row container">
         <div className="col-md-6">
           <div className="col-md-6">
             <div className="form-group">
-              <label for="product">Sub Category</label>
+              <label htmlFor="product">Sub Category</label>
               <input
                 type="text"
                 id="subcategory"
-                class="form-control"
+                className="form-control"
                 placeholder="Product Name..."
                 required
                 name="subCategory"
@@ -59,14 +59,7 @@ export default class AddCategoryLeft extends Component {
                 name="category1"
                 className="form-control"
                 onChange={this.onChange}
-              >
-                <option value="addNewSubCategory" active>
-                  Add New Sub Category
-                </option>
-                <option value="First">First</option>
-                <option value="Second">Second</option>
-                <option value="Third">Third</option>
-              </select>
+              />
             </div>
             {this.state.category1 === "addNewSubCategory" ? (
               <div className="col-md-12">
@@ -99,11 +92,11 @@ export default class AddCategoryLeft extends Component {
             )}
           </div>
           <form>
-            <div class="form-group col-md-6">
+            <div className="form-group col-md-6">
               <label htmlFor="categories">Categories</label>
               <select
                 multiple
-                class="form-control"
+                className="form-control"
                 id="sel2"
                 name="categories"
                 onChange={this.onChange}

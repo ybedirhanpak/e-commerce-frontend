@@ -3,7 +3,6 @@ import AddCategoryRight from "../../components/add-category-right/add-category-r
 import AddCategoryTop from "../../components/add-category-top/add-category-top";
 import AddCategoryLeft from "../../components/add-category-left/add-category-left";
 import { connect } from "react-redux";
-import { tsExpressionWithTypeArguments } from "@babel/types";
 
 class AddCategoryContainer extends Component {
   constructor() {
@@ -32,7 +31,6 @@ class AddCategoryContainer extends Component {
       <div className="row container">
         <div className="col-md-12">
           <h1>Main Categories</h1>
-
           <AddCategoryTop
             setSub={this.setSubCategories}
             categoryList={this.props.categories}
@@ -41,7 +39,6 @@ class AddCategoryContainer extends Component {
         <div>
           <div className="col-md-6">
             <h1>Sub Categories</h1>
-
             <AddCategoryLeft
               setSub={this.setSubCategories}
               categoryList={this.state.subCategories}
