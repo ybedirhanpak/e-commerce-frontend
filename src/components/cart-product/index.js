@@ -13,7 +13,7 @@ class CartProduct extends React.Component {
                     <img src={this.props.cartProduct.img} alt=""></img>
                 </div>
                 <div className="product-body">
-                    <h3 className="product-name"><a href="#">{this.props.cartProduct.name}</a></h3>
+                    <h3 className="product-name"><a href="product-link">{this.props.cartProduct.name}</a></h3>
                     <h4 className="product-price">
                         <span className="qty">{this.props.cartProduct.quantity}</span>
                         {'$'+ this.props.cartProduct.price}

@@ -6,7 +6,7 @@ import './style.css'
 
 export default class index extends Component {
 
-  data= [
+  cities= [
     {
         "name": "İstanbul"
     },
@@ -28,8 +28,6 @@ export default class index extends Component {
   render() {
     return (
       <div>
-        <Box data={this.data}/>
-       
         <SelectBox data={this.categories} />
 
         <div className="aside">
@@ -49,7 +47,9 @@ export default class index extends Component {
             </div>
           </div>
         </div>
-
+        
+        <Box data={this.cities}/>
+       
         <SelectBox data={this.brands} />
         
       </div>

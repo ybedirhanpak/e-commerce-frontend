@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { updateProduct } from "../../redux/product/actions";
-import { tsExpressionWithTypeArguments } from "@babel/types";
-
 class ProductTab extends Component {
   constructor() {
     super();
@@ -37,20 +34,14 @@ class ProductTab extends Component {
       }
 
     }
-    console.log(children);
     return children;
 
   }
 
   showReviews = () => {
-    console.log("show curBlock",this.state.currentBlock);
     let review = this.props.product.reviews;
-    console.log("onemli",review);
     let element = [];
-    console.log(this.props);
     for (let i = this.state.currentBlock - 3; i < this.state.currentBlock; i++) {
-      console.log("sa");
-      console.log()
       if(i<0){
         i=0;
       }
@@ -59,7 +50,6 @@ class ProductTab extends Component {
         
         break;
       }
-      console.log(review[i].userFullName);
       element.push(<li>
         <div className="review-heading">
           <h5 className="name">{review[i].userFullName}</h5>
@@ -76,8 +66,6 @@ class ProductTab extends Component {
       </li>)
     }
 
-
-    console.log(element);
     return element;
   }
   handleRightReview() {
@@ -86,7 +74,6 @@ class ProductTab extends Component {
       newBlock = 3;
     }
     this.setState({ currentBlock: newBlock })
-    console.log(this.state.currentBlock)
   }
   handleLeftReview() {
     let newBlock = this.state.currentBlock - 3;
@@ -94,8 +81,6 @@ class ProductTab extends Component {
       newBlock = this.props.product.reviews.length;
     }
     this.setState({ currentBlock: newBlock });
-    console.log(this.state.currentBlock)
-
   }
 
   setValue(event) {
@@ -364,7 +349,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  updateProduct
+  
 };
 
 export default connect(

@@ -61,9 +61,9 @@ export const addProduct = body => {
   };
 };
 
-export const deleteProduct = body => {
+export const deleteProduct = id => {
   return dispatch => {
-    DeleteWithUrl(API + "/products/delete", body)
+    DeleteWithUrl(API + "/products/delete/"+ id)
       .then()
       .catch(error => console.log("Errow while deletin' a product\n", error));
   };

@@ -10,10 +10,8 @@ function cartReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.ADD_TOCART:
             if (state.productsList.length > 0) {
-                var index;
                 for (let i = 0; i < state.productsList.length; i++) {
                     if (state.productsList[i].id === action.payload.id) {
-                        index = i;
                         let data = {
                             id: state.productsList[i].id,
                             img: state.productsList[i].img,

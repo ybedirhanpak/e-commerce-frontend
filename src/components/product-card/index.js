@@ -1,9 +1,16 @@
 import React from "react";
-import Image from "react-image-resizer";
 import "./style.css";
+
+//Route
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux';
-import {actionCreators} from '../../redux/cart/actions'
+
+//Redux
+import { connect } from "react-redux";
+import { actionCreators } from '../../redux/cart/actions'
+
+//Components
+import Image from "react-image-resizer";
+
 //"./img/product01.png"
 
 class ProductCard extends React.Component {
@@ -17,7 +24,29 @@ class ProductCard extends React.Component {
       oldPrice:this.props.product.oldPrice 
     });
   }
+
+  findCategory = (categoryId) => {
+    const category = this.props.allCategories.filter(x => x.id === categoryId)[0];
+    return category;
+  }
+
+  generatePath = () => {
+    const _subcategory = this.props.allCategories.filter(x => x.id === this.props.product.category)[0];
+
+    const _subheader = (_subcategory !== undefined) ? 
+      (this.props.allCategories.filter(x => x.id === _subcategory.parentId)[0]) : (undefined) ;
+
+    const _mainCategory = (_subheader !== undefined) ? 
+    (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
+
+    if(_mainCategory !== undefined)
+      return `/show/${_mainCategory.path}/${_subheader.path}/${_subcategory.path}/${this.props.product.id}`;
+    else
+      return '/error'
+  }
+
   render() {
+    console.log("Product props", this.props);
     const product = this.props.product;
     return (
       <div>
@@ -34,17 +63,16 @@ class ProductCard extends React.Component {
             </div>
           </div>
           <div className="product-body">
-            <p className="product-category">{product.category}</p>
+            <p className="product-category">{this.findCategory(product.category).name}</p>
             <h3 className="product-name">
               <Link
                 to={{
-                  pathname: "/productDetailed/" + product.id,
+                  pathname: this.generatePath(),
                   state: { id: product.id }
                 }}
               >
                 {product.name}
               </Link>
-              {/*<a href="productDetailed">{product.name}</a>*/}
             </h3>
             <h4 className="product-price">
               {'$'+ product.price}
@@ -85,11 +113,17 @@ class ProductCard extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    allCategories: state.category.categories
+  }
+}
+
 const mapDispatchToProps = {
   addtoCART: actionCreators.addtoCART
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProductCard);

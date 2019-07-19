@@ -1,23 +1,63 @@
 import React, { Component } from 'react';
+import './breadcrumb.css'
+
+import { Link } from 'react-router-dom';
 
 export default class Breadcrumb extends Component {
     render() {
+		const { _mainCategory, _subcategory, _subheader } = this.props.params;
+		const product = this.props.product;
         return (
-            <div id="breadcrumb" className="section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <ul className="breadcrumb-tree">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">All Categories</a></li>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">Headphones</a></li>
-                                <li className="active">Product name goes here</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="breadcrumb" className="breadcrumb">
+			<div className="container">
+				<div className="row">
+					<div className="col-md-12">
+						<ul className="breadcrumb-tree">
+							{
+								(product !== undefined) ?
+								(
+									/**** 	HOME / MAIN CATEGORY / SUB HEADER / SUBCATEGORY / PRODUCT 	****/
+									<div>
+										<li><Link to={`/home`}>Home</Link></li>
+										<li><Link to={`/show/${_mainCategory.path}`}>{_mainCategory.name}</Link></li>
+										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}`}>{_subheader.name}</Link></li>
+										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}/${_subcategory.path}`}>{_subcategory.name}</Link></li>
+										<li className="active">{product.name}</li>
+									</div>
+								) : (_subcategory !== null) ?
+								(
+									/**** 	HOME / MAIN CATEGORY / SUB HEADER / SUBCATEGORY 	****/
+									<div>
+										<li><Link to={`/home`}>Home</Link></li>
+										<li><Link to={`/show/${_mainCategory.path}`}>{_mainCategory.name}</Link></li>
+										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}`}>{_subheader.name}</Link></li>
+										<li>{_subcategory.name}</li>
+									</div>
+								) : (_subheader !== null) ?
+								(
+									/**** 	HOME / MAIN CATEGORY / SUB HEADER 	 ****/
+									<div>
+										<li><Link to={`/home`}>Home</Link></li>
+										<li><Link to={`/show/${_mainCategory.path}`}>{_mainCategory.name}</Link></li>
+										<li>{_subheader.name}</li>
+									</div>
+								) : (_mainCategory !== null) ?
+								(
+									/**** 	HOME / MAIN CATEGORY 	****/
+									<div>
+										<li><Link to={`/home`}>Home</Link></li>
+										<li>{_mainCategory.name}</li>
+									</div>
+								) :
+								(
+									null
+								)
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
         );
     }
 }
