@@ -5,6 +5,10 @@ import "./App.css";
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
+//Redux
+import { connect } from "react-redux";
+import { fetchAllCategories } from "./redux/category/actions";
+
 //Components
 import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
@@ -28,27 +32,112 @@ import HelpContainer from "./containers/help-container/help-container";
 import LoginContainer from './containers/login-container/login-container';
 import RegisterContainer from './containers/register-container/register-container';
 import NoPageContainer from "./containers/no-page-container/no-page-container";
+import CategoryContainer from './containers/category-container/category-container';
 import AdminPanelContainer from "./containers/admin-panel-container/admin-panel-container";
 import Checkoutcontainer from "./containers/checkout-container/checkout-container";
 
+import AddCategoryContainer from "./containers/add-category-container/add-category-container"
 
-export default class App extends Component {
+class App extends Component {
+
+  componentDidMount() {
+    this.props.fetchAllCategories();
+  }
+
+  findCategoryWithPath = (mainCategory=null, subheader=null, subcategory=null) => {
+    //All categories without hierarchy
+    const allCategories = this.props.categories;
+    const _mainCategory = (mainCategory !== null) ? allCategories.filter(x => x.path === mainCategory)[0] : null;
+    const _subheader = (_mainCategory !== null && subheader !== null) ? 
+     allCategories.filter(x => x.path === subheader && x.parentId === _mainCategory.id)[0] : null;
+    const _subcategory = (_subheader !== null && subcategory !== null) ? 
+      allCategories.filter(x=> x.path === subcategory && x.parentId === _subheader.id)[0] : null;
+    return {
+      _mainCategory,
+      _subheader,
+      _subcategory
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App-body">
           <BrowserRouter>
+
+            {/* Main Header and Navigation Bar */}
+
             <MainHeader />
-            <NavigationBar />
+            <NavigationBar 
+              categories={this.props.categories} 
+              fetchInProgress={this.props.categoriesFetchInProgress}
+            />
+
             <Switch>
+              {/* Home Routes */}
+
               <Route exact path="/" render={() => <Redirect to="home" />} />
               <Route path="/home" component={HomeContainer} exact />
+
+              {/* Category Routes */}
+
+              <Route exact path="/show/:mainCategory" render={(props) => {
+                return(
+                  <CategoryContainer 
+                  {...props}
+                  categories={this.findCategoryWithPath(props.match.params.mainCategory)}
+                  />
+                )
+              }}/>
+
+              <Route exact path="/show/:mainCategory/:subheader" render={(props) => {
+                return(
+                  <CategoryContainer 
+                  {...props}
+                  categories={this.findCategoryWithPath(
+                    props.match.params.mainCategory,
+                    props.match.params.subheader
+                    )}
+                  />
+                )
+              }}/>
+
+              <Route exact path="/show/:mainCategory/:subheader/:subcategory" render={(props) => {
+                return(
+                  <CategoryContainer 
+                  {...props}
+                  categories={this.findCategoryWithPath(
+                    props.match.params.mainCategory,
+                    props.match.params.subheader,
+                    props.match.params.subcategory
+                    )}
+                  />
+                )
+              }}/>
+
+              <Route exact path="/show/:mainCategory/:subheader/:subcategory/:productId" render={(props) => {
+                return(
+                  <ProductDetailedContainer 
+                  {...props}
+                  categories={this.findCategoryWithPath(
+                    props.match.params.mainCategory,
+                    props.match.params.subheader,
+                    props.match.params.subcategory
+                    )}
+                  productId={props.match.params.productId}
+                  />
+                )
+              }}/>
+
               <Route path="/productDetailed/:productId" render={(props) => {
                 const productId = props.match.params.productId;
                 return(
                   <ProductDetailedContainer productId={productId}/>
                 )
               }}/>
+
+              {/* Static Route Pages */}
+
               <Route path="/login" component={LoginContainer}/>
               <Route path="/register" component={RegisterContainer}/>
               <Route path="/account" component={MyAccountContainer}/>
@@ -66,9 +155,12 @@ export default class App extends Component {
               <Route path="/address-location" component={AddressLocationContainer} />
               <Route path="/admin-panel" component={AdminPanelContainer} />
               <Route path="/checkout" component={Checkoutcontainer} />
-              
+              <Route path="/add-category" component={AddCategoryContainer} />
               <Route component={NoPageContainer}/>
+
             </Switch>
+
+            {/* Footer */}
             <Footer />
           </BrowserRouter>
         </div>
@@ -76,3 +168,19 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    categories: state.category.categories,
+    categoriesFetchInProgress: state.category.fetchInProgress
+  };
+};
+
+const mapDispatchToProps = {
+  fetchAllCategories
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

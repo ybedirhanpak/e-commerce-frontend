@@ -4,7 +4,8 @@ import "isomorphic-fetch";
 import {
   GetWithUrl,
   PostWithUrlBody,
-  DeleteWithUrl
+  DeleteWithUrl,
+  PutWithUrlBody
 } from "../../services/url-helper";
 
 /* Action Types */
@@ -42,7 +43,7 @@ export const actionCreators = {
 
 export const getProductList = () => {
   return dispatch => {
-    GetWithUrl(API + "/products")
+    GetWithUrl(API + "/products/get")
       .then(response => response.json())
       .then(response => {
         dispatch(saveProductList(response));
@@ -53,16 +54,16 @@ export const getProductList = () => {
 
 export const addProduct = body => {
   return dispatch => {
-    PostWithUrlBody(API + "/products", body)
+    PostWithUrlBody(API + "/products/create", body)
       .then(response => response.json())
       //.then(dispatch(getProductList()))
       .catch(error => console.log("Error while adding a new product\n", error));
   };
 };
 
-export const deleteProduct = body => {
+export const deleteProduct = id => {
   return dispatch => {
-    DeleteWithUrl(API + "/products/" + body)
+    DeleteWithUrl(API + "/products/delete/"+ id)
       .then()
       .catch(error => console.log("Errow while deletin' a product\n", error));
   };
@@ -70,7 +71,7 @@ export const deleteProduct = body => {
 
 export const getProduct = id => {
   return dispatch => {
-    GetWithUrl(API + "/products/" + id)
+    GetWithUrl(API + "/products/get/" + id)
       .then(response => response.json())
       .then(response => {
         dispatch(saveSingleProduct(response));
@@ -79,5 +80,23 @@ export const getProduct = id => {
       .catch(error =>
         console.log("Error while getting product details\n", error)
       );
+  };
+};
+
+export const updateProduct = (id, body) => {
+  console.log("body", body)
+  return dispatch => {
+    PutWithUrlBody(API + "/products/update/" + id, body)
+      .then(response => {
+        if(response.status >= 200 && response.status < 300) {
+          response.json().then(data => {
+            console.log("data", data);
+            dispatch(saveSingleProduct(data));
+          })
+        }else {
+          console.log("Error.", response);
+        }
+      })
+      .catch(error => console.log("Error while updating a product \n", error));
   };
 };

@@ -1,206 +1,358 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class ProductTab extends Component {
-    render() {
-        return (
-		<div id="product-tab">
-			<ul className="tab-nav">
-				<li className="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-				<li><a data-toggle="tab" href="#tab2">Details</a></li>
-				<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
-			</ul>
+class ProductTab extends Component {
+  constructor() {
+    super();
+    this.state = {
+      reviewerName: "",
+      reviewerMail: "",
+      reviewContent: "",
+      rating: 0,
+      currentBlock: 3
+    };
+    this.setValue = this.setValue.bind(this);
+    this.submitReview = this.submitReview.bind(this);
+    this.showReviews = this.showReviews.bind(this);
+    this.setStars = this.setStars.bind(this);
+    this.handleLeftReview = this.handleLeftReview.bind(this);
+    this.handleRightReview = this.handleRightReview.bind(this);
 
-			
-			<div className="tab-content">
-				{/* Description */}
-				<div id="tab1" className="tab-pane fade in active">
-					<div className="row">
-						<div className="col-md-12">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</div>
-					</div>
-				</div>
+  }
+  
 
-				{/* Details */}
-				<div id="tab2" className="tab-pane fade in">
-					<div className="row">
-						<div className="col-md-12">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</div>
-					</div>
-				</div>
+  setStars = (index) => {
+    let div;
+    let children = [];
+    for (let i = 0; i < 1; i++) {
 
-				{/* Reviews */}
-				<div id="tab3" className="tab-pane fade in">
-					<div className="row">
-						<div className="col-md-3">
-							<div id="rating">
-								<div className="rating-avg">
-									<span>4.5</span>
-									<div className="rating-stars">
-										<i className="fa fa-star"></i>
-										<i className="fa fa-star"></i>
-										<i className="fa fa-star"></i>
-										<i className="fa fa-star"></i>
-										<i className="fa fa-star-o"></i>
-									</div>
-								</div>
-								<ul className="rating">
-									<li>
-										<div className="rating-stars">
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-										</div>
-										<div className="rating-progress">
-											<div style={{width: '80%'}}></div>
-										</div>
-										<span className="sum">3</span>
-									</li>
-									<li>
-										<div className="rating-stars">
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star-o"></i>
-										</div>
-										<div className="rating-progress">
-											<div style={{width: '60%'}}></div>
-										</div>
-										<span className="sum">2</span>
-									</li>
-									<li>
-										<div className="rating-stars">
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star-o"></i>
-											<i className="fa fa-star-o"></i>
-										</div>
-										<div className="rating-progress">
-											<div></div>
-										</div>
-										<span className="sum">0</span>
-									</li>
-									<li>
-										<div className="rating-stars">
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star-o"></i>
-											<i className="fa fa-star-o"></i>
-											<i className="fa fa-star-o"></i>
-										</div>
-										<div className="rating-progress">
-											<div></div>
-										</div>
-										<span className="sum">0</span>
-									</li>
-									<li>
-										<div className="rating-stars">
-											<i className="fa fa-star"></i>
-											<i className="fa fa-star-o"></i>
-											<i className="fa fa-star-o"></i>
-											<i className="fa fa-star-o"></i>
-											<i className="fa fa-star-o"></i>
-										</div>
-										<div className="rating-progress">
-											<div></div>
-										</div>
-										<span className="sum">0</span>
-									</li>
-								</ul>
-							</div>
-						</div>
+      for (let j = 0; j < index; j++) {
+        children.push(<i className="fa fa-star"></i>)
+      }
+      for (let k = index; k < 5; k++) {
+        children.push(<i className="fa fa-star-o empty"></i>)
+      }
 
-						<div className="col-md-6">
-							<div id="reviews">
-								<ul className="reviews">
-									<li>
-										<div className="review-heading">
-											<h5 className="name">John</h5>
-											<p className="date">27 DEC 2018, 8:0 PM</p>
-											<div className="review-rating">
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star-o empty"></i>
-											</div>
-										</div>
-										<div className="review-body">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-										</div>
-									</li>
-									<li>
-										<div className="review-heading">
-											<h5 className="name">John</h5>
-											<p className="date">27 DEC 2018, 8:0 PM</p>
-											<div className="review-rating">
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star-o empty"></i>
-											</div>
-										</div>
-										<div className="review-body">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-										</div>
-									</li>
-									<li>
-										<div className="review-heading">
-											<h5 className="name">John</h5>
-											<p className="date">27 DEC 2018, 8:0 PM</p>
-											<div className="review-rating">
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star"></i>
-												<i className="fa fa-star-o empty"></i>
-											</div>
-										</div>
-										<div className="review-body">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-										</div>
-									</li>
-								</ul>
-								<ul className="reviews-pagination">
-									<li className="active">1</li>
-									<li><a href="2">2</a></li>
-									<li><a href="3">3</a></li>
-									<li><a href="4">4</a></li>
-									<li><a href="right"><i className="fa fa-angle-right"></i></a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div className="col-md-3">
-							<div id="review-form">
-								<form className="review-form">
-									<input className="input" type="text" placeholder="Your Name"/>
-									<input className="input" type="email" placeholder="Your Email"/>
-									<textarea className="input" placeholder="Your Review"></textarea>
-									<div className="input-rating">
-										<span>Your Rating: </span>
-										<div className="stars">
-											<input id="star5" name="rating" value="5" type="radio"/><label for="star5"></label>
-											<input id="star4" name="rating" value="4" type="radio"/><label for="star4"></label>
-											<input id="star3" name="rating" value="3" type="radio"/><label for="star3"></label>
-											<input id="star2" name="rating" value="2" type="radio"/><label for="star2"></label>
-											<input id="star1" name="rating" value="1" type="radio"/><label for="star1"></label>
-										</div>
-									</div>
-									<button className="primary-btn">Submit</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		);
     }
+    return children;
+
+  }
+
+  showReviews = () => {
+    let review = this.props.product.reviews;
+    let element = [];
+    for (let i = this.state.currentBlock - 3; i < this.state.currentBlock; i++) {
+      if(i<0){
+        i=0;
+      }
+
+      if(review.length<=i){
+        
+        break;
+      }
+      element.push(<li>
+        <div className="review-heading">
+          <h5 className="name">{review[i].userFullName}</h5>
+          <p className="date">{review[i].commentTime}</p>
+          <div className="review-rating">
+            {this.setStars(review[i].numberOfStars)}
+          </div>
+        </div>
+        <div className="review-body">
+          <p>
+            {review[i].reviewContent}
+          </p>
+        </div>
+      </li>)
+    }
+
+    return element;
+  }
+  handleRightReview() {
+    let newBlock = this.state.currentBlock + 3;
+    if (newBlock > this.props.product.reviews.length) {
+      newBlock = 3;
+    }
+    this.setState({ currentBlock: newBlock })
+  }
+  handleLeftReview() {
+    let newBlock = this.state.currentBlock - 3;
+    if (newBlock <= 0) {
+      newBlock = this.props.product.reviews.length;
+    }
+    this.setState({ currentBlock: newBlock });
+  }
+
+  setValue(event) {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value });
+  }
+
+  submitReview(event) {
+    var currentDate = new Date();
+    var date = currentDate.getDate();
+    var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+    var year = currentDate.getFullYear();
+    var dateString = date + "-" + (month + 1) + "-" + year;
+    const review = {
+      userFullName: this.state.reviewerName,
+      userMail: this.state.reviewerMail,
+      reviewContent: this.state.reviewContent,
+      commentTime: dateString,
+      numberOfStars: this.state.rating
+    };
+    const product = {
+      ...this.props.product,
+      reviews: [...this.props.product.reviews, review]
+    };
+    this.props.updateProduct(this.props.product.id, product);
+    event.preventDefault();
+  }
+
+
+
+  render() {
+    return (
+      <div id="product-tab">
+        <ul className="tab-nav">
+          <li className="active">
+            <a data-toggle="tab" href="#tab1">
+              Description
+            </a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#tab2">
+              Details
+            </a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#tab3">
+              Reviews (3)
+            </a>
+          </li>
+        </ul>
+
+        <div className="tab-content">
+          {/* Description */}
+          <div id="tab1" className="tab-pane fade in active">
+            <div className="row">
+              <div className="col-md-12">
+                <p>CONTENT</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Details */}
+          <div id="tab2" className="tab-pane fade in">
+            <div className="row">
+              <div className="col-md-12">
+                <p>CONTENT</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Reviews */}
+          <div id="tab3" className="tab-pane fade in">
+            <div className="row">
+              <div className="col-md-3">
+                <div id="rating">
+                  <div className="rating-avg">
+                    <span>4.5</span>
+                    <div className="rating-stars">
+                      <i className="fa fa-star" />
+                      <i className="fa fa-star" />
+                      <i className="fa fa-star" />
+                      <i className="fa fa-star" />
+                      <i className="fa fa-star-o" />
+                    </div>
+                  </div>
+                  <ul className="rating">
+                    <li>
+                      <div className="rating-stars">
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                      </div>
+                      <div className="rating-progress">
+                        <div style={{ width: "80%" }} />
+                      </div>
+                      <span className="sum">3</span>
+                    </li>
+                    <li>
+                      <div className="rating-stars">
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star-o" />
+                      </div>
+                      <div className="rating-progress">
+                        <div style={{ width: "60%" }} />
+                      </div>
+                      <span className="sum">2</span>
+                    </li>
+                    <li>
+                      <div className="rating-stars">
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star-o" />
+                        <i className="fa fa-star-o" />
+                      </div>
+                      <div className="rating-progress">
+                        <div />
+                      </div>
+                      <span className="sum">0</span>
+                    </li>
+                    <li>
+                      <div className="rating-stars">
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star-o" />
+                        <i className="fa fa-star-o" />
+                        <i className="fa fa-star-o" />
+                      </div>
+                      <div className="rating-progress">
+                        <div />
+                      </div>
+                      <span className="sum">0</span>
+                    </li>
+                    <li>
+                      <div className="rating-stars">
+                        <i className="fa fa-star" />
+                        <i className="fa fa-star-o" />
+                        <i className="fa fa-star-o" />
+                        <i className="fa fa-star-o" />
+                        <i className="fa fa-star-o" />
+                      </div>
+                      <div className="rating-progress">
+                        <div />
+                      </div>
+                      <span className="sum">0</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div id="reviews">
+                  <ul className="reviews">
+                    {this.showReviews()}
+                  </ul>
+                  <ul className="reviews-pagination">
+                    <li>
+                      <a id="left-review" onClick={this.handleLeftReview}>
+                        <i className="fa fa-angle-left" />
+                      </a>
+                    </li>
+                    <li>
+                      <a id="right-review" onClick={this.handleRightReview}>
+                        <i className="fa fa-angle-right" />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div id="review-form">
+                  <form className="review-form">
+                    <input
+                      name="reviewerName"
+                      onChange={this.setValue}
+                      value={this.state.reviewerName}
+                      className="input"
+                      type="text"
+                      placeholder="Your Name"
+                    />
+                    <input
+                      value={this.state.reviewerMail}
+                      onChange={this.setValue}
+                      name="reviewerMail"
+                      className="input"
+                      type="email"
+                      placeholder="Your Email"
+                    />
+                    <textarea
+                      value={this.state.reviewContent}
+                      onChange={this.setValue}
+                      name="reviewContent"
+                      className="input"
+                      placeholder="Your Review"
+                    />
+                    <div className="input-rating">
+                      <span>Your Rating: </span>
+                      <div className="stars">
+                        <input
+                          onClick={this.setValue}
+                          id="star5"
+                          name="rating"
+                          value="5"
+                          type="radio"
+                        />
+                        <label for="star5" />
+                        <input
+                          onClick={this.setValue}
+                          id="star4"
+                          name="rating"
+                          value="4"
+                          type="radio"
+                        />
+                        <label for="star4" />
+                        <input
+                          onClick={this.setValue}
+                          id="star3"
+                          name="rating"
+                          value="3"
+                          type="radio"
+                        />
+                        <label for="star3" />
+                        <input
+                          onClick={this.setValue}
+                          id="star2"
+                          name="rating"
+                          value="2"
+                          type="radio"
+                        />
+                        <label for="star2" />
+                        <input
+                          onClick={this.setValue}
+                          id="star1"
+                          name="rating"
+                          value="1"
+                          type="radio"
+                        />
+                        <label for="star1" />
+                      </div>
+                    </div>
+                    <button className="primary-btn" onClick={this.submitReview}>
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = state => {
+  return{
+    currentProduct: state.product.currentProduct
+  };
+};
+
+const mapDispatchToProps = {
+  
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductTab);

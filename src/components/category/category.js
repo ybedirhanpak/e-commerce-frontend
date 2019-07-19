@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./category.css";
 
-//Services
-import { generateLinkWithName } from "../../services/link-generator";
+//Route
+import { Link } from 'react-router-dom';
 
 export default class Category extends Component {
   constructor(props) {
@@ -12,14 +12,26 @@ export default class Category extends Component {
     this.generateSubCategories = this.generateSubCategories.bind(this);
   }
 
-  generateSubCategories = subcategoriesList => {
+  generateSection = (index) => {
+    return (
+      <div>
+        <li className="dropdown-header">{this.props.sections[index].header.name}</li>
+        {this.generateSubCategories(this.props.sections[index])}
+      </div>
+    )
+  } 
+
+  generateSubCategories = (section) => {
     let resultList = [];
-    for (var i = 0; i < subcategoriesList.length; i++) {
+    for (var i = 0; i < section.subcategories.length; i++) {
+      const path = `/show/${this.props.mainCategory.path}/${section.header.path}/${section.subcategories[i].path}`;
       resultList.push(
         <li key={i}>
-          <a href={generateLinkWithName(subcategoriesList[i])}>
-            {subcategoriesList[i]}
-          </a>
+          <Link to={{
+            pathname: path
+          }}>
+            {section.subcategories[i].name}
+          </Link>
         </li>
       );
     }
@@ -27,59 +39,64 @@ export default class Category extends Component {
   };
 
   render() {
-    const category = this.props.category;
-
+    console.log("category props", this.props);
     return (
       <li className="dropdown dropdown-large">
         <a href="dropdown" className="dropdown-toggle" data-toggle="dropdown">
-          {category.title} <b className="caret" />
+          {/* Main Hedaer */}
+          {this.props.mainCategory.name} <b className="caret" />
         </a>
-
         <ul className="dropdown-menu dropdown-menu-large row">
           <li className="col-sm-3">
             <ul>
               {/* Section A */}
-              <li className="dropdown-header">{category.sectionA.header}</li>
-              {this.generateSubCategories(category.sectionA.subcategories)}
-
+              {
+                (this.props.sections.length > 0) ? (this.generateSection(0)) : (null)
+              }
               <li className="divider" />
 
               {/* Section B */}
-              <li className="dropdown-header">{category.sectionB.header}</li>
-              {this.generateSubCategories(category.sectionB.subcategories)}
+              {
+                (this.props.sections.length > 1) ? (this.generateSection(1)) : (null)
+              }
             </ul>
           </li>
           <li className="col-sm-3">
             <ul>
               {/* Section C */}
-              <li className="dropdown-header">{category.sectionC.header}</li>
-              {this.generateSubCategories(category.sectionC.subcategories)}
+              {
+                (this.props.sections.length > 2) ? (this.generateSection(2)) : (null)
+              }
 
               <li className="divider" />
 
               {/* Section D */}
-              <li className="dropdown-header">{category.sectionD.header}</li>
-              {this.generateSubCategories(category.sectionD.subcategories)}
+              {
+                (this.props.sections.length > 3) ? (this.generateSection(3)) : (null)
+              }
             </ul>
           </li>
           <li className="col-sm-3">
             <ul>
               {/* Section E */}
-              <li className="dropdown-header">{category.sectionE.header}</li>
-              {this.generateSubCategories(category.sectionE.subcategories)}
+              {
+                (this.props.sections.length > 4) ? (this.generateSection(4)) : (null)
+              }
 
               <li className="divider" />
 
               {/* Section F */}
-              <li className="dropdown-header">{category.sectionF.header}</li>
-              {this.generateSubCategories(category.sectionF.subcategories)}
+              {
+                (this.props.sections.length > 5) ? (this.generateSection(5)) : (null)
+              }
             </ul>
           </li>
           <li className="col-sm-3">
             <ul>
               {/* Section G */}
-              <li className="dropdown-header">{category.sectionG.header}</li>
-              {this.generateSubCategories(category.sectionG.subcategories)}
+              {
+                (this.props.sections.length > 6) ? (this.generateSection(6)) : (null)
+              }
             </ul>
           </li>
         </ul>

@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 //Redux
 import { connect } from "react-redux";
-import { actionCreators } from "../../redux/cart/actions";
 
 class Cart extends Component {
     constructor(props) {
