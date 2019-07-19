@@ -4,7 +4,8 @@ import "isomorphic-fetch";
 import {
   GetWithUrl,
   PostWithUrlBody,
-  DeleteWithUrl
+  DeleteWithUrl,
+  PutWithUrlBody
 } from "../../services/url-helper";
 
 /* Action Types */
@@ -62,7 +63,7 @@ export const addProduct = body => {
 
 export const deleteProduct = id => {
   return dispatch => {
-    DeleteWithUrl(API + "/products/remove/"+ id)
+    DeleteWithUrl(API + "/products/delete/"+ id)
       .then()
       .catch(error => console.log("Errow while deletin' a product\n", error));
   };
@@ -79,5 +80,23 @@ export const getProduct = id => {
       .catch(error =>
         console.log("Error while getting product details\n", error)
       );
+  };
+};
+
+export const updateProduct = (id, body) => {
+  console.log("body", body)
+  return dispatch => {
+    PutWithUrlBody(API + "/products/update/" + id, body)
+      .then(response => {
+        if(response.status >= 200 && response.status < 300) {
+          response.json().then(data => {
+            console.log("data", data);
+            dispatch(saveSingleProduct(data));
+          })
+        }else {
+          console.log("Error.", response);
+        }
+      })
+      .catch(error => console.log("Error while updating a product \n", error));
   };
 };

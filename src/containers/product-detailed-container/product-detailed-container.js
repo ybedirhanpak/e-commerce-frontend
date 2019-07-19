@@ -20,24 +20,29 @@ class ProductDetailedContainer extends Component {
     console.log("Product detailed props", this.props)
     return (
       <div className="product-detailed">
-          <BreadCrumb params={this.props.categories} product={this.props.product}/>
-          <div className="container">
-              <div className="row">
-                  <div className="col-md-7">
-                      <ProductMainImg product={this.props.product}/>
-                  </div>
-                  <div className="col-md-5">
-                      <ProductDetails product={this.props.product}/>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="col-sm-12">
-                      <ProductTab product={this.props.product}/>
-                  </div>
-              </div>
+        <BreadCrumb params={this.props.categories} product={this.props.product}/>
+        <div className="container">
+            <div className="row">
+                <div className="col-md-7">
+                    <ProductMainImg product={this.props.product}/>
+                </div>
+                <div className="col-md-5">
+                    <ProductDetails product={this.props.product}/>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-sm-12">
+                    <ProductTab product={this.props.product}/>
+                </div>
+            </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <ProductTab product={this.props.product} />
           </div>
+        </div>
       </div>
-    )
+    );
   }
 }
 
