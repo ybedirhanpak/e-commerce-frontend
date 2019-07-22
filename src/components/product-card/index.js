@@ -25,9 +25,13 @@ class ProductCard extends React.Component {
     });
   }
 
-  findCategory = (categoryId) => {
+  findCategoryName = (categoryId) => {
     const category = this.props.allCategories.filter(x => x.id === categoryId)[0];
-    return category;
+    if (category !== undefined) {
+      return category.name;
+    } else {
+      return 'Loading...'
+    }
   }
 
   generatePath = () => {
@@ -63,7 +67,9 @@ class ProductCard extends React.Component {
             </div>
           </div>
           <div className="product-body">
-            <p className="product-category">{this.findCategory(product.category).name}</p>
+            {/* Category */}
+            <p className="product-category">{this.findCategoryName(product.category)}</p>
+            {/* Name */}
             <h3 className="product-name">
               <Link
                 to={{
@@ -74,12 +80,14 @@ class ProductCard extends React.Component {
                 {product.name}
               </Link>
             </h3>
+            {/* Price */}
             <h4 className="product-price">
               {'$'+ product.price}
               <del className="product-old-price">
                 {'$'+ product.oldPrice}
               </del>
             </h4>
+            {/* Rating */}
             <div className="product-rating">
               <i className="fa fa-star" />
               <i className="fa fa-star" />
@@ -87,6 +95,7 @@ class ProductCard extends React.Component {
               <i className="fa fa-star" />
               <i className="fa fa-star" />
             </div>
+            {/* Buttons */}
             <div className="product-btns">
               <button className="add-to-wishlist">
                 <i className="fa fa-heart-o" />
@@ -102,6 +111,7 @@ class ProductCard extends React.Component {
               </button>
             </div>
           </div>
+          {/* Add to cart */}
           <div className="add-to-cart">
             <button className="add-to-cart-btn" onClick={this.handleAddtoChart}>
               <i className="fa fa-shopping-cart" /> add to cart

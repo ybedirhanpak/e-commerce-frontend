@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import CartProduct from '../cart-product/index'
 
+//Route
+import { Link } from 'react-router-dom';
+
 //Redux
 import { connect } from "react-redux";
 
@@ -34,7 +37,7 @@ class Cart extends Component {
 
                     <button className="btn btn-default btn-rounded my-6" href="cart">
                         <i className="fa fa-shopping-cart"></i>
-                        <span>Your Cart</span>
+                        <span>{' Your Cart'}</span>
                     </button>
                 </a>
                 <div className="cart-dropdown">
@@ -46,8 +49,8 @@ class Cart extends Component {
                         <h5>SUBTOTAL: ${this.props.cart.totalPrice}</h5>
                     </div>
                     <div className="cart-btns">
-                        <a href="view-cart">View Cart</a>
-                        <a href="checkout">Checkout  <i className="fa fa-arrow-circle-right"></i></a>
+                        <a href="#">View Cart</a>
+                        <Link to="/checkout">Checkout  <i className="fa fa-arrow-circle-right"></i></Link>
                     </div>
                 </div>
             </div>

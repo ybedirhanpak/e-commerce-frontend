@@ -4,20 +4,29 @@ import "isomorphic-fetch";
 import {
   GetWithUrl,
   PostWithUrlBody,
-  DeleteWithUrl
+  DeleteWithUrl,
+  PutWithUrlBody
 } from "../../services/url-helper";
 
 /* Action Types */
 
+const INITIALIZE_FETCH_PRODUCT = "INITIALIZE_FETCH_PRODUCT";
 const SAVE_PRODUCT_LIST = "SAVE_PRODUCT_LIST";
 const SAVE_SINGLE_PRODUCT = "SAVE_SINGLE_PRODUCT";
 
 export const actionTypes = {
+  INITIALIZE_FETCH_PRODUCT,
   SAVE_PRODUCT_LIST,
   SAVE_SINGLE_PRODUCT
 };
 
 /* Action Creators */
+
+function initializeFetchProduct() {
+  return {
+    type: INITIALIZE_FETCH_PRODUCT
+  };
+}
 
 function saveProductList(productList) {
   return {
@@ -34,6 +43,7 @@ function saveSingleProduct(product) {
 }
 
 export const actionCreators = {
+  initializeFetchProduct,
   saveProductList,
   saveSingleProduct
 };
@@ -42,6 +52,7 @@ export const actionCreators = {
 
 export const getProductList = () => {
   return dispatch => {
+    dispatch(initializeFetchProduct())
     GetWithUrl(API + "/products/get")
       .then(response => response.json())
       .then(response => {
@@ -62,7 +73,7 @@ export const addProduct = body => {
 
 export const deleteProduct = id => {
   return dispatch => {
-    DeleteWithUrl(API + "/products/remove/"+ id)
+    DeleteWithUrl(API + "/products/delete/"+ id)
       .then()
       .catch(error => console.log("Errow while deletin' a product\n", error));
   };
@@ -70,6 +81,7 @@ export const deleteProduct = id => {
 
 export const getProduct = id => {
   return dispatch => {
+    dispatch(initializeFetchProduct());
     GetWithUrl(API + "/products/get/" + id)
       .then(response => response.json())
       .then(response => {
@@ -79,5 +91,23 @@ export const getProduct = id => {
       .catch(error =>
         console.log("Error while getting product details\n", error)
       );
+  };
+};
+
+export const updateProduct = (id, body) => {
+  console.log("body", body)
+  return dispatch => {
+    PutWithUrlBody(API + "/products/update/" + id, body)
+      .then(response => {
+        if(response.status >= 200 && response.status < 300) {
+          response.json().then(data => {
+            console.log("data", data);
+            dispatch(saveSingleProduct(data));
+          })
+        }else {
+          console.log("Error.", response);
+        }
+      })
+      .catch(error => console.log("Error while updating a product \n", error));
   };
 };
