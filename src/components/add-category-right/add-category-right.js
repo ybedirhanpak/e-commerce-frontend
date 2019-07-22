@@ -1,16 +1,26 @@
 import React, { Component } from "react";
-
-export default class AddCategoryRight extends Component {
+import { connect } from "react-redux";
+import { addCategory } from "../../redux/category/actions";
+class AddCategoryRight extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subCategory2: "",
-      category2: "",
-      categories2: "",
-      categorySelected2: false
+      categoryInput: "",
+      categories: "",
+      categorySelected: false
     };
     this.onChange = this.onChange.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
+    this.saveCategory = this.saveCategory.bind(this);
+  }
+
+  saveCategory() {
+    const category = {
+      Name: this.state.categoryInput,
+      Path: this.state.categoryInput,
+      ParentId: this.props.parentId
+    };
+    this.props.addCategory(category);
   }
 
   selectCategory(event) {
@@ -46,16 +56,16 @@ export default class AddCategoryRight extends Component {
                 className="form-control"
                 placeholder="Product Name..."
                 required
-                name="subCategory2"
+                name="categoryInput"
                 onChange={this.onChange}
               />
             </div>
 
-            {this.state.category2 === "addNewSubCategory" ? (
+            {"a" === "a" ? (
               <div className="col-md-12">
                 <button
                   className="btn btn-danger btn-lg btn-block"
-                  onClick={this.sendMessage}
+                  onClick={this.saveCategory}
                 >
                   Save
                 </button>
@@ -101,3 +111,12 @@ export default class AddCategoryRight extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  addCategory
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddCategoryRight);

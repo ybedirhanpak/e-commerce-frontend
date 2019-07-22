@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCategory } from "../../redux/category/actions";
+import { addCategory, apiUpdateCategory } from "../../redux/category/actions";
 
 class AddCategoryTop extends Component {
   constructor(props) {
     super(props);
     this.state = {
       categoryInput: "",
-      selected: false
+      selectedId: ""
     };
     this.onChange = this.onChange.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.saveCategory = this.saveCategory.bind(this);
+    this.updateCategory = this.updateCategory.bind(this);
   }
 
   saveCategory() {
@@ -22,9 +23,18 @@ class AddCategoryTop extends Component {
     this.props.addCategory(category);
   }
 
+  updateCategory(event) {
+    const category = {
+      Name: this.state.categoryInput,
+      Path: this.state.categoryInput
+    };
+    this.props.apiUpdateCategory(this.state.selectedId, category);
+    console.log(category);
+  }
+
   selectCategory(event) {
     this.setState({
-      selected: true
+      selectedId: event.target.id
     });
     const id = event.target.id;
 
@@ -43,7 +53,6 @@ class AddCategoryTop extends Component {
   };
 
   render() {
-    console.log("category list:" + this.props.categoryList);
     var categories = this.props.categoryList.filter(
       element => element.parentId === null
     );
@@ -93,7 +102,7 @@ class AddCategoryTop extends Component {
             <div className="col-md-3">
               <button
                 className="btn btn-danger btn-lg btn-block"
-                onClick={this.sendMessage}
+                onClick={this.updateCategory}
               >
                 Edit
               </button>
@@ -114,7 +123,8 @@ class AddCategoryTop extends Component {
 }
 
 const mapDispatchToProps = {
-  addCategory
+  addCategory,
+  apiUpdateCategory
 };
 
 export default connect(
