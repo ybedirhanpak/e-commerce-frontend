@@ -2,7 +2,8 @@ import { API } from "../../api-config";
 import {
   GetWithUrl,
   PostWithUrlBody,
-  PutWithUrlBody
+  PutWithUrlBody,
+  DeleteWithUrl
 } from "../../services/url-helper";
 
 /* Action Types */
@@ -29,8 +30,9 @@ function saveCategories(categories) {
 /* Api Call Functions */
 
 export const fetchAllCategories = () => {
+  console.log("fetchAll");
   return dispatch => {
-    GetWithUrl(API + "/categories/get")
+    GetWithUrl(API + "/categories/getAll")
       .then(response => {
         return response.json();
       })
@@ -45,7 +47,7 @@ export const addCategory = body => {
   return dispatch => {
     PostWithUrlBody(API + "/categories/create", body)
       .then()
-      .then(dispatch(fetchAllCategories))
+      .then(dispatch(fetchAllCategories()))
       .catch();
   };
 };
@@ -54,7 +56,16 @@ export const apiUpdateCategory = (id, body) => {
   return dispatch => {
     PutWithUrlBody(API + "/categories/update/" + id, body)
       .then(response => console.log(response))
-      .then(dispatch(fetchAllCategories))
+      .then(dispatch(fetchAllCategories()))
       .catch(error => console.log("Error while updating the category"));
+  };
+};
+
+export const apiDeleteCategory = id => {
+  return dispatch => {
+    DeleteWithUrl(API + "/categories/delete/" + id)
+      .then(response => console.log(response))
+      .then(dispatch(fetchAllCategories()))
+      .catch(error => console.log("Error while deleting the category", error));
   };
 };

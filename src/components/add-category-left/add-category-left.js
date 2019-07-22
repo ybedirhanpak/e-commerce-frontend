@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCategory, apiUpdateCategory } from "../../redux/category/actions";
+import {
+  addCategory,
+  apiUpdateCategory,
+  apiDeleteCategory
+} from "../../redux/category/actions";
 
 class AddCategoryLeft extends Component {
   constructor(props) {
@@ -15,6 +19,7 @@ class AddCategoryLeft extends Component {
     this.selectCategory = this.selectCategory.bind(this);
     this.saveCategory = this.saveCategory.bind(this);
     this.updateCategory = this.updateCategory.bind(this);
+    this.deleteCategory = this.deleteCategory.bind(this);
   }
 
   saveCategory() {
@@ -33,6 +38,7 @@ class AddCategoryLeft extends Component {
     };
     this.props.apiUpdateCategory(this.state.selectedId, category);
   }
+
   selectCategory(event) {
     this.setState({
       selectedId: event.target.id
@@ -42,6 +48,9 @@ class AddCategoryLeft extends Component {
       element => element.parentId === id
     );
     this.props.setSub(subList, 2, id);
+  }
+  deleteCategory() {
+    this.props.apiDeleteCategory(this.state.selectedId);
   }
 
   onChange = event => {
@@ -73,9 +82,8 @@ class AddCategoryLeft extends Component {
                 onChange={this.onChange}
               />
             </div>
-
-            {"a" === "a" ? (
-              <div className="col-md-12">
+            <div className="row container">
+              <div className="col-md-2">
                 <button
                   className="btn btn-danger btn-lg btn-block"
                   onClick={this.saveCategory}
@@ -83,26 +91,25 @@ class AddCategoryLeft extends Component {
                   Save
                 </button>
               </div>
-            ) : (
-              <div className="row container">
-                <div className="col-md-2">
-                  <button
-                    className="btn btn-danger btn-lg btn-block"
-                    onClick={this.updateCategory}
-                  >
-                    Edit
-                  </button>
-                </div>
-                <div className="col-md-2">
-                  <button
-                    className="btn btn-danger btn-lg btn-block"
-                    onClick={this.sendMessage}
-                  >
-                    Delete
-                  </button>
-                </div>
+            </div>
+            <div className="row container">
+              <div className="col-md-2">
+                <button
+                  className="btn btn-danger btn-lg btn-block"
+                  onClick={this.updateCategory}
+                >
+                  Edit
+                </button>
               </div>
-            )}
+              <div className="col-md-2">
+                <button
+                  className="btn btn-danger btn-lg btn-block"
+                  onClick={this.deleteCategory}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
           <form>
             <div className="form-group col-md-6">
@@ -127,7 +134,8 @@ class AddCategoryLeft extends Component {
 
 const mapDispatchToProps = {
   addCategory,
-  apiUpdateCategory
+  apiUpdateCategory,
+  apiDeleteCategory
 };
 
 export default connect(

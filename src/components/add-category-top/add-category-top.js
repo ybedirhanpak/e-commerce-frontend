@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCategory, apiUpdateCategory } from "../../redux/category/actions";
+import {
+  addCategory,
+  apiUpdateCategory,
+  apiDeleteCategory
+} from "../../redux/category/actions";
 
 class AddCategoryTop extends Component {
   constructor(props) {
@@ -13,6 +17,7 @@ class AddCategoryTop extends Component {
     this.selectCategory = this.selectCategory.bind(this);
     this.saveCategory = this.saveCategory.bind(this);
     this.updateCategory = this.updateCategory.bind(this);
+    this.deleteCategory = this.deleteCategory.bind(this);
   }
 
   saveCategory() {
@@ -24,12 +29,15 @@ class AddCategoryTop extends Component {
   }
 
   updateCategory(event) {
+    event.preventDefault();
     const category = {
       Name: this.state.categoryInput,
       Path: this.state.categoryInput
     };
     this.props.apiUpdateCategory(this.state.selectedId, category);
-    console.log(category);
+  }
+  deleteCategory() {
+    this.props.apiDeleteCategory(this.state.selectedId);
   }
 
   selectCategory(event) {
@@ -110,7 +118,7 @@ class AddCategoryTop extends Component {
             <div className="col-md-3">
               <button
                 className="btn btn-danger btn-lg btn-block"
-                onClick={this.sendMessage}
+                onClick={this.deleteCategory}
               >
                 Delete
               </button>
@@ -124,7 +132,8 @@ class AddCategoryTop extends Component {
 
 const mapDispatchToProps = {
   addCategory,
-  apiUpdateCategory
+  apiUpdateCategory,
+  apiDeleteCategory
 };
 
 export default connect(
