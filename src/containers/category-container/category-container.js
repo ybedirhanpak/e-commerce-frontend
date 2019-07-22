@@ -8,28 +8,39 @@ import BreadCrumb from '../../components/breadcrumb/breadcrumb'
 
 //Redux
 import { connect } from "react-redux";
-import { getProductList } from "../../redux/product/actions";
-
+import { getProductList, getProductListWithCategory } from "../../redux/product/actions";
+import { isNullOrUndefined } from 'util';
 
 class CategoryContainer extends Component {
 
     componentDidMount() {
-        this.props.getProductList();
+        if(!isNullOrUndefined(this.props.categories._subcategory)) {
+            const subcategoryId = this.props.categories._subcategory.id;
+            this.props.getProductListWithCategory(subcategoryId);
+        } else if(!isNullOrUndefined(this.props.categories._subheader)) {
+            const subheaderId = this.props.categories._subheader.id;
+            this.props.getProductListWithCategory(subheaderId);
+        } else if(!isNullOrUndefined(this.props.categories._mainCategory)) {
+            const mainCategoryId = this.props.categories._mainCategory.id;
+            this.props.getProductListWithCategory(mainCategoryId);
+        } else {
+            this.props.getProductList();
+        }
     }
 
     render() {
         console.log("category-container props:", this.props);
         const { productId } = this.props.match.params;
         return (
-            <div className="category-container">
+            <div className="section category-container">
                 <BreadCrumb params={this.props.categories} productId={productId}/>
                 <div className="container">
                     <div className="row">
-                        <div id="aside" className="col-md-3">
+                        <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
                             <Filter/>
                         </div>
-                        <div id="store" className="col-md-9">
+                        <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}
                             <Store 
                                 apiProducts={this.props.apiProducts}
@@ -51,7 +62,8 @@ const mapStateToProps = state => {
   };
   
   const mapDispatchToProps = {
-    getProductList
+    getProductList,
+    getProductListWithCategory
   };
   
   export default connect(

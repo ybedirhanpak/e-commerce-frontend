@@ -53,7 +53,19 @@ export const actionCreators = {
 export const getProductList = () => {
   return dispatch => {
     dispatch(initializeFetchProduct())
-    GetWithUrl(API + "/products/get")
+    GetWithUrl(API + "/products/getAll")
+      .then(response => response.json())
+      .then(response => {
+        dispatch(saveProductList(response));
+      })
+      .catch(error => console.log("Error when fetching product list\n", error));
+  };
+};
+
+export const getProductListWithCategory = (categoryId) => {
+  return dispatch => {
+    dispatch(initializeFetchProduct())
+    GetWithUrl(API + "/products/getByCategoryId/" + categoryId)
       .then(response => response.json())
       .then(response => {
         dispatch(saveProductList(response));
@@ -82,7 +94,7 @@ export const deleteProduct = id => {
 export const getProduct = id => {
   return dispatch => {
     dispatch(initializeFetchProduct());
-    GetWithUrl(API + "/products/get/" + id)
+    GetWithUrl(API + "/products/getById/" + id)
       .then(response => response.json())
       .then(response => {
         dispatch(saveSingleProduct(response));
