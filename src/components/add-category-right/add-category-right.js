@@ -22,12 +22,14 @@ class AddCategoryRight extends Component {
   }
 
   saveCategory() {
-    const category = {
-      Name: this.state.categoryInput,
-      Path: this.state.categoryInput,
-      ParentId: this.props.parentId
-    };
-    this.props.addCategory(category);
+    if (this.state.categoryInput !== "") {
+      const category = {
+        Name: this.state.categoryInput,
+        Path: this.state.categoryInput,
+        ParentId: this.props.parentId
+      };
+      this.props.addCategory(category);
+    }
   }
   updateCategory() {
     const category = {
@@ -45,7 +47,7 @@ class AddCategoryRight extends Component {
     const id = event.target.id;
 
     this.setState({
-      category2: id
+      selectedId: id
     });
   }
 
@@ -56,7 +58,10 @@ class AddCategoryRight extends Component {
   };
 
   render() {
-    const categories = this.props.categoryList.map(element => (
+    const categoryList = this.props.allCategories.filter(
+      element => element.parentId === this.props.parentId
+    );
+    const categories = categoryList.map(element => (
       <option key={element.id} id={element.id} onClick={this.selectCategory}>
         {element.name}
       </option>

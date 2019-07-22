@@ -23,12 +23,14 @@ class AddCategoryLeft extends Component {
   }
 
   saveCategory() {
-    const category = {
-      Name: this.state.categoryInput,
-      Path: this.state.categoryInput,
-      ParentId: this.props.parentId
-    };
-    this.props.addCategory(category);
+    if (this.state.categoryInput !== "") {
+      const category = {
+        Name: this.state.categoryInput,
+        Path: this.state.categoryInput,
+        ParentId: this.props.parentId
+      };
+      this.props.addCategory(category);
+    }
   }
   updateCategory() {
     const category = {
@@ -44,13 +46,12 @@ class AddCategoryLeft extends Component {
       selectedId: event.target.id
     });
     const id = event.target.id;
-    const subList = this.props.allCategories.filter(
-      element => element.parentId === id
-    );
-    this.props.setSub(subList, 2, id);
+
+    this.props.setSub(2, id);
   }
   deleteCategory() {
     this.props.apiDeleteCategory(this.state.selectedId);
+    this.props.clearParents();
   }
 
   onChange = event => {
@@ -61,7 +62,10 @@ class AddCategoryLeft extends Component {
   };
 
   render() {
-    const categories = this.props.categoryList.map(element => (
+    const categoryList = this.props.allCategories.filter(
+      element => element.parentId === this.props.parentId
+    );
+    const categories = categoryList.map(element => (
       <option key={element.id} id={element.id} onClick={this.selectCategory}>
         {element.name}
       </option>

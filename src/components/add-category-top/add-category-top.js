@@ -21,11 +21,13 @@ class AddCategoryTop extends Component {
   }
 
   saveCategory() {
-    const category = {
-      Name: this.state.categoryInput,
-      Path: this.state.categoryInput
-    };
-    this.props.addCategory(category);
+    if (this.state.categoryInput !== "") {
+      const category = {
+        Name: this.state.categoryInput,
+        Path: this.state.categoryInput
+      };
+      this.props.addCategory(category);
+    }
   }
 
   updateCategory(event) {
@@ -38,6 +40,7 @@ class AddCategoryTop extends Component {
   }
   deleteCategory() {
     this.props.apiDeleteCategory(this.state.selectedId);
+    this.props.clearParents("both");
   }
 
   selectCategory(event) {
@@ -46,11 +49,7 @@ class AddCategoryTop extends Component {
     });
     const id = event.target.id;
 
-    const subList = this.props.categoryList.filter(
-      element => element.parentId === id
-    );
-
-    this.props.setSub(subList, 1, id);
+    this.props.setSub(1, id);
   }
 
   onChange = event => {
