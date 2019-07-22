@@ -17,7 +17,7 @@ class UserLoginRegisterDropdown extends Component {
                 data-toggle="dropdown"
               >
                 <i className="fa fa-user" />
-                <span>Login / Register</span>
+                <span>{' Login / Register'}</span>
               </button>
               <ul className="dropdown-menu dropdown-menu-large row">
                     {/* Login */}
@@ -43,7 +43,7 @@ class UserLoginRegisterDropdown extends Component {
               data-toggle="dropdown"
             >
               <i className="fa fa-user" />
-              <span>{this.props.user.currentUser.firstName}</span>
+              <span>{` ${this.props.user.currentUser.firstName}`}</span>
             </button>
             <ul className="dropdown-menu dropdown-menu-large row">
                   {/* My Account */}

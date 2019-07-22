@@ -20,7 +20,6 @@ class ProductTab extends Component {
 
   }
   
-
   setStars = (index) => {
     let div;
     let children = [];
@@ -46,10 +45,10 @@ class ProductTab extends Component {
         i=0;
       }
 
-      if(review.length<=i){
-        
+      if(review === undefined || review.length<=i){
         break;
       }
+
       element.push(<li>
         <div className="review-heading">
           <h5 className="name">{review[i].userFullName}</h5>
@@ -60,22 +59,25 @@ class ProductTab extends Component {
         </div>
         <div className="review-body">
           <p>
+          }
             {review[i].reviewContent}
           </p>
         </div>
       </li>)
-    }
 
-    return element;
+      return element;
+    }
   }
-  handleRightReview() {
+
+  handleRightReview = () => {
     let newBlock = this.state.currentBlock + 3;
     if (newBlock > this.props.product.reviews.length) {
       newBlock = 3;
     }
     this.setState({ currentBlock: newBlock })
   }
-  handleLeftReview() {
+
+  handleLeftReview = () => {
     let newBlock = this.state.currentBlock - 3;
     if (newBlock <= 0) {
       newBlock = this.props.product.reviews.length;
@@ -83,13 +85,13 @@ class ProductTab extends Component {
     this.setState({ currentBlock: newBlock });
   }
 
-  setValue(event) {
+  setValue = (event) => {
     const { name, value } = event.target;
 
     this.setState({ [name]: value });
   }
 
-  submitReview(event) {
+  submitReview = (event) => {
     var currentDate = new Date();
     var date = currentDate.getDate();
     var month = currentDate.getMonth(); //Be careful! January is 0 not 1
@@ -110,11 +112,10 @@ class ProductTab extends Component {
     event.preventDefault();
   }
 
-
-
   render() {
     return (
       <div id="product-tab">
+        {/* Navigation */}
         <ul className="tab-nav">
           <li className="active">
             <a data-toggle="tab" href="#tab1">
@@ -133,6 +134,7 @@ class ProductTab extends Component {
           </li>
         </ul>
 
+        {/* Content */}
         <div className="tab-content">
           {/* Description */}
           <div id="tab1" className="tab-pane fade in active">
@@ -155,6 +157,7 @@ class ProductTab extends Component {
           {/* Reviews */}
           <div id="tab3" className="tab-pane fade in">
             <div className="row">
+              {/* Rating */}
               <div className="col-md-3">
                 <div id="rating">
                   <div className="rating-avg">
@@ -236,7 +239,7 @@ class ProductTab extends Component {
                   </ul>
                 </div>
               </div>
-
+              {/* Reviews */}
               <div className="col-md-6">
                 <div id="reviews">
                   <ul className="reviews">
@@ -256,7 +259,7 @@ class ProductTab extends Component {
                   </ul>
                 </div>
               </div>
-
+              {/* Review Form */}
               <div className="col-md-3">
                 <div id="review-form">
                   <form className="review-form">

@@ -10,15 +10,23 @@ import {
 
 /* Action Types */
 
+const INITIALIZE_FETCH_PRODUCT = "INITIALIZE_FETCH_PRODUCT";
 const SAVE_PRODUCT_LIST = "SAVE_PRODUCT_LIST";
 const SAVE_SINGLE_PRODUCT = "SAVE_SINGLE_PRODUCT";
 
 export const actionTypes = {
+  INITIALIZE_FETCH_PRODUCT,
   SAVE_PRODUCT_LIST,
   SAVE_SINGLE_PRODUCT
 };
 
 /* Action Creators */
+
+function initializeFetchProduct() {
+  return {
+    type: INITIALIZE_FETCH_PRODUCT
+  };
+}
 
 function saveProductList(productList) {
   return {
@@ -35,6 +43,7 @@ function saveSingleProduct(product) {
 }
 
 export const actionCreators = {
+  initializeFetchProduct,
   saveProductList,
   saveSingleProduct
 };
@@ -43,6 +52,7 @@ export const actionCreators = {
 
 export const getProductList = () => {
   return dispatch => {
+    dispatch(initializeFetchProduct())
     GetWithUrl(API + "/products/get")
       .then(response => response.json())
       .then(response => {
@@ -71,6 +81,7 @@ export const deleteProduct = id => {
 
 export const getProduct = id => {
   return dispatch => {
+    dispatch(initializeFetchProduct());
     GetWithUrl(API + "/products/get/" + id)
       .then(response => response.json())
       .then(response => {

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 //Components
 import StoreTopFilter from "../store-top-filter/store-top-filter";
 import ProductCard from "../product-card/index";
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 export default class Store extends Component {
   constructor(props) {
@@ -15,20 +16,12 @@ export default class Store extends Component {
   createProducts = () => {
     if(this.props.fetchInProgress) {
       return(
-        <ProductCard product={
-          {
-            name: "Loading...",
-            imgSource: "./img/product05.png",
-            discount: "...",
-            category: "...",
-            price: "...",
-            stars: 5
-          }} />
+        <LoadingSpinner/>
       )
     }else {
       const productsList = this.props.apiProducts.map(product => {
         return(
-          <div key={product.id} className="col-md-4 col-xs-6">
+          <div key={product.id} className="col-xs-12 col-md-4">
             <ProductCard product={product} />
           </div>
         )

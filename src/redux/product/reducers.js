@@ -8,6 +8,11 @@ const initialState = {
 
 function productReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.INITIALIZE_FETCH_PRODUCT:
+      return {
+        ...state,
+        fetchInProgress: true
+      }
     case actionTypes.SAVE_PRODUCT_LIST:
       return {
         ...state,
@@ -17,7 +22,8 @@ function productReducer(state = initialState, action) {
     case actionTypes.SAVE_SINGLE_PRODUCT:
       return {
         ...state,
-        currentProduct: action.payload
+        currentProduct: action.payload,
+        fetchInProgress: false
       };
     default:
       return state;

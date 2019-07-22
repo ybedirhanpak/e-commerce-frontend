@@ -10,6 +10,7 @@ import ProductMainImg from "../../components/product-main-img/product-main-img";
 import ProductDetails from "../../components/product-details/product-details";
 import ProductTab from "../../components/product-tab/product-tab";
 import BreadCrumb from '../../components/breadcrumb/breadcrumb'
+import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
 
 class ProductDetailedContainer extends Component {
   componentDidMount() {
@@ -18,10 +19,17 @@ class ProductDetailedContainer extends Component {
 
   render() {
     console.log("Product detailed props", this.props)
+    if(this.props.fetchInProgress) {
+      return(
+        <div className="container" style={{height:200}}>
+          <LoadingSpinner/>
+        </div>
+      )
+    }
     return (
       <div className="product-detailed">
         <BreadCrumb params={this.props.categories} product={this.props.product}/>
-        <div className="container">
+        <div className="container" style={{padding:40}}>
             <div className="row">
                 <div className="col-md-7">
                     <ProductMainImg product={this.props.product}/>
@@ -36,11 +44,6 @@ class ProductDetailedContainer extends Component {
                 </div>
             </div>
         </div>
-        <div className="row">
-          <div className="col-sm-12">
-            <ProductTab product={this.props.product} />
-          </div>
-        </div>
       </div>
     );
   }
@@ -48,7 +51,8 @@ class ProductDetailedContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.product.currentProduct
+    product: state.product.currentProduct,
+    fetchInProgress: state.product.fetchInProgress
   };
 };
 
