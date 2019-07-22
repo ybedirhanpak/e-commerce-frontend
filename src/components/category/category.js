@@ -13,9 +13,10 @@ export default class Category extends Component {
   }
 
   generateSection = (index) => {
+    const subheaderPath = `/show/${this.props.mainCategory.path}/${this.props.sections[index].header.path}/`;
     return (
       <div>
-        <li className="dropdown-header">{this.props.sections[index].header.name}</li>
+        <Link to={subheaderPath}> <li className="dropdown-header">{this.props.sections[index].header.name}</li> </Link>
         {this.generateSubCategories(this.props.sections[index])}
       </div>
     )
@@ -24,11 +25,11 @@ export default class Category extends Component {
   generateSubCategories = (section) => {
     let resultList = [];
     for (var i = 0; i < section.subcategories.length; i++) {
-      const path = `/show/${this.props.mainCategory.path}/${section.header.path}/${section.subcategories[i].path}`;
+      const subcategoryPath = `/show/${this.props.mainCategory.path}/${section.header.path}/${section.subcategories[i].path}`;
       resultList.push(
         <li key={i}>
           <Link to={{
-            pathname: path
+            pathname: subcategoryPath
           }}>
             {section.subcategories[i].name}
           </Link>
@@ -42,10 +43,10 @@ export default class Category extends Component {
     console.log("category props", this.props);
     return (
       <li className="dropdown dropdown-large">
-        <a href="dropdown" className="dropdown-toggle" data-toggle="dropdown">
+          <a href="dropdown" className="dropdown-toggle" data-toggle="dropdown">
           {/* Main Hedaer */}
           {this.props.mainCategory.name} <b className="caret" />
-        </a>
+          </a>
         <ul className="dropdown-menu dropdown-menu-large row">
           <li className="col-sm-3">
             <ul>
@@ -53,8 +54,13 @@ export default class Category extends Component {
               {
                 (this.props.sections.length > 0) ? (this.generateSection(0)) : (null)
               }
-              <li className="divider" />
 
+              {
+                (this.props.sections.length > 1) ? (
+                  <li className="divider" />
+                ) : (null)
+              }
+              
               {/* Section B */}
               {
                 (this.props.sections.length > 1) ? (this.generateSection(1)) : (null)
@@ -68,8 +74,12 @@ export default class Category extends Component {
                 (this.props.sections.length > 2) ? (this.generateSection(2)) : (null)
               }
 
-              <li className="divider" />
-
+              {
+                (this.props.sections.length > 3) ? (
+                  <li className="divider" />
+                ) : (null)
+              }
+              
               {/* Section D */}
               {
                 (this.props.sections.length > 3) ? (this.generateSection(3)) : (null)
@@ -83,7 +93,11 @@ export default class Category extends Component {
                 (this.props.sections.length > 4) ? (this.generateSection(4)) : (null)
               }
 
-              <li className="divider" />
+              {
+                (this.props.sections.length > 5) ? (
+                  <li className="divider" />
+                ) : (null)
+              }
 
               {/* Section F */}
               {

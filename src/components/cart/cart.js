@@ -34,7 +34,6 @@ class Cart extends Component {
         return (
             <div className="dropdown">
                 <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-
                     <button className="btn btn-default btn-rounded my-6" href="cart">
                         <i className="fa fa-shopping-cart"></i>
                         <span>{' Your Cart'}</span>
