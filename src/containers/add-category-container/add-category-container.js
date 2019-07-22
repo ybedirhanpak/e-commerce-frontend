@@ -8,24 +8,34 @@ class AddCategoryContainer extends Component {
   constructor() {
     super();
     this.state = {
-      subCategories: [],
-      subCategories2: [],
       parentId1: "",
       parentId2: ""
     };
     this.setSubCategories = this.setSubCategories.bind(this);
+    this.clearParents = this.clearParents.bind(this);
   }
 
-  setSubCategories(subList, subType, parentId) {
+  setSubCategories(subType, parentId) {
     if (subType === 1) {
       this.setState({
-        subCategories: subList,
-        parentId1: parentId
+        parentId1: parentId,
+        parentId2: ""
       });
     } else {
       this.setState({
-        subCategories2: subList,
         parentId2: parentId
+      });
+    }
+  }
+  clearParents(type) {
+    if (type === "both") {
+      this.setState({
+        parentId1: "",
+        parentId2: ""
+      });
+    } else {
+      this.setState({
+        parentId2: ""
       });
     }
   }
@@ -38,6 +48,7 @@ class AddCategoryContainer extends Component {
           <AddCategoryTop
             setSub={this.setSubCategories}
             categoryList={this.props.categories}
+            clearParents={this.clearParents}
           />
         </div>
         <div>
@@ -45,16 +56,16 @@ class AddCategoryContainer extends Component {
             <h1>Sub Categories</h1>
             <AddCategoryLeft
               setSub={this.setSubCategories}
-              categoryList={this.state.subCategories}
               allCategories={this.props.categories}
               parentId={this.state.parentId1}
+              clearParents={this.clearParents}
             />
           </div>
           <div className="col-md-6">
             <h1>Sub Categories2</h1>
             <AddCategoryRight
               parentId={this.state.parentId2}
-              categoryList={this.state.subCategories2}
+              allCategories={this.props.categories}
             />
           </div>
         </div>

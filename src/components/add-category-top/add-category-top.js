@@ -1,38 +1,55 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCategory } from "../../redux/category/actions";
+import {
+  addCategory,
+  apiUpdateCategory,
+  apiDeleteCategory
+} from "../../redux/category/actions";
 
 class AddCategoryTop extends Component {
   constructor(props) {
     super(props);
     this.state = {
       categoryInput: "",
-      selected: false
+      selectedId: ""
     };
     this.onChange = this.onChange.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.saveCategory = this.saveCategory.bind(this);
+    this.updateCategory = this.updateCategory.bind(this);
+    this.deleteCategory = this.deleteCategory.bind(this);
   }
 
   saveCategory() {
+    if (this.state.categoryInput !== "") {
+      const category = {
+        Name: this.state.categoryInput,
+        Path: this.state.categoryInput
+      };
+      this.props.addCategory(category);
+    }
+  }
+
+  updateCategory(event) {
+    event.preventDefault();
     const category = {
       Name: this.state.categoryInput,
       Path: this.state.categoryInput
     };
-    this.props.addCategory(category);
+    this.props.apiUpdateCategory(this.state.selectedId, category);
+  }
+  deleteCategory() {
+    this.props.apiDeleteCategory(this.state.selectedId);
+    this.props.clearParents("both");
   }
 
   selectCategory(event) {
     this.setState({
-      selected: true
+      selectedId: event.target.id
     });
     const id = event.target.id;
 
-    const subList = this.props.categoryList.filter(
-      element => element.parentId === id
-    );
-
-    this.props.setSub(subList, 1, id);
+    this.props.setSub(1, id);
   }
 
   onChange = event => {
@@ -43,7 +60,6 @@ class AddCategoryTop extends Component {
   };
 
   render() {
-    console.log("category list:" + this.props.categoryList);
     var categories = this.props.categoryList.filter(
       element => element.parentId === null
     );
@@ -93,7 +109,7 @@ class AddCategoryTop extends Component {
             <div className="col-md-3">
               <button
                 className="btn btn-danger btn-lg btn-block"
-                onClick={this.sendMessage}
+                onClick={this.updateCategory}
               >
                 Edit
               </button>
@@ -101,7 +117,7 @@ class AddCategoryTop extends Component {
             <div className="col-md-3">
               <button
                 className="btn btn-danger btn-lg btn-block"
-                onClick={this.sendMessage}
+                onClick={this.deleteCategory}
               >
                 Delete
               </button>
@@ -114,7 +130,9 @@ class AddCategoryTop extends Component {
 }
 
 const mapDispatchToProps = {
-  addCategory
+  addCategory,
+  apiUpdateCategory,
+  apiDeleteCategory
 };
 
 export default connect(

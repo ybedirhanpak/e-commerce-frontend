@@ -1,35 +1,67 @@
 import React, { Component } from "react";
-
-export default class AddCategoryRight extends Component {
+import { connect } from "react-redux";
+import {
+  addCategory,
+  apiUpdateCategory,
+  apiDeleteCategory
+} from "../../redux/category/actions";
+class AddCategoryRight extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subCategory2: "",
-      category2: "",
-      categories2: "",
-      categorySelected2: false
+      categoryInput: "",
+      categories: "",
+      categorySelected: false,
+      selectedId: ""
     };
     this.onChange = this.onChange.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
+    this.saveCategory = this.saveCategory.bind(this);
+    this.updateCategory = this.updateCategory.bind(this);
+    this.deleteCategory = this.deleteCategory.bind(this);
+  }
+
+  saveCategory() {
+    if (this.state.categoryInput !== "") {
+      const category = {
+        Name: this.state.categoryInput,
+        Path: this.state.categoryInput,
+        ParentId: this.props.parentId
+      };
+      this.props.addCategory(category);
+    }
+  }
+  updateCategory() {
+    const category = {
+      ParentId: this.props.parentId,
+      Name: this.state.categoryInput,
+      Path: this.state.categoryInput
+    };
+    this.props.apiUpdateCategory(this.state.selectedId, category);
+  }
+  deleteCategory() {
+    this.props.apiDeleteCategory(this.state.selectedId);
   }
 
   selectCategory(event) {
     const id = event.target.id;
 
     this.setState({
-      category2: id
+      selectedId: id
     });
   }
 
   onChange = event => {
-    //debugger;
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
   render() {
-    const categories = this.props.categoryList.map(element => (
+    const categoryList = this.props.allCategories.filter(
+      element => element.parentId === this.props.parentId
+    );
+    const categories = categoryList.map(element => (
       <option key={element.id} id={element.id} onClick={this.selectCategory}>
         {element.name}
       </option>
@@ -42,44 +74,42 @@ export default class AddCategoryRight extends Component {
               <label htmlFor="product">Sub Category</label>
               <input
                 type="text"
-                id="subcategory"
+                id="categoryInput"
                 className="form-control"
-                placeholder="Product Name..."
+                placeholder="Sub Category"
                 required
-                name="subCategory2"
+                name="categoryInput"
                 onChange={this.onChange}
               />
             </div>
-
-            {this.state.category2 === "addNewSubCategory" ? (
-              <div className="col-md-12">
+            <div className="row container">
+              <div className="col-md-2">
                 <button
                   className="btn btn-danger btn-lg btn-block"
-                  onClick={this.sendMessage}
+                  onClick={this.saveCategory}
                 >
                   Save
                 </button>
               </div>
-            ) : (
-              <div className="row col-md-12">
-                <div className="col-md-2">
-                  <button
-                    className="btn btn-danger btn-lg btn-block"
-                    onClick={this.sendMessage}
-                  >
-                    Edit
-                  </button>
-                </div>
-                <div className="col-md-2">
-                  <button
-                    className="btn btn-danger btn-lg btn-block"
-                    onClick={this.sendMessage}
-                  >
-                    Delete
-                  </button>
-                </div>
+            </div>
+            <div className="row container">
+              <div className="col-md-2">
+                <button
+                  className="btn btn-danger btn-lg btn-block"
+                  onClick={this.updateCategory}
+                >
+                  Edit
+                </button>
               </div>
-            )}
+              <div className="col-md-2">
+                <button
+                  className="btn btn-danger btn-lg btn-block"
+                  onClick={this.deleteCategory}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
           <form>
             <div className="form-group col-md-6">
@@ -88,7 +118,7 @@ export default class AddCategoryRight extends Component {
                 multiple
                 className="form-control"
                 id="sel2"
-                name="categories2"
+                name="categories"
                 onChange={this.onChange}
                 onClick={this.onClick}
               >
@@ -101,3 +131,14 @@ export default class AddCategoryRight extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  addCategory,
+  apiDeleteCategory,
+  apiUpdateCategory
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddCategoryRight);
