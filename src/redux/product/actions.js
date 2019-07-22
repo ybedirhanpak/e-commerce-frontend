@@ -62,10 +62,10 @@ export const getProductList = () => {
   };
 };
 
-export const getProductListWithCategory = (categoryId) => {
+export const getProductListWithCategory = (categoryIds) => {
   return dispatch => {
     dispatch(initializeFetchProduct())
-    GetWithUrl(API + "/products/getByCategoryId/" + categoryId)
+    PostWithUrlBody(API + "/products/getByCategory/", categoryIds)
       .then(response => response.json())
       .then(response => {
         dispatch(saveProductList(response));
