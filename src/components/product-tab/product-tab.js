@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { updateProduct } from '../../redux/product/actions';
 
 class ProductTab extends Component {
   constructor() {
@@ -48,7 +49,7 @@ class ProductTab extends Component {
       if(review === undefined || review.length<=i){
         break;
       }
-
+      
       element.push(<li>
         <div className="review-heading">
           <h5 className="name">{review[i].userFullName}</h5>
@@ -59,14 +60,13 @@ class ProductTab extends Component {
         </div>
         <div className="review-body">
           <p>
-          }
             {review[i].reviewContent}
           </p>
         </div>
       </li>)
-
-      return element;
     }
+    
+    return element;
   }
 
   handleRightReview = () => {
@@ -352,7 +352,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  
+  updateProduct,
 };
 
 export default connect(
