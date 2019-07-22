@@ -13,16 +13,6 @@ import { isNullOrUndefined } from 'util';
 
 class CategoryContainer extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            _mainCategory: undefined,
-            _subheader: undefined,
-            _subcategory: undefined
-        }
-    }
-
     componentDidMount() {
         this.initializeCategory();
     }
@@ -36,12 +26,7 @@ class CategoryContainer extends Component {
     initializeCategory = () => {
         const { mainCategory, subheader, subcategory } = this.props.match.params;
         const { _mainCategory, _subheader, _subcategory } = this.findCategoryWithPath(mainCategory, subheader, subcategory);
-        this.setState({
-            _mainCategory, 
-            _subheader, 
-            _subcategory
-        });
-        this.loadProducts(this.state._mainCategory, this.state._subheader, this.state._subcategory);
+        this.loadProducts(_mainCategory, _subheader, _subcategory);
     }
 
     findCategoryWithPath = (mainCategory=null, subheader=null, subcategory=null) => {
@@ -59,31 +44,31 @@ class CategoryContainer extends Component {
         }
     }
 
-    loadProducts = () => {
+    loadProducts = (_mainCategory, _subheader, _subcategory) => {
         let categoryIds = [];
-
-        if(categoryIds.length !== 0) {
-            console.log("categoryIds: ",categoryIds)
+        if(!isNullOrUndefined(_subcategory)) {
+            this.props.getProductListWithCategory([_subcategory.id]);
+        }else if(!isNullOrUndefined(_subheader)) {
+            categoryIds = this.findChildrenCategoryIds(_subheader.id);
             this.props.getProductListWithCategory(categoryIds);
-        } else {
-            this.props.getProductList();
+        } else if(!isNullOrUndefined(_mainCategory)){
+            const subheaderIds = this.findChildrenCategoryIds(_mainCategory.id);
+            categoryIds = subheaderIds.map(x => this.findChildrenCategoryIds(x)).flat(1);
+            this.props.getProductListWithCategory(categoryIds);
         }
     }
 
     findChildrenCategoryIds = (id) => {
-        // const resultIdList = [];
-        // const allCategories = this.props.apiCategories;
-        // allCategories.filter(x => x.parentId === id).map(x => resultIdList.push(x.id));
-        
+        const allCategories = this.props.apiCategories;
+        return allCategories.filter(x => x.parentId === id).map(x => x.id); 
     }
 
     render() {
-        console.log("category-container props:", this.props);
-        console.log("category-container state:", this.state);
-        const { productId } = this.props.match.params;
+        const { mainCategory, subheader, subcategory, productId } = this.props.match.params;
+        const categories = this.findCategoryWithPath(mainCategory, subheader, subcategory);
         return (
-            <div className="section category-container">
-                <BreadCrumb params={this.props.categories} productId={productId}/>
+            <div className="category-container">
+                <BreadCrumb params={categories} productId={productId}/>
                 <div className="container">
                     <div className="row">
                         <div id="aside" className="col-sm-6 col-md-3">

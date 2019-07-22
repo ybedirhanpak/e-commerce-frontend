@@ -5,10 +5,6 @@ import "./App.css";
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-//Redux
-import { connect } from "react-redux";
-import { fetchAllCategories } from "./redux/category/actions";
-
 //Components
 import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
@@ -38,26 +34,7 @@ import Checkoutcontainer from "./containers/checkout-container/checkout-containe
 
 import AddCategoryContainer from "./containers/add-category-container/add-category-container"
 
-class App extends Component {
-
-  componentDidMount() {
-    this.props.fetchAllCategories();
-  }
-
-  findCategoryWithPath = (mainCategory=null, subheader=null, subcategory=null) => {
-    //All categories without hierarchy
-    const allCategories = this.props.categories;
-    const _mainCategory = (mainCategory !== null) ? allCategories.filter(x => x.path === mainCategory)[0] : null;
-    const _subheader = (_mainCategory !== null && subheader !== null) ? 
-     allCategories.filter(x => x.path === subheader && x.parentId === _mainCategory.id)[0] : null;
-    const _subcategory = (_subheader !== null && subcategory !== null) ? 
-      allCategories.filter(x=> x.path === subcategory && x.parentId === _subheader.id)[0] : null;
-    return {
-      _mainCategory,
-      _subheader,
-      _subcategory
-    }
-  }
+export default class App extends Component {
 
   render() {
     return (
@@ -68,10 +45,7 @@ class App extends Component {
             {/* Main Header and Navigation Bar */}
 
             <MainHeader />
-            <NavigationBar 
-              categories={this.props.categories} 
-              fetchInProgress={this.props.categoriesFetchInProgress}
-            />
+            <NavigationBar />
 
             <Switch>
               {/* Home Routes */}
@@ -85,7 +59,6 @@ class App extends Component {
                 return(
                   <CategoryContainer 
                   {...props}
-                  categories={this.findCategoryWithPath(props.match.params.mainCategory)}
                   />
                 )
               }}/>
@@ -94,10 +67,6 @@ class App extends Component {
                 return(
                   <CategoryContainer 
                   {...props}
-                  categories={this.findCategoryWithPath(
-                    props.match.params.mainCategory,
-                    props.match.params.subheader
-                    )}
                   />
                 )
               }}/>
@@ -106,11 +75,6 @@ class App extends Component {
                 return(
                   <CategoryContainer 
                   {...props}
-                  categories={this.findCategoryWithPath(
-                    props.match.params.mainCategory,
-                    props.match.params.subheader,
-                    props.match.params.subcategory
-                    )}
                   />
                 )
               }}/>
@@ -119,12 +83,6 @@ class App extends Component {
                 return(
                   <ProductDetailedContainer 
                   {...props}
-                  categories={this.findCategoryWithPath(
-                    props.match.params.mainCategory,
-                    props.match.params.subheader,
-                    props.match.params.subcategory
-                    )}
-                  productId={props.match.params.productId}
                   />
                 )
               }}/>
@@ -168,19 +126,3 @@ class App extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    categories: state.category.categories,
-    categoriesFetchInProgress: state.category.fetchInProgress
-  };
-};
-
-const mapDispatchToProps = {
-  fetchAllCategories
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);

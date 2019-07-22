@@ -26,7 +26,7 @@ function saveCategories(categories) {
 
 export const fetchAllCategories = () => {
   return dispatch => {
-    GetWithUrl(API + "/categories/get")
+    GetWithUrl(API + "/categories/getAll")
       .then(response => {
         return response.json();
       })

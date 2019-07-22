@@ -7,6 +7,7 @@ import {
   DeleteWithUrl,
   PutWithUrlBody
 } from "../../services/url-helper";
+import { isNullOrUndefined } from "util";
 
 /* Action Types */
 
@@ -68,7 +69,11 @@ export const getProductListWithCategory = (categoryIds) => {
     PostWithUrlBody(API + "/products/getByCategory/", categoryIds)
       .then(response => response.json())
       .then(response => {
-        dispatch(saveProductList(response));
+        if(isNullOrUndefined(response.status) || (response.status >= 200 && response.status < 300)) {
+          dispatch(saveProductList(response));
+        } else {
+          console.log("Error when getProductListWithCategory ", response);
+        }
       })
       .catch(error => console.log("Error when fetching product list\n", error));
   };

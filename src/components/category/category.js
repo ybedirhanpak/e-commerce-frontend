@@ -15,10 +15,10 @@ export default class Category extends Component {
   generateSection = (index) => {
     const subheaderPath = `/show/${this.props.mainCategory.path}/${this.props.sections[index].header.path}/`;
     return (
-      <div>
+      <>
         <Link to={subheaderPath}> <li className="dropdown-header">{this.props.sections[index].header.name}</li> </Link>
         {this.generateSubCategories(this.props.sections[index])}
-      </div>
+      </>
     )
   } 
 
@@ -47,7 +47,7 @@ export default class Category extends Component {
           {/* Main Hedaer */}
           {this.props.mainCategory.name} <b className="caret" />
           </a>
-        <ul className="dropdown-menu dropdown-menu-large row">
+        <ul className="dropdown-menu dropdown-menu-large row category">
           <li className="col-sm-3">
             <ul>
               {/* Section A */}

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import './navigation-bar.css'
 
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+//Redux
+import { connect } from "react-redux";
+import { fetchAllCategories } from "../../redux/category/actions";
 
 //Components
 import Category from "../category/category";
@@ -10,7 +12,12 @@ import Category from "../category/category";
 import { Link } from 'react-router-dom';
 import LoadingSpinner from "../loading-spinner/loading-spinner";
 
-export default class NavigationBar extends Component {
+class NavigationBar extends Component {
+
+  componentDidMount() {
+    this.props.fetchAllCategories();
+  }
+
   generateCategories = () => {
     if(this.props.fetchInProgress) {
       return(
@@ -71,3 +78,16 @@ export default class NavigationBar extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    categories: state.category.categories,
+    fetchInProgress: state.category.fetchInProgress
+  };
+};
+
+const mapDispatchToProps = {
+  fetchAllCategories
+};
+
+
+export default connect (mapStateToProps, mapDispatchToProps)(NavigationBar);

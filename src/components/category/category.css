@@ -25,7 +25,7 @@
 .dropdown-menu-large > li ul > li > a:hover,
 .dropdown-menu-large > li ul > li > a:focus {
     text-decoration: none;
-    color: #262626;
+    color: #555555;
     background-color: #f5f5f5;
 }
 .dropdown-menu-large .disabled > a,
@@ -45,6 +45,16 @@ color: #999999;
     color: #D10024;
     font-size: 18px;
 }
+
+.category > li > ul > li > a {
+    color: #555555;
+}
+
+.category > li > ul > li > a:hover {
+    color: #D10024;
+}
+
+
 @media (max-width: 768px) {
     .dropdown-menu-large {
         margin-left: 0 ;
