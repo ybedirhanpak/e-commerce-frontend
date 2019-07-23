@@ -56,7 +56,7 @@ class ProductCard extends React.Component {
       <div>
         <div className="product">
           <div className="product-img">
-            <Image width={240} height={240} src={product.imgSource} alt="" />
+            <Image width={240} height={240} src={product.imgSource} alt="Product" />
             <div className="product-label">
               {product.discount && (
                 <span className="sale">-{product.discount}</span>
