@@ -10,9 +10,7 @@ class ProductTab extends Component {
       reviewerMail: "",
       reviewContent: "",
       rating: 0,
-      currentBlock: 3,
-      reviewStarCount: [0, 0, 0, 0, 0, 0],
-      average: 0.0
+      currentBlock: 3
     };
     this.setValue = this.setValue.bind(this);
     this.submitReview = this.submitReview.bind(this);
@@ -23,31 +21,15 @@ class ProductTab extends Component {
     this.createStarAverage = this.createStarAverage.bind(this);
   }
 
-  componentDidMount() {
-    let sum = 0;
-    let tmp = [0, 0, 0, 0, 0, 0]
-    this.props.product.reviews.map(star => {
-      tmp.slice(star.numberOfStars, 1, tmp[star.numberOfStars]++);
-      sum += star.numberOfStars
-    })
-
-
-    this.setState({
-      average: sum / this.props.product.reviews.length,
-      reviewStarCount: tmp
-    })
-  }
-
-  createStarAverage = () => {
+  createStarAverage = (average,reviewStarCount) => {
     let div = []
     let children = []
     let divInside, ul = []
     for (let i = 0; i < 1; i++) {
-
-      for (let j = 0; j < Math.round(this.state.average); j++) {
+      for (let j = 0; j < Math.round(average); j++) {
         children.push(<i className="fa fa-star"></i>)
       }
-      for (let k = this.state.average; k < 5; k++) {
+      for (let k = average; k < 5; k++) {
         children.push(<i className="fa fa-star-o"></i>)
       }
 
@@ -63,9 +45,9 @@ class ProductTab extends Component {
           <i className="fa fa-star" />
         </div>
         <div className="rating-progress">
-          <div style={{ width: (this.state.reviewStarCount[5]/this.props.product.reviews.length)*100+"%" }} />
+          <div style={{ width: (reviewStarCount[5]/this.props.product.reviews.length)*100+"%" }} >{(reviewStarCount[5]/this.props.product.reviews.length)*100} </div>
         </div>
-        <span className="sum">{this.state.reviewStarCount[5]}</span>
+        <span className="sum">{reviewStarCount[5]}</span>
       </li>
       <li>
         <div className="rating-stars">
@@ -76,9 +58,9 @@ class ProductTab extends Component {
           <i className="fa fa-star-o" />
         </div>
         <div className="rating-progress">
-          <div style={{ width: (this.state.reviewStarCount[4]/this.props.product.reviews.length)*100+"%" }} />
+          <div style={{ width: (reviewStarCount[4]/this.props.product.reviews.length)*100+"%" }} />
         </div>
-        <span className="sum">{this.state.reviewStarCount[4]}</span>
+        <span className="sum">{reviewStarCount[4]}</span>
       </li>
       <li>
         <div className="rating-stars">
@@ -89,9 +71,9 @@ class ProductTab extends Component {
           <i className="fa fa-star-o" />
         </div>
         <div className="rating-progress">
-          <div style={{ width: (this.state.reviewStarCount[3]/this.props.product.reviews.length)*100+"%" }} />
+          <div style={{ width: (reviewStarCount[3]/this.props.product.reviews.length)*100+"%" }} />
         </div>
-        <span className="sum">{this.state.reviewStarCount[3]}</span>
+        <span className="sum">{reviewStarCount[3]}</span>
       </li>
       <li>
         <div className="rating-stars">
@@ -102,9 +84,9 @@ class ProductTab extends Component {
           <i className="fa fa-star-o" />
         </div>
         <div className="rating-progress">
-          <div style={{ width: (this.state.reviewStarCount[2]/this.props.product.reviews.length)*100+"%" }}/>
+          <div style={{ width: (reviewStarCount[2]/this.props.product.reviews.length)*100+"%" }}/>
         </div>
-        <span className="sum">{this.state.reviewStarCount[2]}</span>
+        <span className="sum">{reviewStarCount[2]}</span>
       </li>
       <li>
         <div className="rating-stars">
@@ -115,9 +97,9 @@ class ProductTab extends Component {
           <i className="fa fa-star-o" />
         </div>
         <div className="rating-progress">
-          <div style={{ width: (this.state.reviewStarCount[1]/this.props.product.reviews.length)*100+"%" }}/>
+          <div style={{ width: (reviewStarCount[1]/this.props.product.reviews.length)*100+"%" }}/>
         </div>
-        <span className="sum">{this.state.reviewStarCount[1]}</span>
+        <span className="sum">{reviewStarCount[1]}</span>
       </li>
       <li>
         <div className="rating-stars">
@@ -128,16 +110,16 @@ class ProductTab extends Component {
           <i className="fa fa-star-o" />
         </div>
         <div className="rating-progress">
-          <div style={{ width: (this.state.reviewStarCount[0]/this.props.product.reviews.length)*100+"%" }} />
+          <div style={{ width: (reviewStarCount[0]/this.props.product.reviews.length)*100+"%" }} />
         </div>
-        <span className="sum">{this.state.reviewStarCount[0]}</span>
+        <span className="sum">{reviewStarCount[0]}</span>
       </li>
     </ul>)
 
     div.push(
     <div id="rating">
     <div className="rating-avg">
-      <span>{this.state.average.toFixed(1)}</span>
+      <span>{average.toFixed(1)}</span>
       <div className="rating-stars">
         {children}
       </div>
@@ -145,9 +127,6 @@ class ProductTab extends Component {
     {ul}
     </div>
 )
-
-
-
     return div
   }
 
@@ -170,6 +149,7 @@ class ProductTab extends Component {
   showReviews = () => {
     let review = this.props.product.reviews;
     let element = [];
+    let comments = [];
     for (let i = this.state.currentBlock - 3; i < this.state.currentBlock; i++) {
       if (i < 0) {
         i = 0;
@@ -201,7 +181,7 @@ class ProductTab extends Component {
   handleRightReview = () => {
     let newBlock = this.state.currentBlock + 3;
     if (newBlock > this.props.product.reviews.length) {
-      newBlock = 3;
+      newBlock = this.props.product.reviews.length-newBlock;
     }
     this.setState({ currentBlock: newBlock })
   }
@@ -220,7 +200,7 @@ class ProductTab extends Component {
     this.setState({ [name]: value });
   }
 
-  submitReview = (event) => {
+  submitReview = (event,average) => {
     var currentDate = new Date();
     var date = currentDate.getDate();
     var month = currentDate.getMonth(); //Be careful! January is 0 not 1
@@ -235,7 +215,7 @@ class ProductTab extends Component {
     };
     const product = {
       ...this.props.product,
-      stars: Math.round(this.state.average),
+      stars: Math.round(average),
       reviews: [...this.props.product.reviews, review]
     };
     this.props.updateProduct(this.props.product.id, product);
@@ -243,6 +223,15 @@ class ProductTab extends Component {
   }
 
   render() {
+    let commentStarCount = [0,0,0,0,0,0]
+    let sum = 0;
+    this.props.product.reviews.map(star => {
+      commentStarCount.slice(star.numberOfStars, 1, commentStarCount[star.numberOfStars]++);
+      sum += star.numberOfStars
+    })
+    const average = sum/this.props.product.reviews.length
+
+
     return (
       <div id="product-tab">
         {/* Navigation */}
@@ -290,7 +279,7 @@ class ProductTab extends Component {
               {/* Rating */}
               <div className="col-md-3">
                 
-                  {this.createStarAverage()}
+                  {this.createStarAverage(average,commentStarCount)}
                 
               </div>
               {/* Reviews */}
@@ -385,7 +374,7 @@ class ProductTab extends Component {
                         <label for="star1" />
                       </div>
                     </div>
-                    <button className="primary-btn" onClick={this.submitReview}>
+                    <button className="primary-btn" onClick={(event) => this.submitReview(event,average)}>
                       Submit
                     </button>
                   </form>

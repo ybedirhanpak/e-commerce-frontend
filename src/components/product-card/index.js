@@ -108,7 +108,6 @@ class ProductCard extends React.Component {
             </h4>
             {/* Rating */}
             {this.createAverageOfStar()}
-            {this.props.product.stars}
             {/* Buttons */}
             <div className="product-btns">
               <button className="add-to-wishlist">
