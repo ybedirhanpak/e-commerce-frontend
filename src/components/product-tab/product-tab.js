@@ -24,7 +24,6 @@ class ProductTab extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.currentProduct)
     let sum = 0;
     let tmp = [0, 0, 0, 0, 0, 0]
     this.props.product.reviews.map(star => {
@@ -32,7 +31,6 @@ class ProductTab extends Component {
       sum += star.numberOfStars
     })
 
-    console.log("tmp", tmp)
 
     this.setState({
       average: sum / this.props.product.reviews.length,
@@ -47,7 +45,6 @@ class ProductTab extends Component {
     for (let i = 0; i < 1; i++) {
 
       for (let j = 0; j < Math.round(this.state.average); j++) {
-        console.log("girdi")
         children.push(<i className="fa fa-star"></i>)
       }
       for (let k = this.state.average; k < 5; k++) {
