@@ -14,7 +14,7 @@ export default class ProductDetails extends Component {
 						<i className="fa fa-star"></i>
 						<i className="fa fa-star-o"></i>
 					</div>
-					<a className="review-link" href="add-review">10 Review(s) | Add your review</a>
+					<a className="review-link" href="add-review">{this.props.product.reviews.length} Review(s) | Add your review</a>
 				</div>
 				<div>
 					<h3 className="product-price">{'$'+ product.price }<del className="product-old-price">{'$'+ product.oldPrice}</del></h3>

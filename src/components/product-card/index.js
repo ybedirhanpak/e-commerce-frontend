@@ -14,6 +14,25 @@ import Image from "react-image-resizer";
 //"./img/product01.png"
 
 class ProductCard extends React.Component {
+  
+  createAverageOfStar = () => {
+    let children = []
+    let div = []
+
+    for (let i = 0; i < this.props.product.stars; i++) {
+      children.push(<i className="fa fa-star" />)
+    }
+    for (let j = this.props.product.stars; j < 5; j++) {
+      children.push(<i className="fa fa-star-o" />)
+    }
+    div.push(<div className="product-rating">
+      {children}
+    </div>)
+  console.log(this.props.product.stars)
+    return div
+
+  }
+  
   handleAddtoChart = () => {
     this.props.addtoCART({
       id:this.props.product.id,
@@ -88,13 +107,8 @@ class ProductCard extends React.Component {
               </del>
             </h4>
             {/* Rating */}
-            <div className="product-rating">
-              <i className="fa fa-star" />
-              <i className="fa fa-star" />
-              <i className="fa fa-star" />
-              <i className="fa fa-star" />
-              <i className="fa fa-star" />
-            </div>
+            {this.createAverageOfStar()}
+            {this.props.product.stars}
             {/* Buttons */}
             <div className="product-btns">
               <button className="add-to-wishlist">
