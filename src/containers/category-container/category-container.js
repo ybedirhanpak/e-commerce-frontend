@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './category-container.css'
 
 //Components
 import Store from '../../components/store/store';

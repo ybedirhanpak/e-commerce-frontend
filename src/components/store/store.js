@@ -33,12 +33,12 @@ export default class Store extends Component {
   render() {
     console.log("store props", this.props);
     return (
-      <div>
+      <>
         <StoreTopFilter />
         <div className="row">
           {this.createProducts()}
         </div>
-      </div>
+      </>
     );
   }
 }
