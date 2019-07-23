@@ -207,11 +207,11 @@ class ProductTab extends Component {
     var year = currentDate.getFullYear();
     var dateString = date + "-" + (month + 1) + "-" + year;
     const review = {
-      userFullName: this.state.reviewerName,
-      userMail: this.state.reviewerMail,
-      reviewContent: this.state.reviewContent,
-      commentTime: dateString,
-      numberOfStars: this.state.rating
+      UserFullName: this.state.reviewerName,
+      UserMail: this.state.reviewerMail,
+      ReviewContent: this.state.reviewContent,
+      CommentTime: dateString,
+      NumberOfStars: this.state.rating
     };
     const product = {
       ...this.props.product,

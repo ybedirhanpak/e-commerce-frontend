@@ -10,7 +10,7 @@ class MyAccountContainer extends Component {
     render() {
         if(this.props.user.currentUser) {
             return (
-                <div class="container">
+                <div class="container" style={{paddingTop:20}}>
                     <div class="row">
                         <div class="col-sm-3 col-md-3">
                             <div class="panel-group" id="accordion">

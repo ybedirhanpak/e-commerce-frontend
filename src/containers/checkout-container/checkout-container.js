@@ -9,7 +9,7 @@ class CheckoutContainer extends Component {
     render() {
         console.log("checkout container props", this.props);
         return (
-            <div className="container">
+            <div className="container" style={{padding:40}}>
                 <div class="row">
                 <div class="col-md-7">
                 <Checkoutadress />               
