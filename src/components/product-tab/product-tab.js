@@ -26,7 +26,6 @@ class ProductTab extends Component {
     let children = []
     let divInside, ul = []
     for (let i = 0; i < 1; i++) {
-
       for (let j = 0; j < Math.round(average); j++) {
         children.push(<i className="fa fa-star"></i>)
       }
