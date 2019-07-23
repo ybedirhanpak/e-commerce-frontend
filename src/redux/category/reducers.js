@@ -8,10 +8,7 @@ const initialState = {
 function categoriesReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SAVE_CATEGORIES:
-      return { ...state, 
-        categories: action.payload,
-        fetchInProgress: false
-       };
+      return { ...state, categories: action.payload, fetchInProgress: false };
     default:
       return state;
   }
