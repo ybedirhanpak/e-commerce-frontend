@@ -3,18 +3,22 @@
 
 const ADD_TOCART = "ADD_TOCART";
 const DELETE_FROMCART = "DELETE_FROMCART";
+const DECREASE_FROMCART = "DECREASE_FROMCART";
 
 export const actionTypes = {
     ADD_TOCART,
-    DELETE_FROMCART
+    DELETE_FROMCART,
+    DECREASE_FROMCART
 };
 
 /* Action Creators */
 
 export const actionCreators = {
     addtoCART,
-    deletefromCART
+    deletefromCART,
+    decreasefromCART
 };
+
 
 function addtoCART(data) {
     return {
@@ -29,6 +33,9 @@ function deletefromCART(data) {
         payload: data
     };
 }
-
-
-
+function decreasefromCART(data){
+    return{
+        type:DECREASE_FROMCART,
+        payload:data
+    }
+}
