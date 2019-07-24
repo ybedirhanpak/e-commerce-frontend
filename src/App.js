@@ -43,7 +43,6 @@ export default class App extends Component {
           <BrowserRouter>
 
             {/* Main Header and Navigation Bar */}
-
             <MainHeader />
             <NavigationBar />
 
@@ -58,7 +57,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory" render={(props) => {
                 return(
                   <CategoryContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
@@ -66,7 +65,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader" render={(props) => {
                 return(
                   <CategoryContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
@@ -74,7 +73,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader/:subcategory" render={(props) => {
                 return(
                   <CategoryContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
@@ -82,7 +81,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader/:subcategory/:productId" render={(props) => {
                 return(
                   <ProductDetailedContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
