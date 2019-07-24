@@ -123,7 +123,7 @@ class CategoryContainer extends Component {
                     <div className="row">
                         <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
-                            <Filter/>
+                            <Filter currentCategories={categories}/>
                         </div>
                         <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}
@@ -145,14 +145,14 @@ const mapStateToProps = state => {
       apiProducts: state.product.productList,
       fetchInProgress: state.product.fetchInProgress
     };
-  };
+};
   
-  const mapDispatchToProps = {
+const mapDispatchToProps = {
     getProductList,
     getProductListWithCategory
-  };
+};
   
-  export default connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CategoryContainer);
+)(CategoryContainer);

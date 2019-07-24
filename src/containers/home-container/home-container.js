@@ -16,6 +16,7 @@ class HomeContainer extends Component {
     }
 
     render() {
+        console.log("home container props", this.props);
         const currentDate = new Date();
         const year = (currentDate.getMonth() === 11 && currentDate.getDate() > 23) ? currentDate.getFullYear() + 1 : currentDate.getFullYear();
         return (
@@ -24,7 +25,7 @@ class HomeContainer extends Component {
                     <div className="row">
                         <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
-                            <Filter/>
+                            {/* <Filter/> */}
                         </div>
                         <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}
