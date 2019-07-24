@@ -14,11 +14,13 @@ import { isNullOrUndefined } from "util";
 const INITIALIZE_FETCH_PRODUCT = "INITIALIZE_FETCH_PRODUCT";
 const SAVE_PRODUCT_LIST = "SAVE_PRODUCT_LIST";
 const SAVE_SINGLE_PRODUCT = "SAVE_SINGLE_PRODUCT";
+const UPDATE_FILTERS = "UPDATE_FILTERS"
 
 export const actionTypes = {
   INITIALIZE_FETCH_PRODUCT,
   SAVE_PRODUCT_LIST,
-  SAVE_SINGLE_PRODUCT
+  SAVE_SINGLE_PRODUCT,
+  UPDATE_FILTERS
 };
 
 /* Action Creators */
@@ -34,6 +36,13 @@ function saveProductList(productList) {
     type: SAVE_PRODUCT_LIST,
     payload: productList
   };
+}
+
+export function updateFilters(filters){
+  return{
+    type: UPDATE_FILTERS,
+    payload: filters
+  }
 }
 
 function saveSingleProduct(product) {
@@ -69,7 +78,7 @@ export const getProductListWithCategory = (categoryIds) => {
     PostWithUrlBody(API + "/products/getByCategory/", categoryIds)
       .then(response => response.json())
       .then(response => {
-        if(isNullOrUndefined(response.status) || (response.status >= 200 && response.status < 300)) {
+        if (isNullOrUndefined(response.status) || (response.status >= 200 && response.status < 300)) {
           dispatch(saveProductList(response));
         } else {
           console.log("Error when getProductListWithCategory ", response);
@@ -90,7 +99,7 @@ export const addProduct = body => {
 
 export const deleteProduct = id => {
   return dispatch => {
-    DeleteWithUrl(API + "/products/delete/"+ id)
+    DeleteWithUrl(API + "/products/delete/" + id)
       .then()
       .catch(error => console.log("Errow while deletin' a product\n", error));
   };
@@ -116,12 +125,12 @@ export const updateProduct = (id, body) => {
   return dispatch => {
     PutWithUrlBody(API + "/products/update/" + id, body)
       .then(response => {
-        if(response.status >= 200 && response.status < 300) {
+        if (response.status >= 200 && response.status < 300) {
           response.json().then(data => {
             console.log("data", data);
             dispatch(saveSingleProduct(data));
           })
-        }else {
+        } else {
           console.log("Error.", response);
         }
       })

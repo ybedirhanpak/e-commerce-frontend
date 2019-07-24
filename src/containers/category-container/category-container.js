@@ -65,6 +65,7 @@ class CategoryContainer extends Component {
     render() {
         const { mainCategory, subheader, subcategory, productId } = this.props.match.params;
         const categories = this.findCategoryWithPath(mainCategory, subheader, subcategory);
+        console.log("cateogyr container", this.props);
         return (
             <div className="category-container">
                 <BreadCrumb params={categories} productId={productId}/>
@@ -72,7 +73,7 @@ class CategoryContainer extends Component {
                     <div className="row">
                         <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
-                            <Filter/>
+                            <Filter url={this.props.match.url}/>
                         </div>
                         <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}

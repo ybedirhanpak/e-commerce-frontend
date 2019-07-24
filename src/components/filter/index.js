@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import SelectBox from "../select-box";
 import Box from '../city-dropdown/box'
 import './style.css'
+import PriceFilter from "../price-filter/price-filter"
 
 export default class index extends Component {
 
@@ -29,24 +30,8 @@ export default class index extends Component {
     return (
       <div className="aside-filter">
         <SelectBox data={this.categories} />
-
-        <div className="aside">
-          <h3 className="aside-title">Price</h3>
-          <div className="price-filter">
-            <div id="price-slider" />
-            <div className="input-number price-min">
-              <input id="price-min" type="number" />
-              <span className="qty-up">+</span>
-              <span className="qty-down">-</span>
-            </div>
-            <span>-</span>
-            <div className="input-number price-max">
-              <input id="price-max" type="number" />
-              <span className="qty-up">+</span>
-              <span className="qty-down">-</span>
-            </div>
-          </div>
-        </div>
+        <PriceFilter url={this.props.url}/>
+        
         
         <Box data={this.cities}/>
        
