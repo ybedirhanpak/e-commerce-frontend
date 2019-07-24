@@ -6,6 +6,10 @@ import { connect } from "react-redux";
 //Route
 import { Redirect, Link, Route } from 'react-router-dom';
 
+//changepassword
+import ChangePassword from '../../components/change-password/change-password'
+import OrdersPage from '../../components/orders-page/orders-page';
+
 class MyAccountContainer extends Component {
     render() {
         if(this.props.user.currentUser) {
@@ -117,7 +121,7 @@ class MyAccountContainer extends Component {
                         <div class="col-sm-9 col-md-9">
                             <div class="well">
                                 <Route path='/account/orders' render={() =>
-                                    <h1>Orders</h1>
+                                    <OrdersPage />
                                 } />
                                 <Route path='/account/addresses' render={() =>
                                     <h1>Addresses</h1>
@@ -126,7 +130,7 @@ class MyAccountContainer extends Component {
                                     <h1>Coupons</h1>
                                 } />
                                 <Route path='/account/change-password' render={() =>
-                                    <h1>Change Password</h1>
+                                    <ChangePassword />
                                 } />
                                 <Route path='/account/help' render={() =>
                                     <h1>Help</h1>
