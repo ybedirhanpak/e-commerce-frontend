@@ -4,6 +4,14 @@ const initialState = {
   productList: [],
   currentProduct: {},
   fetchInProgress: true,
+  filters: {
+    cities: [],
+    price: {
+      min: "",
+      max: ""
+    },
+    brands: []
+  }
 };
 
 function productReducer(state = initialState, action) {
@@ -25,6 +33,20 @@ function productReducer(state = initialState, action) {
         currentProduct: action.payload,
         fetchInProgress: false
       };
+    case actionTypes.UPDATE_FILTERS:
+      if (action.payload.type === "price") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            price: {
+              min: action.payload.priceFilter.min,
+              max: action.payload.priceFilter.max,
+            }
+          }
+        }
+      }
+      return state;
     default:
       return state;
   }
