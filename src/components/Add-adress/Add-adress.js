@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
-export default class AddAdress extends Component {
+import { connect } from 'react-redux'
+
+class AddAdress extends Component {
 	constructor(props){
 		super(props)
 		this.state={
@@ -64,3 +66,9 @@ export default class AddAdress extends Component {
         )
     }
 }
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(null, mapDispatchToProps) (AddAdress)

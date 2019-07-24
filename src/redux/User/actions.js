@@ -10,6 +10,8 @@ const RESET_LOGIN = 'RESET_LOGIN';
 const INITIALIZE_LOGIN = 'INITIALIZE_LOGIN';
 const COMPLETE_LOGIN = "COMPLETE_LOGIN";
 const LOGOUT = "LOGOUT";
+const ADD_ADDRESS = "ADD_ADDRESS"
+
 export const actionTypes = {
   RESET_REGISTER,
   INITIALIZE_REGISTER,
@@ -17,7 +19,8 @@ export const actionTypes = {
   RESET_LOGIN,
   INITIALIZE_LOGIN,
   COMPLETE_LOGIN,
-  LOGOUT
+  LOGOUT,
+  ADD_ADDRESS
 };
 
 /* Action Creators */
@@ -29,7 +32,8 @@ export const actionCreators = {
   resetLogin,
   initializeLogin,
   completeLogin,
-  logout
+  logout,
+  addAdress
 };
 
 function resetRegister() {
@@ -76,6 +80,13 @@ function logout() {
   };
 }
 
+function addAdress({firstName, lastName, email, address, city, country, zipCode, tel}) {
+  return{
+    type: ADD_ADDRESS,
+    payload: {firstName, lastName, email, address, city, country, zipCode, tel}
+  }
+}
+
 /* Api Call Functions */
 
 export const postUserRegister = body => {
@@ -109,3 +120,5 @@ export const postUserLogin = body => {
       .catch(error => console.log("Error when fetch register\n", error));
   };
 };
+
+
