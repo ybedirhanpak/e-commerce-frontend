@@ -6,6 +6,8 @@ import {
   apiDeleteCategory
 } from "../../redux/category/actions";
 
+import { generateLinkWithName } from "../../services/link-generator";
+
 class AddCategoryTop extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +26,7 @@ class AddCategoryTop extends Component {
     if (this.state.categoryInput !== "") {
       const category = {
         Name: this.state.categoryInput,
-        Path: this.state.categoryInput
+        Path: generateLinkWithName(this.state.categoryInput)
       };
       this.props.addCategory(category);
     }

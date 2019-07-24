@@ -6,6 +6,9 @@ import {
   apiDeleteCategory
 } from "../../redux/category/actions";
 
+import { generateLinkWithName } from "../../services/link-generator";
+import generate from "@babel/generator";
+
 class AddCategoryLeft extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +29,7 @@ class AddCategoryLeft extends Component {
     if (this.state.categoryInput !== "") {
       const category = {
         Name: this.state.categoryInput,
-        Path: this.state.categoryInput,
+        Path: generateLinkWithName(this.state.categoryInput),
         ParentId: this.props.parentId
       };
       this.props.addCategory(category);

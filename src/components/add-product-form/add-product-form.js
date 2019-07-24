@@ -4,6 +4,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchAllCategories } from "../../redux/category/actions";
 import { addProduct } from "../../redux/product/actions";
+import { fetchAllCities } from "../../redux/city/actions";
+import { fetchAllBrands } from "../../redux/brand/actions";
 
 //Components
 import MultiSelect from "@khanacademy/react-multi-select";
@@ -38,6 +40,11 @@ class AddProductForm extends React.Component {
   }
 
   render() {
+    console.log(this.state);
+    let cities = this.props.cityList.map(element => ({
+      label: element.name,
+      value: element.id
+    }));
     let mainCategories = this.props.categories.filter(c => c.parentId === null);
     mainCategories = mainCategories.map(element => (
       <option
@@ -77,6 +84,12 @@ class AddProductForm extends React.Component {
         id={element.id}
         onClick={this.selectThirdCategory}
       >
+        {element.name}
+      </option>
+    ));
+
+    let brands = this.props.brandList.map(element => (
+      <option onClick={this.selectBrand} value={element.id}>
         {element.name}
       </option>
     ));
@@ -192,18 +205,7 @@ class AddProductForm extends React.Component {
             <div className="form-group">
               <label htmlFor="select1">Brand</label>
               <select name="category1" className="form-control" multiple>
-                <option onClick={this.selectBrand} value="Mavi">
-                  Mavi
-                </option>
-                <option onClick={this.selectBrand} value="J&J">
-                  J&J
-                </option>
-                <option onClick={this.selectBrand} value="H&M">
-                  H&M
-                </option>
-                <option onClick={this.selectBrand} value="LOFT">
-                  LOFT
-                </option>
+                {brands}
               </select>
             </div>
 
@@ -259,9 +261,11 @@ class AddProductForm extends React.Component {
     });
   }
   componentDidMount() {
-    if (this.props.categories === null) {
+    if (this.props.categories === undefined) {
       this.props.fetchAllCategories();
     }
+    this.props.fetchAllCities();
+    this.props.fetchAllBrands();
   }
   selectMainCategory(event) {
     const id = event.target.id;
@@ -328,12 +332,11 @@ class AddProductForm extends React.Component {
   };
 
   addProduct = () => {
-    console.log("here");
     let count =
       ((Number(this.state.oldPrice) - Number(this.state.price)) /
         Number(this.state.oldPrice)) *
       100;
-    console.log(count);
+
     let product = {
       name: this.state.productName,
       imgSource: this.state.imgSource,
@@ -357,13 +360,17 @@ class AddProductForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.category.categories
+    categories: state.category.categories,
+    cityList: state.city.cityList,
+    brandList: state.brand.brandList
   };
 };
 
 const mapDispatchToProps = {
   fetchAllCategories,
-  addProduct
+  addProduct,
+  fetchAllCities,
+  fetchAllBrands
 };
 
 export default connect(
@@ -395,24 +402,5 @@ const sizes = [
   {
     label: "XLarge",
     value: "XLarge"
-  }
-];
-
-const cities = [
-  {
-    label: "Istanbul",
-    value: "Istanbul"
-  },
-  {
-    label: "Hatay",
-    value: "Hatay"
-  },
-  {
-    label: "Ankara",
-    value: "Ankara"
-  },
-  {
-    label: "Izmir",
-    value: "Izmir"
   }
 ];
