@@ -52,24 +52,29 @@ export const actionCreators = {
 /* Api Call Functions */
 
 export const getProductList = () => {
+  console.log("get product");
   return dispatch => {
-    dispatch(initializeFetchProduct())
+    dispatch(initializeFetchProduct());
     GetWithUrl(API + "/products/getAll")
       .then(response => response.json())
       .then(response => {
+        console.log(response);
         dispatch(saveProductList(response));
       })
       .catch(error => console.log("Error when fetching product list\n", error));
   };
 };
 
-export const getProductListWithCategory = (categoryIds) => {
+export const getProductListWithCategory = categoryIds => {
   return dispatch => {
-    dispatch(initializeFetchProduct())
+    dispatch(initializeFetchProduct());
     PostWithUrlBody(API + "/products/getByCategory/", categoryIds)
       .then(response => response.json())
       .then(response => {
-        if(isNullOrUndefined(response.status) || (response.status >= 200 && response.status < 300)) {
+        if (
+          isNullOrUndefined(response.status) ||
+          (response.status >= 200 && response.status < 300)
+        ) {
           dispatch(saveProductList(response));
         } else {
           console.log("Error when getProductListWithCategory ", response);
@@ -80,17 +85,21 @@ export const getProductListWithCategory = (categoryIds) => {
 };
 
 export const addProduct = body => {
+  console.log(body);
   return dispatch => {
     PostWithUrlBody(API + "/products/create", body)
       .then(response => response.json())
-      //.then(dispatch(getProductList()))
+      .then(response => {
+        console.log(response);
+        dispatch(getProductList());
+      })
       .catch(error => console.log("Error while adding a new product\n", error));
   };
 };
 
 export const deleteProduct = id => {
   return dispatch => {
-    DeleteWithUrl(API + "/products/delete/"+ id)
+    DeleteWithUrl(API + "/products/delete/" + id)
       .then()
       .catch(error => console.log("Errow while deletin' a product\n", error));
   };
@@ -112,16 +121,16 @@ export const getProduct = id => {
 };
 
 export const updateProduct = (id, body) => {
-  console.log("body", body)
+  console.log("body", body);
   return dispatch => {
     PutWithUrlBody(API + "/products/update/" + id, body)
       .then(response => {
-        if(response.status >= 200 && response.status < 300) {
+        if (response.status >= 200 && response.status < 300) {
           response.json().then(data => {
             console.log("data", data);
             dispatch(saveSingleProduct(data));
-          })
-        }else {
+          });
+        } else {
           console.log("Error.", response);
         }
       })
