@@ -329,13 +329,15 @@ class AddProductForm extends React.Component {
 
   addProduct = () => {
     console.log("here");
+    let count =
+      ((Number(this.state.oldPrice) - Number(this.state.price)) /
+        Number(this.state.oldPrice)) *
+      100;
+    console.log(count);
     let product = {
       name: this.state.productName,
       imgSource: this.state.imgSource,
-      discount: String(
-        (Number(this.state.oldPrice) - Number(this.state.price)) /
-          Number(this.state.oldPrice)
-      ),
+      discount: "%" + String(parseInt(count, 10)),
       isNew: true,
       category: this.state.selectedThirdCategory,
       price: this.state.price,
@@ -370,6 +372,10 @@ export default connect(
 )(AddProductForm);
 
 const sizes = [
+  {
+    label: "Fix Size",
+    value: "FixSize"
+  },
   {
     label: "XSmall",
     value: "XSmall"
