@@ -7,7 +7,6 @@ import {
 } from "../../redux/category/actions";
 
 import { generateLinkWithName } from "../../services/link-generator";
-import generate from "@babel/generator";
 
 class AddCategoryLeft extends Component {
   constructor(props) {
