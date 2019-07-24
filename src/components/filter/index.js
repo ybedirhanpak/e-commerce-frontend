@@ -1,38 +1,19 @@
 import React, { Component } from "react";
+import './style.css'
 
+//Components
 import SelectBox from "../select-box";
 import Box from '../city-dropdown/box'
-import './style.css'
-import PriceFilter from "../price-filter/price-filter"
+import CategorySelectBox from '../category-select-box/category-select-box';
 
-export default class index extends Component {
-
-  cities= [
-    {
-        "name": "İstanbul"
-    },
-    {
-        "name": "Hatay"
-    },
-    {
-        "name": "Ankara"
-    },
-    {
-        "name": "Bursa"
-    },
-    {
-        "name": "İzmir"
-    }
-]
-  
-
+export default class Filter extends Component {
   render() {
     return (
       <div className="aside-filter">
+        <CategorySelectBox data={this.categories} currentCategories={this.props.currentCategories} />
         <SelectBox data={this.categories} />
         <PriceFilter url={this.props.url}/>
-        
-        
+               
         <Box data={this.cities}/>
        
         <SelectBox data={this.brands} />
@@ -40,6 +21,8 @@ export default class index extends Component {
       </div>
     );
   }
+
+
   categories = {
     title: "CATEGORIES",
     options: [
@@ -98,4 +81,22 @@ export default class index extends Component {
       }
     ]
   };
+
+  cities= [
+    {
+        "name": "İstanbul"
+    },
+    {
+        "name": "Hatay"
+    },
+    {
+        "name": "Ankara"
+    },
+    {
+        "name": "Bursa"
+    },
+    {
+        "name": "İzmir"
+    }
+]
 }
