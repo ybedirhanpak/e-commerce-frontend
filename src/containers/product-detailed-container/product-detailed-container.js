@@ -12,11 +12,53 @@ import ProductTab from "../../components/product-tab/product-tab";
 import BreadCrumb from '../../components/breadcrumb/breadcrumb'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
 
+/**
+ * CategoryContainer is used when application is on this path:
+ * - /show/:mainCategory/:subheader/:subcategory/:productId
+ * 
+ * props: {
+ *  match: {
+ *      params: {
+ *          mainCategory,
+ *          subheader,
+ *          subcategory,
+ *          productId,
+ *      },
+ *      url,    
+ *  }
+ * }
+ * 
+ * Example: "http://localhost:3000/show/erkek/giyim/t-shirt/5d37fe781f3d7773f2aa3a57"
+ * 
+ * mainCategory: "erkek"
+ * subheader: "giyim"
+ * subcategory: "t-shirt"
+ * productId: "5d37fe781f3d7773f2aa3a57"
+ * url: "/show/erkek/giyim/t-shirt"
+ * 
+ */
 class ProductDetailedContainer extends Component {
+
+  /**
+  * Executed when component is mounted
+  */
   componentDidMount() {
     this.props.getProduct(this.props.match.params.productId);
   }
 
+  /**
+   * Executed when another productDetailedContainer is used insted of current one.
+   * @param {*} prevProps is previous productDetailedContainer's props.
+   */
+  componentDidUpdate(prevProps) {
+    if(this.props.match.url !== prevProps.match.url) {
+      this.props.getProduct(this.props.match.params.productId);
+    }
+  }
+
+  /**
+   * Creates category objects according to the path given.
+   */
   findCategoryWithPath = (mainCategory=null, subheader=null, subcategory=null) => {
     //All categories without hierarchy
     const allCategories = this.props.apiCategories;
@@ -34,10 +76,12 @@ class ProductDetailedContainer extends Component {
 
   render() {
     console.log("Product detailed props", this.props)
-
+    // Category paths that are fetched from url
     const { mainCategory, subheader, subcategory } = this.props.match.params;
+    // Category objects created from paths
     const categories = this.findCategoryWithPath(mainCategory, subheader, subcategory);
 
+    // If product hasn't been fetched yet, show loading spinner
     if(this.props.fetchInProgress) {
       return(
         <div className="container" style={{height:200}}>
@@ -45,9 +89,10 @@ class ProductDetailedContainer extends Component {
         </div>
       )
     }
+    //If product is fetched show product details
     return (
       <div className="product-detailed">
-        <BreadCrumb params={categories} product={this.props.product}/>
+        <BreadCrumb categories={categories} product={this.props.product}/>
         <div className="container" style={{padding:40}}>
             <div className="row">
                 <div className="col-md-7">
