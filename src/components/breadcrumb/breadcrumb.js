@@ -3,9 +3,45 @@ import './breadcrumb.css'
 
 import { Link } from 'react-router-dom';
 
+/**
+ * Breadcrumb, used in CategoryContainer and ProductDetailed
+ * props: {
+ * 	categories: {
+ * 		_mainCategory, 
+ * 		_subcategory, 
+ * 		_subheader
+ * 	},
+ * 	product: {
+ * 		name
+ * 	}
+ * }
+ * 
+ * _mainCategory, _subcategory, _subheader: {
+ * 	name,
+ * 	path,
+ * }
+ * 
+ * 
+ * Example: "http://localhost:3000/show/Erkek/Giyim"
+ * 
+ * _mainCategory: {
+ * 	name: Erkek,
+ * 	path: erkek,
+ * }
+ * 
+ * _subheader: {
+ * 	name: Giyim,
+ * 	path: giyim,
+ * }
+ * 
+ * _subcategory: null
+ * 
+ */
 export default class Breadcrumb extends Component {
     render() {
-		const { _mainCategory, _subcategory, _subheader } = this.props.params;
+		//Get categories from props
+		const { _mainCategory, _subcategory, _subheader } = this.props.categories;
+		//Get product from props
 		const product = this.props.product;
         return (
         <div id="breadcrumb" className="breadcrumb">

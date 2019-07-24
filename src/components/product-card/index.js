@@ -70,7 +70,6 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    console.log("productprops",this.props)
     const product = this.props.product;
     return (
       <div>

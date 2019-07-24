@@ -31,8 +31,8 @@ import NoPageContainer from "./containers/no-page-container/no-page-container";
 import CategoryContainer from './containers/category-container/category-container';
 import AdminPanelContainer from "./containers/admin-panel-container/admin-panel-container";
 import Checkoutcontainer from "./containers/checkout-container/checkout-container";
-
 import AddCategoryContainer from "./containers/add-category-container/add-category-container"
+
 
 export default class App extends Component {
 
@@ -43,7 +43,6 @@ export default class App extends Component {
           <BrowserRouter>
 
             {/* Main Header and Navigation Bar */}
-
             <MainHeader />
             <NavigationBar />
 
@@ -58,7 +57,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory" render={(props) => {
                 return(
                   <CategoryContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
@@ -66,7 +65,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader" render={(props) => {
                 return(
                   <CategoryContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
@@ -74,7 +73,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader/:subcategory" render={(props) => {
                 return(
                   <CategoryContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
@@ -82,7 +81,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader/:subcategory/:productId" render={(props) => {
                 return(
                   <ProductDetailedContainer 
-                  {...props}
+                  match={props.match}
                   />
                 )
               }}/>
@@ -115,6 +114,7 @@ export default class App extends Component {
               <Route path="/checkout" component={Checkoutcontainer} />
               <Route path="/add-category" component={AddCategoryContainer} />
               <Route component={NoPageContainer}/>
+
 
             </Switch>
 
