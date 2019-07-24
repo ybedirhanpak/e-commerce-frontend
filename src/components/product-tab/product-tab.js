@@ -120,7 +120,7 @@ class ProductTab extends Component {
       div.push(
         <div id="rating">
           <div className="rating-avg">
-            <span>{(isNaN(average.toFixed(1) ? "" : average.toFixed(1)))}</span>
+            <span>{average.toFixed(1)}</span>
             <div className="rating-stars">
               {children}
             </div>
@@ -225,12 +225,14 @@ class ProductTab extends Component {
       CommentTime: dateString,
       NumberOfStars: this.state.rating
     };
-    const _reviews = isNullOrUndefined(this.props.product.reviews) ? [review] : [...this.props.product.reviews, review]
+    console.log("average",Math.round(average))
+    console.log("rating",this.state.rating)
     const product = {
       ...this.props.product,
-      stars: Math.round(average),
-      reviews: _reviews
+      stars: average.toFixed(2),
+      reviews: [...this.props.product.reviews,review]
     };
+    console.log("product",product)
     this.props.updateProduct(this.props.product.id, product);
     event.preventDefault();
   }
@@ -240,15 +242,18 @@ class ProductTab extends Component {
     let sum = 0
     let average = 0
 
-    if (this.props.product.reviews !== undefined && this.props.product.reviews !== null) {
-      this.props.product.reviews.map(star => {
-        commentStarCount.slice(star.numberOfStars, 1, commentStarCount[star.numberOfStars]++);
-        sum += star.numberOfStars
-      })
-      average = sum / this.props.product.reviews.length
-    } else {
-      
+    
+    this.props.product.reviews.map(star => {
+      commentStarCount.slice(star.numberOfStars, 1, commentStarCount[star.numberOfStars]++);        
+      sum += star.numberOfStars
+    })
+
+    if(this.props.product.reviews.length<=0){
+      average=0
+    }else{
+      average= sum/this.props.product.reviews.length
     }
+    
     return (
       <div id="product-tab">
         {/* Navigation */}
