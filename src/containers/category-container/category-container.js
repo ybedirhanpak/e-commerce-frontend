@@ -65,17 +65,25 @@ class CategoryContainer extends Component {
         this.loadProducts(_mainCategory, _subheader, _subcategory);
     }
 
+    findIdWithPath = (path) => {
+        return this.props.apiCategories.filter(x => x.path === path)[0];
+    }
+
+    findIdWithPathAndParent = (path, parentId) => {
+        return this.props.apiCategories.filter(x => x.path === path && x.parentId === parentId)[0];
+    }
+
     /**
      * Creates category objects according to the path given.
      */
     findCategoryWithPath = (mainCategory=null, subheader=null, subcategory=null) => {
         //All categories without hierarchy
         const allCategories = this.props.apiCategories;
-        const _mainCategory = (mainCategory !== null) ? allCategories.filter(x => x.path === mainCategory)[0] : null;
+        const _mainCategory = (mainCategory !== null) ? this.findIdWithPath(mainCategory) : null;
         const _subheader = (_mainCategory !== null && subheader !== null) ? 
-         allCategories.filter(x => x.path === subheader && x.parentId === _mainCategory.id)[0] : null;
+            this.findIdWithPathAndParent(subheader, _mainCategory.id) : null;
         const _subcategory = (_subheader !== null && subcategory !== null) ? 
-          allCategories.filter(x=> x.path === subcategory && x.parentId === _subheader.id)[0] : null;
+            this.findIdWithPathAndParent(subcategory, _subheader.id) : null;
         return {
           _mainCategory,
           _subheader,

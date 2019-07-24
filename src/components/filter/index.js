@@ -5,19 +5,16 @@ import './style.css'
 import SelectBox from "../select-box";
 import Box from '../city-dropdown/box'
 import CategorySelectBox from '../category-select-box/category-select-box';
+import PriceFilter from '../price-filter/price-filter';
 
 export default class Filter extends Component {
   render() {
     return (
       <div className="aside-filter">
         <CategorySelectBox data={this.categories} currentCategories={this.props.currentCategories} />
-        <SelectBox data={this.categories} />
         <PriceFilter url={this.props.url}/>
-               
         <Box data={this.cities}/>
-       
         <SelectBox data={this.brands} />
-        
       </div>
     );
   }

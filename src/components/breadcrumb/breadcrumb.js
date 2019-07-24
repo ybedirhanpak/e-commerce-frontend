@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './breadcrumb.css'
 
 import { Link } from 'react-router-dom';
+import { isNullOrUndefined } from 'util';
 
 /**
  * Breadcrumb, used in CategoryContainer and ProductDetailed
@@ -50,7 +51,7 @@ export default class Breadcrumb extends Component {
 					<div className="col-md-12">
 						<ul className="breadcrumb-tree">
 							{
-								(product !== undefined) ?
+								(!isNullOrUndefined(product)) ?
 								(
 									/**** 	HOME / MAIN CATEGORY / SUB HEADER / SUBCATEGORY / PRODUCT 	****/
 									<div>
@@ -60,7 +61,7 @@ export default class Breadcrumb extends Component {
 										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}/${_subcategory.path}`}>{_subcategory.name}</Link></li>
 										<li className="active">{product.name}</li>
 									</div>
-								) : (_subcategory !== null) ?
+								) : (!isNullOrUndefined(_subcategory)) ?
 								(
 									/**** 	HOME / MAIN CATEGORY / SUB HEADER / SUBCATEGORY 	****/
 									<div>
@@ -69,7 +70,7 @@ export default class Breadcrumb extends Component {
 										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}`}>{_subheader.name}</Link></li>
 										<li>{_subcategory.name}</li>
 									</div>
-								) : (_subheader !== null) ?
+								) : (!isNullOrUndefined(_subheader)) ?
 								(
 									/**** 	HOME / MAIN CATEGORY / SUB HEADER 	 ****/
 									<div>
@@ -77,7 +78,7 @@ export default class Breadcrumb extends Component {
 										<li><Link to={`/show/${_mainCategory.path}`}>{_mainCategory.name}</Link></li>
 										<li>{_subheader.name}</li>
 									</div>
-								) : (_mainCategory !== null) ?
+								) : (!isNullOrUndefined(_mainCategory)) ?
 								(
 									/**** 	HOME / MAIN CATEGORY 	****/
 									<div>
