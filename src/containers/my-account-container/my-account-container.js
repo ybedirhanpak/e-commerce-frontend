@@ -9,6 +9,8 @@ import { Redirect, Link, Route } from 'react-router-dom';
 //changepassword
 import ChangePassword from '../../components/change-password/change-password'
 import OrdersPage from '../../components/orders-page/orders-page';
+import MyAdress from '../../components/My-adress/my-adress'
+import AddAdress from '../../components/Add-adress/Add-adress'
 
 class MyAccountContainer extends Component {
     render() {
@@ -124,7 +126,10 @@ class MyAccountContainer extends Component {
                                     <OrdersPage />
                                 } />
                                 <Route path='/account/addresses' render={() =>
-                                    <h1>Addresses</h1>
+                                    <MyAdress />
+                                } />
+                                <Route path='/account/addAddress' render={() =>
+                                    <AddAdress />
                                 } />
                                 <Route path='/account/coupons' render={() =>
                                     <h1>Coupons</h1>
