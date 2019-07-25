@@ -3,22 +3,27 @@ import './style.css';
 
 //Components
 import SelectBox from "../select-box";
-import Box from '../city-dropdown/box'
-import CategorySelectBox from '../category-select-box/category-select-box';
-import PriceFilter from '../price-filter/price-filter';
+import Box from "../city-dropdown/box";
+import CategorySelectBox from "../category-select-box/category-select-box";
+import PriceFilter from "../price-filter/price-filter";
 
 export default class Filter extends Component {
   render() {
     return (
       <div className="aside-filter">
-        <CategorySelectBox currentCategories={this.props.currentCategories}/>
         <PriceFilter />
-        <Box data={this.cities}/>
-        <SelectBox data={this.brands} />
+
+        <CategorySelectBox
+          data={this.categories}
+          currentCategories={this.props.currentCategories}
+        />
+        
+        <Box data={this.props.cityList} title="CITIES" />
+
+        <SelectBox data={this.props.brandList} title="BRANDS" />
       </div>
     );
   }
-
 
   categories = {
     title: "CATEGORIES",
@@ -79,21 +84,21 @@ export default class Filter extends Component {
     ]
   };
 
-  cities= [
+  cities = [
     {
-        "name": "İstanbul"
+      name: "İstanbul"
     },
     {
-        "name": "Hatay"
+      name: "Hatay"
     },
     {
-        "name": "Ankara"
+      name: "Ankara"
     },
     {
-        "name": "Bursa"
+      name: "Bursa"
     },
     {
-        "name": "İzmir"
+      name: "İzmir"
     }
-]
+  ];
 }

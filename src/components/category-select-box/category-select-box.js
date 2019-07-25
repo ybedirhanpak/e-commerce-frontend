@@ -27,7 +27,6 @@ class CategorySelectBox extends Component {
       type:"subcategories",
       subcategories:newFilterCategories
     })
-
   }
 
   generateSubCategories = (_subheader) => {
@@ -59,7 +58,7 @@ class CategorySelectBox extends Component {
       </>
     )});
     return subCategoriesCheckboxList;
-  }
+  };
 
   generateSubHeaders = (_mainCategory) => {
     const _subheaders = this.props.allCategories.filter(x => x.parentId == _mainCategory.id);
@@ -81,7 +80,7 @@ class CategorySelectBox extends Component {
       </>
     )});
     return subheaderCheckboxList;
-  }
+  };
 
   render() {
     console.log("category select box props",this.props);
@@ -109,7 +108,7 @@ const mapStateToProps = state => {
     allCategories: state.category.categories,
     filterCategories: state.product.filters.subcategories
   };
-}
+};
 
 const mapDispatchToProps = {
   updateFilters

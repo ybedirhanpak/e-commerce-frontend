@@ -1,11 +1,14 @@
 .input-checkbox {
-    margin-top:10px;
+  margin-top: 10px;
 }
 
-.small{
-    color: #8D99AE;
-    font-size: 68%!important;
-    margin-left:5px;
+.small {
+  color: #8d99ae;
+  font-size: 68% !important;
+  margin-left: 5px;
 }
 
-  
+.aside {
+  max-height: 100px;
+  overflow-y: scroll;
+}
