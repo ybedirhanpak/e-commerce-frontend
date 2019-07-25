@@ -57,6 +57,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory" render={(props) => {
                 return(
                   <CategoryContainer 
+                  location={props.location}
                   match={props.match}
                   />
                 )
@@ -65,31 +66,18 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader" render={(props) => {
                 return(
                   <CategoryContainer 
+                  location={props.location}
                   match={props.match}
                   />
                 )
               }}/>
 
-              <Route exact path="/show/:mainCategory/:subheader/:subcategory" render={(props) => {
-                return(
-                  <CategoryContainer 
-                  match={props.match}
-                  />
-                )
-              }}/>
-
-              <Route exact path="/show/:mainCategory/:subheader/:subcategory/:productId" render={(props) => {
+              <Route exact path="/show/:mainCategory/:subheader/:productId" render={(props) => {
                 return(
                   <ProductDetailedContainer 
+                  location={props.location}
                   match={props.match}
                   />
-                )
-              }}/>
-
-              <Route path="/productDetailed/:productId" render={(props) => {
-                const productId = props.match.params.productId;
-                return(
-                  <ProductDetailedContainer productId={productId}/>
                 )
               }}/>
 

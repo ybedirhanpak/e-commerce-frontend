@@ -14,6 +14,7 @@ export default class Store extends Component {
   }
 
   createProducts = () => {
+    
     if(this.props.fetchInProgress) {
       return(
         <LoadingSpinner/>

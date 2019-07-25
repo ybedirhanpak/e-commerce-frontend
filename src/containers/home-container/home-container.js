@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 //Components
 import Store from '../../components/store/store';
-import Filter from '../../components/filter/index';
 import SlideProduct from '../../components/slide-product/slide';
 
 //Redux
@@ -27,11 +26,12 @@ class HomeContainer extends Component {
                             {/* Filter Component */}
                             {/* <Filter/> */}
                         </div>
-                        <div id="store" className="col-sm-6 col-md-9">
+                        <div id="store" className="col-sm-12">
                             {/* Store Component */}
                             <Store
                                 apiProducts={this.props.apiProducts}
                                 fetchInProgress={this.props.fetchInProgress}
+                                filters={this.props.filters}
                             />
                         </div>
                     </div>
@@ -45,6 +45,7 @@ class HomeContainer extends Component {
 const mapStateToProps = state => {
     return {
         apiProducts: state.product.productList,
+        filters: state.product.filters,
         fetchInProgress: state.product.fetchInProgress,
         allCategories: state.category.categories
     };
