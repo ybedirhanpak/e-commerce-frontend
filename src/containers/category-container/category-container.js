@@ -38,6 +38,7 @@ class CategoryContainer extends Component {
     this.state = {
       brandList: []
     };
+    this.filterProducts = this.filterProducts.bind(this);
   }
   /**
    * Executed when component is mounted
@@ -141,6 +142,27 @@ class CategoryContainer extends Component {
       }
     };
 
+    filterProducts = (productList) => {
+      console.log(this.props.filters)
+      const filters = this.props.filters;
+      console.log(filters.price.min)
+      let minPrice = 0;
+      let maxPrice = 99999999999999;
+      if (filters.price.min !== "") {
+       minPrice = Number(filters.price.min)
+      } 
+      
+      if(Number(filters.price.max) !== 0){
+        maxPrice = Number(filters.price.max)
+      } 
+  
+      let filteredProducts = productList.filter(product => Number(product.price) >= minPrice && 
+        Number(product.price) <= maxPrice)
+
+      console.log("filtrelenmiş", filteredProducts);
+      return filteredProducts;
+    }
+
   render() {
     this.findBrandList(this.props.apiProducts, this.state);
     let _cityList = [];
@@ -172,7 +194,7 @@ class CategoryContainer extends Component {
             <div id="store" className="col-sm-6 col-md-9">
               {/* Store Component */}
               <Store
-                apiProducts={this.props.apiProducts}
+                apiProducts={this.filterProducts(this.props.apiProducts)}
                 fetchInProgress={this.props.fetchInProgress}
               />
             </div>
