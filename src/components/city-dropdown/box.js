@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './box.css';
+import "./box.css";
 
 class Box extends Component {
   constructor(props) {
@@ -10,12 +10,6 @@ class Box extends Component {
     };
     this.selectCity = this.selectCity.bind(this);
   }
-
-  dropDown = () => {
-    this.setState(prevState => ({
-      showItems: !prevState.showItems
-    }));
-  };
 
   selectCity(item) {
     this.setState({
@@ -29,18 +23,16 @@ class Box extends Component {
         <input type="checkbox" id={"category-" + index} />
         <label htmlFor={"category-" + index}>
           <span />
-          {element.name}
+          {element}
         </label>
       </div>
     ));
 
     return (
       <div className="box-filter">
+        <h3 className="aside-title">Select City</h3>
         <div className="aside">
-          <h3 className="aside-title" onClick={this.dropDown}>
-           Select City
-          </h3>
-          {(this.state.showItems) ? (<div>{cities}</div>) : (null)}
+          <div>{cities}</div>
         </div>
       </div>
     );
