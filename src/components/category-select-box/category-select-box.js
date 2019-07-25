@@ -10,52 +10,43 @@ import { Link } from 'react-router-dom'
 
 class CategorySelectBox extends Component {
 
-  generateSubCategories = (_mainCategory, _subheader, _subcategories) => {
+  generateSubCategories = (_subheader) => {
+    const _subcategories = this.props.allCategories.filter(x => x.parentId == _subheader.id);
+    //Create _subcategories list
     const subCategoriesCheckboxList = _subcategories.map((subcategory, index) => 
     {
-      const subcategoryChecked = !isNullOrUndefined(this.props.currentCategories._subcategory) 
-        && this.props.currentCategories._subcategory.id === subcategory.id; 
-
-      const subcategoryPath = `/show/${_mainCategory.path}/${_subheader.path}/${subcategory.path}`
       return (
-      <div key={subcategory.id + index} >
-        <div className="input-checkbox">
-          <input checked={subcategoryChecked} type="checkbox" id={subcategory.id} />
-          
+      <>
+        <div key={subcategory.id + index} >
+          <div className="input-checkbox">
+            <input type="checkbox" id={subcategory.id} />
             <label htmlFor={subcategory.id}>
               <span />
-              <Link to={subcategoryPath}>{subcategory.name}</Link>
+              {subcategory.name}
             </label>
+          </div>
         </div>
-      </div>
+      </>
     )});
     return subCategoriesCheckboxList;
   }
 
-  generateSubHeaders = () => {
-    const { _mainCategory, _subheader, _subcategory } = this.props.currentCategories;
+  generateSubHeaders = (_mainCategory) => {
     const _subheaders = this.props.allCategories.filter(x => x.parentId == _mainCategory.id);
     //Create subheader list
     const subheaderCheckboxList = _subheaders.map((subheader, index) => 
     {
-      const _subcategories = this.props.allCategories.filter(y => y.parentId == subheader.id);
-      const subheaderChecked = !isNullOrUndefined(this.props.currentCategories._subheader) 
-        && this.props.currentCategories._subheader.id === subheader.id; 
-
       const subHeaderPath = `/show/${_mainCategory.path}/${subheader.path}/`
       return (
       <>
         <div key={subheader.id + index} >
           <div className="input-checkbox">
-            <input checked={subheaderChecked} type="checkbox" id={subheader.id} data-toggle="collapse" data-target={"#" + subheader.id + "-child"} />
+            <input type="checkbox" id={subheader.id} />
             <label htmlFor={subheader.id}>
               <span />
               <Link to={subHeaderPath}>{subheader.name}</Link>
             </label>
           </div>
-        </div>
-        <div className={subheaderChecked ? "" : "collapse"} id={subheader.id + "-child"} style={{paddingLeft:20, fontSize:12}}>
-          {this.generateSubCategories(_mainCategory, subheader ,_subcategories)}
         </div>
       </>
     )});
@@ -64,13 +55,19 @@ class CategorySelectBox extends Component {
 
   render() {
     console.log("category select box props",this.props);
+    const { _mainCategory, _subheader } = this.props.currentCategories;
+    const title = (!isNullOrUndefined(_subheader)) ? (_subheader.name) : (_mainCategory.name)
     return (
       <div className="aside">
         <h3 className="aside-title" >
-          {this.props.currentCategories._mainCategory.name  }
+          {title}
         </h3>
         <div>
-          {this.generateSubHeaders()}
+        {
+          (!isNullOrUndefined(_subheader)) ?
+          (this.generateSubCategories(_subheader)) : 
+          (this.generateSubHeaders(_mainCategory))
+        }
         </div>
       </div>
     );

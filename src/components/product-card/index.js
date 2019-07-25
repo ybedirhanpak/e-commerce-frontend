@@ -64,7 +64,7 @@ class ProductCard extends React.Component {
     (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
 
     if(_mainCategory !== undefined)
-      return `/show/${_mainCategory.path}/${_subheader.path}/${_subcategory.path}/${this.props.product.id}`;
+      return `/show/${_mainCategory.path}/${_subheader.path}/${this.props.product.id}`;
     else
       return '/error'
   }

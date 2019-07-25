@@ -25,11 +25,14 @@ export default class Category extends Component {
   generateSubCategories = (section) => {
     let resultList = [];
     for (var i = 0; i < section.subcategories.length; i++) {
-      const subcategoryPath = `/show/${this.props.mainCategory.path}/${section.header.path}/${section.subcategories[i].path}`;
+      const subheaderPath = `/show/${this.props.mainCategory.path}/${section.header.path}`;
       resultList.push(
         <li key={i}>
           <Link to={{
-            pathname: subcategoryPath
+            pathname: subheaderPath,
+            state: {
+              selectedSubCategory:section.subcategories[i].id
+            }
           }}>
             {section.subcategories[i].name}
           </Link>

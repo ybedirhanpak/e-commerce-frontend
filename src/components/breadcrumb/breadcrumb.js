@@ -41,7 +41,7 @@ import { isNullOrUndefined } from 'util';
 export default class Breadcrumb extends Component {
     render() {
 		//Get categories from props
-		const { _mainCategory, _subcategory, _subheader } = this.props.categories;
+		const { _mainCategory, _subheader} = this.props.categories;
 		//Get product from props
 		const product = this.props.product;
         return (
@@ -58,17 +58,7 @@ export default class Breadcrumb extends Component {
 										<li><Link to={`/home`}>Home</Link></li>
 										<li><Link to={`/show/${_mainCategory.path}`}>{_mainCategory.name}</Link></li>
 										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}`}>{_subheader.name}</Link></li>
-										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}/${_subcategory.path}`}>{_subcategory.name}</Link></li>
 										<li className="active">{product.name}</li>
-									</div>
-								) : (!isNullOrUndefined(_subcategory)) ?
-								(
-									/**** 	HOME / MAIN CATEGORY / SUB HEADER / SUBCATEGORY 	****/
-									<div>
-										<li><Link to={`/home`}>Home</Link></li>
-										<li><Link to={`/show/${_mainCategory.path}`}>{_mainCategory.name}</Link></li>
-										<li><Link to={`/show/${_mainCategory.path}/${_subheader.path}`}>{_subheader.name}</Link></li>
-										<li>{_subcategory.name}</li>
 									</div>
 								) : (!isNullOrUndefined(_subheader)) ?
 								(

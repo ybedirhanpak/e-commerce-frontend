@@ -12,7 +12,6 @@ import { isNullOrUndefined } from 'util';
 
 /**
  * CategoryContainer is used when application is on one of these paths:
- * - /show/:mainCategory/:subheader/:subcategory
  * - /show/:mainCategory/:subheader/
  * - /show/:mainCategory/
  * 
@@ -21,18 +20,16 @@ import { isNullOrUndefined } from 'util';
  *      params: {
  *          mainCategory,
  *          subheader,
- *          subcategory,
  *      },
  *      url,    
  *  }
  * }
  * 
- * Example: "http://localhost:3000/show/erkek/giyim/t-shirt"
+ * Example: "http://localhost:3000/show/erkek/giyim"
  * 
  * mainCategory: "erkek"
  * subheader: "giyim"
- * subcategory: "t-shirt"
- * url: "/show/erkek/giyim/t-shirt"
+ * url: "/show/erkek/giyim"
  * 
  */
 class CategoryContainer extends Component {
@@ -59,10 +56,10 @@ class CategoryContainer extends Component {
      */
     initializeCategory = () => {
         // Category paths that are fetched from url
-        const { mainCategory, subheader, subcategory } = this.props.match.params;
+        const { mainCategory, subheader } = this.props.match.params;
         // Category objects created from paths
-        const { _mainCategory, _subheader, _subcategory } = this.findCategoryWithPath(mainCategory, subheader, subcategory);
-        this.loadProducts(_mainCategory, _subheader, _subcategory);
+        const { _mainCategory, _subheader } = this.findCategoryWithPath(mainCategory, subheader);
+        this.loadProducts(_mainCategory, _subheader);
     }
 
     findIdWithPath = (path) => {
@@ -76,18 +73,15 @@ class CategoryContainer extends Component {
     /**
      * Creates category objects according to the path given.
      */
-    findCategoryWithPath = (mainCategory=null, subheader=null, subcategory=null) => {
+    findCategoryWithPath = (mainCategory=null, subheader=null) => {
         //All categories without hierarchy
         const allCategories = this.props.apiCategories;
         const _mainCategory = (mainCategory !== null) ? this.findIdWithPath(mainCategory) : null;
         const _subheader = (_mainCategory !== null && subheader !== null) ? 
             this.findIdWithPathAndParent(subheader, _mainCategory.id) : null;
-        const _subcategory = (_subheader !== null && subcategory !== null) ? 
-            this.findIdWithPathAndParent(subcategory, _subheader.id) : null;
         return {
           _mainCategory,
-          _subheader,
-          _subcategory
+          _subheader
         }
     }
 
@@ -95,11 +89,9 @@ class CategoryContainer extends Component {
      * Determines the category hierarchy and creates an array of category ids.
      * Fetches the product list according to category ids.
      */
-    loadProducts = (_mainCategory, _subheader, _subcategory) => {
+    loadProducts = (_mainCategory, _subheader) => {
         let categoryIds = [];
-        if(!isNullOrUndefined(_subcategory)) {
-            categoryIds = [_subcategory.id]
-        }else if(!isNullOrUndefined(_subheader)) {
+        if(!isNullOrUndefined(_subheader)) {
             categoryIds = this.findChildrenCategoryIds(_subheader.id);
         } else if(!isNullOrUndefined(_mainCategory)){
             const subheaderIds = this.findChildrenCategoryIds(_mainCategory.id);
@@ -120,10 +112,10 @@ class CategoryContainer extends Component {
     render() {
         console.log("category container props", this.props);
         // Category paths that are fetched from url
-        const { mainCategory, subheader, subcategory } = this.props.match.params;
+        const { mainCategory, subheader } = this.props.match.params;
         // Category objects created from paths
-        const categories = this.findCategoryWithPath(mainCategory, subheader, subcategory);
-        console.log("cateogyr container", this.props);
+        const categories = this.findCategoryWithPath(mainCategory, subheader);
+        console.log("category container", this.props);
         return (
             <div className="category-container">
                 {/* Create Breadcrumb with category objects */}
@@ -152,7 +144,8 @@ const mapStateToProps = state => {
     return {
       apiCategories: state.category.categories,
       apiProducts: state.product.productList,
-      fetchInProgress: state.product.fetchInProgress
+      fetchInProgress: state.product.fetchInProgress,
+      filterCategories: state.product.filters.subcategories
     };
 };
   
