@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import './style.css'
+import './style.css';
+import PriceFilter from '../price-filter/price-filter'
 
 //Components
 import SelectBox from "../select-box";

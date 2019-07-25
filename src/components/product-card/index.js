@@ -18,7 +18,10 @@ class ProductCard extends React.Component {
   createAverageOfStar = () => {
     let children = []
     let div = []
-
+    let sum = 0;
+    this.props.product.reviews.map(review => {
+      sum += review.numberOfStars;
+    })
     for (let i = 0; i < this.props.product.stars; i++) {
       children.push(<i className="fa fa-star" />)
     }
