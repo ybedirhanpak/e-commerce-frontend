@@ -27,7 +27,7 @@ class HomeContainer extends Component {
                             {/* Filter Component */}
                             {/* <Filter/> */}
                         </div>
-                        <div id="store" className="col-sm-6 col-md-9">
+                        <div id="store" className="col-sm-12">
                             {/* Store Component */}
                             <Store
                                 apiProducts={this.props.apiProducts}

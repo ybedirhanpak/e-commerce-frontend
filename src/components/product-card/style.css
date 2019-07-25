@@ -3,6 +3,10 @@
     height:auto;
 }
 
+.only-product-img {
+  width: 100%;
+  display: block;
+}
 
 #price-slider {
     margin-bottom: 15px;

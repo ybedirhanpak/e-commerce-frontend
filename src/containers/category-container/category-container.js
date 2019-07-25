@@ -7,15 +7,11 @@ import BreadCrumb from "../../components/breadcrumb/breadcrumb";
 
 //Redux
 import { connect } from "react-redux";
-import {
-  getProductList,
-  getProductListWithCategory
-} from "../../redux/product/actions";
-import { isNullOrUndefined } from "util";
+import { getProductList, getProductListWithCategory, updateFilters } from "../../redux/product/actions";
+import { isNullOrUndefined } from 'util';
 
 /**
  * CategoryContainer is used when application is on one of these paths:
- * - /show/:mainCategory/:subheader/:subcategory
  * - /show/:mainCategory/:subheader/
  * - /show/:mainCategory/
  *
@@ -24,19 +20,17 @@ import { isNullOrUndefined } from "util";
  *      params: {
  *          mainCategory,
  *          subheader,
- *          subcategory,
  *      },
  *      url,
  *  }
  * }
- *
- * Example: "http://localhost:3000/show/erkek/giyim/t-shirt"
- *
+ * 
+ * Example: "http://localhost:3000/show/erkek/giyim"
+ * 
  * mainCategory: "erkek"
  * subheader: "giyim"
- * subcategory: "t-shirt"
- * url: "/show/erkek/giyim/t-shirt"
- *
+ * url: "/show/erkek/giyim"
+ * 
  */
 class CategoryContainer extends Component {
   constructor() {
@@ -61,97 +55,91 @@ class CategoryContainer extends Component {
       this.initializeCategory();
     }
   }
+  
+    /**
+     * Executes load operation with category objects
+     */
+    initializeCategory = () => {
+        // Category paths that are fetched from url
+        const { mainCategory, subheader } = this.props.match.params;
+        // Category objects created from paths
+        const { _mainCategory, _subheader } = this.findCategoryWithPath(mainCategory, subheader);
+        //Fetch api products according to categories
+        this.loadProducts(_mainCategory, _subheader);
+        //Update subcategory filter
+        if(!isNullOrUndefined(this.props.location.state) && !isNullOrUndefined(this.props.location.state.selectedSubCategory)) {
+            const selectedSubCategory = this.props.location.state.selectedSubCategory;
+            this.props.updateFilters({
+                type:"subcategories",
+                subcategories:[selectedSubCategory]
+            })
+        } else {
+            this.props.updateFilters({
+                type:"subcategories",
+                subcategories:[]
+            })
+        }
+    }
 
-  /**
-   * Executes load operation with category objects
-   */
-  initializeCategory = () => {
-    // Category paths that are fetched from url
-    const { mainCategory, subheader, subcategory } = this.props.match.params;
-    // Category objects created from paths
-    const {
-      _mainCategory,
-      _subheader,
-      _subcategory
-    } = this.findCategoryWithPath(mainCategory, subheader, subcategory);
-    this.loadProducts(_mainCategory, _subheader, _subcategory);
-  };
+    findIdWithPath = (path) => {
+        return this.props.apiCategories.filter(x => x.path === path)[0];
+    }
 
-  /**
-   * Creates category objects according to the path given.
-   */
-  findCategoryWithPath = (
-    mainCategory = null,
-    subheader = null,
-    subcategory = null
-  ) => {
-    //All categories without hierarchy
-    const allCategories = this.props.apiCategories;
-    const _mainCategory =
-      mainCategory !== null
-        ? allCategories.filter(x => x.path === mainCategory)[0]
-        : null;
-    const _subheader =
-      _mainCategory !== null && subheader !== null
-        ? allCategories.filter(
-            x => x.path === subheader && x.parentId === _mainCategory.id
-          )[0]
-        : null;
-    const _subcategory =
-      _subheader !== null && subcategory !== null
-        ? allCategories.filter(
-            x => x.path === subcategory && x.parentId === _subheader.id
-          )[0]
-        : null;
-    return {
-      _mainCategory,
-      _subheader,
-      _subcategory
+    findIdWithPathAndParent = (path, parentId) => {
+        return this.props.apiCategories.filter(x => x.path === path && x.parentId === parentId)[0];
+    }
+
+    /**
+     * Creates category objects according to the path given.
+     */
+    findCategoryWithPath = (mainCategory=null, subheader=null) => {
+        const _mainCategory = (mainCategory !== null) ? this.findIdWithPath(mainCategory) : null;
+        const _subheader = (_mainCategory !== null && subheader !== null) ? 
+            this.findIdWithPathAndParent(subheader, _mainCategory.id) : null;
+        return {
+          _mainCategory,
+          _subheader
+        }
     };
-  };
 
-  /**
-   * Determines the category hierarchy and creates an array of category ids.
-   * Fetches the product list according to category ids.
-   */
-  loadProducts = (_mainCategory, _subheader, _subcategory) => {
-    let categoryIds = [];
-    if (!isNullOrUndefined(_subcategory)) {
-      categoryIds = [_subcategory.id];
-    } else if (!isNullOrUndefined(_subheader)) {
-      categoryIds = this.findChildrenCategoryIds(_subheader.id);
-    } else if (!isNullOrUndefined(_mainCategory)) {
-      const subheaderIds = this.findChildrenCategoryIds(_mainCategory.id);
-      categoryIds = subheaderIds
-        .map(x => this.findChildrenCategoryIds(x))
-        .flat(1);
+    /**
+     * Determines the category hierarchy and creates an array of category ids.
+     * Fetches the product list according to category ids.
+     */
+    loadProducts = (_mainCategory, _subheader) => {
+        let categoryIds = [];
+        if(!isNullOrUndefined(_subheader)) {
+            categoryIds = this.findChildrenCategoryIds(_subheader.id);
+        } else if(!isNullOrUndefined(_mainCategory)){
+            const subheaderIds = this.findChildrenCategoryIds(_mainCategory.id);
+            categoryIds = subheaderIds.map(x => this.findChildrenCategoryIds(x)).flat(1);
+        }
+        // Dispatch to get product list
+        this.props.getProductListWithCategory(categoryIds);
     }
-    // Dispatch to get product list
-    this.props.getProductListWithCategory(categoryIds);
-  };
+    
+    /**
+     * Finds children category ids of given category id.
+     */
+    findChildrenCategoryIds = id => {
+      const allCategories = this.props.apiCategories;
+      return allCategories.filter(x => x.parentId === id).map(x => x.id);
+    };
 
-  /**
-   * Finds children category ids of given category id.
-   */
-  findChildrenCategoryIds = id => {
-    const allCategories = this.props.apiCategories;
-    return allCategories.filter(x => x.parentId === id).map(x => x.id);
-  };
-
-  findBrandList = (products, prevState) => {
-    let _brandList = this.state.brandList;
-    products.forEach(element => {
-      if (!_brandList.includes(element.brand)) {
-        _brandList.push(element.brand);
-      }
-    });
-
-    if (_brandList !== prevState.brandList) {
-      this.setState({
-        brandList: _brandList
+    findBrandList = (products, prevState) => {
+      let _brandList = this.state.brandList;
+      products.forEach(element => {
+        if (!_brandList.includes(element.brand)) {
+          _brandList.push(element.brand);
+        }
       });
-    }
-  };
+
+      if (_brandList !== prevState.brandList) {
+        this.setState({
+          brandList: _brandList
+        });
+      }
+    };
 
   render() {
     this.findBrandList(this.props.apiProducts, this.state);
@@ -161,15 +149,12 @@ class CategoryContainer extends Component {
     });
     console.log("City List: " + _cityList);
     console.log("Brand List: " + this.state.brandList);
-    // Category paths that are fetched from url
-    const { mainCategory, subheader, subcategory } = this.props.match.params;
-    // Category objects created from paths
-    const categories = this.findCategoryWithPath(
-      mainCategory,
-      subheader,
-      subcategory
-    );
 
+    // Category paths that are fetched from url
+    const { mainCategory, subheader } = this.props.match.params;
+    // Category objects created from paths
+    const categories = this.findCategoryWithPath(mainCategory, subheader);
+    console.log("category container", this.props);
     return (
       <div className="category-container">
         {/* Create Breadcrumb with category objects */}
@@ -181,7 +166,6 @@ class CategoryContainer extends Component {
               <Filter
                 cityList={_cityList}
                 brandList={this.state.brandList}
-                url={this.props.match.url}
                 currentCategories={categories}
               />
             </div>
@@ -208,8 +192,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  getProductList,
-  getProductListWithCategory
+    getProductList,
+    getProductListWithCategory,
+    updateFilters
 };
 
 export default connect(
