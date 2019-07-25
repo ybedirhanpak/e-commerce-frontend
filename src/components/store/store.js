@@ -3,7 +3,7 @@ import React, { Component } from "react";
 //Components
 import StoreTopFilter from "../store-top-filter/store-top-filter";
 import ProductCard from "../product-card/index";
-import LoadingSpinner from '../loading-spinner/loading-spinner';
+import LoadingSpinner from "../loading-spinner/loading-spinner";
 
 export default class Store extends Component {
   constructor(props) {
@@ -24,20 +24,19 @@ export default class Store extends Component {
 
   createProducts = () => {
     this.filterProducts();
-    
     if(this.props.fetchInProgress) {
       return(
         <LoadingSpinner/>
       )
     }else {
       const productsList = this.props.apiProducts.map(product => {
-        return(
+        return (
           <div key={product.id} className="col-xs-12 col-md-4">
             <ProductCard product={product} />
           </div>
-        )
+        );
       });
-      console.log("productslist",this.props.apiProducts)
+
       return productsList;
     }
   };
@@ -47,9 +46,7 @@ export default class Store extends Component {
     return (
       <>
         <StoreTopFilter />
-        <div className="row">
-          {this.createProducts()}
-        </div>
+        <div className="row">{this.createProducts()}</div>
       </>
     );
   }

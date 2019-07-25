@@ -59,27 +59,24 @@ class ProductDetailedContainer extends Component {
   /**
    * Creates category objects according to the path given.
    */
-  findCategoryWithPath = (mainCategory=null, subheader=null, subcategory=null) => {
+  findCategoryWithPath = (mainCategory=null, subheader=null) => {
     //All categories without hierarchy
     const allCategories = this.props.apiCategories;
     const _mainCategory = (mainCategory !== null) ? allCategories.filter(x => x.path === mainCategory)[0] : null;
     const _subheader = (_mainCategory !== null && subheader !== null) ? 
      allCategories.filter(x => x.path === subheader && x.parentId === _mainCategory.id)[0] : null;
-    const _subcategory = (_subheader !== null && subcategory !== null) ? 
-      allCategories.filter(x=> x.path === subcategory && x.parentId === _subheader.id)[0] : null;
     return {
       _mainCategory,
-      _subheader,
-      _subcategory
+      _subheader
     }
   }
 
   render() {
     console.log("Product detailed props", this.props)
     // Category paths that are fetched from url
-    const { mainCategory, subheader, subcategory } = this.props.match.params;
+    const { mainCategory, subheader} = this.props.match.params;
     // Category objects created from paths
-    const categories = this.findCategoryWithPath(mainCategory, subheader, subcategory);
+    const categories = this.findCategoryWithPath(mainCategory, subheader);
 
     // If product hasn't been fetched yet, show loading spinner
     if(this.props.fetchInProgress) {
