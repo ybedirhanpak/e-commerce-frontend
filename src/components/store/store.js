@@ -11,12 +11,24 @@ export default class Store extends Component {
 
     //Bind Functions
     this.createProducts = this.createProducts.bind(this);
+    this.filterProducts = this.filterProducts.bind(this);
+  }
+  //String(Number(filters.price.min))
+  filterProducts = () => {
+    const filters = this.props.filters;
+    this.props.apiProducts.map(x=> console.log( Number(x.price)));
+    let filteredProducts = this.props.apiProducts.filter(product => Number(product.price) >= 90 && Number(product.price) <= 200 )
+    console.log("filtrelenmiş",filteredProducts);
+
   }
 
   createProducts = () => {
-    if (this.props.fetchInProgress) {
-      return <LoadingSpinner />;
-    } else {
+    this.filterProducts();
+    if(this.props.fetchInProgress) {
+      return(
+        <LoadingSpinner/>
+      )
+    }else {
       const productsList = this.props.apiProducts.map(product => {
         return (
           <div key={product.id} className="col-xs-12 col-md-4">
@@ -30,6 +42,7 @@ export default class Store extends Component {
   };
 
   render() {
+    console.log("store props", this.props);
     return (
       <>
         <StoreTopFilter />

@@ -184,11 +184,12 @@ class CategoryContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    apiCategories: state.category.categories,
-    apiProducts: state.product.productList,
-    fetchInProgress: state.product.fetchInProgress
-  };
+    return {
+      apiCategories: state.category.categories,
+      apiProducts: state.product.productList,
+      filters: state.product.filters,
+      fetchInProgress: state.product.fetchInProgress
+    };
 };
 
 const mapDispatchToProps = {

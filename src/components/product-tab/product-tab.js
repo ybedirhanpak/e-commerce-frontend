@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateProduct } from '../../redux/product/actions';
 import { isNullOrUndefined } from "util";
+import './product-tab.css'
 
 class ProductTab extends Component {
   constructor(props) {
@@ -26,11 +27,23 @@ class ProductTab extends Component {
     let div = []
     let children = []
     let divInside, ul = []
+    const iStyle = {
+      color: '#ef233c'
+    }
     for (let i = 0; i < 1; i++) {
       for (let j = 0; j < Math.round(average); j++) {
+        if(j>average-1){
+          children.push(<i style={iStyle} className="fa fa-star-half-o"></i>)
+          continue;
+        }
         children.push(<i className="fa fa-star"></i>)
       }
-      for (let k = average; k < 5; k++) {
+      for (let k = Math.round(average); k < 5; k++) {
+        if(k==5){
+          console.log("break k",k)
+          break;
+        }
+        console.log("push")
         children.push(<i className="fa fa-star-o"></i>)
       }
 
@@ -156,11 +169,11 @@ class ProductTab extends Component {
     let review = this.props.product.reviews;
     let element = [];
     let comments = [];
-    if(review===undefined){
+    if (review === undefined) {
       console.log("undefined")
-      return(<div>No Comment Yet</div>)
+      return (<div>No Comment Yet</div>)
     }
-    
+
     for (let i = this.state.currentBlock - 3; i < this.state.currentBlock; i++) {
       if (i < 0) {
         i = 0;
@@ -225,14 +238,14 @@ class ProductTab extends Component {
       CommentTime: dateString,
       NumberOfStars: this.state.rating
     };
-    console.log("average",Math.round(average))
-    console.log("rating",this.state.rating)
+    console.log("average", Math.round(average))
+    console.log("rating", this.state.rating)
     const product = {
       ...this.props.product,
-      stars: parseInt(average.toFixed(1)),
-      reviews: [...this.props.product.reviews,review]
+      stars: parseInt(Math.round(average)),
+      reviews: [...this.props.product.reviews, review]
     };
-    console.log("product",product)
+    console.log("product", product)
     this.props.updateProduct(this.props.product.id, product);
     event.preventDefault();
   }
@@ -246,18 +259,18 @@ class ProductTab extends Component {
       console.log(this.props.product.reviews)
       console.log("girdiundefdeğill")
       this.props.product.reviews.map(star => {
-        commentStarCount.slice(star.numberOfStars, 1, commentStarCount[star.numberOfStars]++);        
+        commentStarCount.slice(star.numberOfStars, 1, commentStarCount[star.numberOfStars]++);
         sum += star.numberOfStars
       })
-      average= sum/this.props.product.reviews.length
-      if(isNaN(average)){
-        average=0
+      average = sum / this.props.product.reviews.length
+      if (isNaN(average)) {
+        average = 0
       }
-    }else{
+    } else {
       console.log("undef")
-      average=0
+      average = 0
     }
-    
+
     return (
       <div id="product-tab">
         {/* Navigation */}
