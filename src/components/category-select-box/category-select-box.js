@@ -33,7 +33,7 @@ class CategorySelectBox extends Component {
     //Get filter categories from redux
     const filterCategories = this.props.filterCategories;
     //Find all subcategories
-    const _subcategories = this.props.allCategories.filter(x => x.parentId == _subheader.id);
+    const _subcategories = this.props.allCategories.filter(x => x.parentId === _subheader.id);
     //Create _subcategories list
     const subCategoriesCheckboxList = _subcategories.map((subcategory, index) => 
     {
@@ -61,7 +61,7 @@ class CategorySelectBox extends Component {
   };
 
   generateSubHeaders = (_mainCategory) => {
-    const _subheaders = this.props.allCategories.filter(x => x.parentId == _mainCategory.id);
+    const _subheaders = this.props.allCategories.filter(x => x.parentId === _mainCategory.id);
     //Create subheader list
     const subheaderCheckboxList = _subheaders.map((subheader, index) => 
     {

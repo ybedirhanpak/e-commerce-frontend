@@ -1,0 +1,15 @@
+.input-checkbox {
+    margin-top: 10px;
+  }
+  
+  .small {
+    color: #8d99ae;
+    font-size: 68% !important;
+    margin-left: 5px;
+  }
+  
+  .scrollable {
+    max-height: 175px;
+    overflow-y: scroll;
+  }
+  

@@ -7,3 +7,8 @@
     font-size: 68%!important;
     margin-left:5px;
 }
+
+.scrollable {
+    max-height: 175px;
+    overflow-y: scroll;
+}
