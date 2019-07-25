@@ -64,8 +64,8 @@ class ProductCard extends React.Component {
     const _mainCategory = (_subheader !== undefined) ?
       (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
 
-    if (_mainCategory !== undefined)
-      return `/show/${_mainCategory.path}/${_subheader.path}/${_subcategory.path}/${this.props.product.id}`;
+    if(_mainCategory !== undefined)
+      return `/show/${_mainCategory.path}/${_subheader.path}/${this.props.product.id}`;
     else
       return '/error'
   }
@@ -75,8 +75,9 @@ class ProductCard extends React.Component {
     return (
       <div>
         <div className="product">
-          <div className="product-img">
-            <Image width={240} height={240} src={product.imgSource} alt="Product" />
+          <div className="product-img" style={{minHeight:300}}>
+            {/* <Image width={240} height={240} src={product.imgSource} alt="Product" /> */}
+            <img className="only-product-img" src={product.imgSource} alt="Product" />
             <div className="product-label">
               {product.discount && (
                 <span className="sale">-{product.discount}</span>

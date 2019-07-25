@@ -10,7 +10,8 @@ const initialState = {
       min: "",
       max: ""
     },
-    brands: []
+    brands: [],
+    subcategories: []
   }
 };
 
@@ -43,6 +44,14 @@ function productReducer(state = initialState, action) {
               min: action.payload.priceFilter.min,
               max: action.payload.priceFilter.max,
             }
+          }
+        }
+      } else if(action.payload.type === "subcategories") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            subcategories : action.payload.subcategories
           }
         }
       }
