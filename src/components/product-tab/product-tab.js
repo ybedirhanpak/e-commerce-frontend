@@ -39,7 +39,7 @@ class ProductTab extends Component {
         children.push(<i className="fa fa-star"></i>)
       }
       for (let k = Math.round(average); k < 5; k++) {
-        if(k==5){
+        if(k===5){
           console.log("break k",k)
           break;
         }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 //Components
 import Store from "../../components/store/store";
-import Filter from "../../components/filter/index";
+import Filter from "../../components/filter/filter";
 import BreadCrumb from "../../components/breadcrumb/breadcrumb";
 
 //Redux
@@ -127,19 +127,22 @@ class CategoryContainer extends Component {
       return allCategories.filter(x => x.parentId === id).map(x => x.id);
     };
 
-    findBrandList = (products, prevState) => {
-      let _brandList = this.state.brandList;
-      products.forEach(element => {
-        if (!_brandList.includes(element.brand)) {
-          _brandList.push(element.brand);
+    findBrandList = (products) => {
+      let _brandList = [];
+      products.forEach(p => {
+        if (!_brandList.includes(p.brand)) {
+          _brandList.push(p.brand);
         }
       });
+      return _brandList;
+    };
 
-      if (_brandList !== prevState.brandList) {
-        this.setState({
-          brandList: _brandList
-        });
-      }
+    findCityList = (products) => {
+      let _cityList = [];
+      this.props.apiProducts.forEach(p => {
+        _cityList = [...new Set([..._cityList, ...p.cityOptions])];
+      });
+      return _cityList;
     };
 
     filterProducts = (productList) => {
@@ -164,19 +167,17 @@ class CategoryContainer extends Component {
     }
 
   render() {
-    this.findBrandList(this.props.apiProducts, this.state);
-    let _cityList = [];
-    this.props.apiProducts.forEach(element => {
-      _cityList = [...new Set([..._cityList, ...element.cityOptions])];
-    });
-    console.log("City List: " + _cityList);
-    console.log("Brand List: " + this.state.brandList);
+     console.log("category container", this.props);
 
     // Category paths that are fetched from url
     const { mainCategory, subheader } = this.props.match.params;
     // Category objects created from paths
     const categories = this.findCategoryWithPath(mainCategory, subheader);
-    console.log("category container", this.props);
+
+    //City list to show in CitySelectBox
+    const cityList = this.findCityList(this.props.apiProducts);
+    //Brand list to show in BrandSelectBox
+    const brandList = this.findBrandList(this.props.apiProducts);
     return (
       <div className="category-container">
         {/* Create Breadcrumb with category objects */}
@@ -186,8 +187,8 @@ class CategoryContainer extends Component {
             <div id="aside" className="col-sm-6 col-md-3">
               {/* Filter Component */}
               <Filter
-                cityList={_cityList}
-                brandList={this.state.brandList}
+                cityList={cityList}
+                brandList={brandList}
                 currentCategories={categories}
               />
             </div>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 //Components
 import Store from '../../components/store/store';
-import Filter from '../../components/filter/index';
 import SlideProduct from '../../components/slide-product/slide';
 
 //Redux

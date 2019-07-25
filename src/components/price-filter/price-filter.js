@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateFilters } from "../../redux/product/actions";
 
-import { Link } from "react-router-dom";
-
 class PriceFilter extends Component {
   constructor(props) {
     super(props);
