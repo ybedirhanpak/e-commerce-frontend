@@ -32,6 +32,7 @@ class HomeContainer extends Component {
                             <Store
                                 apiProducts={this.props.apiProducts}
                                 fetchInProgress={this.props.fetchInProgress}
+                                filters={this.props.filters}
                             />
                         </div>
                     </div>
@@ -45,6 +46,7 @@ class HomeContainer extends Component {
 const mapStateToProps = state => {
     return {
         apiProducts: state.product.productList,
+        filters: state.product.filters,
         fetchInProgress: state.product.fetchInProgress,
         allCategories: state.category.categories
     };
