@@ -11,12 +11,13 @@ export default class Filter extends Component {
   render() {
     return (
       <div className="aside-filter">
-        <PriceFilter />
 
         <CategorySelectBox
           data={this.categories}
           currentCategories={this.props.currentCategories}
         />
+        
+        <PriceFilter />
         
         <Box data={this.props.cityList} title="CITIES" />
 

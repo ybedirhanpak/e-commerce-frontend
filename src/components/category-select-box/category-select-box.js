@@ -91,7 +91,7 @@ class CategorySelectBox extends Component {
         <h3 className="aside-title" >
           {title}
         </h3>
-        <div>
+        <div className="scrollable">
         {
           (!isNullOrUndefined(_subheader)) ?
           (this.generateSubCategories(_subheader)) : 

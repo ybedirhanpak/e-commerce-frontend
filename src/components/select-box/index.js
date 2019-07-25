@@ -17,7 +17,7 @@ export default class index extends Component {
     return (
       <div>
         <h3 className="aside-title">{this.props.title}</h3>
-        <div className="aside">
+        <div className="aside scrollable">
           <div id={"items-" + this.props.data.title}>{optionsList}</div>
         </div>
       </div>

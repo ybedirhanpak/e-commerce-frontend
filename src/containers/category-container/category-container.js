@@ -142,13 +142,13 @@ class CategoryContainer extends Component {
     };
 
   render() {
-    this.findBrandList(this.props.apiProducts, this.state);
-    let _cityList = [];
-    this.props.apiProducts.forEach(element => {
-      _cityList = [...new Set([..._cityList, ...element.cityOptions])];
-    });
-    console.log("City List: " + _cityList);
-    console.log("Brand List: " + this.state.brandList);
+    // this.findBrandList(this.props.apiProducts, this.state);
+     let _cityList = [];
+    // this.props.apiProducts.forEach(element => {
+    //   _cityList = [...new Set([..._cityList, ...element.cityOptions])];
+    // });
+    // console.log("City List: " + _cityList);
+    // console.log("Brand List: " + this.state.brandList);
 
     // Category paths that are fetched from url
     const { mainCategory, subheader } = this.props.match.params;

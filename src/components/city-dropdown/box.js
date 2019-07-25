@@ -31,7 +31,7 @@ class Box extends Component {
     return (
       <div className="box-filter">
         <h3 className="aside-title">Select City</h3>
-        <div className="aside">
+        <div className="aside scrollable">
           <div>{cities}</div>
         </div>
       </div>

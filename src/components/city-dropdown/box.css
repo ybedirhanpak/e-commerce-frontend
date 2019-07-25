@@ -13,10 +13,11 @@
   margin-left: 5px;
 }
 
-.aside {
-  max-height: 1755px;
+.scrollable {
+  max-height: 175px;
   overflow-y: scroll;
 }
+
 .aside-title {
   font-size: 18px;
 }

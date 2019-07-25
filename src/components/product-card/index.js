@@ -77,7 +77,7 @@ class ProductCard extends React.Component {
     return (
       <div>
         <div className="product">
-          <div className="product-img" style={{minHeight:300}}>
+          <div className="product-img" style={{height:300}}>
             {/* <Image width={240} height={240} src={product.imgSource} alt="Product" /> */}
             <img className="only-product-img" src={product.imgSource} alt="Product" />
             <div className="product-label">
