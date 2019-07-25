@@ -1,5 +1,5 @@
 import { API } from "../../api-config";
-import { PostWithUrlBody } from "../../services/url-helper";
+import { PostWithUrlBody, PutWithUrlBody } from "../../services/url-helper";
 
 /* Action Types */
 
@@ -10,6 +10,8 @@ const RESET_LOGIN = 'RESET_LOGIN';
 const INITIALIZE_LOGIN = 'INITIALIZE_LOGIN';
 const COMPLETE_LOGIN = "COMPLETE_LOGIN";
 const LOGOUT = "LOGOUT";
+const UPDATE_USER = "UPDATE_USER"
+
 export const actionTypes = {
   RESET_REGISTER,
   INITIALIZE_REGISTER,
@@ -17,7 +19,8 @@ export const actionTypes = {
   RESET_LOGIN,
   INITIALIZE_LOGIN,
   COMPLETE_LOGIN,
-  LOGOUT
+  LOGOUT,
+  UPDATE_USER
 };
 
 /* Action Creators */
@@ -29,7 +32,8 @@ export const actionCreators = {
   resetLogin,
   initializeLogin,
   completeLogin,
-  logout
+  logout,
+  updateUser
 };
 
 function resetRegister() {
@@ -76,6 +80,13 @@ function logout() {
   };
 }
 
+function updateUser(userConfig) {
+  return{
+    type: UPDATE_USER,
+    payload: userConfig
+  }
+}
+
 /* Api Call Functions */
 
 export const postUserRegister = body => {
@@ -109,3 +120,16 @@ export const postUserLogin = body => {
       .catch(error => console.log("Error when fetch register\n", error));
   };
 };
+
+export const postUserUpdate = (id,body) => {
+  console.log("add address body",body);
+  return dispatch => {
+    PutWithUrlBody(API + "/users/update/" +id, body)
+      .then(response => response.json())
+      .then(response => {
+        return (dispatch(updateUser(response)))
+      })
+      .catch(error => console.log("Error when adding address\n", error));
+  };
+};
+

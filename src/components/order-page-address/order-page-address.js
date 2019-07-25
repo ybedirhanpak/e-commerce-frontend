@@ -1,14 +1,26 @@
 import React, { Component } from 'react'
+import './order-page-address.css'
+
+//Redux
 import {connect} from 'react-redux'
-import './address-card.css'
+import { actionCreators } from '../../redux/order/actions'
 
-import { Link } from 'react-router-dom'
+//Router
+import {Link} from 'react-router-dom'
 
-
-class AdressCard extends Component {
+class OrderPageAddress extends Component {
     constructor(props){
         super(props)
         
+    }
+
+    handleClick = (event,address) => {
+        if(this.props.type === "shipping") {
+            this.props.selectShippingAddress(address)
+            this.props.selectBillingAddress(address)
+        } else if(this.props.type === "billing") {
+            this.props.selectBillingAddress(address)
+        }
     }
 
     createAddress = () => {
@@ -21,8 +33,7 @@ class AdressCard extends Component {
                 <h5>{this.props.currentUser.firstName} {this.props.currentUser.lastName}</h5>
                 <p className="order-address-p">{address.address}</p>
                 <br></br>
-                <input className="btn btn-danger" type="button" value="Delete" style={{marginRight:10}}></input>
-                <input className="btn btn-warning" type="button" value="Edit"></input>
+                <input className="btn btn-danger" type="button" value="Select" onClick={(event) => this.handleClick(event,address)}></input>
                 </div>
             </div>
         )
@@ -33,7 +44,7 @@ class AdressCard extends Component {
     render() {
         console.log("address card", this.props)
         return (
-            <div className="row">
+            <div className="row order-page-address">
                 <div className="col-xs-12 col-md-6">
                     <div class="card card-2">
                         <Link to='/account/addAddress'>
@@ -49,8 +60,14 @@ class AdressCard extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        currentUser: state.user.currentUser
+        currentUser: state.user.currentUser,
+        order: state.order
     }
 }
 
-export default connect(mapStateToProps) (AdressCard)
+const mapDispatchToProps = {
+    selectShippingAddress: actionCreators.selectShippingAddress,
+    selectBillingAddress: actionCreators.selectBillingAddress
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (OrderPageAddress)

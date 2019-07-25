@@ -1,0 +1,10 @@
+.order-page-address{
+    overflow-y: scroll;
+    max-height: 600px;
+    
+}
+.order-address-p{
+    overflow-y: scroll;
+    max-height: 70px;
+    
+}

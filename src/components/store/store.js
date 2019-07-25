@@ -27,6 +27,7 @@ export default class Store extends Component {
           </div>
         )
       });
+      console.log("productslist",this.props.apiProducts)
       return productsList;
     }
   };
