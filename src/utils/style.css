@@ -954,6 +954,9 @@ textarea.input {
 .product .product-body .product-rating>i.fa-star {
   color: #ef233c;
 }
+.product .product-body .product-rating>i.fa-star-half-o {
+  color: #ef233c;
+}
 
 .product .product-body .product-rating:after {
   content: "";

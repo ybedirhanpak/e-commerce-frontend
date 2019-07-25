@@ -131,6 +131,7 @@ class CategoryContainer extends Component {
                             <Store 
                                 apiProducts={this.props.apiProducts}
                                 fetchInProgress={this.props.fetchInProgress}
+                                filters={this.props.filters}
                             />
                         </div>
                     </div>
@@ -144,6 +145,7 @@ const mapStateToProps = state => {
     return {
       apiCategories: state.category.categories,
       apiProducts: state.product.productList,
+      filters: state.product.filters,
       fetchInProgress: state.product.fetchInProgress
     };
 };

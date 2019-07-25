@@ -11,6 +11,11 @@ export default class Store extends Component {
 
     //Bind Functions
     this.createProducts = this.createProducts.bind(this);
+    this.filterProducts = this.filterProducts.bind(this);
+  }
+
+  filterProducts = () => {
+    
   }
 
   createProducts = () => {
@@ -33,6 +38,7 @@ export default class Store extends Component {
 
   render() {
     console.log("store props", this.props);
+    this.filterProducts();
     return (
       <>
         <StoreTopFilter />
