@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import './add-category-container.css';
+
+//Components
 import AddCategoryRight from "../../components/add-category-right/add-category-right";
 import AddCategoryTop from "../../components/add-category-top/add-category-top";
 import AddCategoryLeft from "../../components/add-category-left/add-category-left";
+
+//Redux
 import { connect } from "react-redux";
 
 class AddCategoryContainer extends Component {
@@ -42,18 +47,22 @@ class AddCategoryContainer extends Component {
 
   render() {
     return (
-      <div className="row container">
-        <div className="col-md-12">
-          <h1>Main Categories</h1>
-          <AddCategoryTop
-            setSub={this.setSubCategories}
-            categoryList={this.props.categories}
-            clearParents={this.clearParents}
-          />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-2"></div>
+          <div className="col-md-8 add-category-top">
+            <h1>Main Categories</h1>
+            <AddCategoryTop
+              setSub={this.setSubCategories}
+              categoryList={this.props.categories}
+              clearParents={this.clearParents}
+            />
+          </div>
+          <div className="col-md-2"></div>
         </div>
-        <div>
-          <div className="col-md-6">
-            <h1>Sub Categories</h1>
+        <div className="row">
+          <div className="col-md-6 add-category-left">
+            <h1>Sub Categories-1</h1>
             <AddCategoryLeft
               setSub={this.setSubCategories}
               allCategories={this.props.categories}
@@ -61,8 +70,8 @@ class AddCategoryContainer extends Component {
               clearParents={this.clearParents}
             />
           </div>
-          <div className="col-md-6">
-            <h1>Sub Categories2</h1>
+          <div className="col-md-6 add-category-right">
+            <h1>Sub Categories-2</h1>
             <AddCategoryRight
               parentId={this.state.parentId2}
               allCategories={this.props.categories}

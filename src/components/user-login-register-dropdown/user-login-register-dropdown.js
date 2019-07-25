@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 
 //Route
 import { Link } from 'react-router-dom'
+import { isNullOrUndefined } from 'util';
 
 class UserLoginRegisterDropdown extends Component {
     render() {
-      if(!this.props.user.currentUser){
+      if(isNullOrUndefined(this.props.user.currentUser)){
         return (
           <div>
               <button
@@ -34,7 +35,7 @@ class UserLoginRegisterDropdown extends Component {
               </ul>
             </div>
           )
-      }else {
+      } else if(this.props.user.currentUser.role === 'User'){
         return (
           <div>
             <button
@@ -62,7 +63,35 @@ class UserLoginRegisterDropdown extends Component {
             </ul>
          </div>
         )
-      }
+      } else {
+          return (
+              <div>
+              <button
+                href=""
+                className="btn btn-default btn-rounded my-6 dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                <i className="fa fa-user" />
+                <span>{` ${this.props.user.currentUser.firstName}`}</span>
+              </button>
+              <ul className="dropdown-menu dropdown-menu-large row">
+                    {/* Add Category */}
+                    <li><Link to='/add-category'>Add Category</Link></li>
+
+                    <li className="divider" />
+                    
+                    {/* Add Product */}
+                    <li><Link to='/add-product'>Add Product</Link></li>
+
+                    <li className="divider" />
+
+                    {/* Logout */}
+                    <li><Link to='/logout'>Logout</Link></li>
+  
+              </ul>
+          </div>
+          )
+        }
     }
 }
 

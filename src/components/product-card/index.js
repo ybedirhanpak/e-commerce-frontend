@@ -55,7 +55,7 @@ class ProductCard extends React.Component {
     }
   }
 
-  generatePath = () => {
+  generateProductPath = () => {
     const _subcategory = this.props.allCategories.filter(x => x.id === this.props.product.category)[0];
 
     const _subheader = (_subcategory !== undefined) ?
@@ -66,6 +66,21 @@ class ProductCard extends React.Component {
 
     if(_mainCategory !== undefined)
       return `/show/${_mainCategory.path}/${_subheader.path}/${this.props.product.id}`;
+    else
+      return '/error'
+  }
+
+  generateCategoryPath = () => {
+    const _subcategory = this.props.allCategories.filter(x => x.id === this.props.product.category)[0];
+
+    const _subheader = (_subcategory !== undefined) ?
+      (this.props.allCategories.filter(x => x.id === _subcategory.parentId)[0]) : (undefined);
+
+    const _mainCategory = (_subheader !== undefined) ?
+      (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
+
+    if(_mainCategory !== undefined)
+      return `/show/${_mainCategory.path}/${_subheader.path}`;
     else
       return '/error'
   }
@@ -89,12 +104,18 @@ class ProductCard extends React.Component {
           </div>
           <div className="product-body">
             {/* Category */}
-            <p className="product-category">{this.findCategoryName(product.category)}</p>
+            <p className="product-category">
+              <Link to={this.generateCategoryPath()}>
+                {
+                  this.findCategoryName(product.category)
+                }
+              </Link>
+            </p>
             {/* Name */}
             <h3 className="product-name">
               <Link
                 to={{
-                  pathname: this.generatePath(),
+                  pathname: this.generateProductPath(),
                   state: { id: product.id }
                 }}
               >
