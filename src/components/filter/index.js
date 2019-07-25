@@ -1,53 +1,20 @@
 import React, { Component } from "react";
-
-import SelectBox from "../select-box";
-import Box from '../city-dropdown/box'
 import './style.css'
 
-export default class index extends Component {
+//Components
+import SelectBox from "../select-box";
+import Box from '../city-dropdown/box'
+import CategorySelectBox from '../category-select-box/category-select-box';
+import PriceFilter from '../price-filter/price-filter'
 
-  cities= [
-    {
-        "name": "İstanbul"
-    },
-    {
-        "name": "Hatay"
-    },
-    {
-        "name": "Ankara"
-    },
-    {
-        "name": "Bursa"
-    },
-    {
-        "name": "İzmir"
-    }
-]
-  
-
+export default class Filter extends Component {
   render() {
     return (
       <div className="aside-filter">
+        <CategorySelectBox data={this.categories} currentCategories={this.props.currentCategories} />
         <SelectBox data={this.categories} />
-
-        <div className="aside">
-          <h3 className="aside-title">Price</h3>
-          <div className="price-filter">
-            <div id="price-slider" />
-            <div className="input-number price-min">
-              <input id="price-min" type="number" />
-              <span className="qty-up">+</span>
-              <span className="qty-down">-</span>
-            </div>
-            <span>-</span>
-            <div className="input-number price-max">
-              <input id="price-max" type="number" />
-              <span className="qty-up">+</span>
-              <span className="qty-down">-</span>
-            </div>
-          </div>
-        </div>
-        
+        <PriceFilter url={this.props.url}/>
+               
         <Box data={this.cities}/>
        
         <SelectBox data={this.brands} />
@@ -55,6 +22,8 @@ export default class index extends Component {
       </div>
     );
   }
+
+
   categories = {
     title: "CATEGORIES",
     options: [
@@ -113,4 +82,22 @@ export default class index extends Component {
       }
     ]
   };
+
+  cities= [
+    {
+        "name": "İstanbul"
+    },
+    {
+        "name": "Hatay"
+    },
+    {
+        "name": "Ankara"
+    },
+    {
+        "name": "Bursa"
+    },
+    {
+        "name": "İzmir"
+    }
+]
 }

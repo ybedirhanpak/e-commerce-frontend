@@ -115,6 +115,7 @@ class CategoryContainer extends Component {
         const { mainCategory, subheader, subcategory } = this.props.match.params;
         // Category objects created from paths
         const categories = this.findCategoryWithPath(mainCategory, subheader, subcategory);
+        console.log("cateogyr container", this.props);
         return (
             <div className="category-container">
                 {/* Create Breadcrumb with category objects */}
@@ -123,7 +124,7 @@ class CategoryContainer extends Component {
                     <div className="row">
                         <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
-                            <Filter/>
+                            <Filter url={this.props.match.url} currentCategories={categories}/>
                         </div>
                         <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}
@@ -145,14 +146,14 @@ const mapStateToProps = state => {
       apiProducts: state.product.productList,
       fetchInProgress: state.product.fetchInProgress
     };
-  };
+};
   
-  const mapDispatchToProps = {
+const mapDispatchToProps = {
     getProductList,
     getProductListWithCategory
-  };
+};
   
-  export default connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CategoryContainer);
+)(CategoryContainer);

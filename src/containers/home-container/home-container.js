@@ -16,6 +16,7 @@ class HomeContainer extends Component {
     }
 
     render() {
+        console.log("home container props", this.props);
         const currentDate = new Date();
         const year = (currentDate.getMonth() === 11 && currentDate.getDate() > 23) ? currentDate.getFullYear() + 1 : currentDate.getFullYear();
         return (
@@ -24,18 +25,18 @@ class HomeContainer extends Component {
                     <div className="row">
                         <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
-                            <Filter/>
+                            {/* <Filter/> */}
                         </div>
                         <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}
-                            <Store 
+                            <Store
                                 apiProducts={this.props.apiProducts}
                                 fetchInProgress={this.props.fetchInProgress}
                             />
                         </div>
                     </div>
                 </div>
-                <SlideProduct date={`${year}-07-20T00:00:00`}/>
+                <SlideProduct date={`${year}-07-26T18:00:00`} />
             </div>
         )
     }
@@ -43,18 +44,17 @@ class HomeContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-      apiProducts: state.product.productList,
-      fetchInProgress: state.product.fetchInProgress,
-      allCategories: state.category.categories
+        apiProducts: state.product.productList,
+        fetchInProgress: state.product.fetchInProgress,
+        allCategories: state.category.categories
     };
 };
-  
+
 const mapDispatchToProps = {
-getProductList
+    getProductList
 };
-  
+
 export default connect(
-mapStateToProps,
-mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(HomeContainer);
-  

@@ -14,11 +14,13 @@ import { isNullOrUndefined } from "util";
 const INITIALIZE_FETCH_PRODUCT = "INITIALIZE_FETCH_PRODUCT";
 const SAVE_PRODUCT_LIST = "SAVE_PRODUCT_LIST";
 const SAVE_SINGLE_PRODUCT = "SAVE_SINGLE_PRODUCT";
+const UPDATE_FILTERS = "UPDATE_FILTERS"
 
 export const actionTypes = {
   INITIALIZE_FETCH_PRODUCT,
   SAVE_PRODUCT_LIST,
-  SAVE_SINGLE_PRODUCT
+  SAVE_SINGLE_PRODUCT,
+  UPDATE_FILTERS
 };
 
 /* Action Creators */
@@ -34,6 +36,13 @@ function saveProductList(productList) {
     type: SAVE_PRODUCT_LIST,
     payload: productList
   };
+}
+
+export function updateFilters(filters){
+  return{
+    type: UPDATE_FILTERS,
+    payload: filters
+  }
 }
 
 function saveSingleProduct(product) {
@@ -71,10 +80,7 @@ export const getProductListWithCategory = categoryIds => {
     PostWithUrlBody(API + "/products/getByCategory/", categoryIds)
       .then(response => response.json())
       .then(response => {
-        if (
-          isNullOrUndefined(response.status) ||
-          (response.status >= 200 && response.status < 300)
-        ) {
+        if (isNullOrUndefined(response.status) || (response.status >= 200 && response.status < 300)) {
           dispatch(saveProductList(response));
         } else {
           console.log("Error when getProductListWithCategory ", response);

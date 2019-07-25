@@ -101,6 +101,12 @@ function userReducer(state = initialState, action) {
         ...state,
         currentUser: null
       }
+      case actionTypes.UPDATE_USER:
+        return {
+          ...state,
+          currentUser: action.payload,
+          fetchInProgress: false
+        }
     default:
       return state;
   }

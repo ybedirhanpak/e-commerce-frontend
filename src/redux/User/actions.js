@@ -1,5 +1,5 @@
 import { API } from "../../api-config";
-import { PostWithUrlBody } from "../../services/url-helper";
+import { PostWithUrlBody, PutWithUrlBody } from "../../services/url-helper";
 
 /* Action Types */
 
@@ -10,7 +10,7 @@ const RESET_LOGIN = 'RESET_LOGIN';
 const INITIALIZE_LOGIN = 'INITIALIZE_LOGIN';
 const COMPLETE_LOGIN = "COMPLETE_LOGIN";
 const LOGOUT = "LOGOUT";
-const ADD_ADDRESS = "ADD_ADDRESS"
+const UPDATE_USER = "UPDATE_USER"
 
 export const actionTypes = {
   RESET_REGISTER,
@@ -20,7 +20,7 @@ export const actionTypes = {
   INITIALIZE_LOGIN,
   COMPLETE_LOGIN,
   LOGOUT,
-  ADD_ADDRESS
+  UPDATE_USER
 };
 
 /* Action Creators */
@@ -33,7 +33,7 @@ export const actionCreators = {
   initializeLogin,
   completeLogin,
   logout,
-  addAdress
+  updateUser
 };
 
 function resetRegister() {
@@ -80,10 +80,10 @@ function logout() {
   };
 }
 
-function addAdress({firstName, lastName, email, address, city, country, zipCode, tel}) {
+function updateUser(userConfig) {
   return{
-    type: ADD_ADDRESS,
-    payload: {firstName, lastName, email, address, city, country, zipCode, tel}
+    type: UPDATE_USER,
+    payload: userConfig
   }
 }
 
@@ -121,4 +121,15 @@ export const postUserLogin = body => {
   };
 };
 
+export const postUserUpdate = (id,body) => {
+  console.log("add address body",body);
+  return dispatch => {
+    PutWithUrlBody(API + "/users/update/" +id, body)
+      .then(response => response.json())
+      .then(response => {
+        return (dispatch(updateUser(response)))
+      })
+      .catch(error => console.log("Error when adding address\n", error));
+  };
+};
 
