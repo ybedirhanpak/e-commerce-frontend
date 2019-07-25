@@ -46,6 +46,14 @@ function productReducer(state = initialState, action) {
             }
           }
         }
+      } else if(action.payload.type === "subcategories") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            subcategories : action.payload.subcategories
+          }
+        }
       }
       return state;
     default:

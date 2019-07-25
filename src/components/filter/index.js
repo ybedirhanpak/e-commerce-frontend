@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import './style.css';
-import PriceFilter from '../price-filter/price-filter'
 
 //Components
 import SelectBox from "../select-box";
@@ -12,8 +11,8 @@ export default class Filter extends Component {
   render() {
     return (
       <div className="aside-filter">
-        <CategorySelectBox data={this.categories} currentCategories={this.props.currentCategories} />
-        <PriceFilter url={this.props.url}/>
+        <CategorySelectBox currentCategories={this.props.currentCategories}/>
+        <PriceFilter />
         <Box data={this.cities}/>
         <SelectBox data={this.brands} />
       </div>

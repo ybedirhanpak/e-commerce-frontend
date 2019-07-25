@@ -4,22 +4,52 @@ import "./category-select-box.css";
 //Redux
 import { connect } from "react-redux";
 import { isNullOrUndefined } from "util";
+import { updateFilters } from "../../redux/product/actions";
 
 //Route
 import { Link } from 'react-router-dom'
 
 class CategorySelectBox extends Component {
 
+  handleSubcategoryClick = (event, subcategoryChecked) => {
+    //Get filter categories from redux
+    const filterCategories = this.props.filterCategories;
+    let newFilterCategories = [];
+    if(subcategoryChecked) {
+      console.log("Remove")
+      newFilterCategories = filterCategories.filter(x => x !== event.target.id)
+    } else {
+      console.log("Add")
+      newFilterCategories = [...filterCategories, event.target.id]
+    }
+
+    this.props.updateFilters({
+      type:"subcategories",
+      subcategories:newFilterCategories
+    })
+
+  }
+
   generateSubCategories = (_subheader) => {
+    //Get filter categories from redux
+    const filterCategories = this.props.filterCategories;
+    //Find all subcategories
     const _subcategories = this.props.allCategories.filter(x => x.parentId == _subheader.id);
     //Create _subcategories list
     const subCategoriesCheckboxList = _subcategories.map((subcategory, index) => 
     {
+      const subcategoryChecked = filterCategories.includes(subcategory.id);
       return (
       <>
         <div key={subcategory.id + index} >
           <div className="input-checkbox">
-            <input type="checkbox" id={subcategory.id} />
+            <input 
+            checked={subcategoryChecked} 
+            type="checkbox" 
+            id={subcategory.id} 
+            onClick={(event) => this.handleSubcategoryClick(event, subcategoryChecked)}
+            >
+            </input>
             <label htmlFor={subcategory.id}>
               <span />
               {subcategory.name}
@@ -76,11 +106,16 @@ class CategorySelectBox extends Component {
 
 const mapStateToProps = state => {
   return {
-    allCategories: state.category.categories
+    allCategories: state.category.categories,
+    filterCategories: state.product.filters.subcategories
   };
 }
 
+const mapDispatchToProps = {
+  updateFilters
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(CategorySelectBox);

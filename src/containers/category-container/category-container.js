@@ -7,7 +7,7 @@ import BreadCrumb from '../../components/breadcrumb/breadcrumb'
 
 //Redux
 import { connect } from "react-redux";
-import { getProductList, getProductListWithCategory } from "../../redux/product/actions";
+import { getProductList, getProductListWithCategory, updateFilters } from "../../redux/product/actions";
 import { isNullOrUndefined } from 'util';
 
 /**
@@ -59,7 +59,21 @@ class CategoryContainer extends Component {
         const { mainCategory, subheader } = this.props.match.params;
         // Category objects created from paths
         const { _mainCategory, _subheader } = this.findCategoryWithPath(mainCategory, subheader);
+        //Fetch api products according to categories
         this.loadProducts(_mainCategory, _subheader);
+        //Update subcategory filter
+        if(!isNullOrUndefined(this.props.location.state) && !isNullOrUndefined(this.props.location.state.selectedSubCategory)) {
+            const selectedSubCategory = this.props.location.state.selectedSubCategory;
+            this.props.updateFilters({
+                type:"subcategories",
+                subcategories:[selectedSubCategory]
+            })
+        } else {
+            this.props.updateFilters({
+                type:"subcategories",
+                subcategories:[]
+            })
+        }
     }
 
     findIdWithPath = (path) => {
@@ -124,7 +138,7 @@ class CategoryContainer extends Component {
                     <div className="row">
                         <div id="aside" className="col-sm-6 col-md-3">
                             {/* Filter Component */}
-                            <Filter url={this.props.match.url} currentCategories={categories}/>
+                            <Filter currentCategories={categories}/>
                         </div>
                         <div id="store" className="col-sm-6 col-md-9">
                             {/* Store Component */}
@@ -144,14 +158,14 @@ const mapStateToProps = state => {
     return {
       apiCategories: state.category.categories,
       apiProducts: state.product.productList,
-      fetchInProgress: state.product.fetchInProgress,
-      filterCategories: state.product.filters.subcategories
+      fetchInProgress: state.product.fetchInProgress
     };
 };
   
 const mapDispatchToProps = {
     getProductList,
-    getProductListWithCategory
+    getProductListWithCategory,
+    updateFilters
 };
   
 export default connect(
