@@ -22,7 +22,6 @@ class CategorySelectBox extends Component {
       console.log("Add")
       newFilterCategories = [...filterCategories, event.target.id]
     }
-
     this.props.updateFilters({
       type:"subcategories",
       subcategories:newFilterCategories
