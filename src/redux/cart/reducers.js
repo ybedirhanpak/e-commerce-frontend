@@ -42,7 +42,8 @@ function cartReducer(state = initialState, action) {
                             quantity: state.productsList[i].quantity + action.payload.quantity,
                             rawPrice: state.productsList[i].rawPrice,
                             price: String(Number(state.productsList[i].price) + 
-                                Number(state.productsList[i].rawPrice) * Number(action.payload.quantity))
+                                Number(state.productsList[i].rawPrice) * Number(action.payload.quantity)),
+                            oldPrice: state.productsList[i].oldPrice
                         }
                         let tmp = state.productsList.filter(product => product.id !== state.productsList[i].id);
                         if(data.quantity > 0) {
