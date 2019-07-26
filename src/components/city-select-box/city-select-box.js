@@ -1,34 +1,93 @@
 import React, { Component } from "react";
 import "./city-select-box";
+import { connect } from "react-redux";
 
-export default class CitySelectBox extends Component {
+import { updateFilters } from "../../redux/product/actions";
 
-  generateCityCheckBoxes = () => {
-    const cityList = this.props.currentCities.map((city, index) => (
-      <div key={index}>
-        <div className="input-checkbox">
-          <input type="checkbox" id={city + "-" + index} />
-          <label htmlFor={city + "-" + index}>
-            <span />
-            {city}
-          </label>
-        </div>
-      </div>
-    ));
+class CitySelectBox extends Component {
+  generateCity = () => {
+    let cities = [];
+    this.props.currentCities.map(element => {
+      if (
+        this.props.allCities.filter(temp => element === temp.id)[0] !==
+        undefined
+      ) {
+        cities.push(
+          this.props.allCities.filter(temp => element === temp.id)[0]
+        );
+      }
+    });
+
+    return cities;
+  };
+
+  handleClick = (event, subcategoryChecked) => {
+    const filterCities = this.props.filterCities;
+    let newFilterCities = [];
+    if (subcategoryChecked) {
+      newFilterCities = filterCities.filter(x => x !== event.target.value);
+    } else {
+      newFilterCities = [...filterCities, event.target.value];
+    }
+    this.props.updateFilters({
+      type: "city_filter",
+      cities: newFilterCities
+    });
+  };
+
+  generateCityCheckBoxes = list => {
+    const filterCities = this.props.filterCities;
+    const cityList = list.map((city, index) => {
+      const cityChecked = filterCities.includes(city.id);
+      return (
+        <>
+          <div key={index} id={city.id}>
+            <div className="input-checkbox">
+              <input
+                checked={cityChecked}
+                type="checkbox"
+                id={city.id + "-" + index}
+                value={city.id}
+                onClick={event => this.handleClick(event, cityChecked)}
+              />
+              <label htmlFor={city.id + "-" + index}>
+                <span />
+                {city.name}
+              </label>
+            </div>
+          </div>
+        </>
+      );
+    });
     return cityList;
-  }
+  };
 
   render() {
-    console.log("City props:", this.props);
     return (
       <div>
         <div className="aside">
-        <h3 className="aside-title">{'Cities'}</h3>
+          <h3 className="aside-title">{"Cities"}</h3>
           <div className="scrollable">
-            {this.generateCityCheckBoxes()}
+            {this.generateCityCheckBoxes(this.generateCity())}
           </div>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    allCities: state.city.cityList,
+    filterCities: state.product.filters.cities
+  };
+};
+
+const mapDispatchToProps = {
+  updateFilters
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CitySelectBox);

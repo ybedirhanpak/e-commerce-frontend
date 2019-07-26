@@ -7,8 +7,12 @@ import BreadCrumb from "../../components/breadcrumb/breadcrumb";
 
 //Redux
 import { connect } from "react-redux";
-import { getProductList, getProductListWithCategory, updateFilters } from "../../redux/product/actions";
-import { isNullOrUndefined } from 'util';
+import {
+  getProductList,
+  getProductListWithCategory,
+  updateFilters
+} from "../../redux/product/actions";
+import { isNullOrUndefined } from "util";
 
 /**
  * CategoryContainer is used when application is on one of these paths:
@@ -24,13 +28,13 @@ import { isNullOrUndefined } from 'util';
  *      url,
  *  }
  * }
- * 
+ *
  * Example: "http://localhost:3000/show/erkek/giyim"
- * 
+ *
  * mainCategory: "erkek"
  * subheader: "giyim"
  * url: "/show/erkek/giyim"
- * 
+ *
  */
 class CategoryContainer extends Component {
   constructor() {
@@ -56,119 +60,130 @@ class CategoryContainer extends Component {
       this.initializeCategory();
     }
   }
-  
-    /**
-     * Executes load operation with category objects
-     */
-    initializeCategory = () => {
-        // Category paths that are fetched from url
-        const { mainCategory, subheader } = this.props.match.params;
-        // Category objects created from paths
-        const { _mainCategory, _subheader } = this.findCategoryWithPath(mainCategory, subheader);
-        //Fetch api products according to categories
-        this.loadProducts(_mainCategory, _subheader);
-        //Update subcategory filter
-        if(!isNullOrUndefined(this.props.location.state) && !isNullOrUndefined(this.props.location.state.selectedSubCategory)) {
-            const selectedSubCategory = this.props.location.state.selectedSubCategory;
-            this.props.updateFilters({
-                type:"subcategories",
-                subcategories:[selectedSubCategory]
-            })
-        } else {
-            this.props.updateFilters({
-                type:"subcategories",
-                subcategories:[]
-            })
-        }
-    }
 
-    findIdWithPath = (path) => {
-        return this.props.apiCategories.filter(x => x.path === path)[0];
-    }
-
-    findIdWithPathAndParent = (path, parentId) => {
-        return this.props.apiCategories.filter(x => x.path === path && x.parentId === parentId)[0];
-    }
-
-    /**
-     * Creates category objects according to the path given.
-     */
-    findCategoryWithPath = (mainCategory=null, subheader=null) => {
-        const _mainCategory = (mainCategory !== null) ? this.findIdWithPath(mainCategory) : null;
-        const _subheader = (_mainCategory !== null && subheader !== null) ? 
-            this.findIdWithPathAndParent(subheader, _mainCategory.id) : null;
-        return {
-          _mainCategory,
-          _subheader
-        }
-    };
-
-    /**
-     * Determines the category hierarchy and creates an array of category ids.
-     * Fetches the product list according to category ids.
-     */
-    loadProducts = (_mainCategory, _subheader) => {
-        let categoryIds = [];
-        if(!isNullOrUndefined(_subheader)) {
-            categoryIds = this.findChildrenCategoryIds(_subheader.id);
-        } else if(!isNullOrUndefined(_mainCategory)){
-            const subheaderIds = this.findChildrenCategoryIds(_mainCategory.id);
-            categoryIds = subheaderIds.map(x => this.findChildrenCategoryIds(x)).flat(1);
-        }
-        // Dispatch to get product list
-        this.props.getProductListWithCategory(categoryIds);
-    }
-    
-    /**
-     * Finds children category ids of given category id.
-     */
-    findChildrenCategoryIds = id => {
-      const allCategories = this.props.apiCategories;
-      return allCategories.filter(x => x.parentId === id).map(x => x.id);
-    };
-
-    findBrandList = (products) => {
-      let _brandList = [];
-      products.forEach(p => {
-        if (!_brandList.includes(p.brand)) {
-          _brandList.push(p.brand);
-        }
+  /**
+   * Executes load operation with category objects
+   */
+  initializeCategory = () => {
+    // Category paths that are fetched from url
+    const { mainCategory, subheader } = this.props.match.params;
+    // Category objects created from paths
+    const { _mainCategory, _subheader } = this.findCategoryWithPath(
+      mainCategory,
+      subheader
+    );
+    //Fetch api products according to categories
+    this.loadProducts(_mainCategory, _subheader);
+    //Update subcategory filter
+    if (
+      !isNullOrUndefined(this.props.location.state) &&
+      !isNullOrUndefined(this.props.location.state.selectedSubCategory)
+    ) {
+      const selectedSubCategory = this.props.location.state.selectedSubCategory;
+      this.props.updateFilters({
+        type: "subcategories",
+        subcategories: [selectedSubCategory]
       });
-      return _brandList;
-    };
-
-    findCityList = (products) => {
-      let _cityList = [];
-      this.props.apiProducts.forEach(p => {
-        _cityList = [...new Set([..._cityList, ...p.cityOptions])];
+    } else {
+      this.props.updateFilters({
+        type: "subcategories",
+        subcategories: []
       });
-      return _cityList;
-    };
-
-    filterProducts = (productList) => {
-      console.log(this.props.filters)
-      const filters = this.props.filters;
-      console.log(filters.price.min)
-      let minPrice = 0;
-      let maxPrice = 99999999999999;
-      if (filters.price.min !== "") {
-       minPrice = Number(filters.price.min)
-      } 
-      
-      if(Number(filters.price.max) !== 0){
-        maxPrice = Number(filters.price.max)
-      } 
-  
-      let filteredProducts = productList.filter(product => Number(product.price) >= minPrice && 
-        Number(product.price) <= maxPrice)
-
-      console.log("filtrelenmiş", filteredProducts);
-      return filteredProducts;
     }
+  };
+
+  findIdWithPath = path => {
+    return this.props.apiCategories.filter(x => x.path === path)[0];
+  };
+
+  findIdWithPathAndParent = (path, parentId) => {
+    return this.props.apiCategories.filter(
+      x => x.path === path && x.parentId === parentId
+    )[0];
+  };
+
+  /**
+   * Creates category objects according to the path given.
+   */
+  findCategoryWithPath = (mainCategory = null, subheader = null) => {
+    const _mainCategory =
+      mainCategory !== null ? this.findIdWithPath(mainCategory) : null;
+    const _subheader =
+      _mainCategory !== null && subheader !== null
+        ? this.findIdWithPathAndParent(subheader, _mainCategory.id)
+        : null;
+    return {
+      _mainCategory,
+      _subheader
+    };
+  };
+
+  /**
+   * Determines the category hierarchy and creates an array of category ids.
+   * Fetches the product list according to category ids.
+   */
+  loadProducts = (_mainCategory, _subheader) => {
+    let categoryIds = [];
+    if (!isNullOrUndefined(_subheader)) {
+      categoryIds = this.findChildrenCategoryIds(_subheader.id);
+    } else if (!isNullOrUndefined(_mainCategory)) {
+      const subheaderIds = this.findChildrenCategoryIds(_mainCategory.id);
+      categoryIds = subheaderIds
+        .map(x => this.findChildrenCategoryIds(x))
+        .flat(1);
+    }
+    // Dispatch to get product list
+    this.props.getProductListWithCategory(categoryIds);
+  };
+
+  /**
+   * Finds children category ids of given category id.
+   */
+  findChildrenCategoryIds = id => {
+    const allCategories = this.props.apiCategories;
+    return allCategories.filter(x => x.parentId === id).map(x => x.id);
+  };
+
+  findBrandList = products => {
+    let _brandList = [];
+    products.forEach(p => {
+      if (!_brandList.includes(p.brand)) {
+        _brandList.push(p.brand);
+      }
+    });
+    return _brandList;
+  };
+
+  findCityList = products => {
+    let _cityList = [];
+    this.props.apiProducts.forEach(p => {
+      _cityList = [...new Set([..._cityList, ...p.cityOptions])];
+    });
+    return _cityList;
+  };
+
+  filterProducts = productList => {
+    const filters = this.props.filters;
+
+    let minPrice = 0;
+    let maxPrice = 99999999999999;
+    if (filters.price.min !== "") {
+      minPrice = Number(filters.price.min);
+    }
+
+    if (Number(filters.price.max) !== 0) {
+      maxPrice = Number(filters.price.max);
+    }
+
+    let filteredProducts = productList.filter(
+      product =>
+        Number(product.price) >= minPrice && Number(product.price) <= maxPrice
+    );
+
+    return filteredProducts;
+  };
 
   render() {
-     console.log("category container", this.props);
-
     // Category paths that are fetched from url
     const { mainCategory, subheader } = this.props.match.params;
     // Category objects created from paths
@@ -207,18 +222,18 @@ class CategoryContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      apiCategories: state.category.categories,
-      apiProducts: state.product.productList,
-      filters: state.product.filters,
-      fetchInProgress: state.product.fetchInProgress
-    };
+  return {
+    apiCategories: state.category.categories,
+    apiProducts: state.product.productList,
+    filters: state.product.filters,
+    fetchInProgress: state.product.fetchInProgress
+  };
 };
 
 const mapDispatchToProps = {
-    getProductList,
-    getProductListWithCategory,
-    updateFilters
+  getProductList,
+  getProductListWithCategory,
+  updateFilters
 };
 
 export default connect(
