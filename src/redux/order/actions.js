@@ -51,6 +51,7 @@ export const postOrderCheckout = body => {
             if(response.status === 201 || response.status === 200) {
                 response.json().then(data => {
                     console.log("successful", data)
+                    dispatch(orderCheckout(data))
                     const userUpdated = {
                         orders:[data.id]
                     }

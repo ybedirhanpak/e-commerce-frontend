@@ -80,6 +80,7 @@ import {postOrderCheckout} from '../../redux/order/actions'
 			orderTrack: "Pending",
 			paymentType: this.state.payment,
 			orderedProducts: this.props.orderedProducts,
+			orderNotes: this.state.orderNotes,
 			userId: this.props.userId
 		}
 		this.props.postOrderCheckout(orderContent)
