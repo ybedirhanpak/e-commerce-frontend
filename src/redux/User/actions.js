@@ -122,12 +122,20 @@ export const postUserLogin = body => {
 };
 
 export const postUserUpdate = (id,body) => {
-  console.log("add address body",body);
+  console.log("post user update body",body);
   return dispatch => {
     PutWithUrlBody(API + "/users/update/" +id, body)
-      .then(response => response.json())
       .then(response => {
-        return (dispatch(updateUser(response)))
+          if(response.status === 201 || response.status === 200) {
+            response.json().then(data => {
+              console.log("update user success", data)
+              dispatch(updateUser(data)); 
+            })              
+        } else {
+          response.json().then(data => {
+            console.log(data.message)
+          });
+        }
       })
       .catch(error => console.log("Error when adding address\n", error));
   };

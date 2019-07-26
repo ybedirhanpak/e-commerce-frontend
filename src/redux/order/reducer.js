@@ -2,7 +2,8 @@ import {actionTypes} from './actions'
 
 const initalState = {
     selectedShippingAddress:{},
-    selectedBillingAddress:{}
+    selectedBillingAddress:{},
+    orderDetail: {}
 }
 
 function addressReducer (state = initalState, action) {
@@ -17,6 +18,12 @@ function addressReducer (state = initalState, action) {
             return{
                 ...state,
                 selectedBillingAddress: action.payload
+            }
+
+        case actionTypes.ORDER_CHECKOUT:
+            return{
+                ...state,
+                orderDetail: action.payload
             }
         default:
             return state;
