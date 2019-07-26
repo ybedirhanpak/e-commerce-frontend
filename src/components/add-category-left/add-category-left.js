@@ -73,41 +73,75 @@ class AddCategoryLeft extends Component {
       </option>
     ));
     return (
-      <div className="row container">
+      <div className="row">
         <div className="col-md-6">
-          <div className="col-md-6">
-            <div className="form-group">
-              <label htmlFor="product">Sub Category</label>
-              <input
-                type="text"
-                id="categoryInput"
-                className="form-control"
-                placeholder="Sub Category"
-                required
-                name="categoryInput"
-                onChange={this.onChange}
-              />
-            </div>
-            <div className="row container">
-              <div className="col-md-2">
-                <button
-                  className="btn btn-danger btn-lg btn-block"
-                  onClick={this.saveCategory}
-                >
-                  Save
-                </button>
+
+          <div className="row ">
+            <div className="col-sm-12">
+              <div className="form-group">
+                <label htmlFor="product">Sub Category</label>
+                <input
+                  type="text"
+                  id="categoryInput"
+                  className="form-control"
+                  placeholder="Sub Category"
+                  required
+                  name="categoryInput"
+                  onChange={this.onChange}
+                />
               </div>
             </div>
-            <div className="row container">
-              <div className="col-md-2">
-                <button
-                  className="btn btn-danger btn-lg btn-block"
-                  onClick={this.updateCategory}
-                >
-                  Edit
-                </button>
+          </div>
+            
+          <div className="row" style={{marginBottom:10}}>
+            <div className="col-sm-12">
+              <button
+                className="btn btn-danger btn-lg btn-block"
+                onClick={this.saveCategory}
+              >
+                Save
+              </button>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-12">
+              <button
+                className="btn btn-danger btn-lg btn-block"
+                onClick={this.updateCategory}
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="col-md-6">
+
+          <div className="row">
+              <div className="col-md-12">
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="categories">Categories</label>
+                    <select
+                      multiple
+                      className="form-control"
+                      id="sel2"
+                      name="categories"
+                      onChange={this.onChange}
+                      onClick={this.onClick}
+                      style={{width:'100%'}}
+                    >
+                      {categories}
+                    </select>
+                  </div>
+                </form>
               </div>
-              <div className="col-md-2">
+          </div>
+
+          <div className="row">
+              <div className="col-md-12">
                 <button
                   className="btn btn-danger btn-lg btn-block"
                   onClick={this.deleteCategory}
@@ -115,24 +149,10 @@ class AddCategoryLeft extends Component {
                   Delete
                 </button>
               </div>
-            </div>
           </div>
-          <form>
-            <div className="form-group col-md-6">
-              <label htmlFor="categories">Categories</label>
-              <select
-                multiple
-                className="form-control"
-                id="sel2"
-                name="categories"
-                onChange={this.onChange}
-                onClick={this.onClick}
-              >
-                {categories}
-              </select>
-            </div>
-          </form>
+
         </div>
+
       </div>
     );
   }

@@ -20,7 +20,6 @@ class PriceFilter extends Component {
     }
 
     handleClick = () => {
-
         if(this.state.minPrice > this.state.maxPrice){
             this.setState({
                 minPrice:this.state.maxPrice,
@@ -42,30 +41,23 @@ class PriceFilter extends Component {
                 }
             });
         }
-        
-        
     }
 
     setValue = (event) => {
-         
         const { name, value } = event.target;
         this.setState({ [name]: value })
-
     }
 
     increaseMaxClick = () => {
-
         if (this.state.maxPrice === "") {
             this.setState({ maxPrice: "100" })
         } else {
             const newMaxPrice = Number(this.state.maxPrice) + 100
             this.setState({ maxPrice: String(newMaxPrice) })
         }
-
     }
 
     decreaseMaxClick = () => {
-        
         let newMaxPrice = Number(this.state.maxPrice) - 100
         if (newMaxPrice < 0) {
             newMaxPrice = "0"
@@ -86,7 +78,6 @@ class PriceFilter extends Component {
             newMinPrice = this.state.maxPrice
         }
         this.setState({ minPrice: String(newMinPrice) })
-
     }
 
     decreaseMinClick = () => {
@@ -98,7 +89,6 @@ class PriceFilter extends Component {
             minPrice:newMinPrice
         })
     }
-
 
     render() {
         console.log("lala", this.state)
@@ -136,6 +126,7 @@ class PriceFilter extends Component {
         )
     }
 }
+
 const mapStateToProps = state => {
     return {
         filters: state.product.filters,

@@ -14,11 +14,12 @@ import Image from "react-image-resizer";
 //"./img/product01.png"
 
 class ProductCard extends React.Component {
-  
+
   createAverageOfStar = () => {
     let children = []
     let div = []
-
+    let sum = 0;
+    
     for (let i = 0; i < this.props.product.stars; i++) {
       children.push(<i className="fa fa-star" />)
     }
@@ -28,20 +29,20 @@ class ProductCard extends React.Component {
     div.push(<div className="product-rating">
       {children}
     </div>)
-  console.log(this.props.product.stars)
+    console.log(this.props.product.stars)
     return div
 
   }
-  
+
   handleAddtoChart = () => {
     this.props.addtoCART({
-      id:this.props.product.id,
-      img:this.props.product.imgSource,
-      name:this.props.product.name,
+      id: this.props.product.id,
+      img: this.props.product.imgSource,
+      name: this.props.product.name,
       rawPrice: this.props.product.price,
-      quantity:1,
-      price:this.props.product.price ,
-      oldPrice:this.props.product.oldPrice 
+      quantity: 1,
+      price: this.props.product.price,
+      oldPrice: this.props.product.oldPrice
     });
   }
 
@@ -54,17 +55,32 @@ class ProductCard extends React.Component {
     }
   }
 
-  generatePath = () => {
+  generateProductPath = () => {
     const _subcategory = this.props.allCategories.filter(x => x.id === this.props.product.category)[0];
 
-    const _subheader = (_subcategory !== undefined) ? 
-      (this.props.allCategories.filter(x => x.id === _subcategory.parentId)[0]) : (undefined) ;
+    const _subheader = (_subcategory !== undefined) ?
+      (this.props.allCategories.filter(x => x.id === _subcategory.parentId)[0]) : (undefined);
 
-    const _mainCategory = (_subheader !== undefined) ? 
-    (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
+    const _mainCategory = (_subheader !== undefined) ?
+      (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
 
     if(_mainCategory !== undefined)
-      return `/show/${_mainCategory.path}/${_subheader.path}/${_subcategory.path}/${this.props.product.id}`;
+      return `/show/${_mainCategory.path}/${_subheader.path}/${this.props.product.id}`;
+    else
+      return '/error'
+  }
+
+  generateCategoryPath = () => {
+    const _subcategory = this.props.allCategories.filter(x => x.id === this.props.product.category)[0];
+
+    const _subheader = (_subcategory !== undefined) ?
+      (this.props.allCategories.filter(x => x.id === _subcategory.parentId)[0]) : (undefined);
+
+    const _mainCategory = (_subheader !== undefined) ?
+      (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
+
+    if(_mainCategory !== undefined)
+      return `/show/${_mainCategory.path}/${_subheader.path}`;
     else
       return '/error'
   }
@@ -74,8 +90,9 @@ class ProductCard extends React.Component {
     return (
       <div>
         <div className="product">
-          <div className="product-img">
-            <Image width={240} height={240} src={product.imgSource} alt="Product" />
+          <div className="product-img" style={{height:300}}>
+            {/* <Image width={240} height={240} src={product.imgSource} alt="Product" /> */}
+            <img className="only-product-img" src={product.imgSource} alt="Product" />
             <div className="product-label">
               {product.discount && (
                 <span className="sale">-{product.discount}</span>
@@ -87,12 +104,18 @@ class ProductCard extends React.Component {
           </div>
           <div className="product-body">
             {/* Category */}
-            <p className="product-category">{this.findCategoryName(product.category)}</p>
+            <p className="product-category">
+              <Link to={this.generateCategoryPath()}>
+                {
+                  this.findCategoryName(product.category)
+                }
+              </Link>
+            </p>
             {/* Name */}
             <h3 className="product-name">
               <Link
                 to={{
-                  pathname: this.generatePath(),
+                  pathname: this.generateProductPath(),
                   state: { id: product.id }
                 }}
               >
@@ -101,9 +124,9 @@ class ProductCard extends React.Component {
             </h3>
             {/* Price */}
             <h4 className="product-price">
-              {'$'+ product.price}
+              {'$' + product.price}
               <del className="product-old-price">
-                {'$'+ product.oldPrice}
+                {'$' + product.oldPrice}
               </del>
             </h4>
             {/* Rating */}

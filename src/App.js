@@ -10,6 +10,7 @@ import MainHeader from "./components/main-header/main-header";
 import NavigationBar from "./components/navigation-bar/navigation-bar";
 import Footer from "./components/bottom-footer/footer";
 import Logout from './components/logout/logout';
+import PrivateRoute from './components/private-route/private-route';
 
 //Containers
 import HomeContainer from "./containers/home-container/home-container";
@@ -57,6 +58,7 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory" render={(props) => {
                 return(
                   <CategoryContainer 
+                  location={props.location}
                   match={props.match}
                   />
                 )
@@ -65,31 +67,18 @@ export default class App extends Component {
               <Route exact path="/show/:mainCategory/:subheader" render={(props) => {
                 return(
                   <CategoryContainer 
+                  location={props.location}
                   match={props.match}
                   />
                 )
               }}/>
 
-              <Route exact path="/show/:mainCategory/:subheader/:subcategory" render={(props) => {
-                return(
-                  <CategoryContainer 
-                  match={props.match}
-                  />
-                )
-              }}/>
-
-              <Route exact path="/show/:mainCategory/:subheader/:subcategory/:productId" render={(props) => {
+              <Route exact path="/show/:mainCategory/:subheader/:productId" render={(props) => {
                 return(
                   <ProductDetailedContainer 
+                  location={props.location}
                   match={props.match}
                   />
-                )
-              }}/>
-
-              <Route path="/productDetailed/:productId" render={(props) => {
-                const productId = props.match.params.productId;
-                return(
-                  <ProductDetailedContainer productId={productId}/>
                 )
               }}/>
 
@@ -110,11 +99,12 @@ export default class App extends Component {
               <Route path="/track" component={TrackMyOrderContainer}/>
               <Route path="/help" component={HelpContainer}/>
               <Route path="/address-location" component={AddressLocationContainer} />
-              <Route path="/admin-panel" component={AdminPanelContainer} />
               <Route path="/checkout" component={Checkoutcontainer} />
-              <Route path="/add-category" component={AddCategoryContainer} />
-              <Route component={NoPageContainer}/>
 
+              <PrivateRoute path="/add-product" component={AdminPanelContainer} />
+              <PrivateRoute path="/add-category" component={AddCategoryContainer} />
+
+              <Route component={NoPageContainer}/>
 
             </Switch>
 

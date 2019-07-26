@@ -72,61 +72,60 @@ class AddCategoryTop extends Component {
     ));
 
     return (
-      <div className="row container" onClick={this.onClick}>
-        <div className="col-md-12">
-          <div className="form-group">
-            <label htmlFor="product">Sub Category</label>
-            <input
-              type="text"
-              id="subcategory"
-              className="form-control"
-              placeholder="Main category name"
-              required
-              name="categoryInput"
-              onChange={this.onChange}
-            />
-          </div>
+      <>
+        <div className="form-group">
+          <label htmlFor="product">Sub Category</label>
+          <input
+            type="text"
+            id="subcategory"
+            className="form-control"
+            placeholder="Main category name"
+            required
+            name="categoryInput"
+            onChange={this.onChange}
+          />
+        </div>
 
-          <button
-            className="btn btn-danger btn-lg btn-block"
-            onClick={this.saveCategory}
+        <button
+          className="btn btn-danger btn-lg btn-block"
+          onClick={this.saveCategory}
+          style={{marginBottom:10}}
+        >
+          Save
+        </button>
+
+        <form style={{marginBottom:10}}>
+          <label htmlFor="categories">Categories</label>
+          <select
+            multiple
+            className="form-control"
+            id="sel2"
+            name="categories"
+            onChange={this.onChange}
           >
-            Save
-          </button>
+            {categories}
+          </select>
+        </form>
 
-          <form>
-            <label htmlFor="categories">Categories</label>
-            <select
-              multiple
-              className="form-control"
-              id="sel2"
-              name="categories"
-              onChange={this.onChange}
+        <div className="row">
+          <div className="col-md-4" style={{float:'left'}}>
+            <button
+              className="btn btn-danger btn-lg btn-block"
+              onClick={this.updateCategory}
             >
-              {categories}
-            </select>
-          </form>
-
-          <div className="row container">
-            <div className="col-md-3">
-              <button
-                className="btn btn-danger btn-lg btn-block"
-                onClick={this.updateCategory}
-              >
-                Edit
-              </button>
-            </div>
-            <div className="col-md-3">
-              <button
-                className="btn btn-danger btn-lg btn-block"
-                onClick={this.deleteCategory}
-              >
-                Delete
-              </button>
-            </div>
+              Edit
+            </button>
+          </div>
+          <div className="col-md-4" style={{float:'right'}}>
+            <button
+              className="btn btn-danger btn-lg btn-block"
+              onClick={this.deleteCategory}
+            >
+              Delete
+            </button>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

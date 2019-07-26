@@ -10,7 +10,8 @@ const initialState = {
       min: "",
       max: ""
     },
-    brands: []
+    brands: [],
+    subcategories: []
   }
 };
 
