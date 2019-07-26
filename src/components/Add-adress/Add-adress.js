@@ -46,13 +46,11 @@ class AddAdress extends Component {
 		...this.props.currentUser,
 		addresses:[...this.props.currentUser.addresses, addressContent]
 	}
-	console.log(addressContent)
 	this.props.postUserUpdate(this.props.currentUser.id, useradd);
 }
 
 
     render() {
-		console.log("add-adress page", this.props)
         return (
                 <div className="billing-details">
 							

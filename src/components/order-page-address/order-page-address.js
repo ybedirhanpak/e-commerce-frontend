@@ -38,11 +38,9 @@ class OrderPageAddress extends Component {
             </div>
         )
         });
-        console.log("addresslist",this.props.currentUser.adresses)
         return addressList;
       };
     render() {
-        console.log("address card", this.props)
         return (
             <div className="row order-page-address">
                 <div className="col-xs-12 col-md-6">
