@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 //Components
 import Store from '../../components/store/store';
 import SlideProduct from '../../components/slide-product/slide';
+import StoreTopFilter from "../../components/store-top-filter/store-top-filter";
 
 //Redux
 import { connect } from "react-redux";
@@ -22,12 +23,9 @@ class HomeContainer extends Component {
             <div className="section">
                 <div className="container">
                     <div className="row">
-                        <div id="aside" className="col-sm-6 col-md-3">
-                            {/* Filter Component */}
-                            {/* <Filter/> */}
-                        </div>
                         <div id="store" className="col-sm-12">
                             {/* Store Component */}
+                            <StoreTopFilter />
                             <Store
                                 apiProducts={this.props.apiProducts}
                                 fetchInProgress={this.props.fetchInProgress}

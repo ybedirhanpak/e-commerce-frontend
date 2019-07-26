@@ -11,7 +11,11 @@ const initialState = {
       max: ""
     },
     brands: [],
-    subcategories: []
+    subcategories: [],
+    searchText: "",
+    mainCategoryId: "",
+    sortBy: "new",
+    show: "20",
   }
 };
 
@@ -52,6 +56,31 @@ function productReducer(state = initialState, action) {
           filters: {
             ...state.filters,
             subcategories: action.payload.subcategories
+          }
+        }
+      }else if(action.payload.type === "searchBar") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            searchText: action.payload.searchText,
+            mainCategoryId: action.payload.mainCategoryId
+          }
+        }
+      } else if(action.payload.type === "sortBy") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            sortBy: action.payload.sortBy
+          }
+        }
+      } else if(action.payload.type === "show") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            show: action.payload.show
           }
         }
       }
