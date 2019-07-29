@@ -1,23 +1,45 @@
 import React, { Component } from 'react'
 
-export default class StoreTopFilter extends Component {
+//Redux
+import { connect } from 'react-redux';
+import { updateFilters } from "../../redux/product/actions";
+
+class StoreTopFilter extends Component {
+
+    handleSortChange = (event) => {
+        console.log("changed", event.target.value)
+        this.props.updateFilters({
+            type:"sortBy",
+            sortBy: event.target.value
+        })
+    }
+
+    handleShowChange = (event) => {
+        this.props.updateFilters({
+            type:"show",
+            show: event.target.value
+        })
+    }
+
     render() {
         return (
             <div className="store-filter clearfix">
                 <div className="store-sort">
                     <label>
                         Sort By:
-                        <select className="input-select">
-                            <option value="0">Popular</option>
-                            <option value="1">Position</option>
+                        <select className="input-select" onChange={this.handleSortChange}>
+                            <option value="new">New</option>
+                            <option value="priceLowToHigh">Price (Low to High)</option>
+                            <option value="priceHighToLow">Price (High to Low)</option>
                         </select>
                     </label>
 
                     <label>
                         Show:
-                        <select className="input-select">
-                            <option value="0">20</option>
-                            <option value="1">50</option>
+                        <select className="input-select" onChange={this.handleShowChange}>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
                         </select>
                     </label>
                 </div>
@@ -29,3 +51,9 @@ export default class StoreTopFilter extends Component {
         )
     }
 }
+
+const mapDispatchToProps = {
+    updateFilters
+  };
+
+export default connect(null,mapDispatchToProps)(StoreTopFilter)

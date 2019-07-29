@@ -70,9 +70,9 @@ class UserLoginRegisterDropdown extends Component {
                 href=""
                 className="btn btn-default btn-rounded my-6 dropdown-toggle"
                 data-toggle="dropdown"
+                style={{minWidth:150}}
               >
-                <i className="fa fa-user" />
-                <span>{` ${this.props.user.currentUser.firstName}`}</span>
+                <span style={{float:'left'}}><i className="fa fa-user"/> {` ${this.props.user.currentUser.firstName}`}</span>
               </button>
               <ul className="dropdown-menu dropdown-menu-large row">
                     {/* Add Category */}

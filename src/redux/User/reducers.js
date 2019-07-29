@@ -19,26 +19,26 @@ function userReducer(state = initialState, action) {
     case actionTypes.RESET_REGISTER:
       return {
         ...state,
-        registerStatus:{
+        registerStatus: {
           ...state.registerStatus,
-          registerInProgress : -1,
+          registerInProgress: -1,
           successfulRegister: -1
         }
-      }
+      };
     case actionTypes.INITIALIZE_REGISTER:
       return {
         ...state,
-        registerStatus:{
+        registerStatus: {
           ...state.registerStatus,
-          registerInProgress : 1,
+          registerInProgress: 1,
           successfulRegister: -1
         }
-      }
+      };
     case actionTypes.COMPLETE_REGISTER:
       if (action.payload.status === 200) {
         return {
           ...state,
-          registerStatus:{
+          registerStatus: {
             ...state.registerStatus,
             registerInProgress: 0,
             successfulRegister: 1,
@@ -48,7 +48,7 @@ function userReducer(state = initialState, action) {
       } else {
         return {
           ...state,
-          registerStatus:{
+          registerStatus: {
             ...state.registerStatus,
             registerInProgress: 1,
             successfulRegister: 0,
@@ -59,54 +59,54 @@ function userReducer(state = initialState, action) {
     case actionTypes.RESET_LOGIN:
       return {
         ...state,
-        loginStatus:{
+        loginStatus: {
           ...state.loginStatus,
-          loginInProgress : -1,
+          loginInProgress: -1,
           successfulLogin: -1
         }
-      }
+      };
     case actionTypes.INITIALIZE_LOGIN:
       return {
         ...state,
-        loginStatus:{
+        loginStatus: {
           ...state.loginStatus,
-          loginInProgress : 1,
+          loginInProgress: 1,
           successfulLogin: -1
         }
-      }
+      };
     case actionTypes.COMPLETE_LOGIN:
-      if(action.payload.message === 'Email or password is incorrect') {
+      if (action.payload.message === "Email or password is incorrect") {
         return {
           ...state,
-          loginStatus:{
+          loginStatus: {
             ...state.loginStatus,
-            loginInProgress : 1,
+            loginInProgress: 1,
             successfulLogin: 0,
-            loginResponse: 'Email or password is incorrect'
+            loginResponse: "Email or password is incorrect"
           }
-        }
+        };
       } else {
         return {
           ...state,
           currentUser: action.payload,
-          loginStatus:{
+          loginStatus: {
             ...state.loginStatus,
-            loginInProgress : 0,
+            loginInProgress: 0,
             successfulLogin: 1
           }
-        }
+        };
       }
     case actionTypes.LOGOUT:
       return {
         ...state,
         currentUser: null
-      }
-      case actionTypes.UPDATE_USER:
-        return {
-          ...state,
-          currentUser: action.payload,
-          fetchInProgress: false
-        }
+      };
+    case actionTypes.UPDATE_USER:
+      return {
+        ...state,
+        currentUser: action.payload,
+        fetchInProgress: false
+      };
     default:
       return state;
   }
