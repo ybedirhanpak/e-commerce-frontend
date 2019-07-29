@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 //Components
-import StoreTopFilter from "../store-top-filter/store-top-filter";
 import ProductCard from "../product-card/index";
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 
@@ -36,7 +35,6 @@ export default class Store extends Component {
     console.log("store props", this.props);
     return (
       <>
-        <StoreTopFilter />
         <div className="row">
           {this.createProducts()}
         </div>
