@@ -30,7 +30,6 @@ function saveCategories(categories) {
 /* Api Call Functions */
 
 export const fetchAllCategories = () => {
-  console.log("fetchAll");
   return dispatch => {
     GetWithUrl(API + "/categories/getAll")
       .then(response => {

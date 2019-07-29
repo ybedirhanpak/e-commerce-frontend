@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 //Redux
 import { connect } from "react-redux";
-import { actionCreators } from '../../redux/cart/actions'
+import { actionCreators } from "../../redux/cart/actions";
 
 //Components
 import Image from "react-image-resizer";
@@ -14,25 +14,21 @@ import Image from "react-image-resizer";
 //"./img/product01.png"
 
 class ProductCard extends React.Component {
-
   createAverageOfStar = () => {
-    let children = []
-    let div = []
+    let children = [];
+    let div = [];
     let sum = 0;
-    
+
     for (let i = 0; i < this.props.product.stars; i++) {
-      children.push(<i className="fa fa-star" />)
+      children.push(<i className="fa fa-star" />);
     }
     for (let j = this.props.product.stars; j < 5; j++) {
-      children.push(<i className="fa fa-star-o" />)
+      children.push(<i className="fa fa-star-o" />);
     }
-    div.push(<div className="product-rating">
-      {children}
-    </div>)
-    console.log(this.props.product.stars)
-    return div
+    div.push(<div className="product-rating">{children}</div>);
 
-  }
+    return div;
+  };
 
   handleAddtoChart = () => {
     this.props.addtoCART({
@@ -45,55 +41,77 @@ class ProductCard extends React.Component {
       oldPrice: this.props.product.oldPrice,
       size:this.props.product.sizeOptions[0]
     });
-  }
+  };
 
-  findCategoryName = (categoryId) => {
-    const category = this.props.allCategories.filter(x => x.id === categoryId)[0];
+  findCategoryName = categoryId => {
+    const category = this.props.allCategories.filter(
+      x => x.id === categoryId
+    )[0];
     if (category !== undefined) {
       return category.name;
     } else {
-      return 'Loading...'
+      return "Loading...";
     }
-  }
+  };
 
   generateProductPath = () => {
-    const _subcategory = this.props.allCategories.filter(x => x.id === this.props.product.category)[0];
+    const _subcategory = this.props.allCategories.filter(
+      x => x.id === this.props.product.category
+    )[0];
 
-    const _subheader = (_subcategory !== undefined) ?
-      (this.props.allCategories.filter(x => x.id === _subcategory.parentId)[0]) : (undefined);
+    const _subheader =
+      _subcategory !== undefined
+        ? this.props.allCategories.filter(
+            x => x.id === _subcategory.parentId
+          )[0]
+        : undefined;
 
-    const _mainCategory = (_subheader !== undefined) ?
-      (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
+    const _mainCategory =
+      _subheader !== undefined
+        ? this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]
+        : undefined;
 
-    if(_mainCategory !== undefined)
-      return `/show/${_mainCategory.path}/${_subheader.path}/${this.props.product.id}`;
-    else
-      return '/error'
-  }
+    if (_mainCategory !== undefined)
+      return `/show/${_mainCategory.path}/${_subheader.path}/${
+        this.props.product.id
+      }`;
+    else return "/error";
+  };
 
   generateCategoryPath = () => {
-    const _subcategory = this.props.allCategories.filter(x => x.id === this.props.product.category)[0];
+    const _subcategory = this.props.allCategories.filter(
+      x => x.id === this.props.product.category
+    )[0];
 
-    const _subheader = (_subcategory !== undefined) ?
-      (this.props.allCategories.filter(x => x.id === _subcategory.parentId)[0]) : (undefined);
+    const _subheader =
+      _subcategory !== undefined
+        ? this.props.allCategories.filter(
+            x => x.id === _subcategory.parentId
+          )[0]
+        : undefined;
 
-    const _mainCategory = (_subheader !== undefined) ?
-      (this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]) : (undefined);
+    const _mainCategory =
+      _subheader !== undefined
+        ? this.props.allCategories.filter(x => x.id === _subheader.parentId)[0]
+        : undefined;
 
-    if(_mainCategory !== undefined)
+    if (_mainCategory !== undefined)
       return `/show/${_mainCategory.path}/${_subheader.path}`;
-    else
-      return '/error'
-  }
+    else return "/error";
+  };
 
   render() {
     const product = this.props.product;
     return (
       <div>
         <div className="product">
-          <div className="product-img" style={{height:300}}>
+          <div className="product-img" style={{ height: 300 }}>
             {/* <Image width={240} height={240} src={product.imgSource} alt="Product" /> */}
-            <img className="only-product-img" src={product.imgSource} alt="Product" />
+            <img
+              className="only-product-img"
+              src={product.imgSource}
+              alt="Product"
+            />
             <div className="product-label">
               {product.discount && (
                 <span className="sale">-{product.discount}</span>
@@ -107,9 +125,7 @@ class ProductCard extends React.Component {
             {/* Category */}
             <p className="product-category">
               <Link to={this.generateCategoryPath()}>
-                {
-                  this.findCategoryName(product.category)
-                }
+                {this.findCategoryName(product.category)}
               </Link>
             </p>
             {/* Name */}
@@ -125,10 +141,8 @@ class ProductCard extends React.Component {
             </h3>
             {/* Price */}
             <h4 className="product-price">
-              {'$' + product.price}
-              <del className="product-old-price">
-                {'$' + product.oldPrice}
-              </del>
+              {"$" + product.price}
+              <del className="product-old-price">{"$" + product.oldPrice}</del>
             </h4>
             {/* Rating */}
             {this.createAverageOfStar()}
@@ -163,8 +177,8 @@ class ProductCard extends React.Component {
 const mapStateToProps = state => {
   return {
     allCategories: state.category.categories
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   addtoCART: actionCreators.addtoCART

@@ -17,10 +17,7 @@ function cartReducer(state = initialState, action) {
               img: state.productsList[i].id,
               name: state.productsList[i].id,
               quantity: state.productsList[i].quantity - 1,
-              price: String(
-                Number(state.productsList[i].price) +
-                  Number(action.payload.price)
-              )
+              price: state.productsList[i].price + action.payload.price
             };
             let tmp = state.productsList.filter(
               product => product.id !== state.productsList[i].id
@@ -29,7 +26,7 @@ function cartReducer(state = initialState, action) {
             return {
               ...state,
               anyProduct: true,
-              totalPrice: state.totalPrice + Number(action.payload.price),
+              totalPrice: state.totalPrice + action.payload.price,
               productsList: tmp
             };
           }
@@ -50,11 +47,10 @@ function cartReducer(state = initialState, action) {
               quantity:
                 state.productsList[i].quantity + action.payload.quantity,
               rawPrice: state.productsList[i].rawPrice,
-              price: String(
-                Number(state.productsList[i].price) +
-                  Number(state.productsList[i].rawPrice) *
-                    Number(action.payload.quantity)
-              ),
+              price:
+                state.productsList[i].price +
+                state.productsList[i].rawPrice *
+                  Number(action.payload.quantity),
               oldPrice: state.productsList[i].oldPrice,
               size: state.productsList[i].size
             };
@@ -66,34 +62,29 @@ function cartReducer(state = initialState, action) {
               anyProduct: true,
               totalPrice:
                 state.totalPrice +
-                Number(state.productsList[i].rawPrice) *
+                state.productsList[i].rawPrice *
                   Number(action.payload.quantity),
               productsList: tmp
             };
           }
         }
-
         return {
           ...state,
           anyProduct: true,
-          totalPrice:
-            state.totalPrice +
-            Number(action.payload.rawPrice) * Number(action.payload.quantity),
+          totalPrice: state.totalPrice + action.payload.price,
           productsList: [...state.productsList, action.payload]
         };
       } else {
         return {
           ...state,
           anyProduct: true,
-          totalPrice:
-            state.totalPrice +
-            Number(action.payload.rawPrice) * Number(action.payload.quantity),
+          totalPrice: state.totalPrice + action.payload.price,
           productsList: [...state.productsList, action.payload]
         };
       }
 
     case actionTypes.DELETE_FROMCART:
-      let sum = state.totalPrice - Number(action.payload.price);
+      let sum = state.totalPrice - action.payload.price;
       if (sum === 0) {
         return {
           totalPrice: sum,
