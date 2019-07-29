@@ -55,7 +55,6 @@ class AddAdress extends Component {
   };
 
   render() {
-    console.log("add-adress page", this.props);
     return (
       <div className="billing-details">
         <div className="form-group">

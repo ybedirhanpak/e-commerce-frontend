@@ -27,12 +27,6 @@ import OrderPageAddress from '../order-page-address/order-page-address'
 						</div>
 					</div>
 				</div>
-				
-				<div className="order-notes">
-					<textarea class="input" placeholder="Order Notes"></textarea>
-				</div>
-			
-		
 			</div>
         )
     }
