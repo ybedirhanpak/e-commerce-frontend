@@ -15,7 +15,9 @@ class CartProduct extends React.Component {
         </div>
         <div className="product-body">
           <h3 className="product-name">
-            <a href="#">{this.props.cartProduct.name}</a>
+            <a href="#">
+              {this.props.cartProduct.name}({this.props.cartProduct.size})
+            </a>
           </h3>
           <h4 className="product-price">
             <span className="qty">{this.props.cartProduct.quantity}</span>
