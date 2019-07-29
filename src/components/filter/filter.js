@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import "./filter.css";
+
+//Redux
 import { connect } from "react-redux";
 import { fetchAllCities } from "../../redux/city/actions";
 import { fetchAllBrands } from "../../redux/brand/actions";
+import { getProductListWithFilter } from "../../redux/product/actions";
+
 //Components
 import BrandSelectBox from "../brand-select-box/brand-select-box";
 import CitySelectBox from "../city-select-box/city-select-box";
@@ -15,6 +19,10 @@ class Filter extends Component {
     this.props.fetchAllCities();
   }
 
+  applyFilters = () => {
+    this.props.getProductListWithFilter(this.props.filters);
+  };
+
   render() {
     return (
       <div className="aside-filter">
@@ -26,17 +34,31 @@ class Filter extends Component {
         <BrandSelectBox currentBrands={this.props.brandList} />
         {/* City Filter */}
         <CitySelectBox currentCities={this.props.cityList} />
+        <button
+          className="btn btn-danger"
+          style={{ float: "right", marginTop: 20 }}
+          onClick={this.applyFilters}
+        >
+          Apply
+        </button>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    filters: state.product.filters
+  };
+};
+
 const mapDispatchToProps = {
   fetchAllBrands,
-  fetchAllCities
+  fetchAllCities,
+  getProductListWithFilter
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Filter);
