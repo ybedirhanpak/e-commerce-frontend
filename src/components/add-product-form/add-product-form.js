@@ -26,8 +26,8 @@ class AddProductForm extends React.Component {
       selectedBrand: "",
       productName: "",
       description: "",
-      price: "",
-      oldPrice: "",
+      price: 0,
+      oldPrice: 0,
       quantity: "",
       imgSource: ""
     };
@@ -332,9 +332,7 @@ class AddProductForm extends React.Component {
 
   addProduct = () => {
     let count =
-      ((Number(this.state.oldPrice) - Number(this.state.price)) /
-        Number(this.state.oldPrice)) *
-      100;
+      ((this.state.oldPrice - this.state.price) / this.state.oldPrice) * 100;
 
     let product = {
       name: this.state.productName,
