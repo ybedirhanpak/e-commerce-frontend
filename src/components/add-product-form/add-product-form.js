@@ -40,7 +40,6 @@ class AddProductForm extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     let cities = this.props.cityList.map(element => ({
       label: element.name,
       value: element.id

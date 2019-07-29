@@ -15,7 +15,6 @@ export default class form extends Component {
   }
 
   sendMessage() {
-    console.log("hellooo");
     const body = {
       senderName: this.state.fullName,
       senderEmail: this.state.email,

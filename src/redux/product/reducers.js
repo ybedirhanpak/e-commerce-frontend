@@ -11,7 +11,11 @@ const initialState = {
       max: ""
     },
     brands: [],
-    subcategories: []
+    subcategories: [],
+    searchText: "",
+    mainCategoryId: "",
+    sortBy: "new",
+    show: "20",
   }
 };
 
@@ -21,7 +25,7 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
         fetchInProgress: true
-      }
+      };
     case actionTypes.SAVE_PRODUCT_LIST:
       return {
         ...state,
@@ -42,11 +46,60 @@ function productReducer(state = initialState, action) {
             ...state.filters,
             price: {
               min: action.payload.priceFilter.min,
-              max: action.payload.priceFilter.max,
+              max: action.payload.priceFilter.max
             }
           }
+        };
+      } else if (action.payload.type === "subcategories") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            subcategories: action.payload.subcategories
+          }
         }
-      }
+      }else if(action.payload.type === "searchBar") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            searchText: action.payload.searchText,
+            mainCategoryId: action.payload.mainCategoryId
+          }
+        }
+      } else if(action.payload.type === "sortBy") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            sortBy: action.payload.sortBy
+          }
+        }
+      } else if(action.payload.type === "show") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            show: action.payload.show
+          }
+        }
+      } else if (action.payload.type === "city_filter") {
+          return {
+            ...state,
+            filters: {
+              ...state.filters,
+              cities: action.payload.cities
+            }
+          }
+      } else if (action.payload.type === "brand_filter") {
+          return {
+            ...state,
+            filters: {
+              ...state.filters,
+              brands: action.payload.brands
+            }
+          }
+      } 
       return state;
     default:
       return state;
