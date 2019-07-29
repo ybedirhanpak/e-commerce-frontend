@@ -8,7 +8,7 @@ import { actionCreators } from "../../redux/cart/actions";
 import { isEmptyTypeAnnotation } from "@babel/types";
 
 class ProductDetails extends Component {
-  //SİZE SEÇMEYİ BİTİR
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +31,6 @@ class ProductDetails extends Component {
     let children = [];
     let div = [];
     let sum = 0;
-    console.log(product);
     for (let i = 0; i < product.stars; i++) {
       children.push(<i className="fa fa-star" />);
     }
@@ -39,7 +38,6 @@ class ProductDetails extends Component {
       children.push(<i className="fa fa-star-o" />);
     }
     div.push(<div className="product-rating">{children}</div>);
-    console.log(product.stars);
     return div;
   };
 
@@ -50,16 +48,13 @@ class ProductDetails extends Component {
     return true;
   }
   createOption = product => {
-    console.log(this.props);
     let sizeOptions = [];
-    console.log(this.props.product);
     if (
       isNullOrUndefined(this.props.product) ||
       this.isEmpty(this.props.product)
     ) {
       return <LoadingSpinner />;
     } else {
-      console.log(this.props.product, product);
       product.sizeOptions.forEach(element => {
         sizeOptions.push(
           <option name="size" value={element}>
@@ -67,7 +62,6 @@ class ProductDetails extends Component {
           </option>
         );
       });
-      console.log(sizeOptions);
       return sizeOptions;
     }
   };
@@ -126,7 +120,6 @@ class ProductDetails extends Component {
 
   render() {
     const product = this.props.product;
-    console.log("render", product);
     return (
       <div className="product-details">
         <h2 className="product-name">{product.name}</h2>
