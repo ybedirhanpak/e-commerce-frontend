@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 //Components
 import Store from '../../components/store/store';
@@ -20,40 +20,40 @@ class HomeContainer extends Component {
         const currentDate = new Date();
         const year = (currentDate.getMonth() === 11 && currentDate.getDate() > 23) ? currentDate.getFullYear() + 1 : currentDate.getFullYear();
         return (
-            <div className="section">
-                <div className="container">
-                    <div className="row">
-                        <div id="store" className="col-sm-12">
-                            {/* Store Component */}
-                            <StoreTopFilter />
-                            <Store
-                                apiProducts={this.props.apiProducts}
-                                fetchInProgress={this.props.fetchInProgress}
-                                filters={this.props.filters}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <SlideProduct date={`${year}-07-26T18:00:00`} />
-            </div>
-        )
-    }
+          <div className="section">
+              <div className="container">
+                  <div className="row">
+                      <div id="store" className="col-sm-12">
+                          {/* Store Component */}
+                          <StoreTopFilter />
+                          <Store
+                              apiProducts={this.props.apiProducts}
+                              fetchInProgress={this.props.fetchInProgress}
+                              filters={this.props.filters}
+                          />
+                      </div>
+                  </div>
+              </div>
+              <SlideProduct date={`${year}-07-26T18:00:00`} />
+          </div>
+      );
+  }
 }
 
 const mapStateToProps = state => {
-    return {
-        apiProducts: state.product.productList,
-        filters: state.product.filters,
-        fetchInProgress: state.product.fetchInProgress,
-        allCategories: state.category.categories
-    };
+  return {
+    apiProducts: state.product.productList,
+    filters: state.product.filters,
+    fetchInProgress: state.product.fetchInProgress,
+    allCategories: state.category.categories
+  };
 };
 
 const mapDispatchToProps = {
-    getProductList
+  getProductList
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(HomeContainer);
