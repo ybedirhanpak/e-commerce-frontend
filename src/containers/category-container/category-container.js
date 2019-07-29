@@ -176,8 +176,7 @@ class CategoryContainer extends Component {
     }
 
     let filteredProducts = productList.filter(
-      product =>
-        Number(product.price) >= minPrice && Number(product.price) <= maxPrice
+      product => product.price >= minPrice && product.price <= maxPrice
     );
 
     return filteredProducts;

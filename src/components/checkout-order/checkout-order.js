@@ -41,6 +41,11 @@ class CheckoutOrder extends Component {
     this.props.updateQuantity({ ...product, quantity: 1 });
   };
 
+  handleDecrease = (event, product) => {
+    event.preventDefault();
+    this.props.updateQuantity({ ...product, quantity: -1 });
+  };
+
   createOrderCart = () => {
     if (!this.props.cart.anyProduct) {
       return (
@@ -72,7 +77,7 @@ class CheckoutOrder extends Component {
           <div>
             {product.quantity + "x " + product.name} {}
           </div>
-          <div>${product.price}</div>
+          <div>${Number(product.price).toFixed(2)}</div>
         </div>
       ));
       return resultList;
@@ -126,7 +131,7 @@ class CheckoutOrder extends Component {
             </div>
             <div>
               <strong className="order-total">
-                ${this.props.cart.totalPrice}
+                ${Number(this.props.cart.totalPrice).toFixed(2)}
               </strong>
             </div>
           </div>

@@ -62,7 +62,7 @@ class AddAdress extends Component {
             className="input"
             type="text"
             name="addressName"
-            placeholder="ddressName"
+            placeholder="Address Name"
             onChange={this.onChange}
           />
         </div>
