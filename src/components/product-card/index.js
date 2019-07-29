@@ -39,7 +39,7 @@ class ProductCard extends React.Component {
       quantity: 1,
       price: this.props.product.price,
       oldPrice: this.props.product.oldPrice,
-      size:this.props.product.sizeOptions[0]
+      size: this.props.product.sizeOptions[0]
     });
   };
 

@@ -49,11 +49,7 @@ class Cart extends Component {
             <small>
               {this.props.cart.productsList.length} Item(s) selected
             </small>
-<<<<<<< HEAD
             <h5>SUBTOTAL: ${Number(this.props.cart.totalPrice).toFixed(2)}</h5>
-=======
-            <h5>SUBTOTAL: ${this.props.cart.totalPrice.toFixed(2)}</h5>
->>>>>>> b78c733c89258119f18c904c89bb514eb73e919f
           </div>
           <div className="cart-btns">
             <a href="#">View Cart</a>

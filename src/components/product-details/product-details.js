@@ -24,6 +24,8 @@ class ProductDetails extends Component {
     this.quantityOnChangeHandler = this.quantityOnChangeHandler.bind(this);
     this.isEmpty = this.isEmpty.bind(this);
     this.onChangeOptions = this.onChangeOptions.bind(this);
+    this.qtyIncreaseOnClick = this.qtyIncreaseOnClick.bind(this);
+    this.qtyDecreaseOnClick = this.qtyDecreaseOnClick.bind(this);
   }
   createAverageOfStar = product => {
     let children = [];
@@ -69,6 +71,20 @@ class ProductDetails extends Component {
       return sizeOptions;
     }
   };
+  qtyIncreaseOnClick() {
+    let newQty = this.state.quantity + 1;
+    if (newQty > this.props.product.quantity) {
+      newQty--;
+    }
+    this.setState({ quantity: newQty });
+  }
+  qtyDecreaseOnClick() {
+    let newQty = this.state.quantity - 1;
+    if (newQty <= 0) {
+      newQty = 1;
+    }
+    this.setState({ quantity: newQty });
+  }
 
   onChangeOptions(event) {
     const { name, value } = event.target;
@@ -83,21 +99,34 @@ class ProductDetails extends Component {
   }
 
   handleAddtoChart = () => {
-    this.props.addtoCART({
-      id: this.props.product.id,
-      img: this.props.product.imgSource,
-      name: this.props.product.name,
-      rawPrice: this.props.product.price,
-      quantity: this.state.quantity,
-      price: String(Number(this.props.product.price) * this.state.quantity),
-      oldPrice: this.props.product.oldPrice,
-      size: this.state.size
-    });
+    if (Number(this.state.quantity) === 0) {
+      this.props.addtoCART({
+        id: this.props.product.id,
+        img: this.props.product.imgSource,
+        name: this.props.product.name,
+        rawPrice: this.props.product.price,
+        quantity: 1,
+        price: Number(this.props.product.price) * 1,
+        oldPrice: this.props.product.oldPrice,
+        size: this.state.size
+      });
+    } else {
+      this.props.addtoCART({
+        id: this.props.product.id,
+        img: this.props.product.imgSource,
+        name: this.props.product.name,
+        rawPrice: this.props.product.price,
+        quantity: this.state.quantity,
+        price: Number(this.props.product.price) * this.state.quantity,
+        oldPrice: this.props.product.oldPrice,
+        size: this.state.size
+      });
+    }
   };
 
   render() {
     const product = this.props.product;
-    console.log("render", this.state);
+    console.log("render", product);
     return (
       <div className="product-details">
         <h2 className="product-name">{product.name}</h2>
@@ -138,13 +167,19 @@ class ProductDetails extends Component {
             Qty
             <div className="input-number">
               <input
+                id="quantityInput"
                 name="quantity"
                 onChange={this.quantityOnChangeHandler}
                 type="number"
                 placeholder={1}
+                value={this.state.quantity >= 1 ? this.state.quantity : ""}
               />
-              <span className="qty-up">+</span>
-              <span className="qty-down">-</span>
+              <span onClick={this.qtyIncreaseOnClick} className="qty-up">
+                +
+              </span>
+              <span onClick={this.qtyDecreaseOnClick} className="qty-down">
+                -
+              </span>
             </div>
           </div>
           <button onClick={this.handleAddtoChart} className="add-to-cart-btn">

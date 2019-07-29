@@ -26,7 +26,7 @@ function cartReducer(state = initialState, action) {
             return {
               ...state,
               anyProduct: true,
-              totalPrice: state.totalPrice + action.payload.price,
+              totalPrice: Number(state.totalPrice + action.payload.price),
               productsList: tmp
             };
           }
@@ -34,7 +34,6 @@ function cartReducer(state = initialState, action) {
       }
     case actionTypes.ADD_TOCART:
       if (state.productsList.length > 0) {
-        let index;
         for (let i = 0; i < state.productsList.length; i++) {
           if (
             state.productsList[i].id === action.payload.id &&
@@ -49,8 +48,7 @@ function cartReducer(state = initialState, action) {
               rawPrice: state.productsList[i].rawPrice,
               price:
                 state.productsList[i].price +
-                state.productsList[i].rawPrice *
-                  Number(action.payload.quantity),
+                state.productsList[i].rawPrice * action.payload.quantity,
               oldPrice: state.productsList[i].oldPrice,
               size: state.productsList[i].size
             };
@@ -71,7 +69,7 @@ function cartReducer(state = initialState, action) {
         return {
           ...state,
           anyProduct: true,
-          totalPrice: state.totalPrice + action.payload.price,
+          totalPrice: Number(state.totalPrice + action.payload.price),
           productsList: [...state.productsList, action.payload]
         };
       } else {
@@ -85,21 +83,42 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.DELETE_FROMCART:
       let sum = state.totalPrice - action.payload.price;
+      console.log("sum", sum);
+      if (sum <= 0) {
+        sum = 0;
+      }
+      let product, index;
+      for (let i = 0; i < state.productsList.length; i++) {
+        if (
+          state.productsList[i].id === action.payload.id &&
+          state.productsList[i].size === action.payload.size
+        ) {
+          product = state.productsList[i];
+          index = i;
+          break;
+        } else if (
+          state.productsList[i].id === action.payload.id &&
+          state.productsList[i].size !== action.payload.size
+        ) {
+          product = state.productsList[i];
+        }
+        index = i;
+      }
+      console.log("productdelete", product);
+      let tmp = state.productsList;
+      tmp.splice(index, 1);
       if (sum === 0) {
+        console.log("sum0", sum);
         return {
-          totalPrice: sum,
+          totalPrice: 0,
           anyProduct: false,
-          productsList: state.productsList.filter(
-            product => product.id !== action.payload.id
-          )
+          productsList: []
         };
       } else {
         return {
           totalPrice: sum,
           anyProduct: true,
-          productsList: state.productsList.filter(
-            product => product.id !== action.payload.id
-          )
+          productsList: tmp
         };
       }
 
