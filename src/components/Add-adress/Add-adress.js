@@ -1,6 +1,6 @@
-import React, { Component } from "./node_modules/react";
+import React, { Component } from "react";
 
-import { connect } from "./node_modules/react-redux";
+import { connect } from "react-redux";
 import { postUserUpdate } from "../../redux/user/actions";
 
 class AddAdress extends Component {
