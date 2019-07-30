@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
+
+import { updatePassword } from "../../redux/user/actions";
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -22,12 +23,18 @@ class ChangePassword extends Component {
 
   onClick = () => {
     if (
-      this.state.cPassword === "" ||
-      this.state.newPassword === "" ||
+      this.state.cPassword === "" &&
+      this.state.newPassword === "" &&
       this.state.newPassword2 === ""
     ) {
       alert("Please fill the all fields!!!");
     } else if (this.state.newPassword === this.state.newPassword2) {
+      let body = {
+        oldPassword: this.state.cPassword,
+        newPassword: this.state.newPassword,
+        email: this.props.user.email
+      };
+      this.props.updatePassword(body);
       this.setState({
         isMatch: true
       });
@@ -90,6 +97,17 @@ class ChangePassword extends Component {
   }
 }
 
-const mapStateToProps = state => {};
+const mapDispatchToProps = {
+  updatePassword
+};
 
-export default connect(mapStateToProps)(ChangePassword);
+const mapStateToProps = state => {
+  return {
+    user: state.user.currentUser
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChangePassword);
