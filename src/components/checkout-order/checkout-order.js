@@ -85,8 +85,13 @@ class CheckoutOrder extends Component {
   };
 
   submitOrder = () => {
-    if (this.state.termsChecked === false) {
-      alert("Please check Terms & Condiditons");
+    if (
+      this.state.termsChecked === false ||
+      this.state.payment === "" ||
+      this.props.orderAddress === "" ||
+      !this.props.orderTotal
+    ) {
+      alert("Please check all fields!");
     } else {
       const orderContent = {
         shippingAddress: this.props.orderAddress.selectedShippingAddress,
@@ -111,6 +116,7 @@ class CheckoutOrder extends Component {
     console.log("checkout order props", this.props);
     console.log("checkout order state", this.state);
     console.log("order progress", this.props.orderInProgress);
+    console.log("order total", this.props.orderTotal);
 
     return (
       <div>
