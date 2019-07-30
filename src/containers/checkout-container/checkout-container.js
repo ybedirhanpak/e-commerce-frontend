@@ -7,11 +7,11 @@ class CheckoutContainer extends Component {
   render() {
     return (
       <div className="container" style={{ padding: 40 }}>
-        <div class="row">
-          <div class="col-md-7">
+        <div className="row">
+          <div className="col-md-7">
             <Checkoutadress />
           </div>
-          <div class="col-md-5 order-details">
+          <div className="col-md-5 order-details">
             <ChechkoutOrder cart={this.props.cart} />
           </div>
         </div>

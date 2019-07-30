@@ -40,10 +40,8 @@ class ProductTab extends Component {
       }
       for (let k = Math.round(average); k < 5; k++) {
         if(k===5){
-          console.log("break k",k)
           break;
         }
-        console.log("push")
         children.push(<i className="fa fa-star-o"></i>)
       }
 
@@ -170,7 +168,6 @@ class ProductTab extends Component {
     let element = [];
     let comments = [];
     if (review === undefined) {
-      console.log("undefined")
       return (<div>No Comment Yet</div>)
     }
 
@@ -180,7 +177,6 @@ class ProductTab extends Component {
       }
 
       if (review === undefined || review.length <= i) {
-        console.log("girdi")
         break;
       }
 
@@ -238,14 +234,11 @@ class ProductTab extends Component {
       CommentTime: dateString,
       NumberOfStars: this.state.rating
     };
-    console.log("average", Math.round(average))
-    console.log("rating", this.state.rating)
     const product = {
       ...this.props.product,
       stars: parseInt(Math.round(average)),
       reviews: [...this.props.product.reviews, review]
     };
-    console.log("product", product)
     this.props.updateProduct(this.props.product.id, product);
     event.preventDefault();
   }
@@ -256,8 +249,6 @@ class ProductTab extends Component {
     let average = 0
 
     if (this.props.product.reviews !== undefined && this.props.product.reviews !== null) {
-      console.log(this.props.product.reviews)
-      console.log("girdiundefdeğill")
       this.props.product.reviews.map(star => {
         commentStarCount.slice(star.numberOfStars, 1, commentStarCount[star.numberOfStars]++);
         sum += star.numberOfStars
@@ -267,7 +258,6 @@ class ProductTab extends Component {
         average = 0
       }
     } else {
-      console.log("undef")
       average = 0
     }
 

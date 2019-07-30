@@ -27,7 +27,7 @@ class BrandsSelectBox extends Component {
     if (brandChecked) {
       newFilterBrands = filterBrands.filter(x => x !== event.target.value);
     } else {
-      newFilterBrands = [...newFilterBrands, event.target.value];
+      newFilterBrands = [...filterBrands, event.target.value];
     }
     this.props.updateFilters({
       type: "brand_filter",

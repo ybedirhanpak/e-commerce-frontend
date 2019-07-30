@@ -23,28 +23,30 @@ class OrderPageAddress extends Component {
   };
 
   createAddress = () => {
-    const addressList = this.props.currentUser.addresses.map(address => {
-      return (
-        <div key={address.id} className="col-xs-12 col-md-6">
-          <div class="card card-2">
-            <h4>{address.addressName}</h4>
-            <hr />
-            <h5>
-              {this.props.currentUser.firstName}{" "}
-              {this.props.currentUser.lastName}
-            </h5>
-            <p className="order-address-p">{address.address}</p>
-            <br />
-            <input
-              className="btn btn-danger"
-              type="button"
-              value="Select"
-              onClick={event => this.handleClick(event, address)}
-            />
+    const addressList = this.props.currentUser.addresses.map(
+      (address, index) => {
+        return (
+          <div key={address.addressName + index} className="col-xs-12 col-md-6">
+            <div className="card card-2">
+              <h4>{address.addressName}</h4>
+              <hr />
+              <h5>
+                {this.props.currentUser.firstName}{" "}
+                {this.props.currentUser.lastName}
+              </h5>
+              <p className="order-address-p">{address.address}</p>
+              <br />
+              <input
+                className="btn btn-danger"
+                type="button"
+                value="Select"
+                onClick={event => this.handleClick(event, address)}
+              />
+            </div>
           </div>
-        </div>
-      );
-    });
+        );
+      }
+    );
     return addressList;
   };
 
@@ -52,11 +54,11 @@ class OrderPageAddress extends Component {
     return (
       <div className="row order-page-address">
         <div className="col-xs-12 col-md-6">
-          <div class="card card-2">
+          <div className="card card-2" style={{ paddingTop: 80 }}>
             <Link to="/account/addAddress">
-              To add adress{" "}
+              Add New Address{" "}
               <button className="btn btn-danger" type="button">
-                click
+                +
               </button>
             </Link>
           </div>

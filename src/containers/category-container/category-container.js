@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import {
   getProductList,
   getProductListWithCategory,
+  getProductListWithFilter,
   updateFilters
 } from "../../redux/product/actions";
 import { isNullOrUndefined } from "util";
@@ -132,8 +133,15 @@ class CategoryContainer extends Component {
         .map(x => this.findChildrenCategoryIds(x))
         .flat(1);
     }
+    this.props.updateFilters({
+      type: "allSubcategories",
+      allSubcategories: categoryIds
+    });
+    console.log("Starting get request with filter...", this.props.filters);
     // Dispatch to get product list
-    this.props.getProductListWithCategory(categoryIds);
+    this.props
+      .getProductListWithCategory(categoryIds)
+      .then(x => this.props.getProductListWithFilter(this.props.filters));
   };
 
   /**
@@ -156,7 +164,7 @@ class CategoryContainer extends Component {
 
   findCityList = products => {
     let _cityList = [];
-    this.props.apiProducts.forEach(p => {
+    products.forEach(p => {
       _cityList = [...new Set([..._cityList, ...p.cityOptions])];
     });
     return _cityList;
@@ -176,8 +184,7 @@ class CategoryContainer extends Component {
     }
 
     let filteredProducts = productList.filter(
-      product =>
-        Number(product.price) >= minPrice && Number(product.price) <= maxPrice
+      product => product.price >= minPrice && product.price <= maxPrice
     );
 
     return filteredProducts;
@@ -207,10 +214,14 @@ class CategoryContainer extends Component {
                 currentCategories={categories}
               />
             </div>
-            <div id="store" className="col-sm-6 col-md-9">
+            <div
+              id="store"
+              className="col-sm-6 col-md-9"
+              style={{ minHeight: 1000 }}
+            >
               {/* Store Component */}
               <Store
-                apiProducts={this.filterProducts(this.props.apiProducts)}
+                apiProducts={this.props.filteredProductList}
                 fetchInProgress={this.props.fetchInProgress}
               />
             </div>
@@ -225,6 +236,7 @@ const mapStateToProps = state => {
   return {
     apiCategories: state.category.categories,
     apiProducts: state.product.productList,
+    filteredProductList: state.product.filteredProductList,
     filters: state.product.filters,
     fetchInProgress: state.product.fetchInProgress
   };
@@ -233,6 +245,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getProductList,
   getProductListWithCategory,
+  getProductListWithFilter,
   updateFilters
 };
 

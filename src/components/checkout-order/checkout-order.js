@@ -36,9 +36,9 @@ class CheckoutOrder extends Component {
     });
   };
 
-  handleIncrease = (event, product) => {
+  handleDecrease = (event, product) => {
     event.preventDefault();
-    this.props.updateQuantity({ ...product, quantity: 1 });
+    this.props.updateQuantity({ ...product, quantity: -1 });
   };
 
   createOrderCart = () => {
@@ -72,7 +72,7 @@ class CheckoutOrder extends Component {
           <div>
             {product.quantity + "x " + product.name} {}
           </div>
-          <div>${product.price}</div>
+          <div>${Number(product.price).toFixed(2)}</div>
         </div>
       ));
       return resultList;
@@ -88,7 +88,10 @@ class CheckoutOrder extends Component {
         billingAddress: this.props.orderAddress.selectedBillingAddress,
         orderTrack: "Pending",
         paymentType: this.state.payment,
+        orderNotes: this.state.orderNotes,
         orderedProducts: this.props.orderedProducts,
+        orderTotal: this.props.cart.totalPrice,
+
         userId: this.props.userId
       };
       this.props.postOrderCheckout(orderContent);
@@ -126,7 +129,7 @@ class CheckoutOrder extends Component {
             </div>
             <div>
               <strong className="order-total">
-                ${this.props.cart.totalPrice}
+                ${Number(this.props.cart.totalPrice).toFixed(2)}
               </strong>
             </div>
           </div>
@@ -140,7 +143,7 @@ class CheckoutOrder extends Component {
               value="Direct Bank"
               onChange={this.handleClick}
             />
-            <label for="payment-1">
+            <label htmlFor="payment-1">
               <span />
               Direct Bank Transfer
             </label>
@@ -159,7 +162,7 @@ class CheckoutOrder extends Component {
               value="Cheque"
               onChange={this.handleClick}
             />
-            <label for="payment-2" name="payment">
+            <label htmlFor="payment-2" name="payment">
               <span />
               Cheque Payment
             </label>
@@ -178,7 +181,7 @@ class CheckoutOrder extends Component {
               value="Paypal"
               onChange={this.handleClick}
             />
-            <label for="payment-3">
+            <label htmlFor="payment-3">
               <span />
               Paypal System
             </label>
@@ -196,7 +199,7 @@ class CheckoutOrder extends Component {
             id="terms"
             onClick={event => this.termClick(event, this.state)}
           />
-          <label for="terms">
+          <label htmlFor="terms">
             <span />
             I've read and accept the <a href="#">terms & conditions</a>
           </label>
@@ -204,7 +207,7 @@ class CheckoutOrder extends Component {
         <br />
         <div className="order-notes">
           <textarea
-            class="input"
+            className="input"
             placeholder="Order Notes"
             name="orderNotes"
             onChange={this.onChange}

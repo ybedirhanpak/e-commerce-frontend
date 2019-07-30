@@ -13,12 +13,14 @@ import { isNullOrUndefined } from "util";
 
 const INITIALIZE_FETCH_PRODUCT = "INITIALIZE_FETCH_PRODUCT";
 const SAVE_PRODUCT_LIST = "SAVE_PRODUCT_LIST";
+const SAVE_FILTERED_PRODUCT_LIST = "SAVE_FILTERED_PRODUCT_LIST";
 const SAVE_SINGLE_PRODUCT = "SAVE_SINGLE_PRODUCT";
-const UPDATE_FILTERS = "UPDATE_FILTERS"
+const UPDATE_FILTERS = "UPDATE_FILTERS";
 
 export const actionTypes = {
   INITIALIZE_FETCH_PRODUCT,
   SAVE_PRODUCT_LIST,
+  SAVE_FILTERED_PRODUCT_LIST,
   SAVE_SINGLE_PRODUCT,
   UPDATE_FILTERS
 };
@@ -38,11 +40,18 @@ function saveProductList(productList) {
   };
 }
 
-export function updateFilters(filters){
-  return{
+function saveFilteredProductList(productList) {
+  return {
+    type: SAVE_FILTERED_PRODUCT_LIST,
+    payload: productList
+  };
+}
+
+export function updateFilters(filters) {
+  return {
     type: UPDATE_FILTERS,
     payload: filters
-  }
+  };
 }
 
 function saveSingleProduct(product) {
@@ -77,10 +86,13 @@ export const getProductList = () => {
 export const getProductListWithCategory = categoryIds => {
   return dispatch => {
     dispatch(initializeFetchProduct());
-    PostWithUrlBody(API + "/products/getByCategory/", categoryIds)
+    return PostWithUrlBody(API + "/products/getByCategory/", categoryIds)
       .then(response => response.json())
       .then(response => {
-        if (isNullOrUndefined(response.status) || (response.status >= 200 && response.status < 300)) {
+        if (
+          isNullOrUndefined(response.status) ||
+          (response.status >= 200 && response.status < 300)
+        ) {
           dispatch(saveProductList(response));
         } else {
           console.log("Error when getProductListWithCategory ", response);
@@ -141,5 +153,25 @@ export const updateProduct = (id, body) => {
         }
       })
       .catch(error => console.log("Error while updating a product \n", error));
+  };
+};
+
+export const getProductListWithFilter = filterIn => {
+  return dispatch => {
+    dispatch(initializeFetchProduct());
+    PostWithUrlBody(API + "/products/getByFilter/", filterIn)
+      .then(response => {
+        if (response.status >= 200 && response.status < 300) {
+          response.json().then(data => {
+            console.log("data", data);
+            dispatch(saveFilteredProductList(data));
+          });
+        } else {
+          console.log("Error.", response);
+        }
+      })
+      .catch(error =>
+        console.log("Error when fetching filtered product list\n", error)
+      );
   };
 };

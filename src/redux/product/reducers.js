@@ -2,6 +2,7 @@ import { actionTypes } from "./actions";
 
 const initialState = {
   productList: [],
+  filteredProductList: [],
   currentProduct: {},
   fetchInProgress: true,
   filters: {
@@ -12,10 +13,11 @@ const initialState = {
     },
     brands: [],
     subcategories: [],
+    allSubcategories: [],
     searchText: "",
     mainCategoryId: "",
     sortBy: "new",
-    show: "20",
+    show: "20"
   }
 };
 
@@ -30,6 +32,12 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
         productList: action.payload,
+        fetchInProgress: false
+      };
+    case actionTypes.SAVE_FILTERED_PRODUCT_LIST:
+      return {
+        ...state,
+        filteredProductList: action.payload,
         fetchInProgress: false
       };
     case actionTypes.SAVE_SINGLE_PRODUCT:
@@ -57,49 +65,57 @@ function productReducer(state = initialState, action) {
             ...state.filters,
             subcategories: action.payload.subcategories
           }
-        }
-      }else if(action.payload.type === "searchBar") {
+        };
+      } else if (action.payload.type === "allSubcategories") {
         return {
           ...state,
           filters: {
-            ...state.filters,
+            ...initialState.filters,
+            allSubcategories: action.payload.allSubcategories
+          }
+        };
+      } else if (action.payload.type === "searchBar") {
+        return {
+          ...state,
+          filters: {
+            ...initialState.filters,
             searchText: action.payload.searchText,
             mainCategoryId: action.payload.mainCategoryId
           }
-        }
-      } else if(action.payload.type === "sortBy") {
+        };
+      } else if (action.payload.type === "sortBy") {
         return {
           ...state,
           filters: {
             ...state.filters,
             sortBy: action.payload.sortBy
           }
-        }
-      } else if(action.payload.type === "show") {
+        };
+      } else if (action.payload.type === "show") {
         return {
           ...state,
           filters: {
             ...state.filters,
             show: action.payload.show
           }
-        }
+        };
       } else if (action.payload.type === "city_filter") {
-          return {
-            ...state,
-            filters: {
-              ...state.filters,
-              cities: action.payload.cities
-            }
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            cities: action.payload.cities
           }
+        };
       } else if (action.payload.type === "brand_filter") {
-          return {
-            ...state,
-            filters: {
-              ...state.filters,
-              brands: action.payload.brands
-            }
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            brands: action.payload.brands
           }
-      } 
+        };
+      }
       return state;
     default:
       return state;
