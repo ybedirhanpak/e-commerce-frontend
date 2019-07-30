@@ -73,6 +73,7 @@ export default class form extends Component {
             cols="20"
             rows="5"
             class="form-control"
+            required
             value={this.state.message}
             onChange={this.handleChange}
           />

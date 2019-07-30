@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addUserAddress, resetAddressAdd } from "../../redux/user/actions";
 
-class addAdress extends Component {
+class AddAdress extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -161,4 +161,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(addAdress);
+)(AddAdress);
