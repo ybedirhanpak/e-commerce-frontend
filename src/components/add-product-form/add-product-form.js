@@ -29,7 +29,10 @@ class AddProductForm extends React.Component {
       price: 0,
       oldPrice: 0,
       quantity: "",
-      imgSource: ""
+      imgSource: "",
+      tag: "",
+      tagList: [],
+      selectedTag: ""
     };
     this.onChange = this.onChange.bind(this);
     this.selectMainCategory = this.selectMainCategory.bind(this);
@@ -93,6 +96,11 @@ class AddProductForm extends React.Component {
       </option>
     ));
 
+    let tags = this.state.tagList.map(element => (
+      <option onClick={this.selectTag} value={element}>
+        {element}
+      </option>
+    ));
     return (
       <div className="container-fluid">
         <div className="row">
@@ -240,6 +248,28 @@ class AddProductForm extends React.Component {
             </div>
 
             <br />
+            <div className="form-group">
+              <label htmlFor="price">Tag</label>
+              <input
+                type="string"
+                id="tag"
+                className="form-control"
+                placeholder="New Tag"
+                name="tag"
+                onChange={this.onChange}
+              />
+              <button onClick={() => this.addTag(this.state)}>Add Tag</button>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="select1">Brand</label>
+              <select name="category1" className="form-control" multiple>
+                {tags}
+              </select>
+              <button onClick={() => this.removeTag(this.state)}>
+                remove Tag
+              </button>
+            </div>
 
             <button
               className="btn btn-danger btn-lg btn-block"
@@ -253,6 +283,26 @@ class AddProductForm extends React.Component {
       </div>
     );
   }
+  removeTag = prevState => {
+    this.setState({
+      tagList: prevState.tagList.filter(
+        element => element !== this.state.selectedTag
+      )
+    });
+  };
+
+  selectTag = event => {
+    this.setState({
+      selectedTag: event.target.value
+    });
+  };
+  addTag = prevState => {
+    if (this.state.tag !== "") {
+      this.setState({
+        tagList: [...prevState.tagList, prevState.tag]
+      });
+    }
+  };
 
   selectBrand(event) {
     this.setState({
@@ -348,7 +398,8 @@ class AddProductForm extends React.Component {
       cityOptions: this.state.selectedCities,
       brand: this.state.selectedBrand,
       stars: 0,
-      reviews: []
+      reviews: [],
+      tags: this.state.tagList
     };
 
     this.props.addProduct(product);
