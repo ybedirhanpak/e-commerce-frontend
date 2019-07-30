@@ -88,7 +88,10 @@ class CheckoutOrder extends Component {
         billingAddress: this.props.orderAddress.selectedBillingAddress,
         orderTrack: "Pending",
         paymentType: this.state.payment,
+        orderNotes: this.state.orderNotes,
         orderedProducts: this.props.orderedProducts,
+        orderTotal: this.props.cart.totalPrice,
+
         userId: this.props.userId
       };
       this.props.postOrderCheckout(orderContent);

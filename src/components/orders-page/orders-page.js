@@ -13,7 +13,16 @@ class OrdersPage extends Component {
 
   generateProducts = productList => {
     const products = productList.map(product => {
-      return <h5>{product.name}</h5>;
+      return (
+        <div>
+          <h4>{product.name}</h4>
+          <h5>
+            <br />/ Quantity: x{product.quantity} <br />/ Price: ${" "}
+            {product.price}
+            <hr />
+          </h5>
+        </div>
+      );
     });
     return products;
   };
@@ -35,16 +44,19 @@ class OrdersPage extends Component {
                 </a>
               </h4>
             </div>
-            <div id={`${order.id}`} class="panel-collapse collapse in">
+            <div
+              id={`${order.id}`}
+              class="panel-collapse collapse in accordion"
+            >
               <div className="panel-body">
                 <div className="row" style={{ paddingbot: 20 }}>
                   <div className="col-md-6">
-                    <h1>Shipping Adress:</h1>
+                    <h4>Shipping Adress:</h4>
                     <hr />
                     {order.shippingAddress.address}
                   </div>
                   <div className="col-md-6">
-                    <h1>Package Track</h1>
+                    <h4>Package Track</h4>
                     <hr />
                     {order.orderTrack}
                   </div>
@@ -52,19 +64,32 @@ class OrdersPage extends Component {
                 <br />
                 <div className="row" style={{ paddingbot: 20 }}>
                   <div className="col-md-6">
-                    <h1>Billing Adress:</h1>
+                    <h4>Billing Adress:</h4>
                     <hr />
                     {order.billingAddress.address}
                   </div>
                   <div className="col-md-6">
-                    <h1>Payment Type</h1>
+                    <h4>Order Notes:</h4>
                     <hr />
-                    {order.paymentType}
+                    {order.orderNotes}
                   </div>
                 </div>
                 <br />
                 <div className="row" style={{ paddingbot: 20 }}>
-                  <h1>Ordered Products</h1>
+                  <div className="col-md-6">
+                    <h4>Payment Type</h4>
+                    <hr />
+                    {order.paymentType}
+                  </div>
+                  <div className="col-md-6">
+                    <h4>Payment Total:</h4>
+                    <hr /> <b>${order.orderTotal}</b>
+                  </div>
+                </div>
+                <br />
+                <div className="row" style={{ paddingbot: 20 }}>
+                  <h3>Ordered Products</h3>
+                  <hr />
                   {this.generateProducts(order.orderedProducts)}
                 </div>
               </div>
