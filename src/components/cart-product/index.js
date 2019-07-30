@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 class CartProduct extends React.Component {
   handleDeleteFromCart = () => {
-    console.log("la", this.props.cartProduct);
     this.props.deletefromCART(this.props.cartProduct);
   };
   render() {
@@ -15,9 +14,7 @@ class CartProduct extends React.Component {
         </div>
         <div className="product-body">
           <h3 className="product-name">
-            <a href="#">
-              {this.props.cartProduct.name}({this.props.cartProduct.size})
-            </a>
+            {this.props.cartProduct.name}({this.props.cartProduct.size})
           </h3>
           <h4 className="product-price">
             <span className="qty">{this.props.cartProduct.quantity}</span>

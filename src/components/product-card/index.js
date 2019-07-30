@@ -8,24 +8,24 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/cart/actions";
 
-//Components
-import Image from "react-image-resizer";
-
 //"./img/product01.png"
 
 class ProductCard extends React.Component {
   createAverageOfStar = () => {
     let children = [];
     let div = [];
-    let sum = 0;
 
     for (let i = 0; i < this.props.product.stars; i++) {
-      children.push(<i className="fa fa-star" />);
+      children.push(<i key={`key-${i}`} className="fa fa-star" />);
     }
     for (let j = this.props.product.stars; j < 5; j++) {
-      children.push(<i className="fa fa-star-o" />);
+      children.push(<i key={`key-${j}`} className="fa fa-star-o" />);
     }
-    div.push(<div className="product-rating">{children}</div>);
+    div.push(
+      <div key={`key-${6}`} className="product-rating">
+        {children}
+      </div>
+    );
 
     return div;
   };
@@ -103,71 +103,67 @@ class ProductCard extends React.Component {
   render() {
     const product = this.props.product;
     return (
-      <div>
-        <div className="product">
-          <div className="product-img" style={{ height: 300 }}>
-            {/* <Image width={240} height={240} src={product.imgSource} alt="Product" /> */}
-            <img
-              className="only-product-img"
-              src={product.imgSource}
-              alt="Product"
-            />
-            <div className="product-label">
-              {product.discount && (
-                <span className="sale">-{product.discount}</span>
-              )}
-              {product.new && (
-                <span className="new">{product.new && "NEW"}</span>
-              )}
-            </div>
+      <div className="product">
+        <div className="product-img" style={{ height: 300 }}>
+          {/* <Image width={240} height={240} src={product.imgSource} alt="Product" /> */}
+          <img
+            className="only-product-img"
+            src={product.imgSource}
+            alt="Product"
+          />
+          <div className="product-label">
+            {product.discount && (
+              <span className="sale">-{product.discount}</span>
+            )}
+            {product.new && <span className="new">{product.new && "NEW"}</span>}
           </div>
-          <div className="product-body">
-            {/* Category */}
-            <p className="product-category">
-              <Link to={this.generateCategoryPath()}>
-                {this.findCategoryName(product.category)}
-              </Link>
-            </p>
-            {/* Name */}
-            <h3 className="product-name">
-              <Link
-                to={{
-                  pathname: this.generateProductPath(),
-                  state: { id: product.id }
-                }}
-              >
-                {product.name}
-              </Link>
-            </h3>
-            {/* Price */}
-            <h4 className="product-price">
-              {"$" + product.price}
-              <del className="product-old-price">{"$" + product.oldPrice}</del>
-            </h4>
-            {/* Rating */}
-            {this.createAverageOfStar()}
-            {/* Buttons */}
-            <div className="product-btns">
-              <button className="add-to-wishlist">
-                <i className="fa fa-heart-o" />
-                <span className="tooltipp">add to wishlist</span>
-              </button>
-              <button className="add-to-compare">
-                <i className="fa fa-exchange" />
-                <span className="tooltipp">add to compare</span>
-              </button>
-              <button className="quick-view">
-                <i className="fa fa-eye" />
-                <span className="tooltipp">quick view</span>
-              </button>
-            </div>
-          </div>
-          {/* Add to cart */}
-          <div className="add-to-cart">
-            <button className="add-to-cart-btn" onClick={this.handleAddtoChart}>
-              <i className="fa fa-shopping-cart" /> add to cart
+        </div>
+        <div className="product-body">
+          {/* Category */}
+          <p className="product-category">
+            <Link to={this.generateCategoryPath()}>
+              {this.findCategoryName(product.category)}
+            </Link>
+          </p>
+          {/* Name */}
+          <h3 className="product-name">
+            <Link
+              to={{
+                pathname: this.generateProductPath(),
+                state: { id: product.id }
+              }}
+            >
+              {product.name}
+            </Link>
+          </h3>
+          {/* Price */}
+          <h4 className="product-price">
+            {"$" + product.price}
+            <del className="product-old-price">{"$" + product.oldPrice}</del>
+          </h4>
+          {/* Rating */}
+          {this.createAverageOfStar()}
+          {/* Buttons */}
+          <div className="product-btns">
+            <button className="add-to-wishlist">
+              <i className="fa fa-heart-o" />
+              <span className="tooltipp">add to wishlist</span>
+            </button>
+            <button className="add-to-compare">
+              <i className="fa fa-exchange" />
+              <span className="tooltipp">add to compare</span>
+            </button>
+            <button className="quick-view">
+              <i className="fa fa-eye" />
+              <span className="tooltipp">quick view</span>
             </button>
           </div>
+        </div>
+        {/* Add to cart */}
+        <div className="add-to-cart">
+          <button className="add-to-cart-btn" onClick={this.handleAddtoChart}>
+            <i className="fa fa-shopping-cart" /> add to cart
+          </button>
         </div>
       </div>
     );

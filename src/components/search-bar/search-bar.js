@@ -51,7 +51,6 @@ class SearchBar extends Component {
   };
 
   render() {
-    console.log("search bar state", this.state.selectedCategory.id);
     return (
       <div className="header-search">
         <form>

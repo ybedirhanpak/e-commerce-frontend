@@ -16,6 +16,7 @@ class CitySelectBox extends Component {
           this.props.allCities.filter(temp => element === temp.id)[0]
         );
       }
+      return null;
     });
 
     return cities;
@@ -40,23 +41,22 @@ class CitySelectBox extends Component {
     const cityList = list.map((city, index) => {
       const cityChecked = filterCities.includes(city.id);
       return (
-        <>
-          <div key={index} id={city.id}>
-            <div className="input-checkbox">
-              <input
-                checked={cityChecked}
-                type="checkbox"
-                id={city.id + "-" + index}
-                value={city.id}
-                onClick={event => this.handleClick(event, cityChecked)}
-              />
-              <label htmlFor={city.id + "-" + index}>
-                <span />
-                {city.name}
-              </label>
-            </div>
+        <div key={index} id={city.id}>
+          <div className="input-checkbox">
+            <input
+              readOnly
+              checked={cityChecked}
+              type="checkbox"
+              id={city.id + "-" + index}
+              value={city.id}
+              onClick={event => this.handleClick(event, cityChecked)}
+            />
+            <label htmlFor={city.id + "-" + index}>
+              <span />
+              {city.name}
+            </label>
           </div>
-        </>
+        </div>
       );
     });
     return cityList;

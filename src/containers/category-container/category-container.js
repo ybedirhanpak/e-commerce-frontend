@@ -137,7 +137,6 @@ class CategoryContainer extends Component {
       type: "allSubcategories",
       allSubcategories: categoryIds
     });
-    console.log("Starting get request with filter...", this.props.filters);
     // Dispatch to get product list
     this.props
       .getProductListWithCategory(categoryIds)

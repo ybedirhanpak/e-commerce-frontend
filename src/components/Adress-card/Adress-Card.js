@@ -5,10 +5,6 @@ import "./address-card.css";
 import { Link } from "react-router-dom";
 
 class AdressCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   createAddress = () => {
     const addressList = this.props.currentUser.addresses.map(
       (address, index) => {

@@ -64,8 +64,6 @@ class AddAdress extends Component {
   }
 
   render() {
-    console.log("add address progress", this.props.addAddressProgress);
-    console.log("user address name", this.props.userAddresses);
     return (
       <div className="billing-details">
         <div className="form-group">
