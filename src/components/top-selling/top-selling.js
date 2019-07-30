@@ -9,9 +9,9 @@ export default class TopSelling extends Component {
         <div className="section">
           <div className="container">
             <div className="row">
-              <TopSellingCol />
-              <TopSellingCol />
-              <TopSellingCol />
+              <TopSellingCol products={this.props.products} />
+              <TopSellingCol products={this.props.products} />
+              <TopSellingCol products={this.props.products} />
             </div>
           </div>
         </div>

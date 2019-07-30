@@ -1,19 +1,29 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 export default class TopSellingProduct extends Component {
   render() {
+    const product = this.props.product;
     return (
-      <div className="product-widget">
+      <div className="product-widget" style={{ height: 120 }}>
         <div className="product-img">
-          <img src="./img/product02.png" alt="" />
+          <img src={product.imgSource} alt="" />
         </div>
         <div className="product-body">
-          <p className="product-category">Category</p>
           <h3 className="product-name">
-            <a href="#">product name goes here</a>
+            <Link
+              to={{
+                pathname: "/asd",
+                state: { id: product.id }
+              }}
+            >
+              {product.name}
+            </Link>
           </h3>
           <h4 className="product-price">
-            $980.00 <del className="product-old-price">$990.00</del>
+            {"$" + product.price}
+            <del className="product-old-price">{"$" + product.oldPrice}</del>
           </h4>
         </div>
       </div>
