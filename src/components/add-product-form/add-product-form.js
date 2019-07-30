@@ -262,7 +262,7 @@ class AddProductForm extends React.Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="select1">Brand</label>
+              <label htmlFor="select1">Tags</label>
               <select name="category1" className="form-control" multiple>
                 {tags}
               </select>
