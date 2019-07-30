@@ -36,6 +36,11 @@ class CheckoutOrder extends Component {
     });
   };
 
+  handleIncrease = (event, product) => {
+    event.preventDefault();
+    this.props.updateQuantity({ ...product, quantity: 1 });
+  };
+
   handleDecrease = (event, product) => {
     event.preventDefault();
     this.props.updateQuantity({ ...product, quantity: -1 });
