@@ -3,7 +3,7 @@ import React, { Component } from "./node_modules/react";
 import { connect } from "./node_modules/react-redux";
 import { postUserUpdate } from "../../redux/user/actions";
 
-class addAdress extends Component {
+class AddAdress extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -136,4 +136,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(addAdress);
+)(AddAdress);
