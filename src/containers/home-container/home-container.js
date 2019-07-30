@@ -8,6 +8,8 @@ import StoreTopFilter from "../../components/store-top-filter/store-top-filter";
 //Redux
 import { connect } from "react-redux";
 import { getProductList } from "../../redux/product/actions";
+import Collection from "../../components/collection/collection";
+import TopSelling from "../../components/top-selling/top-selling";
 
 class HomeContainer extends Component {
   componentDidMount() {
@@ -25,18 +27,15 @@ class HomeContainer extends Component {
       <div className="section">
         <div className="container">
           <div className="row">
-            <div id="store" className="col-sm-12">
-              {/* Store Component */}
-              <StoreTopFilter />
-              <Store
-                apiProducts={this.props.apiProducts}
-                fetchInProgress={this.props.fetchInProgress}
-                filters={this.props.filters}
-              />
+            <div className="col-sm-12">
+              <Collection />
             </div>
           </div>
         </div>
         <SlideProduct date={`${year}-07-26T18:00:00`} />
+        <div>
+          <TopSelling />
+        </div>
       </div>
     );
   }
