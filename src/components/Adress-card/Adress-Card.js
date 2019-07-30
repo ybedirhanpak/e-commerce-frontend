@@ -26,13 +26,16 @@ class AdressCard extends Component {
               </h5>
               <p className="order-address-p">{address.address}</p>
               <br />
-              <input
+              <button
                 className="btn btn-danger"
-                type="button"
                 value="Delete"
                 style={{ marginRight: 10 }}
-              />
-              <input className="btn btn-warning" type="button" value="Edit" />
+              >
+                Delete
+              </button>
+              <button className="btn btn-warning" value="Edit">
+                Edit
+              </button>
             </div>
           </div>
         );

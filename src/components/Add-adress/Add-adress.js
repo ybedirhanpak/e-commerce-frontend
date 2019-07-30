@@ -23,22 +23,11 @@ class AddAdress extends Component {
     this.onChange = this.onChange.bind(this);
     this.submitAddress = this.submitAddress.bind(this);
   }
+
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
-  };
-  onClick = () => {
-    if (
-      this.state.addressName === "" ||
-      this.state.address === "" ||
-      this.state.city === "" ||
-      this.state.country === "" ||
-      this.state.zipCode === "" ||
-      this.state.tel === ""
-    ) {
-      alert("Please fill the all fields!!!");
-    }
   };
 
   submitAddress = event => {
@@ -51,11 +40,23 @@ class AddAdress extends Component {
       zipCode: this.state.zipCode,
       Telephone: this.state.tel
     };
+
     const useradd = {
       addresses: [...this.props.currentUser.addresses, addressContent]
     };
 
-    this.props.addUserAddress(this.props.currentUser.id, useradd);
+    if (
+      this.state.addressName === "" ||
+      this.state.address === "" ||
+      this.state.city === "" ||
+      this.state.country === "" ||
+      this.state.zipCode === "" ||
+      this.state.tel === ""
+    ) {
+      alert("Please fill the all fields!!!");
+    } else {
+      this.props.addUserAddress(this.props.currentUser.id, useradd);
+    }
   };
 
   componentDidMount() {
@@ -64,6 +65,7 @@ class AddAdress extends Component {
 
   render() {
     console.log("add address progress", this.props.addAddressProgress);
+    console.log("user address name", this.props.userAddresses);
     return (
       <div className="billing-details">
         <div className="form-group">
@@ -152,7 +154,8 @@ class AddAdress extends Component {
 const mapStateToProps = state => {
   return {
     currentUser: state.user.currentUser,
-    addAddressProgress: state.user.addAddressProgress
+    addAddressProgress: state.user.addAddressProgress,
+    userAddresses: state.user.currentUser.addressess
   };
 };
 
