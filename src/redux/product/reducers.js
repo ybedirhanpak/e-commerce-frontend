@@ -2,6 +2,7 @@ import { actionTypes } from "./actions";
 
 const initialState = {
   productList: [],
+  filteredProductList: [],
   currentProduct: {},
   fetchInProgress: true,
   filters: {
@@ -12,6 +13,7 @@ const initialState = {
     },
     brands: [],
     subcategories: [],
+    allSubcategories: [],
     searchText: "",
     mainCategoryId: "",
     sortBy: "new",
@@ -30,6 +32,12 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
         productList: action.payload,
+        fetchInProgress: false
+      };
+    case actionTypes.SAVE_FILTERED_PRODUCT_LIST:
+      return {
+        ...state,
+        filteredProductList: action.payload,
         fetchInProgress: false
       };
     case actionTypes.SAVE_SINGLE_PRODUCT:
@@ -56,6 +64,14 @@ function productReducer(state = initialState, action) {
           filters: {
             ...state.filters,
             subcategories: action.payload.subcategories
+          }
+        };
+      } else if (action.payload.type === "allSubcategories") {
+        return {
+          ...state,
+          filters: {
+            ...initialState.filters,
+            allSubcategories: action.payload.allSubcategories
           }
         };
       } else if (action.payload.type === "searchBar") {
