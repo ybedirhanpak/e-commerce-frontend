@@ -6,12 +6,18 @@ const SELECT_SHIPPING_ADDRESS = "SELECT_SHIPPING_ADDRESS";
 const SELECT_BILLING_ADDRESS = "SELECT_BILLING_ADDRESS";
 const INITALIZE_LOAD = "INITALIZE_LOAD";
 const COMPLETE_LOAD = "COMPLETE_LOAD";
+const INITALIZE_ORDER = "INITALIZE_ORDER";
+const COMPLETE_ORDER = "COMPLETE_ORDER";
+const RESET_ORDER = "RESET_ORDER";
 
 export const actionTypes = {
   SELECT_SHIPPING_ADDRESS,
   SELECT_BILLING_ADDRESS,
   INITALIZE_LOAD,
-  COMPLETE_LOAD
+  COMPLETE_LOAD,
+  INITALIZE_ORDER,
+  COMPLETE_ORDER,
+  RESET_ORDER
 };
 
 function selectShippingAddress(address) {
@@ -41,26 +47,48 @@ function completeLoad(orders) {
   };
 }
 
+function initalizeOrder() {
+  return {
+    type: INITALIZE_ORDER
+  };
+}
+
+function completeOrder() {
+  return {
+    type: COMPLETE_ORDER
+  };
+}
+
+export const resetOrder = () => {
+  return {
+    type: RESET_ORDER
+  };
+};
+
 export const actionCreators = {
   selectShippingAddress,
   selectBillingAddress,
   initializeLoad,
-  completeLoad
+  completeLoad,
+  initalizeOrder,
+  completeOrder
 };
 
 export const postOrderCheckout = body => {
   console.log("body", body);
 
   return dispatch => {
+    dispatch(initalizeOrder());
     PostWithUrlBody(API + "/orders/create", body)
       .then(response => {
         console.log("response", response);
-        if (response.status === 201 || response.status === 200) {
+        if (response.status >= 200 && response.status < 300) {
           response.json().then(data => {
             console.log("successful", data);
             const userUpdated = {
               orders: [data.id]
             };
+            dispatch(completeOrder());
             dispatch(postUserUpdate(data.userId, userUpdated));
           });
         } else {

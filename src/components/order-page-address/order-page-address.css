@@ -1,10 +1,16 @@
-.order-page-address{
-    overflow-y: scroll;
-    max-height: 600px;
-    
+.order-page-address {
+  overflow-y: scroll;
+  max-height: 600px;
 }
-.order-address-p{
-    overflow-y: scroll;
-    max-height: 70px;
-    
+.order-address-p {
+  overflow-y: scroll;
+  max-height: 70px;
+}
+
+.shipping {
+  background-color: rgb(194, 255, 192);
+}
+
+.billing {
+  background-color: pink;
 }

@@ -4,7 +4,8 @@ const initalState = {
   selectedShippingAddress: {},
   selectedBillingAddress: {},
   currentOrders: [],
-  fetchInProgress: true
+  fetchInProgress: true,
+  orderInProgress: -1
 };
 
 function addressReducer(state = initalState, action) {
@@ -33,6 +34,25 @@ function addressReducer(state = initalState, action) {
         currentOrders: action.payload,
         fetchInProgress: false
       };
+
+    case actionTypes.INITALIZE_ORDER:
+      return {
+        ...state,
+        orderInProgress: 0
+      };
+
+    case actionTypes.COMPLETE_ORDER:
+      return {
+        ...state,
+        orderInProgress: 1
+      };
+
+    case actionTypes.RESET_ORDER:
+      return {
+        ...state,
+        orderInProgress: -1
+      };
+
     default:
       return state;
   }
