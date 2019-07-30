@@ -13,19 +13,11 @@ export default class TopSellingCol extends Component {
           </div>
         </div>
 
-        <div>
-          <TopSellingProduct />
+        <TopSellingProduct />
 
-          <TopSellingProduct />
+        <TopSellingProduct />
 
-          <TopSellingProduct />
-        </div>
-
-        <div>
-          <TopSellingProduct />
-
-          <TopSellingProduct />
-        </div>
+        <TopSellingProduct />
       </div>
     );
   }

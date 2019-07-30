@@ -63,7 +63,6 @@ class AddAdress extends Component {
   }
 
   render() {
-    console.log("add address progress", this.props.addAddressProgress);
     return (
       <div className="billing-details">
         <div className="form-group">

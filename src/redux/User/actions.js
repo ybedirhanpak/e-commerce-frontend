@@ -124,7 +124,6 @@ export const postUserRegister = body => {
           dispatch(completeRegister(response));
         } else {
           response.json().then(data => {
-            console.log(data.message);
             dispatch(completeRegister(data.message));
           });
         }
@@ -148,13 +147,11 @@ export const postUserLogin = body => {
 };
 
 export const postUserUpdate = (id, body) => {
-  console.log("post user update body", body);
   return dispatch => {
     PutWithUrlBody(API + "/users/update/" + id, body)
       .then(response => {
         if (response.status === 201 || response.status === 200) {
           response.json().then(data => {
-            console.log("update user success", data);
             dispatch(updateUser(data));
           });
         } else {
@@ -168,18 +165,14 @@ export const postUserUpdate = (id, body) => {
 };
 
 export const addUserAddress = (id, body) => {
-  console.log("add user address, body: ", body);
   return dispatch => {
     dispatch(initalizeAddAddress());
     PutWithUrlBody(API + "/users/update/" + id, body)
       .then(response => {
-        console.log("response: ", response);
         if (response.status >= 200 && response.status < 300) {
           response.json().then(data => {
-            console.log("add user address success", data);
             dispatch(updateUser(data));
             dispatch(completeAddAddress());
-            console.log("updated user address succesfully");
           });
         } else {
           response.json().then(data => {

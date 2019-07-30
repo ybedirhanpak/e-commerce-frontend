@@ -5,9 +5,9 @@ import Slider from "react-slick";
 
 export default class ProductSlide extends Component {
   generateProducts = () => {
-    const productsList = this.props.products.map(product => {
+    const productsList = this.props.products.map((product, index) => {
       return (
-        <div key={product.id}>
+        <div key={`${product.id}-${index}`}>
           <ProductCard product={product} />
         </div>
       );

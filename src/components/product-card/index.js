@@ -8,24 +8,24 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/cart/actions";
 
-//Components
-import Image from "react-image-resizer";
-
 //"./img/product01.png"
 
 class ProductCard extends React.Component {
   createAverageOfStar = () => {
     let children = [];
     let div = [];
-    let sum = 0;
 
     for (let i = 0; i < this.props.product.stars; i++) {
-      children.push(<i className="fa fa-star" />);
+      children.push(<i key={`key-${i}`} className="fa fa-star" />);
     }
     for (let j = this.props.product.stars; j < 5; j++) {
-      children.push(<i className="fa fa-star-o" />);
+      children.push(<i key={`key-${j}`} className="fa fa-star-o" />);
     }
-    div.push(<div className="product-rating">{children}</div>);
+    div.push(
+      <div key={`key-${6}`} className="product-rating">
+        {children}
+      </div>
+    );
 
     return div;
   };

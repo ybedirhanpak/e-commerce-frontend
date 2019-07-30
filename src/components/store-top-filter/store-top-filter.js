@@ -7,7 +7,6 @@ import { getProductListWithFilter } from "../../redux/product/actions";
 
 class StoreTopFilter extends Component {
   handleSortChange = event => {
-    console.log("changed", event.target.value);
     this.props.updateFilters({
       type: "sortBy",
       sortBy: event.target.value

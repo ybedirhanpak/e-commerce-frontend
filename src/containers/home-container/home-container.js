@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 
 //Components
-import Store from "../../components/store/store";
 import SlideProduct from "../../components/slide-product/slide";
-import StoreTopFilter from "../../components/store-top-filter/store-top-filter";
 import ProductSlide from "../../components/product-slide/product-slide";
 
 //Redux
@@ -18,7 +16,6 @@ class HomeContainer extends Component {
   }
 
   render() {
-    console.log("home container props", this.props);
     const currentDate = new Date();
     const year =
       currentDate.getMonth() === 11 && currentDate.getDate() > 23

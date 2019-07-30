@@ -16,8 +16,8 @@ class BrandsSelectBox extends Component {
           this.props.allBrands.filter(temp => element === temp.id)[0]
         );
       }
+      return null;
     });
-
     return brands;
   };
 

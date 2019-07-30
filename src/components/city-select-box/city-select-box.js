@@ -16,6 +16,7 @@ class CitySelectBox extends Component {
           this.props.allCities.filter(temp => element === temp.id)[0]
         );
       }
+      return null;
     });
 
     return cities;

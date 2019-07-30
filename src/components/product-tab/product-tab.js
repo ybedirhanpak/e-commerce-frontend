@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateProduct } from '../../redux/product/actions';
+import { updateProduct } from "../../redux/product/actions";
 import { isNullOrUndefined } from "util";
-import './product-tab.css'
+import "./product-tab.css";
 
 class ProductTab extends Component {
   constructor(props) {
@@ -24,154 +24,199 @@ class ProductTab extends Component {
   }
 
   createStarAverage = (average, reviewStarCount) => {
-    let div = []
-    let children = []
-    let divInside, ul = []
+    let div = [];
+    let children = [];
+    let ul = [];
     const iStyle = {
-      color: '#ef233c'
-    }
+      color: "#ef233c"
+    };
     for (let i = 0; i < 1; i++) {
       for (let j = 0; j < Math.round(average); j++) {
-        if(j>average-1){
-          children.push(<i style={iStyle} className="fa fa-star-half-o"></i>)
+        if (j > average - 1) {
+          children.push(
+            <i key={`key-${j}1`} style={iStyle} className="fa fa-star-half-o" />
+          );
           continue;
         }
-        children.push(<i className="fa fa-star"></i>)
+        children.push(<i key={`key-${j}2`} className="fa fa-star" />);
       }
       for (let k = Math.round(average); k < 5; k++) {
-        if(k===5){
+        if (k === 5) {
           break;
         }
-        children.push(<i className="fa fa-star-o"></i>)
+        children.push(<i key={`key-${k}1`} className="fa fa-star-o" />);
       }
-
     }
-    if (this.props.product.reviews !== undefined && this.props.product.reviews !== null) {
-      ul.push(<ul className="rating">
-        <li>
-          <div className="rating-stars">
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-          </div>
-          <div className="rating-progress">
-            <div style={{ width: (reviewStarCount[5] / this.props.product.reviews.length) * 100 + "%" }} ></div>
-          </div>
-          <span className="sum">{reviewStarCount[5]}</span>
-        </li>
-        <li>
-          <div className="rating-stars">
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star-o" />
-          </div>
-          <div className="rating-progress">
-            <div style={{ width: (reviewStarCount[4] / this.props.product.reviews.length) * 100 + "%" }} />
-          </div>
-          <span className="sum">{reviewStarCount[4]}</span>
-        </li>
-        <li>
-          <div className="rating-stars">
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-          </div>
-          <div className="rating-progress">
-            <div style={{ width: (reviewStarCount[3] / this.props.product.reviews.length) * 100 + "%" }} />
-          </div>
-          <span className="sum">{reviewStarCount[3]}</span>
-        </li>
-        <li>
-          <div className="rating-stars">
-            <i className="fa fa-star" />
-            <i className="fa fa-star" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-          </div>
-          <div className="rating-progress">
-            <div style={{ width: (reviewStarCount[2] / this.props.product.reviews.length) * 100 + "%" }} />
-          </div>
-          <span className="sum">{reviewStarCount[2]}</span>
-        </li>
-        <li>
-          <div className="rating-stars">
-            <i className="fa fa-star" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-          </div>
-          <div className="rating-progress">
-            <div style={{ width: (reviewStarCount[1] / this.props.product.reviews.length) * 100 + "%" }} />
-          </div>
-          <span className="sum">{reviewStarCount[1]}</span>
-        </li>
-        <li>
-          <div className="rating-stars">
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-            <i className="fa fa-star-o" />
-          </div>
-          <div className="rating-progress">
-            <div style={{ width: (reviewStarCount[0] / this.props.product.reviews.length) * 100 + "%" }} />
-          </div>
-          <span className="sum">{reviewStarCount[0]}</span>
-        </li>
-      </ul>)
+    if (
+      this.props.product.reviews !== undefined &&
+      this.props.product.reviews !== null
+    ) {
+      ul.push(
+        <ul key={`key-ul`} className="rating">
+          <li>
+            <div className="rating-stars">
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+            </div>
+            <div className="rating-progress">
+              <div
+                style={{
+                  width:
+                    (reviewStarCount[5] / this.props.product.reviews.length) *
+                      100 +
+                    "%"
+                }}
+              />
+            </div>
+            <span className="sum">{reviewStarCount[5]}</span>
+          </li>
+          <li>
+            <div className="rating-stars">
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star-o" />
+            </div>
+            <div className="rating-progress">
+              <div
+                style={{
+                  width:
+                    (reviewStarCount[4] / this.props.product.reviews.length) *
+                      100 +
+                    "%"
+                }}
+              />
+            </div>
+            <span className="sum">{reviewStarCount[4]}</span>
+          </li>
+          <li>
+            <div className="rating-stars">
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+            </div>
+            <div className="rating-progress">
+              <div
+                style={{
+                  width:
+                    (reviewStarCount[3] / this.props.product.reviews.length) *
+                      100 +
+                    "%"
+                }}
+              />
+            </div>
+            <span className="sum">{reviewStarCount[3]}</span>
+          </li>
+          <li>
+            <div className="rating-stars">
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+            </div>
+            <div className="rating-progress">
+              <div
+                style={{
+                  width:
+                    (reviewStarCount[2] / this.props.product.reviews.length) *
+                      100 +
+                    "%"
+                }}
+              />
+            </div>
+            <span className="sum">{reviewStarCount[2]}</span>
+          </li>
+          <li>
+            <div className="rating-stars">
+              <i className="fa fa-star" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+            </div>
+            <div className="rating-progress">
+              <div
+                style={{
+                  width:
+                    (reviewStarCount[1] / this.props.product.reviews.length) *
+                      100 +
+                    "%"
+                }}
+              />
+            </div>
+            <span className="sum">{reviewStarCount[1]}</span>
+          </li>
+          <li>
+            <div className="rating-stars">
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+              <i className="fa fa-star-o" />
+            </div>
+            <div className="rating-progress">
+              <div
+                style={{
+                  width:
+                    (reviewStarCount[0] / this.props.product.reviews.length) *
+                      100 +
+                    "%"
+                }}
+              />
+            </div>
+            <span className="sum">{reviewStarCount[0]}</span>
+          </li>
+        </ul>
+      );
 
       div.push(
-        <div id="rating">
+        <div key={`key-div`} id="rating">
           <div className="rating-avg">
             <span>{average.toFixed(1)}</span>
-            <div className="rating-stars">
-              {children}
-            </div>
+            <div className="rating-stars">{children}</div>
           </div>
           {ul}
         </div>
-      )
+      );
     } else {
-      div.push(<div>NO COMMENT YET</div>)
+      div.push(<div>NO COMMENT YET</div>);
     }
 
+    return div;
+  };
 
-    return div
-  }
-
-  setStars = (index) => {
+  setStars = index => {
     let children = [];
     for (let i = 0; i < 1; i++) {
-
       for (let j = 0; j < index; j++) {
-        children.push(<i className="fa fa-star"></i>)
+        children.push(<i key={`key-${j}3`} className="fa fa-star" />);
       }
       for (let k = index; k < 5; k++) {
-        children.push(<i className="fa fa-star-o empty"></i>)
+        children.push(<i key={`key-${k}2`} className="fa fa-star-o empty" />);
       }
-
     }
     return children;
-
-  }
+  };
 
   showReviews = () => {
     let review = this.props.product.reviews;
     let element = [];
-    let comments = [];
     if (review === undefined) {
-      return (<div>No Comment Yet</div>)
+      return <div>No Comment Yet</div>;
     }
 
-    for (let i = this.state.currentBlock - 3; i < this.state.currentBlock; i++) {
+    for (
+      let i = this.state.currentBlock - 3;
+      i < this.state.currentBlock;
+      i++
+    ) {
       if (i < 0) {
         i = 0;
       }
@@ -180,32 +225,32 @@ class ProductTab extends Component {
         break;
       }
 
-      element.push(<li>
-        <div className="review-heading">
-          <h5 className="name">{review[i].userFullName}</h5>
-          <p className="date">{review[i].commentTime}</p>
-          <div className="review-rating">
-            {this.setStars(review[i].numberOfStars)}
+      element.push(
+        <li key={`key-li-${i}`}>
+          <div className="review-heading">
+            <h5 className="name">{review[i].userFullName}</h5>
+            <p className="date">{review[i].commentTime}</p>
+            <div className="review-rating">
+              {this.setStars(review[i].numberOfStars)}
+            </div>
           </div>
-        </div>
-        <div className="review-body">
-          <p>
-            {review[i].reviewContent}
-          </p>
-        </div>
-      </li>)
+          <div className="review-body">
+            <p>{review[i].reviewContent}</p>
+          </div>
+        </li>
+      );
     }
 
     return element;
-  }
+  };
 
   handleRightReview = () => {
     let newBlock = this.state.currentBlock + 3;
     if (newBlock > this.props.product.reviews.length) {
       newBlock = this.props.product.reviews.length - newBlock;
     }
-    this.setState({ currentBlock: newBlock })
-  }
+    this.setState({ currentBlock: newBlock });
+  };
 
   handleLeftReview = () => {
     let newBlock = this.state.currentBlock - 3;
@@ -213,13 +258,13 @@ class ProductTab extends Component {
       newBlock = this.props.product.reviews.length;
     }
     this.setState({ currentBlock: newBlock });
-  }
+  };
 
-  setValue = (event) => {
+  setValue = event => {
     const { name, value } = event.target;
 
     this.setState({ [name]: value });
-  }
+  };
 
   submitReview = (event, average) => {
     var currentDate = new Date();
@@ -241,24 +286,32 @@ class ProductTab extends Component {
     };
     this.props.updateProduct(this.props.product.id, product);
     event.preventDefault();
-  }
+  };
 
   render() {
-    let commentStarCount = [0, 0, 0, 0, 0, 0]
-    let sum = 0
-    let average = 0
+    let commentStarCount = [0, 0, 0, 0, 0, 0];
+    let sum = 0;
+    let average = 0;
 
-    if (this.props.product.reviews !== undefined && this.props.product.reviews !== null) {
+    if (
+      this.props.product.reviews !== undefined &&
+      this.props.product.reviews !== null
+    ) {
       this.props.product.reviews.map(star => {
-        commentStarCount.slice(star.numberOfStars, 1, commentStarCount[star.numberOfStars]++);
-        sum += star.numberOfStars
-      })
-      average = sum / this.props.product.reviews.length
+        commentStarCount.slice(
+          star.numberOfStars,
+          1,
+          commentStarCount[star.numberOfStars]++
+        );
+        sum += star.numberOfStars;
+        return null;
+      });
+      average = sum / this.props.product.reviews.length;
       if (isNaN(average)) {
-        average = 0
+        average = 0;
       }
     } else {
-      average = 0
+      average = 0;
     }
 
     return (
@@ -277,7 +330,11 @@ class ProductTab extends Component {
           </li>
           <li>
             <a data-toggle="tab" href="#tab3">
-              Reviews ({(isNullOrUndefined(this.props.product.reviews) ? "0" : this.props.product.reviews.length)})
+              Reviews (
+              {isNullOrUndefined(this.props.product.reviews)
+                ? "0"
+                : this.props.product.reviews.length}
+              )
             </a>
           </li>
         </ul>
@@ -307,24 +364,28 @@ class ProductTab extends Component {
             <div className="row">
               {/* Rating */}
               <div className="col-md-3">
-
                 {this.createStarAverage(average, commentStarCount)}
-
               </div>
               {/* Reviews */}
               <div className="col-md-6">
                 <div id="reviews">
-                  <ul className="reviews">
-                    {this.showReviews()}
-                  </ul>
+                  <ul className="reviews">{this.showReviews()}</ul>
                   <ul className="reviews-pagination">
                     <li>
-                      <a id="left-review" onClick={this.handleLeftReview}>
+                      <a
+                        href="#"
+                        id="left-review"
+                        onClick={this.handleLeftReview}
+                      >
                         <i className="fa fa-angle-left" />
                       </a>
                     </li>
                     <li>
-                      <a id="right-review" onClick={this.handleRightReview}>
+                      <a
+                        href="#"
+                        id="right-review"
+                        onClick={this.handleRightReview}
+                      >
                         <i className="fa fa-angle-right" />
                       </a>
                     </li>
@@ -368,7 +429,7 @@ class ProductTab extends Component {
                           value="5"
                           type="radio"
                         />
-                        <label for="star5" />
+                        <label htmlFor="star5" />
                         <input
                           onClick={this.setValue}
                           id="star4"
@@ -376,7 +437,7 @@ class ProductTab extends Component {
                           value="4"
                           type="radio"
                         />
-                        <label for="star4" />
+                        <label htmlFor="star4" />
                         <input
                           onClick={this.setValue}
                           id="star3"
@@ -384,7 +445,7 @@ class ProductTab extends Component {
                           value="3"
                           type="radio"
                         />
-                        <label for="star3" />
+                        <label htmlFor="star3" />
                         <input
                           onClick={this.setValue}
                           id="star2"
@@ -392,7 +453,7 @@ class ProductTab extends Component {
                           value="2"
                           type="radio"
                         />
-                        <label for="star2" />
+                        <label htmlFor="star2" />
                         <input
                           onClick={this.setValue}
                           id="star1"
@@ -400,10 +461,13 @@ class ProductTab extends Component {
                           value="1"
                           type="radio"
                         />
-                        <label for="star1" />
+                        <label htmlFor="star1" />
                       </div>
                     </div>
-                    <button className="primary-btn" onClick={(event) => this.submitReview(event, average)}>
+                    <button
+                      className="primary-btn"
+                      onClick={event => this.submitReview(event, average)}
+                    >
                       Submit
                     </button>
                   </form>
@@ -424,7 +488,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  updateProduct,
+  updateProduct
 };
 
 export default connect(

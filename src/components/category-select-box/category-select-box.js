@@ -68,17 +68,15 @@ class CategorySelectBox extends Component {
     const subheaderCheckboxList = _subheaders.map((subheader, index) => {
       const subHeaderPath = `/show/${_mainCategory.path}/${subheader.path}/`;
       return (
-        <>
-          <div key={subheader.id + index}>
-            <div className="input-checkbox">
-              <input type="checkbox" id={subheader.id} />
-              <label htmlFor={subheader.id}>
-                <span />
-                <Link to={subHeaderPath}>{subheader.name}</Link>
-              </label>
-            </div>
+        <div key={subheader.id + index}>
+          <div className="input-checkbox">
+            <input type="checkbox" id={subheader.id} />
+            <label htmlFor={subheader.id}>
+              <span />
+              <Link to={subHeaderPath}>{subheader.name}</Link>
+            </label>
           </div>
-        </>
+        </div>
       );
     });
     return subheaderCheckboxList;

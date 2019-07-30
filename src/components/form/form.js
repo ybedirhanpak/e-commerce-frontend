@@ -38,7 +38,7 @@ export default class form extends Component {
     return (
       <div>
         <div className="form-group">
-          <label for="ad">Full Name</label>
+          <label htmlFor="ad">Full Name</label>
           <input
             type="text"
             id="name"
@@ -52,7 +52,7 @@ export default class form extends Component {
         </div>
 
         <div className="form-group">
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -66,7 +66,7 @@ export default class form extends Component {
         </div>
 
         <div className="form-group">
-          <label for="message">Message</label>
+          <label htmlFor="message">Message</label>
           <textarea
             name="message"
             id="message"
