@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import Store from "../../components/store/store";
 import Filter from "../../components/filter/filter";
 import BreadCrumb from "../../components/breadcrumb/breadcrumb";
-
+import StoreTopFilter from "../../components/store-top-filter/store-top-filter";
 //Redux
 import { connect } from "react-redux";
 import {
@@ -219,6 +219,7 @@ class CategoryContainer extends Component {
               className="col-sm-6 col-md-9"
               style={{ minHeight: 1000 }}
             >
+              <StoreTopFilter />
               {/* Store Component */}
               <Store
                 apiProducts={this.props.filteredProductList}
