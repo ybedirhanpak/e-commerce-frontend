@@ -11,6 +11,9 @@ const INITIALIZE_LOGIN = "INITIALIZE_LOGIN";
 const COMPLETE_LOGIN = "COMPLETE_LOGIN";
 const LOGOUT = "LOGOUT";
 const UPDATE_USER = "UPDATE_USER";
+const INITALIZE_ADD_ADDRESS = "INITALIZE_ADD_ADDRESS";
+const COMPLETE_ADD_ADDRESS = "COMPLETE_ADD_ADDRESS";
+const RESET_ADD_ADDRESS = "RESET_ADD_ADDRESS";
 
 export const actionTypes = {
   RESET_REGISTER,
@@ -20,7 +23,10 @@ export const actionTypes = {
   INITIALIZE_LOGIN,
   COMPLETE_LOGIN,
   LOGOUT,
-  UPDATE_USER
+  UPDATE_USER,
+  INITALIZE_ADD_ADDRESS,
+  COMPLETE_ADD_ADDRESS,
+  RESET_ADD_ADDRESS
 };
 
 /* Action Creators */
@@ -33,7 +39,9 @@ export const actionCreators = {
   initializeLogin,
   completeLogin,
   logout,
-  updateUser
+  updateUser,
+  initalizeAddAddress,
+  completeAddAddress
 };
 
 function resetRegister() {
@@ -87,6 +95,25 @@ function updateUser(userConfig) {
   };
 }
 
+function initalizeAddAddress() {
+  return {
+    type: INITALIZE_ADD_ADDRESS
+  };
+}
+
+function completeAddAddress(userAddress) {
+  return {
+    type: COMPLETE_ADD_ADDRESS,
+    payload: userAddress
+  };
+}
+
+export const resetAddressAdd = () => {
+  return {
+    type: RESET_ADD_ADDRESS
+  };
+};
+
 /* Api Call Functions */
 
 export const postUserRegister = body => {
@@ -138,5 +165,30 @@ export const postUserUpdate = (id, body) => {
         }
       })
       .catch(error => console.log("Error when adding address\n", error));
+  };
+};
+
+export const addUserAddress = (id, body) => {
+  console.log("add user address, body: ", body);
+  return dispatch => {
+    dispatch(initalizeAddAddress());
+    PutWithUrlBody(API + "/users/update/" + id, body).then(response => {
+      console.log("response: ", response);
+      if (response.status >= 200 && response.status < 300) {
+        response.json().then(data => {
+          console.log("add user address success", data);
+          dispatch(updateUser(data));
+          dispatch(completeAddAddress(data));
+          console.log("updated user address succesfully");
+        });
+      } else {
+        response.json().then(data => {
+          console.log(data.message);
+          alert(
+            "There is a problem occured. Please check your internet connection and try again later!"
+          );
+        });
+      }
+    });
   };
 };

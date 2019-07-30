@@ -1,7 +1,7 @@
-import React, { Component } from "./node_modules/react";
+import React, { Component } from "react";
 
-import { connect } from "./node_modules/react-redux";
-import { postUserUpdate } from "../../redux/user/actions";
+import { connect } from "react-redux";
+import { addUserAddress, resetAddressAdd } from "../../redux/user/actions";
 
 class addAdress extends Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class addAdress extends Component {
   };
 
   submitAddress = event => {
+    event.preventDefault();
     const addressContent = {
       addressName: this.state.addressName,
       address: this.state.address,
@@ -51,10 +52,15 @@ class addAdress extends Component {
       addresses: [...this.props.currentUser.addresses, addressContent]
     };
 
-    this.props.postUserUpdate(this.props.currentUser.id, useradd);
+    this.props.addUserAddress(this.props.currentUser.id, useradd);
   };
 
+  componentDidMount() {
+    this.props.resetAddressAdd();
+  }
+
   render() {
+    console.log("add address progress", this.props.addAddressProgress);
     return (
       <div className="billing-details">
         <div className="form-group">
@@ -118,6 +124,23 @@ class addAdress extends Component {
         >
           Save
         </button>
+        {this.props.addAddressProgress === 0 ? (
+          <div style={{ marginTop: 20, backgroundColor: "pink", height: 40 }}>
+            <h5 className="alert-heading">
+              Adding address in progress, please wait..
+            </h5>
+          </div>
+        ) : this.props.addAddressProgress === 1 ? (
+          <div
+            style={{
+              marginTop: 20,
+              backgroundColor: "#00cc00",
+              height: 40
+            }}
+          >
+            <h5 className="alert-heading">Address added succesfully...</h5>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -125,12 +148,14 @@ class addAdress extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    addAddressProgress: state.user.addAddressProgress
   };
 };
 
 const mapDispatchToProps = {
-  postUserUpdate
+  addUserAddress,
+  resetAddressAdd
 };
 
 export default connect(

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/cart/actions";
-import { postOrderCheckout } from "../../redux/order/actions";
+import { postOrderCheckout, resetOrder } from "../../redux/order/actions";
 
 class CheckoutOrder extends Component {
   constructor(props) {
@@ -98,9 +98,14 @@ class CheckoutOrder extends Component {
     }
   };
 
+  componentDidMount() {
+    this.props.resetOrder();
+  }
+
   render() {
     console.log("checkout order props", this.props);
     console.log("checkout order state", this.state);
+    console.log("order progress", this.props.orderInProgress);
 
     return (
       <div>
@@ -220,6 +225,21 @@ class CheckoutOrder extends Component {
         >
           Place order
         </button>
+        {this.props.orderInProgress === 0 ? (
+          <div style={{ marginTop: 20, backgroundColor: "pink", height: 40 }}>
+            <h5 className="alert-heading">sipraiş veriliyor</h5>
+          </div>
+        ) : this.props.orderInProgress === 1 ? (
+          <div
+            style={{
+              marginTop: 20,
+              backgroundColor: "#00cc00",
+              height: 40
+            }}
+          >
+            <h5 className="alert-heading">Order added succesfully...</h5>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -228,13 +248,15 @@ const mapStateToProps = state => {
   return {
     orderAddress: state.order,
     orderedProducts: state.cart.productsList,
-    userId: state.user.currentUser.id
+    userId: state.user.currentUser.id,
+    orderInProgress: state.order.orderInProgress
   };
 };
 
 const mapDispatchToProps = {
   updateQuantity: actionCreators.addtoCART,
-  postOrderCheckout
+  postOrderCheckout,
+  resetOrder
 };
 
 export default connect(

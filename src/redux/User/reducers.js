@@ -11,7 +11,8 @@ const initialState = {
     loginInProgress: -1,
     successfulLogin: -1,
     loginResponse: {}
-  }
+  },
+  addAddressProgress: -1
 };
 
 function userReducer(state = initialState, action) {
@@ -106,6 +107,21 @@ function userReducer(state = initialState, action) {
         ...state,
         currentUser: action.payload,
         fetchInProgress: false
+      };
+    case actionTypes.INITALIZE_ADD_ADDRESS:
+      return {
+        ...state,
+        addAddressProgress: 0
+      };
+    case actionTypes.COMPLETE_ADD_ADDRESS:
+      return {
+        ...state,
+        addAddressProgress: 1
+      };
+    case actionTypes.RESET_ADD_ADDRESS:
+      return {
+        ...state,
+        addAddressProgress: -1
       };
     default:
       return state;
