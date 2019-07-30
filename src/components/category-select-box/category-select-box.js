@@ -37,24 +37,23 @@ class CategorySelectBox extends Component {
       (subcategory, index) => {
         const subcategoryChecked = filterCategories.includes(subcategory.id);
         return (
-          <>
-            <div key={subcategory.id + index}>
-              <div className="input-checkbox">
-                <input
-                  checked={subcategoryChecked}
-                  type="checkbox"
-                  id={subcategory.id}
-                  onClick={event =>
-                    this.handleSubcategoryClick(event, subcategoryChecked)
-                  }
-                />
-                <label htmlFor={subcategory.id}>
-                  <span />
-                  {subcategory.name}
-                </label>
-              </div>
+          <div key={`Category-Select-${subcategory.id}-${index}`}>
+            <div className="input-checkbox">
+              <input
+                readOnly
+                checked={subcategoryChecked}
+                type="checkbox"
+                id={subcategory.id}
+                onClick={event =>
+                  this.handleSubcategoryClick(event, subcategoryChecked)
+                }
+              />
+              <label htmlFor={subcategory.id}>
+                <span />
+                {subcategory.name}
+              </label>
             </div>
-          </>
+          </div>
         );
       }
     );

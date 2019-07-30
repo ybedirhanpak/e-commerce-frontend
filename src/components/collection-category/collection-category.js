@@ -11,7 +11,7 @@ export default class CollectionCategory extends Component {
         </div>
         <div className="shop-body">
           <h3>{this.props.header}</h3>
-          <Link to={this.props.path} class="cta-btn">
+          <Link to={this.props.path} className="cta-btn">
             Shop now <i className="fa fa-arrow-circle-right" />
           </Link>
         </div>

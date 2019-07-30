@@ -40,23 +40,22 @@ class BrandsSelectBox extends Component {
     const brandsList = list.map((brand, index) => {
       const brandChecked = filterBrands.includes(brand.id);
       return (
-        <>
-          <div key={index} id={brand.id}>
-            <div className="input-checkbox">
-              <input
-                checked={brandChecked}
-                type="checkbox"
-                id={brand.id + "-" + index}
-                value={brand.id}
-                onClick={event => this.handleClick(event, brandChecked)}
-              />
-              <label htmlFor={brand.id + "-" + index}>
-                <span />
-                {brand.name}
-              </label>
-            </div>
+        <div key={index} id={brand.id}>
+          <div className="input-checkbox">
+            <input
+              readOnly
+              checked={brandChecked}
+              type="checkbox"
+              id={brand.id + "-" + index}
+              value={brand.id}
+              onClick={event => this.handleClick(event, brandChecked)}
+            />
+            <label htmlFor={brand.id + "-" + index}>
+              <span />
+              {brand.name}
+            </label>
           </div>
-        </>
+        </div>
       );
     });
     return brandsList;

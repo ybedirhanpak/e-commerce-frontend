@@ -26,15 +26,23 @@ class HomeContainer extends Component {
         : currentDate.getFullYear();
     return (
       <div className="section">
+        <div className="row">
+          <div className="col-sm-12">
+            <Collection />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <SlideProduct date={`${year}-07-26T18:00:00`} />
+          </div>
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
               <ProductSlide products={this.props.apiProducts} />
-              <Collection />
             </div>
           </div>
         </div>
-        <SlideProduct date={`${year}-07-26T18:00:00`} />
         <div>
           <TopSelling />
         </div>

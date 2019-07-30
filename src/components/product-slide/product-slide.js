@@ -6,7 +6,11 @@ import Slider from "react-slick";
 export default class ProductSlide extends Component {
   generateProducts = () => {
     const productsList = this.props.products.map(product => {
-      return <ProductCard product={product} />;
+      return (
+        <div key={product.id}>
+          <ProductCard product={product} />
+        </div>
+      );
     });
 
     return productsList;
@@ -22,7 +26,7 @@ export default class ProductSlide extends Component {
     };
 
     return (
-      <div className="container fluid">
+      <div>
         <h3>New Products</h3>
         <Slider {...settings}>{this.generateProducts()}</Slider>
       </div>

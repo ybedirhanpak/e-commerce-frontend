@@ -91,7 +91,6 @@ class PriceFilter extends Component {
   };
 
   render() {
-    console.log("lala", this.state);
     return (
       <div className="aside">
         <h3 className="aside-title">Price</h3>
