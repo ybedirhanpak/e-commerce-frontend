@@ -140,3 +140,11 @@ export const postUserUpdate = (id, body) => {
       .catch(error => console.log("Error when adding address\n", error));
   };
 };
+
+export const updatePassword = body => {
+  return dispatch => {
+    PutWithUrlBody(API + "/users/updatepassword", body)
+      .then(console.log("password updated"))
+      .catch(error => console.log("Error while updating password\n", error));
+  };
+};
