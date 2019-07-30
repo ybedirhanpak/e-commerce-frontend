@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { addUserAddress, resetAddressAdd } from "../../redux/user/actions";
+import {
+  addUserAddress,
+  resetAddressAdd,
+  postUserUpdate
+} from "../../redux/user/actions";
 
 class AddAdress extends Component {
   constructor(props) {
@@ -48,7 +52,6 @@ class AddAdress extends Component {
       Telephone: this.state.tel
     };
     const useradd = {
-      ...this.props.currentUser,
       addresses: [...this.props.currentUser.addresses, addressContent]
     };
 
@@ -155,7 +158,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   addUserAddress,
-  resetAddressAdd
+  resetAddressAdd,
+  postUserUpdate
 };
 
 export default connect(

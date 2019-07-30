@@ -101,10 +101,9 @@ function initalizeAddAddress() {
   };
 }
 
-function completeAddAddress(userAddress) {
+function completeAddAddress() {
   return {
-    type: COMPLETE_ADD_ADDRESS,
-    payload: userAddress
+    type: COMPLETE_ADD_ADDRESS
   };
 }
 
@@ -172,23 +171,25 @@ export const addUserAddress = (id, body) => {
   console.log("add user address, body: ", body);
   return dispatch => {
     dispatch(initalizeAddAddress());
-    PutWithUrlBody(API + "/users/update/" + id, body).then(response => {
-      console.log("response: ", response);
-      if (response.status >= 200 && response.status < 300) {
-        response.json().then(data => {
-          console.log("add user address success", data);
-          dispatch(updateUser(data));
-          dispatch(completeAddAddress(data));
-          console.log("updated user address succesfully");
-        });
-      } else {
-        response.json().then(data => {
-          console.log(data.message);
-          alert(
-            "There is a problem occured. Please check your internet connection and try again later!"
-          );
-        });
-      }
-    });
+    PutWithUrlBody(API + "/users/update/" + id, body)
+      .then(response => {
+        console.log("response: ", response);
+        if (response.status >= 200 && response.status < 300) {
+          response.json().then(data => {
+            console.log("add user address success", data);
+            dispatch(updateUser(data));
+            dispatch(completeAddAddress());
+            console.log("updated user address succesfully");
+          });
+        } else {
+          response.json().then(data => {
+            console.log(data.message);
+            alert(
+              "There is a problem occured. Please check your internet connection and try again later!"
+            );
+          });
+        }
+      })
+      .catch(error => console.log("Error when adding address\n", error));
   };
 };
