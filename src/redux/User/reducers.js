@@ -12,7 +12,8 @@ const initialState = {
     successfulLogin: -1,
     loginResponse: {}
   },
-  addAddressProgress: -1
+  addAddressProgress: -1,
+  resetPasswordProgress: 2
 };
 
 function userReducer(state = initialState, action) {
@@ -26,6 +27,33 @@ function userReducer(state = initialState, action) {
           successfulRegister: -1
         }
       };
+    case actionTypes.RESET_PASSWORD:
+      console.log(action.payload);
+      if (action.payload >= 200 && action.payload <= 300) {
+        return {
+          ...state,
+          resetPasswordProgress: 1
+        };
+      } else {
+        return {
+          ...state,
+          resetPasswordProgress: -1
+        };
+      }
+
+    case actionTypes.INITIALIZE_RESET_PASSWORD:
+      if (action.payload === 1) {
+        return {
+          ...state,
+          resetPasswordProgress: 0
+        };
+      } else {
+        return {
+          ...state,
+          resetPasswordProgress: 2
+        };
+      }
+
     case actionTypes.INITIALIZE_REGISTER:
       return {
         ...state,
