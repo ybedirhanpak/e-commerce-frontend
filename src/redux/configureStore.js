@@ -15,6 +15,7 @@ import cartReducer from "./cart/reducers";
 import cityReducer from "./city/reducers";
 import brandReducer from "./brand/reducer";
 import addressReducer from "./order/reducer";
+import adminPanelReducer from "./admin/reducers";
 
 //Combine reducers
 const rootReducer = combineReducers({
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   city: cityReducer,
   brand: brandReducer,
-  order: addressReducer
+  order: addressReducer,
+  admin: adminPanelReducer
 });
 
 const persistConfig = {

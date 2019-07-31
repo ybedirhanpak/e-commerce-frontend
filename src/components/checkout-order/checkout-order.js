@@ -88,8 +88,7 @@ class CheckoutOrder extends Component {
     if (
       this.state.termsChecked === false ||
       this.state.payment === "" ||
-      this.props.orderAddress === "" ||
-      !this.props.orderTotal
+      this.props.orderAddress === ""
     ) {
       alert("Please check all fields!");
     } else {
