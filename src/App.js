@@ -33,7 +33,7 @@ import CategoryContainer from "./containers/category-container/category-containe
 import AdminPanelContainer from "./containers/admin-panel-container/admin-panel-container";
 import Checkoutcontainer from "./containers/checkout-container/checkout-container";
 import AddCategoryContainer from "./containers/add-category-container/add-category-container";
-import forgotPasswordContainer from "./containers/forgot-password-container/forgot-password-container";
+import ForgotPasswordContainer from "./containers/forgot-password-container/forgot-password-container";
 
 export default class App extends Component {
   render() {
@@ -118,7 +118,7 @@ export default class App extends Component {
               <Route path="/checkout" component={Checkoutcontainer} />
               <Route
                 path="/forgot-password"
-                component={forgotPasswordContainer}
+                component={ForgotPasswordContainer}
               />
 
               <PrivateRoute
