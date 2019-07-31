@@ -48,7 +48,7 @@ class ChangePassword extends Component {
       <div>
         <h1>ChangePassword</h1>
         <div className="form-group">
-          <label for="cPassword">Current Password</label>
+          <label htmlFor="cPassword">Current Password</label>
           <input
             type="password"
             id="cPassword"
@@ -61,7 +61,7 @@ class ChangePassword extends Component {
         </div>
         <br />
         <div className="form-group">
-          <label for="newPassword">New Password</label>
+          <label htmlFor="newPassword">New Password</label>
           <input
             type="password"
             id="newPassword"
@@ -74,7 +74,7 @@ class ChangePassword extends Component {
         </div>
         <br />
         <div className="form-group">
-          <label for="newPassword2">New Password Again</label>
+          <label htmlFor="newPassword2">New Password Again</label>
           <input
             type="password"
             id="newPassword2"

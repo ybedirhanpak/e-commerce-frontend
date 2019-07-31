@@ -9,10 +9,6 @@ import { actionCreators } from "../../redux/order/actions";
 import { Link } from "react-router-dom";
 
 class OrderPageAddress extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClick = (event, address) => {
     if (this.props.type === "shipping") {
       this.props.selectShippingAddress(address);

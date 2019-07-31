@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MDBContainer, MDBBtn, MDBInput, MDBAlert } from "mdbreact";
+
 //Redux
 import { connect } from "react-redux";
 import { postUserLogin, actionCreators } from "../../redux/user/actions";
@@ -7,7 +8,7 @@ import { postUserLogin, actionCreators } from "../../redux/user/actions";
 //Route
 import { Redirect, Link } from "react-router-dom";
 
-class UserRegisterForm extends Component {
+class UserLoginForm extends Component {
   state = {
     email: "",
     password: "",
@@ -149,4 +150,5 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserRegisterForm);
+)(UserLoginForm);
+

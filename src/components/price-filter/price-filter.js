@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateFilters } from "../../redux/product/actions";
 
-import { Link } from "react-router-dom";
-
 class PriceFilter extends Component {
   constructor(props) {
     super(props);
@@ -91,7 +89,6 @@ class PriceFilter extends Component {
   };
 
   render() {
-    console.log("lala", this.state);
     return (
       <div className="aside">
         <h3 className="aside-title">Price</h3>

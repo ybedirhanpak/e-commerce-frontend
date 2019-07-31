@@ -5,10 +5,6 @@ import "./address-card.css";
 import { Link } from "react-router-dom";
 
 class AdressCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   createAddress = () => {
     const addressList = this.props.currentUser.addresses.map(
       (address, index) => {
@@ -26,13 +22,16 @@ class AdressCard extends Component {
               </h5>
               <p className="order-address-p">{address.address}</p>
               <br />
-              <input
+              <button
                 className="btn btn-danger"
-                type="button"
                 value="Delete"
                 style={{ marginRight: 10 }}
-              />
-              <input className="btn btn-warning" type="button" value="Edit" />
+              >
+                Delete
+              </button>
+              <button className="btn btn-warning" value="Edit">
+                Edit
+              </button>
             </div>
           </div>
         );
