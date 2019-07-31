@@ -49,11 +49,7 @@ class HomeContainer extends Component {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-        <div>{/*} <TopSelling products={this.props.apiProducts} /> */}</div>
-=======
         <div>{/* <TopSelling products={this.props.apiProducts} /> */}</div>
->>>>>>> d95be14b5120f953db6c27ce79ef938b483e5b2b
       </div>
     );
   }

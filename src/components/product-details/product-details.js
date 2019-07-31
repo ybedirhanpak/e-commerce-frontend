@@ -89,32 +89,47 @@ class ProductDetails extends Component {
   }
 
   handleAddtoChart = () => {
-    if (Number(this.state.quantity) === 0) {
-      this.props.addtoCART({
-        id: this.props.product.id,
-        img: this.props.product.imgSource,
-        name: this.props.product.name,
-        rawPrice: this.props.product.price,
-        quantity: 1,
-        price: Number(this.props.product.price) * 1,
-        oldPrice: this.props.product.oldPrice,
-        size: this.state.size
-      });
+    let sumQuantity = 0;
+    for (let i = 0; i < this.props.productsList.length; i++) {
+      if (this.props.productsList[i].id === this.props.product.id) {
+        sumQuantity += this.props.productsList[i].quantity;
+      }
+    }
+    sumQuantity += this.state.quantity;
+
+    if (sumQuantity <= this.props.product.quantity) {
+      if (
+        Number(this.state.quantity) === 0 &&
+        sumQuantity + 1 <= this.props.product.quantity
+      ) {
+        this.props.addtoCART({
+          id: this.props.product.id,
+          img: this.props.product.imgSource,
+          name: this.props.product.name,
+          rawPrice: this.props.product.price,
+          quantity: 1,
+          price: Number(this.props.product.price) * 1,
+          oldPrice: this.props.product.oldPrice,
+          size: this.state.size
+        });
+      } else {
+        this.props.addtoCART({
+          id: this.props.product.id,
+          img: this.props.product.imgSource,
+          name: this.props.product.name,
+          rawPrice: this.props.product.price,
+          quantity: this.state.quantity,
+          price: Number(this.props.product.price) * this.state.quantity,
+          oldPrice: this.props.product.oldPrice,
+          size: this.state.size
+        });
+      }
     } else {
-      this.props.addtoCART({
-        id: this.props.product.id,
-        img: this.props.product.imgSource,
-        name: this.props.product.name,
-        rawPrice: this.props.product.price,
-        quantity: this.state.quantity,
-        price: Number(this.props.product.price) * this.state.quantity,
-        oldPrice: this.props.product.oldPrice,
-        size: this.state.size
-      });
     }
   };
 
   render() {
+    console.log(this.props);
     const product = this.props.product;
     return (
       <div className="product-details">
@@ -180,11 +195,17 @@ class ProductDetails extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    productsList: state.cart.productsList
+  };
+};
+
 const mapDispatchToProps = {
   addtoCART: actionCreators.addtoCART
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProductDetails);
