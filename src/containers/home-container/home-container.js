@@ -40,9 +40,7 @@ class HomeContainer extends Component {
             </div>
           </div>
         </div>
-        <div>
-          <TopSelling products={this.props.apiProducts} />
-        </div>
+        <div>{/*} <TopSelling products={this.props.apiProducts} /> */}</div>
       </div>
     );
   }
