@@ -7,7 +7,8 @@ class PriceFilter extends Component {
     super(props);
     this.state = {
       minPrice: "",
-      maxPrice: ""
+      maxPrice: "",
+      checked: false
     };
     this.setValue = this.setValue.bind(this);
     this.increaseMinClick = this.increaseMinClick.bind(this);
@@ -18,6 +19,7 @@ class PriceFilter extends Component {
   }
 
   handleClick = () => {
+    this.setState({ checked: true });
     if (Number(this.state.minPrice) > Number(this.state.maxPrice)) {
       this.setState({
         minPrice: this.state.maxPrice,
@@ -43,7 +45,7 @@ class PriceFilter extends Component {
 
   setValue = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, checked: false });
   };
 
   increaseMaxClick = () => {
@@ -53,6 +55,7 @@ class PriceFilter extends Component {
       const newMaxPrice = Number(this.state.maxPrice) + 100;
       this.setState({ maxPrice: String(newMaxPrice) });
     }
+    this.setState({ checked: false });
   };
 
   decreaseMaxClick = () => {
@@ -65,6 +68,7 @@ class PriceFilter extends Component {
     this.setState({
       maxPrice: String(newMaxPrice)
     });
+    this.setState({ checked: false });
   };
 
   increaseMinClick = () => {
@@ -76,6 +80,7 @@ class PriceFilter extends Component {
       newMinPrice = this.state.maxPrice;
     }
     this.setState({ minPrice: String(newMinPrice) });
+    this.setState({ checked: false });
   };
 
   decreaseMinClick = () => {
@@ -86,6 +91,7 @@ class PriceFilter extends Component {
     this.setState({
       minPrice: newMinPrice
     });
+    this.setState({ checked: false });
   };
 
   render() {
@@ -127,8 +133,13 @@ class PriceFilter extends Component {
               -
             </span>
           </div>
-          <button onClick={this.handleClick} className="btn">
-            ->
+          <button
+            onClick={this.handleClick}
+            className={
+              !this.state.checked ? "btn btn-danger" : "btn btn-success"
+            }
+          >
+            <i className="fa fa-check" />
           </button>
         </div>
       </div>

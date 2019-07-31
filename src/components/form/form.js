@@ -42,7 +42,7 @@ export default class form extends Component {
           <input
             type="text"
             id="name"
-            class="form-control"
+            className="form-control"
             placeholder="Enter your full name."
             required
             name="fullName"
@@ -56,7 +56,7 @@ export default class form extends Component {
           <input
             type="email"
             id="email"
-            class="form-control"
+            className="form-control"
             placeholder="Enter your email address."
             required
             name="email"
@@ -72,7 +72,7 @@ export default class form extends Component {
             id="message"
             cols="20"
             rows="5"
-            class="form-control"
+            className="form-control"
             required
             value={this.state.message}
             onChange={this.handleChange}

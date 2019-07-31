@@ -43,7 +43,6 @@ class CategoryContainer extends Component {
     this.state = {
       brandList: []
     };
-    this.filterProducts = this.filterProducts.bind(this);
   }
   /**
    * Executed when component is mounted
@@ -57,7 +56,10 @@ class CategoryContainer extends Component {
    * @param {*} prevProps is previous category container's props.
    */
   componentDidUpdate(prevProps) {
-    if (this.props.match.url !== prevProps.match.url) {
+    if (
+      this.props.match.url !== prevProps.match.url ||
+      this.props.filters.searchText !== prevProps.filters.searchText
+    ) {
       this.initializeCategory();
     }
   }
@@ -135,7 +137,9 @@ class CategoryContainer extends Component {
     }
     this.props.updateFilters({
       type: "allSubcategories",
-      allSubcategories: categoryIds
+      allSubcategories: categoryIds,
+      isSearchClicked:
+        this.props.location.state && this.props.location.state.isSearchClicked
     });
     // Dispatch to get product list
     this.props
@@ -169,27 +173,9 @@ class CategoryContainer extends Component {
     return _cityList;
   };
 
-  filterProducts = productList => {
-    const filters = this.props.filters;
-
-    let minPrice = 0;
-    let maxPrice = 99999999999999;
-    if (filters.price.min !== "") {
-      minPrice = Number(filters.price.min);
-    }
-
-    if (Number(filters.price.max) !== 0) {
-      maxPrice = Number(filters.price.max);
-    }
-
-    let filteredProducts = productList.filter(
-      product => product.price >= minPrice && product.price <= maxPrice
-    );
-
-    return filteredProducts;
-  };
-
   render() {
+    console.log("category container props", this.props);
+
     // Category paths that are fetched from url
     const { mainCategory, subheader } = this.props.match.params;
     // Category objects created from paths

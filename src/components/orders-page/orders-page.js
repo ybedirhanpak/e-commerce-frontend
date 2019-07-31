@@ -12,9 +12,9 @@ class OrdersPage extends Component {
   }
 
   generateProducts = productList => {
-    const products = productList.map(product => {
+    const products = productList.map((product, index) => {
       return (
-        <div>
+        <div key={`${product.name}-${index}`}>
           <h4>{product.name}</h4>
           <h5>
             <br />/ Quantity: x{product.quantity} <br />/ Price: ${" "}
@@ -31,9 +31,9 @@ class OrdersPage extends Component {
     const ordersID = this.props.currentOrders.map(order => {
       return (
         <div className="panelGroup" id="accordion" key={order.id}>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h4 className="panel-title">
                 <a
                   data-toggle="collapse"
                   data-parent="#accordion"
@@ -46,7 +46,7 @@ class OrdersPage extends Component {
             </div>
             <div
               id={`${order.id}`}
-              class="panel-collapse collapse in accordion"
+              className="panel-collapse collapse in accordion"
             >
               <div className="panel-body">
                 <div className="row" style={{ paddingbot: 20 }}>
