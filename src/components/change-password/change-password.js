@@ -52,7 +52,7 @@ class ChangePassword extends Component {
           <input
             type="password"
             id="cPassword"
-            class="form-control"
+            className="form-control"
             placeholder="Enter your current password."
             required
             name="cPassword"
@@ -65,7 +65,7 @@ class ChangePassword extends Component {
           <input
             type="password"
             id="newPassword"
-            class="form-control"
+            className="form-control"
             placeholder="Enter your new password."
             required
             name="newPassword"
@@ -78,7 +78,7 @@ class ChangePassword extends Component {
           <input
             type="password"
             id="newPassword2"
-            class="form-control"
+            className="form-control"
             placeholder="Enter your new password again"
             required
             name="newPassword2"

@@ -36,30 +36,36 @@ class MyAccountContainer extends Component {
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="panel-body">
                       <table class="table">
-                        <tr>
-                          <td>
-                            <Link to="/account/orders">
-                              <i class="fa fa-shopping-bag" />
-                              {" Orders"}
-                            </Link>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <Link to="/account/addresses">
-                              <i class="fa fa-map" />
-                              {" Addresses"}
-                            </Link>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <Link to="/account/coupons">
-                              <i class="fa fa-ticket" />
-                              {" Coupons"}
-                            </Link>
-                          </td>
-                        </tr>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Link to="/account/orders">
+                                <i class="fa fa-shopping-bag" />
+                                {" Orders"}
+                              </Link>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Link to="/account/addresses">
+                                <i class="fa fa-map" />
+                                {" Addresses"}
+                              </Link>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Link to="/account/coupons">
+                                <i class="fa fa-ticket" />
+                                {" Coupons"}
+                              </Link>
+                            </td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -80,14 +86,16 @@ class MyAccountContainer extends Component {
                   <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="panel-body">
                       <table class="table">
-                        <tr>
-                          <td>
-                            <Link to="/account/change-password">
-                              <i class="fa fa-key" />
-                              {" Change Password"}
-                            </Link>
-                          </td>
-                        </tr>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Link to="/account/change-password">
+                                <i class="fa fa-key" />
+                                {" Change Password"}
+                              </Link>
+                            </td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -108,22 +116,26 @@ class MyAccountContainer extends Component {
                   <div id="collapseThree" class="panel-collapse collapse">
                     <div class="panel-body">
                       <table class="table">
-                        <tr>
-                          <td>
-                            <Link to="/account/help">
-                              <i class="fa fa-question-circle" />
-                              {" Help"}
-                            </Link>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <Link to="/account/logout">
-                              <i class="fa fa-sign-out" />
-                              {" Logout"}
-                            </Link>
-                          </td>
-                        </tr>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Link to="/account/help">
+                                <i class="fa fa-question-circle" />
+                                {" Help"}
+                              </Link>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Link to="/account/logout">
+                                <i class="fa fa-sign-out" />
+                                {" Logout"}
+                              </Link>
+                            </td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
                   </div>

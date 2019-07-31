@@ -15,7 +15,6 @@ const initialState = {
     subcategories: [],
     allSubcategories: [],
     searchText: "",
-    mainCategoryId: "",
     sortBy: "new",
     show: "20"
   }
@@ -67,20 +66,30 @@ function productReducer(state = initialState, action) {
           }
         };
       } else if (action.payload.type === "allSubcategories") {
-        return {
-          ...state,
-          filters: {
-            ...initialState.filters,
-            allSubcategories: action.payload.allSubcategories
-          }
-        };
+        if (action.payload.isSearchClicked) {
+          return {
+            ...state,
+            filters: {
+              ...state.filters,
+              allSubcategories: action.payload.allSubcategories
+            }
+          };
+        } else {
+          return {
+            ...state,
+            filters: {
+              ...state.filters,
+              searchText: initialState.filters.searchText,
+              allSubcategories: action.payload.allSubcategories
+            }
+          };
+        }
       } else if (action.payload.type === "searchBar") {
         return {
           ...state,
           filters: {
             ...initialState.filters,
-            searchText: action.payload.searchText,
-            mainCategoryId: action.payload.mainCategoryId
+            searchText: action.payload.searchText
           }
         };
       } else if (action.payload.type === "sortBy") {
