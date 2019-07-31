@@ -1,6 +1,14 @@
+.my-product-name {
+  display: block;
+  width: 240px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .product {
-    max-width:280px;
-    height:auto;
+  max-width: 280px;
+  height: auto;
 }
 
 .only-product-img {
@@ -9,52 +17,52 @@
 }
 
 #price-slider {
-    margin-bottom: 15px;
-  }
-  
-  .noUi-target {
-    background-color: #FFF;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 1px solid #E4E7ED;
-    border-radius: 0px;
-  }
-  
-  .noUi-connect {
-    background-color: #D10024;
-  }
-  
-  .noUi-horizontal {
-    height: 6px;
-  }
-  
-  .noUi-horizontal .noUi-handle {
-    width: 12px;
-    height: 12px;
-    left: -6px;
-    top: -4px;
-    border: none;
-    background: #D10024;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-radius: 50%;
-  }
-  
-  .noUi-handle:before, .noUi-handle:after {
-    display: none;
-  }
-  
-  .price-filter .input-number {
-    display: inline-block;
-    width: calc(50% - 7px);
-  }
-  
-  /*----------------------------*\
+  margin-bottom: 15px;
+}
+
+.noUi-target {
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #e4e7ed;
+  border-radius: 0px;
+}
+
+.noUi-connect {
+  background-color: #d10024;
+}
+
+.noUi-horizontal {
+  height: 6px;
+}
+
+.noUi-horizontal .noUi-handle {
+  width: 12px;
+  height: 12px;
+  left: -6px;
+  top: -4px;
+  border: none;
+  background: #d10024;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 50%;
+}
+
+.noUi-handle:before,
+.noUi-handle:after {
+  display: none;
+}
+
+.price-filter .input-number {
+  display: inline-block;
+  width: calc(50% - 7px);
+}
+
+/*----------------------------*\
       Store
   \*----------------------------*/
-  
-  .store-filter {
-    margin-bottom: 15px;
-    margin-top: 15px;
-  }
-  
+
+.store-filter {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}

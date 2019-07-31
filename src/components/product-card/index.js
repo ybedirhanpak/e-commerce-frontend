@@ -126,7 +126,7 @@ class ProductCard extends React.Component {
             </Link>
           </p>
           {/* Name */}
-          <h3 className="product-name">
+          <h3 className="product-name my-product-name">
             <Link
               to={{
                 pathname: this.generateProductPath(),
