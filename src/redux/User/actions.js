@@ -14,6 +14,8 @@ const UPDATE_USER = "UPDATE_USER";
 const INITALIZE_ADD_ADDRESS = "INITALIZE_ADD_ADDRESS";
 const COMPLETE_ADD_ADDRESS = "COMPLETE_ADD_ADDRESS";
 const RESET_ADD_ADDRESS = "RESET_ADD_ADDRESS";
+const RESET_PASSWORD = "RESET_PASSWORD";
+const INITIALIZE_RESET_PASSWORD = "INITALIZE_RESET_PASSWORD";
 
 export const actionTypes = {
   RESET_REGISTER,
@@ -26,7 +28,9 @@ export const actionTypes = {
   UPDATE_USER,
   INITALIZE_ADD_ADDRESS,
   COMPLETE_ADD_ADDRESS,
-  RESET_ADD_ADDRESS
+  RESET_ADD_ADDRESS,
+  RESET_PASSWORD,
+  INITIALIZE_RESET_PASSWORD
 };
 
 /* Action Creators */
@@ -41,7 +45,9 @@ export const actionCreators = {
   logout,
   updateUser,
   initalizeAddAddress,
-  completeAddAddress
+  completeAddAddress,
+  completeResetPassword,
+  initializeResetPassword
 };
 
 function resetRegister() {
@@ -94,6 +100,19 @@ function updateUser(userConfig) {
     payload: userConfig
   };
 }
+function completeResetPassword(userConfig) {
+  return {
+    type: RESET_PASSWORD,
+    payload: userConfig
+  };
+}
+
+export function initializeResetPassword(process) {
+  return {
+    type: INITIALIZE_RESET_PASSWORD,
+    payload: process
+  };
+}
 
 function initalizeAddAddress() {
   return {
@@ -115,6 +134,26 @@ export const resetAddressAdd = () => {
 
 /* Api Call Functions */
 
+export const forgotPassword = body => {
+  return dispatch => {
+    dispatch(initializeResetPassword(1));
+    PostWithUrlBody(API + "/mails/ResetPasswordMail", body)
+      .then(response => {
+        console.log(response);
+        if (response.status >= 200 && response.status <= 300) {
+          console.log(response);
+          dispatch(completeResetPassword(response.status));
+        } else {
+          response.json().then(data => {
+            console.log(data);
+            dispatch(completeResetPassword(data.status));
+          });
+        }
+      })
+      .catch(error => console.log("Error when sending email\n", error));
+  };
+};
+
 export const postUserRegister = body => {
   return dispatch => {
     dispatch(initializeRegister());
@@ -124,7 +163,6 @@ export const postUserRegister = body => {
           dispatch(completeRegister(response));
         } else {
           response.json().then(data => {
-            console.log(data.message);
             dispatch(completeRegister(data.message));
           });
         }
@@ -148,13 +186,11 @@ export const postUserLogin = body => {
 };
 
 export const postUserUpdate = (id, body) => {
-  console.log("post user update body", body);
   return dispatch => {
     PutWithUrlBody(API + "/users/update/" + id, body)
       .then(response => {
         if (response.status === 201 || response.status === 200) {
           response.json().then(data => {
-            console.log("update user success", data);
             dispatch(updateUser(data));
           });
         } else {
@@ -168,18 +204,14 @@ export const postUserUpdate = (id, body) => {
 };
 
 export const addUserAddress = (id, body) => {
-  console.log("add user address, body: ", body);
   return dispatch => {
     dispatch(initalizeAddAddress());
     PutWithUrlBody(API + "/users/update/" + id, body)
       .then(response => {
-        console.log("response: ", response);
         if (response.status >= 200 && response.status < 300) {
           response.json().then(data => {
-            console.log("add user address success", data);
             dispatch(updateUser(data));
             dispatch(completeAddAddress());
-            console.log("updated user address succesfully");
           });
         } else {
           response.json().then(data => {

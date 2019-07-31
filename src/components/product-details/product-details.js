@@ -5,10 +5,8 @@ import LoadingSpinner from "../loading-spinner/loading-spinner";
 //Redux
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/cart/actions";
-import { isEmptyTypeAnnotation } from "@babel/types";
 
 class ProductDetails extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +28,6 @@ class ProductDetails extends Component {
   createAverageOfStar = product => {
     let children = [];
     let div = [];
-    let sum = 0;
     for (let i = 0; i < product.stars; i++) {
       children.push(<i className="fa fa-star" />);
     }
@@ -55,9 +52,9 @@ class ProductDetails extends Component {
     ) {
       return <LoadingSpinner />;
     } else {
-      product.sizeOptions.forEach(element => {
+      product.sizeOptions.forEach((element, index) => {
         sizeOptions.push(
-          <option name="size" value={element}>
+          <option key={index} name="size" value={element}>
             {element}
           </option>
         );
@@ -86,7 +83,6 @@ class ProductDetails extends Component {
   }
 
   quantityOnChangeHandler(event) {
-    const name = event.target.name;
     const value = event.target.value;
 
     this.setState({ quantity: Number(value) });

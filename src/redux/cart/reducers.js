@@ -8,30 +8,6 @@ const initialState = {
 
 function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.DECREASE_FROMCART:
-      if (state.productsList.length > 0) {
-        for (let i = 0; i < state.productsList.length; i++) {
-          if (state.productsList[i].id === action.payload.id) {
-            let data = {
-              id: state.productsList[i].id,
-              img: state.productsList[i].id,
-              name: state.productsList[i].id,
-              quantity: state.productsList[i].quantity - 1,
-              price: state.productsList[i].price + action.payload.price
-            };
-            let tmp = state.productsList.filter(
-              product => product.id !== state.productsList[i].id
-            );
-            tmp.splice(i, 0, data);
-            return {
-              ...state,
-              anyProduct: true,
-              totalPrice: Number(state.totalPrice + action.payload.price),
-              productsList: tmp
-            };
-          }
-        }
-      }
     case actionTypes.ADD_TOCART:
       if (state.productsList.length > 0) {
         for (let i = 0; i < state.productsList.length; i++) {
@@ -83,7 +59,6 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.DELETE_FROMCART:
       let sum = state.totalPrice - action.payload.price;
-      console.log("sum", sum);
       if (sum <= 0) {
         sum = 0;
       }
@@ -104,11 +79,9 @@ function cartReducer(state = initialState, action) {
         }
         index = i;
       }
-      console.log("productdelete", product);
       let tmp = state.productsList;
       tmp.splice(index, 1);
       if (sum === 0) {
-        console.log("sum0", sum);
         return {
           totalPrice: 0,
           anyProduct: false,
@@ -121,7 +94,6 @@ function cartReducer(state = initialState, action) {
           productsList: tmp
         };
       }
-
     default:
       return state;
   }

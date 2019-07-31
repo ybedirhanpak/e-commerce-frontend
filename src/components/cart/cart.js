@@ -33,16 +33,15 @@ class Cart extends Component {
   render() {
     return (
       <div className="dropdown">
-        <a
-          className="dropdown-toggle"
+        <button
+          className="btn btn-default btn-rounded my-6 dropdown-toggle"
           data-toggle="dropdown"
           aria-expanded="true"
+          href="cart"
         >
-          <button className="btn btn-default btn-rounded my-6" href="cart">
-            <i className="fa fa-shopping-cart" />
-            <span>{" Your Cart"}</span>
-          </button>
-        </a>
+          <i className="fa fa-shopping-cart" />
+          <span>{" Your Cart"}</span>
+        </button>
         <div className="cart-dropdown">
           <div className="cart-list">{this.createProductCart()}</div>
           <div className="cart-summary">
@@ -52,7 +51,7 @@ class Cart extends Component {
             <h5>SUBTOTAL: ${Number(this.props.cart.totalPrice).toFixed(2)}</h5>
           </div>
           <div className="cart-btns">
-            <a href="#">View Cart</a>
+            <Link to="/checkout">View Cart</Link>
             <Link to="/checkout">
               Checkout <i className="fa fa-arrow-circle-right" />
             </Link>

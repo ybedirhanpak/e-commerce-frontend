@@ -76,16 +76,12 @@ export const actionCreators = {
 };
 
 export const postOrderCheckout = body => {
-  console.log("body", body);
-
   return dispatch => {
     dispatch(initalizeOrder());
     PostWithUrlBody(API + "/orders/create", body)
       .then(response => {
-        console.log("response", response);
         if (response.status >= 200 && response.status < 300) {
           response.json().then(data => {
-            console.log("successful", data);
             const userUpdated = {
               orders: [data.id]
             };
@@ -108,10 +104,8 @@ export const fetchOrders = body => {
     dispatch(initializeLoad());
     PostWithUrlBody(API + "/orders/getByMultipleIds", body)
       .then(response => {
-        console.log("response", response);
         if (response.status >= 200 && response.status < 300) {
           response.json().then(data => {
-            console.log("data", data);
             dispatch(completeLoad(data));
           });
         } else {

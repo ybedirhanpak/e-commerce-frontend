@@ -45,10 +45,8 @@ export const fetchAllCategories = () => {
 export const addCategory = body => {
   return dispatch => {
     PostWithUrlBody(API + "/categories/create", body)
-      .then(response => console.log(response))
       .then(
-        () => dispatch(fetchAllCategories()),
-        console.log("kategori eklendi 2")
+        () => dispatch(fetchAllCategories())
       )
       .catch();
   };
@@ -57,7 +55,6 @@ export const addCategory = body => {
 export const apiUpdateCategory = (id, body) => {
   return dispatch => {
     PutWithUrlBody(API + "/categories/update/" + id, body)
-      .then(response => console.log(response))
       .then(() => dispatch(fetchAllCategories()))
       .catch(error => console.log("Error while updating the category"));
   };
@@ -66,7 +63,6 @@ export const apiUpdateCategory = (id, body) => {
 export const apiDeleteCategory = id => {
   return dispatch => {
     DeleteWithUrl(API + "/categories/delete/" + id)
-      .then(response => console.log(response))
       .then(() => dispatch(fetchAllCategories()))
       .catch(error => console.log("Error while deleting the category", error));
   };

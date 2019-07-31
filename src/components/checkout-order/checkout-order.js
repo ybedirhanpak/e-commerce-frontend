@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/cart/actions";
 import { postOrderCheckout, resetOrder } from "../../redux/order/actions";
+import { Link } from "react-router-dom";
 
 class CheckoutOrder extends Component {
   constructor(props) {
@@ -112,11 +113,6 @@ class CheckoutOrder extends Component {
   }
 
   render() {
-    console.log("checkout order props", this.props);
-    console.log("checkout order state", this.state);
-    console.log("order progress", this.props.orderInProgress);
-    console.log("order total", this.props.orderTotal);
-
     return (
       <div>
         <div className="section-title text-center">
@@ -216,7 +212,7 @@ class CheckoutOrder extends Component {
           />
           <label htmlFor="terms">
             <span />
-            I've read and accept the <a href="#">terms & conditions</a>
+            I've read and accept the <Link to="/terms">terms & conditions</Link>
           </label>
         </div>
         <br />
@@ -228,11 +224,7 @@ class CheckoutOrder extends Component {
             onChange={this.onChange}
           />
         </div>
-        <button
-          href="#"
-          className="primary-btn order-submit"
-          onClick={this.submitOrder}
-        >
+        <button className="primary-btn order-submit" onClick={this.submitOrder}>
           Place order
         </button>
         {this.props.orderInProgress === 0 ? (
