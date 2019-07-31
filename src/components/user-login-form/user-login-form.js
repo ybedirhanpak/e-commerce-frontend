@@ -99,6 +99,9 @@ class UserLoginForm extends Component {
             <div style={{ marginBottom: 20 }}>
               <Link to="/register">Sign Up!</Link>
             </div>
+            <div style={{ marginBottom: 20 }}>
+              <Link to="/forgot-password">{"Forgot Password"}</Link>
+            </div>
           </div>
           <div className="col-sm-12 col-md-3" />
         </div>
@@ -148,3 +151,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(UserLoginForm);
+
