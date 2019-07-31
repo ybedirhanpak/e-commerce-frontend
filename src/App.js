@@ -33,6 +33,7 @@ import CategoryContainer from "./containers/category-container/category-containe
 import AdminPanelContainer from "./containers/admin-panel-container/admin-panel-container";
 import Checkoutcontainer from "./containers/checkout-container/checkout-container";
 import AddCategoryContainer from "./containers/add-category-container/add-category-container";
+import AllOrders from "./components/all-orders/all-orders";
 import ForgotPasswordContainer from "./containers/forgot-password-container/forgot-password-container";
 
 export default class App extends Component {
@@ -116,6 +117,7 @@ export default class App extends Component {
                 component={AddressLocationContainer}
               />
               <Route path="/checkout" component={Checkoutcontainer} />
+
               <Route
                 path="/forgot-password"
                 component={ForgotPasswordContainer}
@@ -129,6 +131,8 @@ export default class App extends Component {
                 path="/add-category"
                 component={AddCategoryContainer}
               />
+
+              <PrivateRoute path="/all-orders" component={AllOrders} />
 
               <Route component={NoPageContainer} />
             </Switch>
