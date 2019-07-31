@@ -10,11 +10,7 @@ import { Redirect, Link, Route } from "react-router-dom";
 import ChangePassword from "../../components/change-password/change-password";
 import OrdersPage from "../../components/orders-page/orders-page";
 import MyAdress from "../../components/My-adress/my-adress";
-<<<<<<< HEAD
-import AddAdress from "../../components/Add-adress/add-adress";
-=======
 import AddAdress from "../../components/add-adress/add-adress";
->>>>>>> 4a073b07a4b47b1040b875c8dc042703862eb6a6
 
 class MyAccountContainer extends Component {
   render() {

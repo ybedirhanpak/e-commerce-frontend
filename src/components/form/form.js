@@ -21,7 +21,7 @@ export default class form extends Component {
       mailContent: this.state.message
     };
 
-    PostWithUrlBody(API + "/mails", body)
+    PostWithUrlBody(API + "/mails/SendEmail", body)
       .then(response => {
         console.log(response);
         console.log("dispatch");
