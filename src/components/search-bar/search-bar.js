@@ -7,15 +7,26 @@ import { isNullOrUndefined } from "util";
 import { connect } from "react-redux";
 import { updateFilters } from "../../redux/product/actions";
 
+//Route
+import { Redirect } from "react-router-dom";
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedCategory: {},
+      isSelected: false,
+      selectedCategory: "",
       searchText: ""
     };
   }
+
+  findCategoryPath = id => {
+    if (this.state.selectedCategory) {
+      return this.props.categories.filter(c => c.id === id)[0].path;
+    }
+    return "home";
+  };
 
   generateCategories = () => {
     const mainCategories = this.props.categories.filter(c =>
@@ -45,17 +56,36 @@ class SearchBar extends Component {
     //Update redux
     this.props.updateFilters({
       type: "searchBar",
-      searchText: this.state.searchText,
-      mainCategoryId: this.state.selectedCategory
+      searchText: this.state.searchText
     });
+    if (this.state.selectedCategory) {
+      this.setState({ isSelected: true });
+    }
   };
 
   render() {
+    if (this.state.isSelected) {
+      this.setState({
+        isSelected: false,
+        selectedCategory: "",
+        searchText: ""
+      });
+      return (
+        <Redirect
+          to={{
+            pathname: `/show/${this.findCategoryPath(
+              this.state.selectedCategory
+            )}`,
+            state: { isSearchClicked: true }
+          }}
+        />
+      );
+    }
     return (
       <div className="header-search">
         <form>
           <select className="input-select" onChange={this.handleSelectChange}>
-            <option value="0">All Categories</option>
+            <option value="">Please Select</option>
             {this.generateCategories()}
           </select>
           <input

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { fetchAllCategories } from "../../redux/category/actions";
 import { addProduct } from "../../redux/product/actions";
 import { fetchAllCities } from "../../redux/city/actions";
-import { fetchAllBrands } from "../../redux/brand/actions";
+import { fetchAllBrands, addNewBrand } from "../../redux/brand/actions";
 
 //Components
 import MultiSelect from "@khanacademy/react-multi-select";
@@ -13,6 +13,7 @@ import MultiSelect from "@khanacademy/react-multi-select";
 //Firebase
 import * as firebase from "firebase";
 import { generateLinkWithName } from "../../services/link-generator";
+import LoadingSpinner from "../loading-spinner/loading-spinner";
 
 class AddProductForm extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class AddProductForm extends React.Component {
       selectedThirdCategory: "",
       selectedSizes: [],
       selectedCities: [],
+      addBrand: "",
       selectedBrand: "",
       productName: "",
       description: "",
@@ -137,6 +139,14 @@ class AddProductForm extends React.Component {
                 name="productName"
                 onChange={this.onChange}
               />
+              <button
+                onClick={() =>
+                  this.addNameToTag(this.state, this.state.productName)
+                }
+                className="btn btn-danger"
+              >
+                Add to Tags
+              </button>
             </div>
 
             <div className="form-group">
@@ -210,7 +220,25 @@ class AddProductForm extends React.Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="select1">Brand</label>
+              <label htmlFor="price">Add Brand</label>
+              <input
+                type="string"
+                id="addBrand"
+                className="form-control"
+                placeholder="New Brand"
+                name="addBrand"
+                onChange={this.onChange}
+              />
+              <button
+                className="btn btn-danger"
+                onClick={event => this.addBrand(event, this.state)}
+              >
+                Add Brand
+              </button>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="select1">Select Brand</label>
               <select name="category1" className="form-control" multiple>
                 {brands}
               </select>
@@ -258,7 +286,12 @@ class AddProductForm extends React.Component {
                 name="tag"
                 onChange={this.onChange}
               />
-              <button onClick={() => this.addTag(this.state)}>Add Tag</button>
+              <button
+                className="btn btn-danger"
+                onClick={() => this.addTag(this.state)}
+              >
+                Add Tag
+              </button>
             </div>
 
             <div className="form-group">
@@ -266,7 +299,10 @@ class AddProductForm extends React.Component {
               <select name="category1" className="form-control" multiple>
                 {tags}
               </select>
-              <button onClick={() => this.removeTag(this.state)}>
+              <button
+                className="btn btn-danger"
+                onClick={() => this.removeTag(this.state)}
+              >
                 remove Tag
               </button>
             </div>
@@ -278,11 +314,20 @@ class AddProductForm extends React.Component {
               Add Product
             </button>
             <br />
+            {this.props.fetchInProgress ? <LoadingSpinner /> : null}
           </div>
         </div>
       </div>
     );
   }
+
+  addNameToTag = (prevState, productName) => {
+    const keywords = productName.toLowerCase().split(" ");
+    this.setState({
+      tagList: [...prevState.tagList, ...keywords]
+    });
+  };
+
   removeTag = prevState => {
     this.setState({
       tagList: prevState.tagList.filter(
@@ -296,12 +341,17 @@ class AddProductForm extends React.Component {
       selectedTag: event.target.value
     });
   };
+
   addTag = prevState => {
     if (this.state.tag !== "") {
       this.setState({
-        tagList: [...prevState.tagList, prevState.tag]
+        tagList: [...prevState.tagList, prevState.tag.toLowerCase()]
       });
     }
+  };
+
+  addBrand = (event, prevState) => {
+    this.props.addNewBrand({ name: prevState.addBrand });
   };
 
   selectBrand(event) {
@@ -410,7 +460,8 @@ const mapStateToProps = state => {
   return {
     categories: state.category.categories,
     cityList: state.city.cityList,
-    brandList: state.brand.brandList
+    brandList: state.brand.brandList,
+    fetchInProgress: state.product.fetchInProgress
   };
 };
 
@@ -418,7 +469,8 @@ const mapDispatchToProps = {
   fetchAllCategories,
   addProduct,
   fetchAllCities,
-  fetchAllBrands
+  fetchAllBrands,
+  addNewBrand
 };
 
 export default connect(

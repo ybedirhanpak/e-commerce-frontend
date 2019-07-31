@@ -15,6 +15,10 @@ class HomeContainer extends Component {
     this.props.getProductList();
   }
 
+  getLastProducts(quantity, productList) {
+    return productList.slice(productList.length - quantity);
+  }
+
   render() {
     const currentDate = new Date();
     const year =
@@ -36,11 +40,20 @@ class HomeContainer extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
-              <ProductSlide products={this.props.apiProducts} />
+              <ProductSlide
+                products={this.getLastProducts(
+                  10,
+                  this.props.apiProducts
+                ).reverse()}
+              />
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         <div>{/*} <TopSelling products={this.props.apiProducts} /> */}</div>
+=======
+        <div>{/* <TopSelling products={this.props.apiProducts} /> */}</div>
+>>>>>>> d95be14b5120f953db6c27ce79ef938b483e5b2b
       </div>
     );
   }

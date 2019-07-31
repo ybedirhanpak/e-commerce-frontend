@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchOrders } from "../../redux/order/actions";
+import { fetchAllOrders } from "../../redux/order/actions";
+import {
+  fetchUserByMultipleIds,
+  fetchUserById
+} from "../../redux/admin/actions";
+import "./all-orders.css";
 
 import LoadingSpinner from "../loading-spinner/loading-spinner";
 
-class OrdersPage extends Component {
+class AllOrders extends Component {
   componentDidMount() {
-    this.props.fetchOrders({
-      orderIds: this.props.currentUser.orders
-    });
+    this.props.fetchAllOrders();
   }
 
   generateProducts = productList => {
-    const products = productList.map((product, index) => {
+    const products = productList.map(product => {
       return (
-        <div key={`${product.name}-${index}`}>
+        <div>
           <h4>{product.name}</h4>
           <h5>
             <br />/ Quantity: x{product.quantity} <br />/ Price: ${" "}
@@ -27,13 +30,27 @@ class OrdersPage extends Component {
     return products;
   };
 
+  generateUserDetails = userId => {
+    const userDetails = this.props.userDetails.map(userdetail => {
+      if (userdetail.id === userId) {
+        return (
+          <div>
+            {userdetail.firstName} {userdetail.lastName}
+          </div>
+        );
+      }
+      return null;
+    });
+    return userDetails;
+  };
+
   generateOrders = () => {
-    const ordersID = this.props.currentOrders.map(order => {
+    const allOrders = this.props.allOrders.map(order => {
       return (
         <div className="panelGroup" id="accordion" key={order.id}>
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h4 className="panel-title">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
                 <a
                   data-toggle="collapse"
                   data-parent="#accordion"
@@ -46,9 +63,22 @@ class OrdersPage extends Component {
             </div>
             <div
               id={`${order.id}`}
-              className="panel-collapse collapse in accordion"
+              class="panel-collapse collapse in accordion"
             >
               <div className="panel-body">
+                <div className="row" style={{ paddingbot: 20 }}>
+                  <div className="col-md-6">
+                    <h4>Orderer User ID:</h4>
+                    <hr />
+                    {order.userId}
+                  </div>
+                  <br />
+                  <div className="col-md-6">
+                    <h4>Orderer User Name:</h4>
+                    <hr />
+                    {this.generateUserDetails(order.userId)}
+                  </div>
+                </div>
                 <div className="row" style={{ paddingbot: 20 }}>
                   <div className="col-md-6">
                     <h4>Shipping Adress:</h4>
@@ -98,14 +128,14 @@ class OrdersPage extends Component {
         </div>
       );
     });
-    return ordersID;
+    return allOrders;
   };
 
   render() {
     if (this.props.fetchInProgress) {
       return (
         <div>
-          <h1>My Orders</h1>
+          <h1>All Orders</h1>
           <LoadingSpinner />
         </div>
       );
@@ -113,7 +143,7 @@ class OrdersPage extends Component {
 
     return (
       <div>
-        <h1>My Orders</h1>
+        <h1>All Orders</h1>
         {this.generateOrders()}
       </div>
     );
@@ -122,17 +152,19 @@ class OrdersPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentOrders: state.order.currentOrders,
-    currentUser: state.user.currentUser,
-    fetchInProgress: state.order.fetchInProgress
+    allOrders: state.order.currentOrders,
+    fetchInProgress: state.order.fetchInProgress,
+    userDetails: state.admin.userDetails
   };
 };
 
 const mapDispatchToProps = {
-  fetchOrders
+  fetchAllOrders,
+  fetchUserByMultipleIds,
+  fetchUserById
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OrdersPage);
+)(AllOrders);

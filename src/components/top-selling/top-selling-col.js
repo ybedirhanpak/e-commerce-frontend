@@ -5,17 +5,18 @@ import TopSellingProduct from "./top-selling-product";
 export default class TopSellingCol extends Component {
   generateProducts = () => {
     let products = [];
-    for (let i = 0; i < 3; i++) {
-      var min = 0;
-      var max = this.props.products.length;
-      var random = Math.floor(Math.random() * (+max - +min)) + +min;
-      products.push(
-        <div key={this.props.products[random].id + "-" + i}>
-          <TopSellingProduct product={this.props.products[random]} />
-        </div>
-      );
+    if (this.props.products && this.props.products.length > 0) {
+      for (let i = 0; i < 3; i++) {
+        var min = 0;
+        var max = this.props.products.length;
+        var random = Math.floor(Math.random() * (+max - +min)) + +min;
+        products.push(
+          <div key={this.props.products[random].id + "-" + i}>
+            <TopSellingProduct product={this.props.products[random]} />
+          </div>
+        );
+      }
     }
-
     return products;
   };
 

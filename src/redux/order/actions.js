@@ -1,6 +1,7 @@
 import { API } from "../../api-config";
-import { PostWithUrlBody } from "../../services/url-helper";
+import { PostWithUrlBody, GetWithUrl } from "../../services/url-helper";
 import { postUserUpdate } from "../user/actions";
+import { fetchUserByMultipleIds } from "../admin/actions";
 
 const SELECT_SHIPPING_ADDRESS = "SELECT_SHIPPING_ADDRESS";
 const SELECT_BILLING_ADDRESS = "SELECT_BILLING_ADDRESS";
@@ -112,5 +113,32 @@ export const fetchOrders = body => {
         }
       })
       .catch(error => console.log("Error when fetch orders\n", error));
+  };
+};
+
+export const fetchAllOrders = () => {
+  return dispatch => {
+    dispatch(initializeLoad());
+    return GetWithUrl(API + "/orders/getAll")
+      .then(response => {
+        console.log("response", response);
+        if (response.status >= 200 && response.status < 300) {
+          response.json().then(data => {
+            console.log("fetch all orders data", data);
+            dispatch(completeLoad(data));
+            console.log("data", data);
+            if (data) {
+              const userIds = data.map(order => {
+                return order.userId;
+              });
+              console.log("userIds :", userIds);
+              dispatch(fetchUserByMultipleIds({ userIds: userIds }));
+            }
+          });
+        } else {
+          console.log("response error", response);
+        }
+      })
+      .catch(error => console.log("Error when fetchin' all orders", error));
   };
 };

@@ -13,7 +13,7 @@ class AdressCard extends Component {
             key={`${address.addressName}-${index}`}
             className="col-xs-12 col-md-6"
           >
-            <div class="card card-2">
+            <div className="card card-2">
               <h4>{address.addressName}</h4>
               <hr />
               <h5>
@@ -44,7 +44,7 @@ class AdressCard extends Component {
     return (
       <div className="row">
         <div className="col-xs-12 col-md-6">
-          <div class="card card-2">
+          <div className="card card-2">
             <Link to="/account/addAddress" style={{ paddingTop: 80 }}>
               Add New Address{" "}
               <button className="btn btn-danger" type="button">
