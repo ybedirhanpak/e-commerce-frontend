@@ -46,7 +46,7 @@ class CheckoutOrder extends Component {
     event.preventDefault();
     console.log(product);
 
-    if (product.quantity - 1 <= 1) {
+    if (product.quantity <= 1) {
       this.props.deleteFromCART(product);
     } else {
       this.props.updateQuantity({ ...product, quantity: -1 });
