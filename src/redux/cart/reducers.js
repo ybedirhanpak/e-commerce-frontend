@@ -30,6 +30,21 @@ function cartReducer(state = initialState, action) {
             };
 
             let tmp = state.productsList;
+
+            if (data.price <= 0) {
+              data.price = action.payload.rawPrice;
+              data.quantity = 1;
+
+              tmp.splice(i, 1, data);
+
+              return {
+                ...state,
+                anyProduct: true,
+                totalPrice: state.totalPrice,
+                productsList: tmp
+              };
+            }
+
             tmp.splice(i, 1, data);
             return {
               ...state,
