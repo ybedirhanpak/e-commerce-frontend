@@ -73,9 +73,8 @@ function cartReducer(state = initialState, action) {
         } else if (
           state.productsList[i].id === action.payload.id &&
           state.productsList[i].size !== action.payload.size
-        ) {
-        }
-        index = i;
+        )
+          index = i;
       }
       let tmp = state.productsList;
       tmp.splice(index, 1);
