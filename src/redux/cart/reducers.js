@@ -62,22 +62,19 @@ function cartReducer(state = initialState, action) {
       if (sum <= 0) {
         sum = 0;
       }
-      let product, index;
+      let index;
       for (let i = 0; i < state.productsList.length; i++) {
         if (
           state.productsList[i].id === action.payload.id &&
           state.productsList[i].size === action.payload.size
         ) {
-          product = state.productsList[i];
           index = i;
           break;
         } else if (
           state.productsList[i].id === action.payload.id &&
           state.productsList[i].size !== action.payload.size
-        ) {
-          product = state.productsList[i];
-        }
-        index = i;
+        )
+          index = i;
       }
       let tmp = state.productsList;
       tmp.splice(index, 1);
