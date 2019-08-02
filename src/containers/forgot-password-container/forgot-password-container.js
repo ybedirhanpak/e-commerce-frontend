@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { MDBContainer, MDBBtn, MDBInput, MDBAlert } from "mdbreact";
+import { MDBContainer, MDBAlert } from "mdbreact";
 
 import {
   forgotPassword,

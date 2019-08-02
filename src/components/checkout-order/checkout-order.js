@@ -44,7 +44,13 @@ class CheckoutOrder extends Component {
 
   handleDecrease = (event, product) => {
     event.preventDefault();
-    this.props.updateQuantity({ ...product, quantity: -1 });
+    console.log(product);
+
+    if (product.quantity <= 1) {
+      this.props.deleteFromCART(product);
+    } else {
+      this.props.updateQuantity({ ...product, quantity: -1 });
+    }
   };
 
   createOrderCart = () => {
@@ -257,6 +263,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   updateQuantity: actionCreators.addtoCART,
+  deleteFromCART: actionCreators.deletefromCART,
   postOrderCheckout,
   resetOrder
 };
