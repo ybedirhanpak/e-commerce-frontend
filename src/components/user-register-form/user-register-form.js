@@ -3,7 +3,7 @@ import { MDBContainer, MDBBtn, MDBInput, MDBAlert } from 'mdbreact';
 
 //Redux
 import { connect } from "react-redux";
-import { actionCreators, postUserRegister } from "../../redux/user/actions";
+import { actionCreators, postUserRegister } from "../../redux/User/actions";
 
 //Route
 import { Redirect, Link } from 'react-router-dom';

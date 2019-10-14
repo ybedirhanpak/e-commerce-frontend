@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { updatePassword } from "../../redux/user/actions";
+import { updatePassword } from "../../redux/User/actions";
 
 class ChangePassword extends Component {
   constructor(props) {

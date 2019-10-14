@@ -5,7 +5,7 @@ import { MDBContainer, MDBAlert } from "mdbreact";
 import {
   forgotPassword,
   initializeResetPassword
-} from "../../redux/user/actions";
+} from "../../redux/User/actions";
 
 class ForgotPassword extends Component {
   constructor(props) {

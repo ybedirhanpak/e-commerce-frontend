@@ -1,6 +1,6 @@
 import { API } from "../../api-config";
 import { PostWithUrlBody, GetWithUrl } from "../../services/url-helper";
-import { postUserUpdate } from "../user/actions";
+import { postUserUpdate } from "../User/actions";
 import { fetchUserByMultipleIds } from "../admin/actions";
 
 const SELECT_SHIPPING_ADDRESS = "SELECT_SHIPPING_ADDRESS";

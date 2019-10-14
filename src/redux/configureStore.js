@@ -8,7 +8,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 //Reducers
-import userReducer from "./user/reducers";
+import userReducer from "./User/reducers";
 import categoryReducer from "./category/reducers";
 import productReducer from "./product/reducers";
 import cartReducer from "./cart/reducers";

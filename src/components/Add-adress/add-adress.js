@@ -5,7 +5,7 @@ import {
   addUserAddress,
   resetAddressAdd,
   postUserUpdate
-} from "../../redux/user/actions";
+} from "../../redux/User/actions";
 
 class AddAdress extends Component {
   constructor(props) {

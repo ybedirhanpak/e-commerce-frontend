@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 //Redux
 import { connect } from "react-redux";
-import { actionCreators } from '../../redux/user/actions';
+import { actionCreators } from '../../redux/User/actions';
 
 //Route
 import { Redirect } from 'react-router-dom';
